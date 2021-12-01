@@ -1,0 +1,21 @@
+{
+	"name": "AzureDataExplorer1129",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"annotations": [
+			"11-29"
+		],
+		"type": "AzureDataExplorer",
+		"typeProperties": {
+			"endpoint": "https://bdbjkustoqingtest.eastus.kusto.windows.net",
+			"tenant": "72bfe100-a448-4f25-af39-5b36c7bb62ef",
+			"servicePrincipalId": "8f6caa4c-31d9-4562-8084-bcbf13bb0068",
+			"database": "bdbjkustodatabaseqingtest",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIlNZTkFQU0VAQ0ZENjlBNDktQ0RCNi00Qzk3LUI4QjMtNUVGQUVEQjM4REJEXzk1N2MzOGE2LWFiNGItNDk3Zi05NjJlLWE4NmU1ZWY1ZWQ2NSINCn0="
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

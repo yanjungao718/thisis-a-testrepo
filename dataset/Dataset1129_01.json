@@ -1,0 +1,21 @@
+{
+	"name": "Dataset1129_01",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1129",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "New folder 1129/New folder 112901/",
+				"container": "container02"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

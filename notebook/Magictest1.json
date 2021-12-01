@@ -1,0 +1,730 @@
+{
+	"name": "Magictest1",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "SampleSpark",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "56g",
+			"driverCores": 8,
+			"executorMemory": "56g",
+			"executorCores": 8,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "73ed3dbf-8db8-4020-ae65-9765cbf355b5"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1",
+				"state": {
+					"b2b64cf9-3a8b-470c-97e3-3d32cb4cbd69": {
+						"type": "Synapse.DataFrame",
+						"sync_state": {
+							"table": {
+								"rows": [
+									{
+										"0": "test",
+										"1": "1"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232test"
+									},
+									{
+										"0": "map",
+										"1": "2"
+									},
+									{
+										"0": "cool",
+										"1": "10"
+									},
+									{
+										"0": "coolest",
+										"1": "232"
+									}
+								],
+								"schema": [
+									{
+										"key": "0",
+										"name": "_c0",
+										"type": "string"
+									},
+									{
+										"key": "1",
+										"name": "_c1",
+										"type": "string"
+									}
+								]
+							},
+							"isSummary": false,
+							"language": "scala"
+						},
+						"persist_state": {
+							"view": {
+								"type": "details",
+								"chartOptions": {
+									"chartType": "bar",
+									"aggregationType": "count",
+									"categoryFieldKeys": [
+										"0"
+									],
+									"seriesFieldKeys": [
+										"0"
+									],
+									"isStacked": false
+								}
+							}
+						}
+					}
+				}
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/ee9a0083-b9db-4f2d-9cb9-05a291e9c158/resourceGroups/bdbjqa/providers/Microsoft.Synapse/workspaces/bdbj20211129ws/bigDataPools/SampleSpark",
+				"name": "SampleSpark",
+				"type": "Spark",
+				"endpoint": "https://bdbj20211129ws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/SampleSpark",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "3.1",
+				"nodeCount": 3,
+				"cores": 8,
+				"memory": 56,
+				"extraHeader": null
+			}
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					"%lsmagic"
+				],
+				"attachments": null,
+				"execution_count": 1
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"a = 1\n",
+					"def test():\n",
+					"    b = %time 2\n",
+					"    print(a, b)\n",
+					"test()\n",
+					"a"
+				],
+				"attachments": null,
+				"execution_count": 2
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"%%time\n",
+					"import time\n",
+					"time.sleep(.3)"
+				],
+				"attachments": null,
+				"execution_count": 3
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"%%capture --no-stderr out\n",
+					"import sys\n",
+					"\n",
+					"def eprint(*args, **kwargs):\n",
+					"    print(*args, file=sys.stderr, **kwargs)\n",
+					"\n",
+					"print('std\\\\out')\n",
+					"eprint('std\\nerr')"
+				],
+				"attachments": null,
+				"execution_count": 4
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"out.stdout"
+				],
+				"attachments": null,
+				"execution_count": 5
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"%%writefile -a abc/test1.txt\n",
+					"test,1\n",
+					"map,2\n",
+					"cool,10\n",
+					"coolest,232"
+				],
+				"attachments": null,
+				"execution_count": 6
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"df = spark.read.csv('abc/test1.txt')\n",
+					"df.show()"
+				],
+				"attachments": null,
+				"execution_count": 7
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"df.show()"
+				],
+				"attachments": null,
+				"execution_count": 8
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"collapsed": false
+				},
+				"source": [
+					"display(df)"
+				],
+				"attachments": null,
+				"execution_count": 9
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					""
+				],
+				"attachments": null,
+				"execution_count": null
+			}
+		]
+	}
+}

@@ -1,0 +1,499 @@
+{
+	"name": "Widget Basics",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "42348071-15fb-47fc-a1ff-ca4310e2cb2c"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1"
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			}
+		},
+		"cells": [
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nbsphinx": "hidden"
+				},
+				"source": [
+					"**This notebook sample is based on the official [Jupyter Widgets sample notebook `Widget Basics.ipynb`](https://github.com/jupyter-widgets/ipywidgets/blob/7.x/docs/source/examples/Widget%20Basics.ipynb)\r\n",
+					".** Edit this cell to see the full license content.\r\n",
+					"\r\n",
+					"<!--\r\n",
+					"Copyright (c) 2015 Project Jupyter Contributors\r\n",
+					"All rights reserved.\r\n",
+					"\r\n",
+					"Redistribution and use in source and binary forms, with or without\r\n",
+					"modification, are permitted provided that the following conditions are met:\r\n",
+					"\r\n",
+					"1. Redistributions of source code must retain the above copyright notice, this\r\n",
+					"   list of conditions and the following disclaimer.\r\n",
+					"\r\n",
+					"2. Redistributions in binary form must reproduce the above copyright notice,\r\n",
+					"   this list of conditions and the following disclaimer in the documentation\r\n",
+					"   and/or other materials provided with the distribution.\r\n",
+					"\r\n",
+					"3. Neither the name of the copyright holder nor the names of its\r\n",
+					"   contributors may be used to endorse or promote products derived from\r\n",
+					"   this software without specific prior written permission.\r\n",
+					"\r\n",
+					"THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\r\n",
+					"AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\r\n",
+					"IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\r\n",
+					"DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\r\n",
+					"FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\r\n",
+					"DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\r\n",
+					"SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\r\n",
+					"CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\r\n",
+					"OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\r\n",
+					"OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\r\n",
+					"-->"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"**Synapse Studio users**: Now you can consume Jupyter Widgets in Synapse Studio (with \"Preview Features\" turned on). Since it's a Python library, you will need to consume it in PySpark environment.\r\n",
+					"To go through this sample, please create a new notebook from the sample, then execute the code cells one by one with \"Run\" button or `Shift+Enter` shortcut keys.\r\n",
+					"\r\n",
+					"See https://go.microsoft.com/fwlink/?linkid=2170793 for general introduction as well as known limitations on the Jupyter Widgets support in Synapse Studio."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"# Simple Widget Introduction"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## What are widgets?"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"slideshow": {
+						"slide_type": "slide"
+					}
+				},
+				"source": [
+					"Widgets are eventful python objects that have a representation in the browser, often as a control like a slider, textbox, etc."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## What can they be used for?"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"slideshow": {
+						"slide_type": "slide"
+					}
+				},
+				"source": [
+					"You can use widgets to build **interactive GUIs** for your notebooks.  \n",
+					"You can also use widgets to **synchronize stateful and stateless information** between Python and JavaScript."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Using widgets  "
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"slideshow": {
+						"slide_type": "slide"
+					}
+				},
+				"source": [
+					"To use the widget framework, you need to import `ipywidgets`."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"import ipywidgets as widgets\r\n",
+					"widgets.__version__"
+				],
+				"attachments": null,
+				"execution_count": 1
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"slideshow": {
+						"slide_type": "slide"
+					}
+				},
+				"source": [
+					"### repr"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"Widgets have their own display `repr` which allows them to be displayed using IPython's display framework.  Constructing and returning an `IntSlider` automatically displays the widget (as seen below).  Widgets are displayed inside the output area below the code cell. Clearing cell output will also remove the widget."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"widgets.IntSlider()"
+				],
+				"attachments": null,
+				"execution_count": 2
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"slideshow": {
+						"slide_type": "slide"
+					}
+				},
+				"source": [
+					"### display()"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"You can also explicitly display the widget using `display(...)`.\r\n",
+					"\r\n",
+					"**Synapse Studio users**:\r\n",
+					"* Usually you do not need to import `display` function manually from `IPython.display` package. The pre-imported global `display(d)` function now also accepts `Widget` instance as first parameter (`d`). Just note that it does not support more than 1 arguments. If you want to display 2 Widgets respectively, call `display` twice.\r\n",
+					"* In case you have already imported `display` function from IPython, you can always use the following statement to restore the global `display` function provided by Synapse Studio, if necessary (e.g. when you want to display Spark `DataFrame`).\r\n",
+					"```python\r\n",
+					"from notebookutils import display\r\n",
+					"```"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"# pre-imported `display` already supports Widget. No need to import from IPyton.\n",
+					"# from IPython.display import display\n",
+					"w = widgets.IntSlider()\n",
+					"display(w)"
+				],
+				"attachments": null,
+				"execution_count": 3
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"slideshow": {
+						"slide_type": "slide"
+					}
+				},
+				"source": [
+					"### Multiple display() calls"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"If you display the same widget twice, the displayed instances in the front-end will remain in sync with each other.  Try dragging the slider below and watch the slider above."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"display(w)"
+				],
+				"attachments": null,
+				"execution_count": 4
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Why does displaying the same widget twice work?"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"slideshow": {
+						"slide_type": "slide"
+					}
+				},
+				"source": [
+					"Widgets are represented in the back-end by a single object.  Each time a widget is displayed, a new representation of that same object is created in the front-end.  These representations are called views.\n",
+					"\n",
+					"![Kernel & front-end diagram](https://ipywidgets.readthedocs.io/en/7.x/_images/WidgetModelView.png)"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"slideshow": {
+						"slide_type": "slide"
+					}
+				},
+				"source": [
+					"### Closing widgets"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"You can close a widget by calling its `close()` method."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"display(w)"
+				],
+				"attachments": null,
+				"execution_count": 5
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"w.close()"
+				],
+				"attachments": null,
+				"execution_count": 6
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Widget properties"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"slideshow": {
+						"slide_type": "slide"
+					}
+				},
+				"source": [
+					"All of the IPython widgets share a similar naming scheme.  To read the value of a widget, you can query its `value` property."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"w = widgets.IntSlider()\n",
+					"display(w)"
+				],
+				"attachments": null,
+				"execution_count": 7
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"w.value"
+				],
+				"attachments": null,
+				"execution_count": 8
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"Similarly, to set a widget's value, you can set its `value` property."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"w.value = 100"
+				],
+				"attachments": null,
+				"execution_count": 9
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"slideshow": {
+						"slide_type": "slide"
+					}
+				},
+				"source": [
+					"### Keys"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"In addition to `value`, most widgets share `keys`, `description`, and `disabled`.  To see the entire list of synchronized, stateful properties of any specific widget, you can query the `keys` property."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"w.keys"
+				],
+				"attachments": null,
+				"execution_count": 10
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"### Shorthand for setting the initial values of widget properties"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"slideshow": {
+						"slide_type": "slide"
+					}
+				},
+				"source": [
+					"While creating a widget, you can set some or all of the initial values of that widget by defining them as keyword arguments in the widget's constructor (as seen below)."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"widgets.Text(value='Hello World!', disabled=True)"
+				],
+				"attachments": null,
+				"execution_count": 11
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Linking two similar widgets"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"slideshow": {
+						"slide_type": "slide"
+					}
+				},
+				"source": [
+					"If you need to display the same value two different ways, you'll have to use two different widgets. Instead of attempting to manually synchronize the values of the two widgets, you can use the `link`  or `jslink` function to link two properties together (the difference between these is discussed in [Widget Events](https://ipywidgets.readthedocs.io/en/7.x/examples/Widget%20Events.html)).  Below, the values of two widgets are linked together.\r\n",
+					"\r\n",
+					"**Synapse Studio users**: `jslink` is not supported yet. As a workaround, use `link`."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"a = widgets.FloatText()\n",
+					"b = widgets.FloatSlider()\n",
+					"display(a)\n",
+					"display(b)\n",
+					"\n",
+					"# `jslink` is not supported in Synapse Studio yet. Ue `link` instead.\n",
+					"# mylink = widgets.jslink((a, 'value'), (b, 'value'))\n",
+					"mylink = widgets.link((a, 'value'), (b, 'value'))"
+				],
+				"attachments": null,
+				"execution_count": 12
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"### Unlinking widgets"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"slideshow": {
+						"slide_type": "slide"
+					}
+				},
+				"source": [
+					"Unlinking the widgets is simple.  All you have to do is call `.unlink` on the link object.  Try changing one of the widgets above after unlinking to see that they can be independently changed."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"mylink.unlink()"
+				],
+				"attachments": null,
+				"execution_count": 13
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nbsphinx": "hidden"
+				},
+				"source": [
+					"## Next steps\r\n",
+					"\r\n",
+					"You can find more examples from the official [Jupyter Widgets documentation](https://ipywidgets.readthedocs.io/en/7.x/index.html), including\r\n",
+					"* [Widget List](https://ipywidgets.readthedocs.io/en/latest/examples/Widget%20List.html)\r\n",
+					"* [Widget Events](https://ipywidgets.readthedocs.io/en/latest/examples/Widget%20Events.html)\r\n",
+					"* [Widget Styling](https://ipywidgets.readthedocs.io/en/latest/examples/Widget%20Styling.html)\r\n",
+					"* and more!"
+				],
+				"attachments": null
+			}
+		]
+	}
+}

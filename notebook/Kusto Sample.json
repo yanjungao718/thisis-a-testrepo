@@ -1,0 +1,499 @@
+{
+	"name": "Kusto Sample",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "zhao",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "2c4c16d4-f8b2-4797-aa00-fe360bc2bf9a"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1",
+				"state": {
+					"bc47c816-005f-4b1d-90e3-dba72472d250": {
+						"type": "Synapse.DataFrame",
+						"sync_state": {
+							"table": {
+								"rows": [
+									{
+										"0": "2007-01-01 00:00:00",
+										"1": "2007-01-01 00:00:00",
+										"2": "2592",
+										"3": "13208",
+										"4": "NORTH CAROLINA",
+										"5": "Thunderstorm Wind",
+										"6": "0",
+										"7": "0",
+										"8": "0",
+										"9": "0",
+										"10": "0",
+										"11": "0",
+										"12": "Public",
+										"13": "CASAR",
+										"14": "CASAR",
+										"15": "35.52",
+										"16": "-81.63",
+										"17": "35.52",
+										"18": "-81.63",
+										"19": "A small cluster of thunderstorms moved rapidly across the foothills and piedmont of western North Carolina, producing scattered wind damage.",
+										"20": "Several trees down.",
+										"21": "{\"TotalDamages\":0,\"StartTime\":\"2007-01-01T00:00:00.0000000Z\",\"EndTime\":\"2007-01-01T00:00:00.0000000Z\",\"Details\":{\"Description\":\"Several trees down.\",\"Location\":\"NORTH CAROLINA\"}}"
+									},
+									{
+										"0": "2007-01-01 00:00:00",
+										"1": "2007-01-01 05:00:00",
+										"2": "4171",
+										"3": "23358",
+										"4": "WISCONSIN",
+										"5": "Winter Storm",
+										"6": "0",
+										"7": "0",
+										"8": "0",
+										"9": "0",
+										"10": "0",
+										"11": "0",
+										"12": "COOP Observer",
+										"13": "",
+										"14": "",
+										"19": "A powerful storm system moved from the southern plains through eastern Wisconsin, bringing copious amounts of precipitation to northwest Wisconsin from December 30th through the morning of January 1st. Deep tropical moisture out ahead of the storm brought heavy rains to the area on December 30th and 31st. Many areas saw over 1 inch of rain. Cold air wrapped around the system and changed the rain over to snow New Year's Eve. The snow finally ended during the early morning hours of New Year's Day, with the heaviest amounts of 6 to 12 inches reported across Ashland and Iron counties.",
+										"20": "",
+										"21": "{\"TotalDamages\":0,\"StartTime\":\"2007-01-01T00:00:00.0000000Z\",\"EndTime\":\"2007-01-01T05:00:00.0000000Z\",\"Details\":{\"Description\":\"\",\"Location\":\"WISCONSIN\"}}"
+									},
+									{
+										"0": "2007-01-01 00:00:00",
+										"1": "2007-01-01 05:00:00",
+										"2": "4171",
+										"3": "23357",
+										"4": "WISCONSIN",
+										"5": "Winter Storm",
+										"6": "0",
+										"7": "0",
+										"8": "0",
+										"9": "0",
+										"10": "0",
+										"11": "0",
+										"12": "COOP Observer",
+										"13": "",
+										"14": "",
+										"19": "A powerful storm system moved from the southern plains through eastern Wisconsin, bringing copious amounts of precipitation to northwest Wisconsin from December 30th through the morning of January 1st. Deep tropical moisture out ahead of the storm brought heavy rains to the area on December 30th and 31st. Many areas saw over 1 inch of rain. Cold air wrapped around the system and changed the rain over to snow New Year's Eve. The snow finally ended during the early morning hours of New Year's Day, with the heaviest amounts of 6 to 12 inches reported across Ashland and Iron counties.",
+										"20": "",
+										"21": "{\"TotalDamages\":0,\"StartTime\":\"2007-01-01T00:00:00.0000000Z\",\"EndTime\":\"2007-01-01T05:00:00.0000000Z\",\"Details\":{\"Description\":\"\",\"Location\":\"WISCONSIN\"}}"
+									},
+									{
+										"0": "2007-01-01 00:00:00",
+										"1": "2007-01-01 06:00:00",
+										"2": "1930",
+										"3": "9494",
+										"4": "NEW YORK",
+										"5": "Winter Weather",
+										"6": "0",
+										"7": "0",
+										"8": "0",
+										"9": "0",
+										"10": "2000",
+										"11": "0",
+										"12": "Department of Highways",
+										"13": "",
+										"14": "",
+										"19": "A weak area of low pressure moved across Ontario and Quebec provinces in Canada during the morning and afternoon of the 1st. Mild, moist air traveled over a seasonably cool airmass across New York and this resulted in a period of freezing rain from around Midnight to just before dawn. Freezing rain accumulated up to 1/4 of an inch across northern New York resulting in slick roads and several vehicle accidents.",
+										"20": "",
+										"21": "{\"TotalDamages\":2000,\"StartTime\":\"2007-01-01T00:00:00.0000000Z\",\"EndTime\":\"2007-01-01T06:00:00.0000000Z\",\"Details\":{\"Description\":\"\",\"Location\":\"NEW YORK\"}}"
+									},
+									{
+										"0": "2007-01-01 00:00:00",
+										"1": "2007-01-01 06:00:00",
+										"2": "1930",
+										"3": "9488",
+										"4": "NEW YORK",
+										"5": "Winter Weather",
+										"6": "0",
+										"7": "0",
+										"8": "0",
+										"9": "0",
+										"10": "2000",
+										"11": "0",
+										"12": "Department of Highways",
+										"13": "",
+										"14": "",
+										"19": "A weak area of low pressure moved across Ontario and Quebec provinces in Canada during the morning and afternoon of the 1st. Mild, moist air traveled over a seasonably cool airmass across New York and this resulted in a period of freezing rain from around Midnight to just before dawn. Freezing rain accumulated up to 1/4 of an inch across northern New York resulting in slick roads and several vehicle accidents.",
+										"20": "",
+										"21": "{\"TotalDamages\":2000,\"StartTime\":\"2007-01-01T00:00:00.0000000Z\",\"EndTime\":\"2007-01-01T06:00:00.0000000Z\",\"Details\":{\"Description\":\"\",\"Location\":\"NEW YORK\"}}"
+									},
+									{
+										"0": "2007-01-01 00:00:00",
+										"1": "2007-01-01 06:00:00",
+										"2": "1930",
+										"3": "9487",
+										"4": "NEW YORK",
+										"5": "Winter Weather",
+										"6": "0",
+										"7": "0",
+										"8": "0",
+										"9": "0",
+										"10": "2000",
+										"11": "0",
+										"12": "Department of Highways",
+										"13": "",
+										"14": "",
+										"19": "A weak area of low pressure moved across Ontario and Quebec provinces in Canada during the morning and afternoon of the 1st. Mild, moist air traveled over a seasonably cool airmass across New York and this resulted in a period of freezing rain from around Midnight to just before dawn. Freezing rain accumulated up to 1/4 of an inch across northern New York resulting in slick roads and several vehicle accidents.",
+										"20": "",
+										"21": "{\"TotalDamages\":2000,\"StartTime\":\"2007-01-01T00:00:00.0000000Z\",\"EndTime\":\"2007-01-01T06:00:00.0000000Z\",\"Details\":{\"Description\":\"\",\"Location\":\"NEW YORK\"}}"
+									},
+									{
+										"0": "2007-01-01 00:00:00",
+										"1": "2007-01-01 06:00:00",
+										"2": "1930",
+										"3": "9485",
+										"4": "NEW YORK",
+										"5": "Winter Weather",
+										"6": "0",
+										"7": "0",
+										"8": "0",
+										"9": "0",
+										"10": "3000",
+										"11": "0",
+										"12": "Department of Highways",
+										"13": "",
+										"14": "",
+										"19": "A weak area of low pressure moved across Ontario and Quebec provinces in Canada during the morning and afternoon of the 1st. Mild, moist air traveled over a seasonably cool airmass across New York and this resulted in a period of freezing rain from around Midnight to just before dawn. Freezing rain accumulated up to 1/4 of an inch across northern New York resulting in slick roads and several vehicle accidents.",
+										"20": "",
+										"21": "{\"TotalDamages\":3000,\"StartTime\":\"2007-01-01T00:00:00.0000000Z\",\"EndTime\":\"2007-01-01T06:00:00.0000000Z\",\"Details\":{\"Description\":\"\",\"Location\":\"NEW YORK\"}}"
+									},
+									{
+										"0": "2007-01-01 00:00:00",
+										"1": "2007-01-01 06:00:00",
+										"2": "1930",
+										"3": "9486",
+										"4": "NEW YORK",
+										"5": "Winter Weather",
+										"6": "0",
+										"7": "0",
+										"8": "0",
+										"9": "0",
+										"10": "3000",
+										"11": "0",
+										"12": "Department of Highways",
+										"13": "",
+										"14": "",
+										"19": "A weak area of low pressure moved across Ontario and Quebec provinces in Canada during the morning and afternoon of the 1st. Mild, moist air traveled over a seasonably cool airmass across New York and this resulted in a period of freezing rain from around Midnight to just before dawn. Freezing rain accumulated up to 1/4 of an inch across northern New York resulting in slick roads and several vehicle accidents.",
+										"20": "",
+										"21": "{\"TotalDamages\":3000,\"StartTime\":\"2007-01-01T00:00:00.0000000Z\",\"EndTime\":\"2007-01-01T06:00:00.0000000Z\",\"Details\":{\"Description\":\"\",\"Location\":\"NEW YORK\"}}"
+									},
+									{
+										"0": "2007-01-01 00:00:00",
+										"1": "2007-01-01 06:00:00",
+										"2": "1930",
+										"3": "9493",
+										"4": "NEW YORK",
+										"5": "Winter Weather",
+										"6": "0",
+										"7": "0",
+										"8": "0",
+										"9": "0",
+										"10": "2000",
+										"11": "0",
+										"12": "Department of Highways",
+										"13": "",
+										"14": "",
+										"19": "A weak area of low pressure moved across Ontario and Quebec provinces in Canada during the morning and afternoon of the 1st. Mild, moist air traveled over a seasonably cool airmass across New York and this resulted in a period of freezing rain from around Midnight to just before dawn. Freezing rain accumulated up to 1/4 of an inch across northern New York resulting in slick roads and several vehicle accidents.",
+										"20": "",
+										"21": "{\"TotalDamages\":2000,\"StartTime\":\"2007-01-01T00:00:00.0000000Z\",\"EndTime\":\"2007-01-01T06:00:00.0000000Z\",\"Details\":{\"Description\":\"\",\"Location\":\"NEW YORK\"}}"
+									},
+									{
+										"0": "2007-01-01 00:00:00",
+										"1": "2007-01-01 06:00:00",
+										"2": "1930",
+										"3": "9489",
+										"4": "NEW YORK",
+										"5": "Winter Weather",
+										"6": "0",
+										"7": "0",
+										"8": "0",
+										"9": "0",
+										"10": "2000",
+										"11": "0",
+										"12": "Department of Highways",
+										"13": "",
+										"14": "",
+										"19": "A weak area of low pressure moved across Ontario and Quebec provinces in Canada during the morning and afternoon of the 1st. Mild, moist air traveled over a seasonably cool airmass across New York and this resulted in a period of freezing rain from around Midnight to just before dawn. Freezing rain accumulated up to 1/4 of an inch across northern New York resulting in slick roads and several vehicle accidents.",
+										"20": "",
+										"21": "{\"TotalDamages\":2000,\"StartTime\":\"2007-01-01T00:00:00.0000000Z\",\"EndTime\":\"2007-01-01T06:00:00.0000000Z\",\"Details\":{\"Description\":\"\",\"Location\":\"NEW YORK\"}}"
+									}
+								],
+								"schema": [
+									{
+										"key": "0",
+										"name": "StartTime",
+										"type": "timestamp"
+									},
+									{
+										"key": "1",
+										"name": "EndTime",
+										"type": "timestamp"
+									},
+									{
+										"key": "2",
+										"name": "EpisodeId",
+										"type": "int"
+									},
+									{
+										"key": "3",
+										"name": "EventId",
+										"type": "int"
+									},
+									{
+										"key": "4",
+										"name": "State",
+										"type": "string"
+									},
+									{
+										"key": "5",
+										"name": "EventType",
+										"type": "string"
+									},
+									{
+										"key": "6",
+										"name": "InjuriesDirect",
+										"type": "int"
+									},
+									{
+										"key": "7",
+										"name": "InjuriesIndirect",
+										"type": "int"
+									},
+									{
+										"key": "8",
+										"name": "DeathsDirect",
+										"type": "int"
+									},
+									{
+										"key": "9",
+										"name": "DeathsIndirect",
+										"type": "int"
+									},
+									{
+										"key": "10",
+										"name": "DamageProperty",
+										"type": "int"
+									},
+									{
+										"key": "11",
+										"name": "DamageCrops",
+										"type": "int"
+									},
+									{
+										"key": "12",
+										"name": "Source",
+										"type": "string"
+									},
+									{
+										"key": "13",
+										"name": "BeginLocation",
+										"type": "string"
+									},
+									{
+										"key": "14",
+										"name": "EndLocation",
+										"type": "string"
+									},
+									{
+										"key": "15",
+										"name": "BeginLat",
+										"type": "double"
+									},
+									{
+										"key": "16",
+										"name": "BeginLon",
+										"type": "double"
+									},
+									{
+										"key": "17",
+										"name": "EndLat",
+										"type": "double"
+									},
+									{
+										"key": "18",
+										"name": "EndLon",
+										"type": "double"
+									},
+									{
+										"key": "19",
+										"name": "EpisodeNarrative",
+										"type": "string"
+									},
+									{
+										"key": "20",
+										"name": "EventNarrative",
+										"type": "string"
+									},
+									{
+										"key": "21",
+										"name": "StormSummary",
+										"type": "string"
+									}
+								]
+							},
+							"isSummary": false,
+							"language": "scala"
+						},
+						"persist_state": {
+							"view": {
+								"type": "details",
+								"chartOptions": {
+									"chartType": "bar",
+									"aggregationType": "sum",
+									"categoryFieldKeys": [
+										"0"
+									],
+									"seriesFieldKeys": [
+										"2"
+									],
+									"isStacked": false
+								}
+							}
+						}
+					}
+				}
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/ee9a0083-b9db-4f2d-9cb9-05a291e9c158/resourceGroups/bdbjqa/providers/Microsoft.Synapse/workspaces/bdbj20211129ws/bigDataPools/zhao",
+				"name": "zhao",
+				"type": "Spark",
+				"endpoint": "https://bdbj20211129ws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/zhao",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "3.1",
+				"nodeCount": 10,
+				"cores": 4,
+				"memory": 28,
+				"extraHeader": null
+			}
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"metadata": {
+					"microsoft": {
+						"language": "python"
+					},
+					"collapsed": false
+				},
+				"source": [
+					"%%pyspark\n",
+					"\n",
+					"# Read data from Azure Data Explorer table(s)\n",
+					"# Full Sample Code available at: https://github.com/Azure/azure-kusto-spark/blob/master/samples/src/main/python/SynapseSample.py\n",
+					"\n",
+					"kustoDf  = spark.read \\\n",
+					"    .format(\"com.microsoft.kusto.spark.synapse.datasource\") \\\n",
+					"    .option(\"spark.synapse.linkedService\", \"AzureDataExplorer\") \\\n",
+					"    .option(\"kustoDatabase\", \"bdbjkustodatabaseqingtest\") \\\n",
+					"    .option(\"kustoQuery\", \"Qingtest | take 10\") \\\n",
+					"    .load()\n",
+					"\n",
+					"display(kustoDf)\n",
+					""
+				],
+				"attachments": null,
+				"execution_count": 2
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"kustoDf.write \\\r\n",
+					"    .format(\"com.microsoft.kusto.spark.synapse.datasource\") \\\r\n",
+					"    .option(\"spark.synapse.linkedService\", \"AzureDataExplorer\") \\\r\n",
+					"    .option(\"kustoDatabase\", \"bdbjkustodatabaseqingtest\") \\\r\n",
+					"    .option(\"kustoTable\", \"Qingtest1129\") \\\r\n",
+					"    .option(\"tableCreateOptions\",\"CreateIfNotExist\") \\\r\n",
+					"    .mode(\"Append\") \\\r\n",
+					"    .save()"
+				],
+				"attachments": null,
+				"execution_count": 3
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"from pyspark.sql.types import *\r\n",
+					"customSchema = StructType([StructField('Id_P', IntegerType(), True),  \\\r\n",
+					"                           StructField('LastName', StringType(), True), \\\r\n",
+					"                           StructField('FirstName', StringType(), True), \\\r\n",
+					"                           StructField('Address', StringType(), True), \\\r\n",
+					"                           StructField('City', StringType(), True)] )\r\n",
+					"                 \r\n",
+					"\r\n",
+					"dfStream = spark \\\r\n",
+					"  .readStream \\\r\n",
+					"  .schema(customSchema) \\\r\n",
+					"  .csv(\"abfss://default@honghaigen2.dfs.core.windows.net/csv/\") \\\r\n",
+					"\r\n",
+					"spark.conf.set(\"spark.sql.streaming.checkpointLocation\", \"/localWriteCheckpointFolder\")\r\n",
+					"spark.conf.set(\"spark.sql.codegen.wholeStage\", \"false\")\r\n",
+					"\r\n",
+					"kustoQ = dfStream \\\r\n",
+					"    .writeStream \\\r\n",
+					"    .format(\"com.microsoft.kusto.spark.synapse.datasink.KustoSynapseSinkProvider\") \\\r\n",
+					"    .option(\"spark.synapse.linkedService\", \"AzureDataExplorer\") \\\r\n",
+					"    .option(\"kustoDatabase\", \"bdbjkustodatabaseqingtest\") \\\r\n",
+					"    .option(\"kustoTable\", \"Qingtest1129\") \\\r\n",
+					"    .option(\"tableCreateOptions\",\"CreateIfNotExist\") \\\r\n",
+					"    .trigger(once = True)\r\n",
+					"\r\n",
+					"kustoQ.start().awaitTermination(60*8)"
+				],
+				"attachments": null,
+				"execution_count": 4
+			}
+		]
+	}
+}

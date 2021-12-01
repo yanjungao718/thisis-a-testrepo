@@ -1,0 +1,18 @@
+{
+	"name": "CosmosDb",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"annotations": [
+			"Test"
+		],
+		"type": "CosmosDb",
+		"typeProperties": {
+			"connectionString": "AccountEndpoint=https://bdbjsqlapiqingtest.documents.azure.com:443/;Database=sqlapidatabaseqingtest;",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIlNZTkFQU0VAQ0ZENjlBNDktQ0RCNi00Qzk3LUI4QjMtNUVGQUVEQjM4REJEXzIzMTM2OGQ3LWU4NTUtNGE3Zi05YmRhLTI1MmVmYzRmM2E2ZiINCn0="
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

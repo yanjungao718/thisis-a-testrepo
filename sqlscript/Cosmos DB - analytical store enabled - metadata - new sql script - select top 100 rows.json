@@ -1,0 +1,17 @@
+{
+	"name": "Cosmos DB - analytical store enabled - metadata - new sql script - select top 100 rows",
+	"properties": {
+		"content": {
+			"query": "IF (EXISTS(SELECT * FROM sys.credentials WHERE name = 'bdbjsqlapiqingtest'))\nDROP CREDENTIAL [bdbjsqlapiqingtest]\nGO\n\nCREATE CREDENTIAL [bdbjsqlapiqingtest]\nWITH IDENTITY = 'SHARED ACCESS SIGNATURE', \nSECRET = 'pzQibicjdf49Aoacwj8vDRytwFQTXfKnShLfavYVqfUyaiWy9P9uvi6Zo1TR7M396HOgUCNn4QS8MPJDnzztUA=='\nGO\n\nSELECT TOP 100 *\nFROM OPENROWSET(​PROVIDER = 'CosmosDB',\n                CONNECTION = 'Account=bdbjsqlapiqingtest;Database=sqlapidatabaseqingtest',\n                OBJECT = 'container02',\n                SERVER_CREDENTIAL = 'bdbjsqlapiqingtest'\n) AS [container02]\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "master",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
