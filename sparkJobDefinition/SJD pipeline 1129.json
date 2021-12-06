@@ -2,8 +2,10 @@
 	"name": "SJD pipeline 1129",
 	"properties": {
 		"targetBigDataPool": {
+			"referenceName": "testsparkpool01",
 			"type": "BigDataPoolReference"
 		},
+		"requiredSparkVersion": "3.1",
 		"language": "python",
 		"jobProperties": {
 			"name": "SJD pipeline 1129",
@@ -12,11 +14,15 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "1",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "d864fc71-cf03-4799-bea3-af71ccfdbaa9"
+				"spark.autotune.trackingId": "6dac5fb2-f968-4bc5-990e-152160a9e6e9"
 			},
 			"args": [],
 			"jars": [],
 			"files": [],
+			"driverMemory": "56g",
+			"driverCores": 8,
+			"executorMemory": "56g",
+			"executorCores": 8,
 			"numExecutors": 2
 		}
 	}
