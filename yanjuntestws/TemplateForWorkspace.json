@@ -662,7 +662,7 @@
 						"frequency": "Minute",
 						"interval": 20,
 						"startTime": "2021-11-29T05:56:00",
-						"endTime": "2021-11-29T19:00:00",
+						"endTime": "2021-12-11T19:00:00",
 						"timeZone": "China Standard Time"
 					}
 				}
@@ -843,24 +843,25 @@
 				"description": "544545",
 				"nbformat": 4,
 				"nbformat_minor": 2,
+				"bigDataPool": {
+					"referenceName": "testsparkpool01",
+					"type": "BigDataPoolReference"
+				},
 				"sessionProperties": {
-					"driverMemory": "28g",
-					"driverCores": 4,
-					"executorMemory": "28g",
-					"executorCores": 4,
+					"driverMemory": "56g",
+					"driverCores": 8,
+					"executorMemory": "56g",
+					"executorCores": 8,
 					"numExecutors": 2,
 					"conf": {
 						"spark.dynamicAllocation.enabled": "false",
 						"spark.dynamicAllocation.minExecutors": "2",
 						"spark.dynamicAllocation.maxExecutors": "2",
-						"spark.autotune.trackingId": "04650cf6-000a-44e2-8bc0-f8cbe199df9c"
+						"spark.autotune.trackingId": "164de100-edcc-4e16-be74-1f7416a38196"
 					}
 				},
 				"metadata": {
 					"saveOutput": true,
-					"synapse_widget": {
-						"version": "0.1"
-					},
 					"enableDebugMode": false,
 					"kernelspec": {
 						"name": "synapse_pyspark",
@@ -868,6 +869,20 @@
 					},
 					"language_info": {
 						"name": "python"
+					},
+					"a365ComputeOptions": {
+						"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/testsparkpool01",
+						"name": "testsparkpool01",
+						"type": "Spark",
+						"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/testsparkpool01",
+						"auth": {
+							"type": "AAD",
+							"authResource": "https://dev.azuresynapse.net"
+						},
+						"sparkVersion": "3.1",
+						"nodeCount": 10,
+						"cores": 8,
+						"memory": 56
 					}
 				},
 				"cells": [
@@ -876,8 +891,7 @@
 						"source": [
 							"# Bankruptcy Prediction with LightGBM Classifier\r\n",
 							""
-						],
-						"attachments": null
+						]
 					},
 					{
 						"cell_type": "markdown",
@@ -898,8 +912,7 @@
 							"    Spark also supports new types of problems such as quantile regression.\n",
 							"-   Cross platform：LightGBM on Spark is available on Spark (Scala) and PySpark (Python).\n",
 							""
-						],
-						"attachments": null
+						]
 					},
 					{
 						"cell_type": "markdown",
@@ -908,8 +921,7 @@
 							"<img src=\"https://mmlspark.blob.core.windows.net/graphics/Documentation/bankruptcy image.png\" width=\"800\" style=\"float: center;\"/>\n",
 							"\n",
 							"In this example, we use LightGBM to build a classification model in order to predict bankruptcy."
-						],
-						"attachments": null
+						]
 					},
 					{
 						"cell_type": "markdown",
@@ -917,8 +929,7 @@
 							"## Read dataset\r\n",
 							"\r\n",
 							"Get a sample data of financial statements for 6819 companies, 220 represents bankrupted companies while 6599 firms are not bankrupted. "
-						],
-						"attachments": null
+						]
 					},
 					{
 						"cell_type": "code",
@@ -927,7 +938,6 @@
 							"  .option(\"header\", True)\\\n",
 							"  .load(\"wasbs://publicwasb@mmlspark.blob.core.windows.net/company_bankruptcy_prediction_data.csv\")"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": null
 					},
@@ -944,8 +954,7 @@
 							"## Exploratory data\r\n",
 							"\r\n",
 							"Look at the data and evaluate its suitability for use in a model."
-						],
-						"attachments": null
+						]
 					},
 					{
 						"cell_type": "code",
@@ -964,7 +973,6 @@
 						"source": [
 							"display(dataset.head(5))"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": null
 					},
@@ -986,7 +994,6 @@
 							"# print dataset size\r\n",
 							"print(\"Total number of records: \" + str(dataset.count()))"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": null
 					},
@@ -1001,7 +1008,6 @@
 							"print(\"Schema: \")\n",
 							"dataset.printSchema()"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": null
 					},
@@ -1019,8 +1025,7 @@
 							"\r\n",
 							"Simple split, 85% for training and 15% for testing the model. Playing with this ratio may result in different models.\r\n",
 							""
-						],
-						"attachments": null
+						]
 					},
 					{
 						"cell_type": "code",
@@ -1040,7 +1045,6 @@
 							"train_data = featurizer.transform(train)['Bankrupt?', 'features']\n",
 							"test_data = featurizer.transform(test)['Bankrupt?', 'features']"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": null
 					},
@@ -1050,7 +1054,6 @@
 							"# check if the data is unbalanced\r\n",
 							"train_data.groupBy(\"Bankrupt?\").count().show()"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": null
 					},
@@ -1059,8 +1062,7 @@
 						"source": [
 							"## Train the model\r\n",
 							"Train the Classifier model."
-						],
-						"attachments": null
+						]
 					},
 					{
 						"cell_type": "code",
@@ -1070,7 +1072,6 @@
 							"model = LightGBMClassifier(objective=\"binary\", featuresCol=\"features\", labelCol=\"Bankrupt?\", isUnbalance=True)\n",
 							"model = model.fit(train_data)"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": null
 					},
@@ -1081,7 +1082,6 @@
 							"model.saveNativeModel(\"/lgbmcmodel\")\n",
 							"model = LightGBMClassificationModel.loadNativeModelFromFile(\"/lgbmcmodel\")"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": null
 					},
@@ -1090,7 +1090,6 @@
 						"source": [
 							"print(model.getFeatureImportances())"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": null
 					},
@@ -1100,8 +1099,7 @@
 							"## Model Performance Evaluation\r\n",
 							"\r\n",
 							"After training the model, we evaluate the performance of the model using the test set."
-						],
-						"attachments": null
+						]
 					},
 					{
 						"cell_type": "code",
@@ -1109,7 +1107,6 @@
 							"predictions = model.transform(test_data)\n",
 							"#predictions.limit(10).toPandas()"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": null
 					},
@@ -1136,7 +1133,6 @@
 							"                                 scoredLabelsCol=\"Bankrupt?\").transform(predictions)\r\n",
 							"metrics.toPandas()"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": null
 					},
@@ -1154,8 +1150,7 @@
 							"To ensure the Spark instance is shut down, end any connected sessions(notebooks). The pool shuts down when the **idle time** specified in the Apache Spark pool is reached. You can also select **stop session** from the status bar at the upper right of the notebook.\r\n",
 							"\r\n",
 							"![stopsession](https://adsnotebookrelease.blob.core.windows.net/adsnotebookrelease/adsnotebook/image/stopsession.png)"
-						],
-						"attachments": null
+						]
 					},
 					{
 						"cell_type": "markdown",
@@ -1171,8 +1166,7 @@
 							"\r\n",
 							"* [Check out Synapse sample notebooks](https://github.com/Azure-Samples/Synapse/tree/main/MachineLearning) \r\n",
 							"* [MMLSpark GitHub Repo](https://github.com/Azure/mmlspark)"
-						],
-						"attachments": null
+						]
 					}
 				]
 			},
@@ -1186,90 +1180,24 @@
 				"nbformat": 4,
 				"nbformat_minor": 2,
 				"bigDataPool": {
-					"referenceName": "zhao",
+					"referenceName": "testsparkpool01",
 					"type": "BigDataPoolReference"
 				},
 				"sessionProperties": {
-					"driverMemory": "28g",
-					"driverCores": 4,
-					"executorMemory": "28g",
-					"executorCores": 4,
+					"driverMemory": "56g",
+					"driverCores": 8,
+					"executorMemory": "56g",
+					"executorCores": 8,
 					"numExecutors": 2,
 					"conf": {
 						"spark.dynamicAllocation.enabled": "false",
 						"spark.dynamicAllocation.minExecutors": "2",
 						"spark.dynamicAllocation.maxExecutors": "2",
-						"spark.autotune.trackingId": "0d6114ab-34f1-43f6-9515-7df05335e893"
+						"spark.autotune.trackingId": "2bc5453d-e875-4725-b578-7f2d6821176e"
 					}
 				},
 				"metadata": {
 					"saveOutput": true,
-					"synapse_widget": {
-						"version": "0.1",
-						"state": {
-							"8ae8524d-2277-467d-b69b-baaa27221737": {
-								"type": "Synapse.DataFrame",
-								"sync_state": {
-									"table": {
-										"rows": [
-											{
-												"0": "Path",
-												"1": "Data type",
-												"2": "Size",
-												"3": "Modified"
-											},
-											{
-												"0": "abfs://scope@scopeuserwestcentralus.dfs.core.windows.net/data/companies.csv",
-												"1": "UnStructuredStream",
-												"2": "79 bytes",
-												"3": "11/12/20 10:09:57 PM"
-											}
-										],
-										"schema": [
-											{
-												"key": "0",
-												"name": "_c0",
-												"type": "string"
-											},
-											{
-												"key": "1",
-												"name": "_c1",
-												"type": "string"
-											},
-											{
-												"key": "2",
-												"name": "_c2",
-												"type": "string"
-											},
-											{
-												"key": "3",
-												"name": "_c3",
-												"type": "string"
-											}
-										]
-									},
-									"isSummary": false,
-									"language": "scala"
-								},
-								"persist_state": {
-									"view": {
-										"type": "details",
-										"chartOptions": {
-											"chartType": "bar",
-											"aggregationType": "count",
-											"categoryFieldKeys": [
-												"0"
-											],
-											"seriesFieldKeys": [
-												"0"
-											],
-											"isStacked": false
-										}
-									}
-								}
-							}
-						}
-					},
 					"enableDebugMode": false,
 					"kernelspec": {
 						"name": "synapse_pyspark",
@@ -1279,19 +1207,18 @@
 						"name": "python"
 					},
 					"a365ComputeOptions": {
-						"id": "/subscriptions/ee9a0083-b9db-4f2d-9cb9-05a291e9c158/resourceGroups/bdbjqa/providers/Microsoft.Synapse/workspaces/bdbj20211129ws/bigDataPools/zhao",
-						"name": "zhao",
+						"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/testsparkpool01",
+						"name": "testsparkpool01",
 						"type": "Spark",
-						"endpoint": "https://bdbj20211129ws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/zhao",
+						"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/testsparkpool01",
 						"auth": {
 							"type": "AAD",
 							"authResource": "https://dev.azuresynapse.net"
 						},
 						"sparkVersion": "3.1",
 						"nodeCount": 10,
-						"cores": 4,
-						"memory": 28,
-						"extraHeader": null
+						"cores": 8,
+						"memory": 56
 					}
 				},
 				"cells": [
@@ -1319,7 +1246,6 @@
 							")\n",
 							"display(df.limit(10))"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 1
 					}
@@ -1335,27 +1261,24 @@
 				"nbformat": 4,
 				"nbformat_minor": 2,
 				"bigDataPool": {
-					"referenceName": "zhao",
+					"referenceName": "testsparkpool01",
 					"type": "BigDataPoolReference"
 				},
 				"sessionProperties": {
-					"driverMemory": "28g",
-					"driverCores": 4,
-					"executorMemory": "28g",
-					"executorCores": 4,
+					"driverMemory": "56g",
+					"driverCores": 8,
+					"executorMemory": "56g",
+					"executorCores": 8,
 					"numExecutors": 2,
 					"conf": {
 						"spark.dynamicAllocation.enabled": "false",
 						"spark.dynamicAllocation.minExecutors": "2",
 						"spark.dynamicAllocation.maxExecutors": "2",
-						"spark.autotune.trackingId": "c1236c8d-ed11-4db2-ac20-2f6e10f98dd7"
+						"spark.autotune.trackingId": "ea3794b2-9cd6-4cab-9043-e5011f180496"
 					}
 				},
 				"metadata": {
 					"saveOutput": true,
-					"synapse_widget": {
-						"version": "0.1"
-					},
 					"enableDebugMode": false,
 					"kernelspec": {
 						"name": "synapse_pyspark",
@@ -1365,19 +1288,18 @@
 						"name": "python"
 					},
 					"a365ComputeOptions": {
-						"id": "/subscriptions/ee9a0083-b9db-4f2d-9cb9-05a291e9c158/resourceGroups/bdbjqa/providers/Microsoft.Synapse/workspaces/bdbj20211129ws/bigDataPools/zhao",
-						"name": "zhao",
+						"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/testsparkpool01",
+						"name": "testsparkpool01",
 						"type": "Spark",
-						"endpoint": "https://bdbj20211129ws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/zhao",
+						"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/testsparkpool01",
 						"auth": {
 							"type": "AAD",
 							"authResource": "https://dev.azuresynapse.net"
 						},
 						"sparkVersion": "3.1",
 						"nodeCount": 10,
-						"cores": 4,
-						"memory": 28,
-						"extraHeader": null
+						"cores": 8,
+						"memory": 56
 					}
 				},
 				"cells": [
@@ -1402,7 +1324,6 @@
 							")\n",
 							"df.write.mode(\"overwrite\").saveAsTable(\"default.YourTableName\")"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 1
 					}
@@ -1417,2270 +1338,25 @@
 			"properties": {
 				"nbformat": 4,
 				"nbformat_minor": 2,
+				"bigDataPool": {
+					"referenceName": "testsparkpool01",
+					"type": "BigDataPoolReference"
+				},
 				"sessionProperties": {
-					"driverMemory": "28g",
-					"driverCores": 4,
-					"executorMemory": "28g",
-					"executorCores": 4,
+					"driverMemory": "56g",
+					"driverCores": 8,
+					"executorMemory": "56g",
+					"executorCores": 8,
 					"numExecutors": 2,
 					"conf": {
 						"spark.dynamicAllocation.enabled": "false",
 						"spark.dynamicAllocation.minExecutors": "2",
 						"spark.dynamicAllocation.maxExecutors": "2",
-						"spark.autotune.trackingId": "edae7620-f4cc-4c97-b934-487c5c19c4db"
+						"spark.autotune.trackingId": "63c7b476-fdf2-4501-bfc9-e81c895cede3"
 					}
 				},
 				"metadata": {
 					"saveOutput": true,
-					"synapse_widget": {
-						"version": "0.1",
-						"state": {
-							"82c3f9db-24c4-43f1-90d1-19374a4a1cd3": {
-								"type": "Synapse.DataFrame",
-								"sync_state": {
-									"table": {
-										"rows": [
-											{
-												"0": 24,
-												"1": 0.00632,
-												"2": 18,
-												"3": 2.31,
-												"4": 0,
-												"5": 0.538,
-												"6": 6.575,
-												"7": 65.2,
-												"8": 4.09,
-												"9": 1,
-												"10": 296,
-												"11": 15.3,
-												"12": 396.9,
-												"13": 4.98
-											},
-											{
-												"0": 21.6,
-												"1": 0.02731,
-												"2": 0,
-												"3": 7.07,
-												"4": 0,
-												"5": 0.469,
-												"6": 6.421,
-												"7": 78.9,
-												"8": 4.9671,
-												"9": 2,
-												"10": 242,
-												"11": 17.8,
-												"12": 396.9,
-												"13": 9.14
-											},
-											{
-												"0": 34.7,
-												"1": 0.02729,
-												"2": 0,
-												"3": 7.07,
-												"4": 0,
-												"5": 0.469,
-												"6": 7.185,
-												"7": 61.1,
-												"8": 4.9671,
-												"9": 2,
-												"10": 242,
-												"11": 17.8,
-												"12": 392.83,
-												"13": 4.03
-											},
-											{
-												"0": 33.4,
-												"1": 0.03237,
-												"2": 0,
-												"3": 2.18,
-												"4": 0,
-												"5": 0.458,
-												"6": 6.998,
-												"7": 45.8,
-												"8": 6.0622,
-												"9": 3,
-												"10": 222,
-												"11": 18.7,
-												"12": 394.63,
-												"13": 2.94
-											},
-											{
-												"0": 36.2,
-												"1": 0.06905,
-												"2": 0,
-												"3": 2.18,
-												"4": 0,
-												"5": 0.458,
-												"6": 7.147,
-												"7": 54.2,
-												"8": 6.0622,
-												"9": 3,
-												"10": 222,
-												"11": 18.7,
-												"12": 396.9,
-												"13": 5.33
-											},
-											{
-												"0": 28.7,
-												"1": 0.02985,
-												"2": 0,
-												"3": 2.18,
-												"4": 0,
-												"5": 0.458,
-												"6": 6.43,
-												"7": 58.7,
-												"8": 6.0622,
-												"9": 3,
-												"10": 222,
-												"11": 18.7,
-												"12": 394.12,
-												"13": 5.21
-											},
-											{
-												"0": 22.9,
-												"1": 0.08829,
-												"2": 12.5,
-												"3": 7.87,
-												"4": 0,
-												"5": 0.524,
-												"6": 6.012,
-												"7": 66.6,
-												"8": 5.5605,
-												"9": 5,
-												"10": 311,
-												"11": 15.2,
-												"12": 395.6,
-												"13": 12.43
-											},
-											{
-												"0": 27.1,
-												"1": 0.14455,
-												"2": 12.5,
-												"3": 7.87,
-												"4": 0,
-												"5": 0.524,
-												"6": 6.172,
-												"7": 96.1,
-												"8": 5.9505,
-												"9": 5,
-												"10": 311,
-												"11": 15.2,
-												"12": 396.9,
-												"13": 19.15
-											},
-											{
-												"0": 16.5,
-												"1": 0.21124,
-												"2": 12.5,
-												"3": 7.87,
-												"4": 0,
-												"5": 0.524,
-												"6": 5.631,
-												"7": 100,
-												"8": 6.0821,
-												"9": 5,
-												"10": 311,
-												"11": 15.2,
-												"12": 386.63,
-												"13": 29.93
-											},
-											{
-												"0": 18.9,
-												"1": 0.17004,
-												"2": 12.5,
-												"3": 7.87,
-												"4": 0,
-												"5": 0.524,
-												"6": 6.004,
-												"7": 85.9,
-												"8": 6.5921,
-												"9": 5,
-												"10": 311,
-												"11": 15.2,
-												"12": 386.71,
-												"13": 17.1
-											}
-										],
-										"schema": [
-											{
-												"key": "0",
-												"name": "target",
-												"type": "double"
-											},
-											{
-												"key": "1",
-												"name": "f0",
-												"type": "double"
-											},
-											{
-												"key": "2",
-												"name": "f1",
-												"type": "double"
-											},
-											{
-												"key": "3",
-												"name": "f2",
-												"type": "double"
-											},
-											{
-												"key": "4",
-												"name": "f3",
-												"type": "double"
-											},
-											{
-												"key": "5",
-												"name": "f4",
-												"type": "double"
-											},
-											{
-												"key": "6",
-												"name": "f5",
-												"type": "double"
-											},
-											{
-												"key": "7",
-												"name": "f6",
-												"type": "double"
-											},
-											{
-												"key": "8",
-												"name": "f7",
-												"type": "double"
-											},
-											{
-												"key": "9",
-												"name": "f8",
-												"type": "double"
-											},
-											{
-												"key": "10",
-												"name": "f9",
-												"type": "double"
-											},
-											{
-												"key": "11",
-												"name": "f10",
-												"type": "double"
-											},
-											{
-												"key": "12",
-												"name": "f11",
-												"type": "double"
-											},
-											{
-												"key": "13",
-												"name": "f12",
-												"type": "double"
-											}
-										]
-									},
-									"isSummary": false,
-									"language": "scala"
-								},
-								"persist_state": {
-									"view": {
-										"type": "details",
-										"chartOptions": {
-											"chartType": "bar",
-											"aggregationType": "sum",
-											"categoryFieldKeys": [
-												"1"
-											],
-											"seriesFieldKeys": [
-												"0"
-											],
-											"isStacked": false
-										}
-									}
-								}
-							},
-							"a74a7036-febe-40b2-a595-9a785694bef1": {
-								"type": "Synapse.DataFrame",
-								"sync_state": {
-									"table": {
-										"rows": [
-											{
-												"0": "count",
-												"1": "377",
-												"2": "377",
-												"3": "377",
-												"4": "377",
-												"5": "377",
-												"6": "377",
-												"7": "377",
-												"8": "377",
-												"9": "377",
-												"10": "377",
-												"11": "377",
-												"12": "377",
-												"13": "377",
-												"14": "377"
-											},
-											{
-												"0": "mean",
-												"1": "21.973740053050395",
-												"2": "3.713706445623341",
-												"3": "10.809018567639257",
-												"4": "11.50358090185676",
-												"5": "0.07427055702917772",
-												"6": "0.5621320954907156",
-												"7": "6.236015915119363",
-												"8": "70.09734748010614",
-												"9": "3.7060336870026527",
-												"10": "9.782493368700266",
-												"11": "414.40318302387266",
-												"12": "18.52015915119362",
-												"13": "350.23286472148504",
-												"14": "13.184270557029182"
-											},
-											{
-												"0": "stddev",
-												"1": "8.895643511000259",
-												"2": "7.864063086907033",
-												"3": "23.063986464629473",
-												"4": "6.898021082586262",
-												"5": "0.2625591341862547",
-												"6": "0.11925569148339353",
-												"7": "0.710894626480467",
-												"8": "28.107981250290862",
-												"9": "2.0910161916976997",
-												"10": "8.78226035585757",
-												"11": "170.03684453811675",
-												"12": "2.140967413102137",
-												"13": "99.13944837560052",
-												"14": "7.313211453734242"
-											},
-											{
-												"0": "min",
-												"1": "5.0",
-												"2": "0.00632",
-												"3": "0.0",
-												"4": "0.46",
-												"5": "0.0",
-												"6": "0.385",
-												"7": "3.561",
-												"8": "2.9",
-												"9": "1.1296",
-												"10": "1.0",
-												"11": "188.0",
-												"12": "12.6",
-												"13": "0.32",
-												"14": "1.98"
-											},
-											{
-												"0": "25%",
-												"1": "16.3",
-												"2": "0.09164",
-												"3": "0.0",
-												"4": "5.64",
-												"5": "0.0",
-												"6": "0.453",
-												"7": "5.875",
-												"8": "47.2",
-												"9": "2.0651",
-												"10": "4.0",
-												"11": "284.0",
-												"12": "17.4",
-												"13": "371.58",
-												"14": "7.39"
-											},
-											{
-												"0": "50%",
-												"1": "20.7",
-												"2": "0.29916",
-												"3": "0.0",
-												"4": "9.9",
-												"5": "0.0",
-												"6": "0.538",
-												"7": "6.167",
-												"8": "80.8",
-												"9": "2.9634",
-												"10": "5.0",
-												"11": "334.0",
-												"12": "19.1",
-												"13": "390.95",
-												"14": "12.26"
-											},
-											{
-												"0": "75%",
-												"1": "24.7",
-												"2": "3.83684",
-												"3": "12.5",
-												"4": "18.1",
-												"5": "0.0",
-												"6": "0.647",
-												"7": "6.567",
-												"8": "94.6",
-												"9": "5.1004",
-												"10": "24.0",
-												"11": "666.0",
-												"12": "20.2",
-												"13": "396.23",
-												"14": "17.27"
-											},
-											{
-												"0": "max",
-												"1": "50.0",
-												"2": "73.5341",
-												"3": "95.0",
-												"4": "27.74",
-												"5": "1.0",
-												"6": "0.871",
-												"7": "8.78",
-												"8": "100.0",
-												"9": "10.7103",
-												"10": "24.0",
-												"11": "711.0",
-												"12": "22.0",
-												"13": "396.9",
-												"14": "37.97"
-											}
-										],
-										"schema": [
-											{
-												"key": "0",
-												"name": "summary",
-												"type": "string"
-											},
-											{
-												"key": "1",
-												"name": "target",
-												"type": "string"
-											},
-											{
-												"key": "2",
-												"name": "f0",
-												"type": "string"
-											},
-											{
-												"key": "3",
-												"name": "f1",
-												"type": "string"
-											},
-											{
-												"key": "4",
-												"name": "f2",
-												"type": "string"
-											},
-											{
-												"key": "5",
-												"name": "f3",
-												"type": "string"
-											},
-											{
-												"key": "6",
-												"name": "f4",
-												"type": "string"
-											},
-											{
-												"key": "7",
-												"name": "f5",
-												"type": "string"
-											},
-											{
-												"key": "8",
-												"name": "f6",
-												"type": "string"
-											},
-											{
-												"key": "9",
-												"name": "f7",
-												"type": "string"
-											},
-											{
-												"key": "10",
-												"name": "f8",
-												"type": "string"
-											},
-											{
-												"key": "11",
-												"name": "f9",
-												"type": "string"
-											},
-											{
-												"key": "12",
-												"name": "f10",
-												"type": "string"
-											},
-											{
-												"key": "13",
-												"name": "f11",
-												"type": "string"
-											},
-											{
-												"key": "14",
-												"name": "f12",
-												"type": "string"
-											}
-										]
-									},
-									"isSummary": false,
-									"language": "scala"
-								},
-								"persist_state": {
-									"view": {
-										"type": "details",
-										"chartOptions": {
-											"chartType": "bar",
-											"aggregationType": "count",
-											"categoryFieldKeys": [
-												"0"
-											],
-											"seriesFieldKeys": [
-												"0"
-											],
-											"isStacked": false
-										}
-									}
-								}
-							},
-							"600096d1-9aa7-4ad6-9232-ec62959e81bb": {
-								"type": "Synapse.DataFrame",
-								"sync_state": {
-									"table": {
-										"rows": [
-											{
-												"0": 5,
-												"1": {
-													"type": 1,
-													"values": [
-														38.3518,
-														0,
-														18.1,
-														0,
-														0.693,
-														5.453,
-														100,
-														1.4896,
-														24,
-														666,
-														20.2,
-														396.9,
-														30.59
-													]
-												}
-											},
-											{
-												"0": 7,
-												"1": {
-													"type": 1,
-													"values": [
-														0.18337,
-														0,
-														27.74,
-														0,
-														0.609,
-														5.414,
-														98.3,
-														1.7554,
-														4,
-														711,
-														20.1,
-														344.05,
-														23.97
-													]
-												}
-											},
-											{
-												"0": 7,
-												"1": {
-													"type": 1,
-													"values": [
-														45.7461,
-														0,
-														18.1,
-														0,
-														0.693,
-														4.519,
-														100,
-														1.6582,
-														24,
-														666,
-														20.2,
-														88.27,
-														36.98
-													]
-												}
-											},
-											{
-												"0": 7.2,
-												"1": {
-													"type": 1,
-													"values": [
-														14.2362,
-														0,
-														18.1,
-														0,
-														0.693,
-														6.343,
-														100,
-														1.5741,
-														24,
-														666,
-														20.2,
-														396.9,
-														20.32
-													]
-												}
-											},
-											{
-												"0": 7.2,
-												"1": {
-													"type": 1,
-													"values": [
-														16.8118,
-														0,
-														18.1,
-														0,
-														0.7,
-														5.277,
-														98.1,
-														1.4261,
-														24,
-														666,
-														20.2,
-														396.9,
-														30.81
-													]
-												}
-											},
-											{
-												"0": 7.2,
-												"1": {
-													"type": 1,
-													"values": [
-														18.0846,
-														0,
-														18.1,
-														0,
-														0.679,
-														6.434,
-														100,
-														1.8347,
-														24,
-														666,
-														20.2,
-														27.25,
-														29.05
-													]
-												}
-											},
-											{
-												"0": 7.4,
-												"1": {
-													"type": 1,
-													"values": [
-														22.5971,
-														0,
-														18.1,
-														0,
-														0.7,
-														5,
-														89.5,
-														1.5184,
-														24,
-														666,
-														20.2,
-														396.9,
-														31.99
-													]
-												}
-											},
-											{
-												"0": 7.5,
-												"1": {
-													"type": 1,
-													"values": [
-														10.8342,
-														0,
-														18.1,
-														0,
-														0.679,
-														6.782,
-														90.8,
-														1.8195,
-														24,
-														666,
-														20.2,
-														21.57,
-														25.79
-													]
-												}
-											},
-											{
-												"0": 8.1,
-												"1": {
-													"type": 1,
-													"values": [
-														0.20746,
-														0,
-														27.74,
-														0,
-														0.609,
-														5.093,
-														98,
-														1.8226,
-														4,
-														711,
-														20.1,
-														318.43,
-														29.68
-													]
-												}
-											},
-											{
-												"0": 8.3,
-												"1": {
-													"type": 1,
-													"values": [
-														15.8603,
-														0,
-														18.1,
-														0,
-														0.679,
-														5.896,
-														95.4,
-														1.9096,
-														24,
-														666,
-														20.2,
-														7.68,
-														24.39
-													]
-												}
-											}
-										],
-										"schema": [
-											{
-												"key": "0",
-												"name": "target",
-												"type": "double"
-											},
-											{
-												"key": "1",
-												"name": "features",
-												"type": "org.apache.spark.ml.linalg.VectorUDT@3bfc3ba7"
-											}
-										]
-									},
-									"isSummary": false,
-									"language": "scala"
-								},
-								"persist_state": {
-									"view": {
-										"type": "details",
-										"chartOptions": {
-											"chartType": "bar",
-											"aggregationType": "sum",
-											"categoryFieldKeys": [],
-											"seriesFieldKeys": [
-												"0"
-											],
-											"isStacked": false
-										}
-									}
-								}
-							},
-							"2f89eb4c-27c9-4eaa-9a88-31332f805c21": {
-								"type": "Synapse.DataFrame",
-								"sync_state": {
-									"table": {
-										"rows": [
-											{
-												"0": 5,
-												"1": {
-													"type": 1,
-													"values": [
-														67.9208,
-														0,
-														18.1,
-														0,
-														0.693,
-														5.683,
-														100,
-														1.4254,
-														24,
-														666,
-														20.2,
-														384.97,
-														22.98
-													]
-												},
-												"2": 10.840796919767257
-											},
-											{
-												"0": 5.6,
-												"1": {
-													"type": 1,
-													"values": [
-														25.0461,
-														0,
-														18.1,
-														0,
-														0.693,
-														5.987,
-														100,
-														1.5888,
-														24,
-														666,
-														20.2,
-														396.9,
-														26.77
-													]
-												},
-												"2": 13.243210244993282
-											},
-											{
-												"0": 6.3,
-												"1": {
-													"type": 1,
-													"values": [
-														9.91655,
-														0,
-														18.1,
-														0,
-														0.693,
-														5.852,
-														77.8,
-														1.5004,
-														24,
-														666,
-														20.2,
-														338.16,
-														29.97
-													]
-												},
-												"2": 12.14686562729382
-											},
-											{
-												"0": 8.3,
-												"1": {
-													"type": 1,
-													"values": [
-														24.8017,
-														0,
-														18.1,
-														0,
-														0.693,
-														5.349,
-														96,
-														1.7028,
-														24,
-														666,
-														20.2,
-														396.9,
-														19.77
-													]
-												},
-												"2": 14.471714057928402
-											},
-											{
-												"0": 8.5,
-												"1": {
-													"type": 1,
-													"values": [
-														7.67202,
-														0,
-														18.1,
-														0,
-														0.693,
-														5.747,
-														98.9,
-														1.6334,
-														24,
-														666,
-														20.2,
-														393.1,
-														19.92
-													]
-												},
-												"2": 17.08265883101909
-											},
-											{
-												"0": 10.2,
-												"1": {
-													"type": 1,
-													"values": [
-														17.8667,
-														0,
-														18.1,
-														0,
-														0.671,
-														6.223,
-														100,
-														1.3861,
-														24,
-														666,
-														20.2,
-														393.74,
-														21.78
-													]
-												},
-												"2": 17.72097721514993
-											},
-											{
-												"0": 10.4,
-												"1": {
-													"type": 1,
-													"values": [
-														88.9762,
-														0,
-														18.1,
-														0,
-														0.671,
-														6.968,
-														91.9,
-														1.4165,
-														24,
-														666,
-														20.2,
-														396.9,
-														17.21
-													]
-												},
-												"2": 16.741030711114753
-											},
-											{
-												"0": 11,
-												"1": {
-													"type": 1,
-													"values": [
-														7.36711,
-														0,
-														18.1,
-														0,
-														0.679,
-														6.193,
-														78.1,
-														1.9356,
-														24,
-														666,
-														20.2,
-														96.73,
-														21.52
-													]
-												},
-												"2": 14.431770346035968
-											},
-											{
-												"0": 11.3,
-												"1": {
-													"type": 1,
-													"values": [
-														9.18702,
-														0,
-														18.1,
-														0,
-														0.7,
-														5.536,
-														100,
-														1.5804,
-														24,
-														666,
-														20.2,
-														396.9,
-														23.6
-													]
-												},
-												"2": 14.478643032934919
-											},
-											{
-												"0": 12.7,
-												"1": {
-													"type": 1,
-													"values": [
-														13.3598,
-														0,
-														18.1,
-														0,
-														0.693,
-														5.887,
-														94.7,
-														1.7821,
-														24,
-														666,
-														20.2,
-														396.9,
-														16.35
-													]
-												},
-												"2": 18.65300921286679
-											}
-										],
-										"schema": [
-											{
-												"key": "0",
-												"name": "target",
-												"type": "double"
-											},
-											{
-												"key": "1",
-												"name": "features",
-												"type": "org.apache.spark.ml.linalg.VectorUDT@3bfc3ba7"
-											},
-											{
-												"key": "2",
-												"name": "prediction",
-												"type": "double"
-											}
-										]
-									},
-									"isSummary": false,
-									"language": "scala"
-								},
-								"persist_state": {
-									"view": {
-										"type": "details",
-										"chartOptions": {
-											"chartType": "bar",
-											"aggregationType": "sum",
-											"categoryFieldKeys": [
-												"2"
-											],
-											"seriesFieldKeys": [
-												"0"
-											],
-											"isStacked": false
-										}
-									}
-								}
-							},
-							"795426d8-a364-4c03-b5e3-886d06d9bcae": {
-								"type": "Synapse.DataFrame",
-								"sync_state": {
-									"table": {
-										"rows": [
-											{
-												"0": "Spark MLlib - Linear Regression",
-												"1": 27.976319703714584,
-												"2": 5.289264571158696,
-												"3": 0.7112910017173594,
-												"4": 3.7154226196060236
-											}
-										],
-										"schema": [
-											{
-												"key": "0",
-												"name": "model",
-												"type": "string"
-											},
-											{
-												"key": "1",
-												"name": "mean_squared_error",
-												"type": "double"
-											},
-											{
-												"key": "2",
-												"name": "root_mean_squared_error",
-												"type": "double"
-											},
-											{
-												"key": "3",
-												"name": "R^2",
-												"type": "double"
-											},
-											{
-												"key": "4",
-												"name": "mean_absolute_error",
-												"type": "double"
-											}
-										]
-									},
-									"isSummary": false,
-									"language": "scala"
-								},
-								"persist_state": {
-									"view": {
-										"type": "details",
-										"chartOptions": {
-											"chartType": "bar",
-											"aggregationType": "sum",
-											"categoryFieldKeys": [
-												"0"
-											],
-											"seriesFieldKeys": [
-												"1"
-											],
-											"isStacked": false
-										}
-									}
-								}
-							},
-							"70da46b4-6839-445f-82b0-4fbb7b3ca4b7": {
-								"type": "Synapse.DataFrame",
-								"sync_state": {
-									"table": {
-										"rows": [
-											{
-												"0": 5,
-												"1": {
-													"type": 0,
-													"size": 1073741824,
-													"indices": [
-														287408178,
-														419613213,
-														464140333,
-														556319843,
-														584064458,
-														780495775,
-														824677867,
-														851899283,
-														921728202,
-														933181289,
-														1055634727
-													],
-													"values": [
-														20.2,
-														100,
-														18.1,
-														1.4896,
-														666,
-														24,
-														30.59,
-														5.453,
-														396.9,
-														38.3518,
-														0.693
-													]
-												}
-											},
-											{
-												"0": 7,
-												"1": {
-													"type": 0,
-													"size": 1073741824,
-													"indices": [
-														287408178,
-														419613213,
-														464140333,
-														556319843,
-														584064458,
-														780495775,
-														824677867,
-														851899283,
-														921728202,
-														933181289,
-														1055634727
-													],
-													"values": [
-														20.1,
-														98.3,
-														27.74,
-														1.7554,
-														711,
-														4,
-														23.97,
-														5.414,
-														344.05,
-														0.18337,
-														0.609
-													]
-												}
-											},
-											{
-												"0": 7,
-												"1": {
-													"type": 0,
-													"size": 1073741824,
-													"indices": [
-														287408178,
-														419613213,
-														464140333,
-														556319843,
-														584064458,
-														780495775,
-														824677867,
-														851899283,
-														921728202,
-														933181289,
-														1055634727
-													],
-													"values": [
-														20.2,
-														100,
-														18.1,
-														1.6582,
-														666,
-														24,
-														36.98,
-														4.519,
-														88.27,
-														45.7461,
-														0.693
-													]
-												}
-											},
-											{
-												"0": 7.2,
-												"1": {
-													"type": 0,
-													"size": 1073741824,
-													"indices": [
-														287408178,
-														419613213,
-														464140333,
-														556319843,
-														584064458,
-														780495775,
-														824677867,
-														851899283,
-														921728202,
-														933181289,
-														1055634727
-													],
-													"values": [
-														20.2,
-														100,
-														18.1,
-														1.5741,
-														666,
-														24,
-														20.32,
-														6.343,
-														396.9,
-														14.2362,
-														0.693
-													]
-												}
-											},
-											{
-												"0": 7.2,
-												"1": {
-													"type": 0,
-													"size": 1073741824,
-													"indices": [
-														287408178,
-														419613213,
-														464140333,
-														556319843,
-														584064458,
-														780495775,
-														824677867,
-														851899283,
-														921728202,
-														933181289,
-														1055634727
-													],
-													"values": [
-														20.2,
-														98.1,
-														18.1,
-														1.4261,
-														666,
-														24,
-														30.81,
-														5.277,
-														396.9,
-														16.8118,
-														0.7
-													]
-												}
-											},
-											{
-												"0": 7.2,
-												"1": {
-													"type": 0,
-													"size": 1073741824,
-													"indices": [
-														287408178,
-														419613213,
-														464140333,
-														556319843,
-														584064458,
-														780495775,
-														824677867,
-														851899283,
-														921728202,
-														933181289,
-														1055634727
-													],
-													"values": [
-														20.2,
-														100,
-														18.1,
-														1.8347,
-														666,
-														24,
-														29.05,
-														6.434,
-														27.25,
-														18.0846,
-														0.679
-													]
-												}
-											},
-											{
-												"0": 7.4,
-												"1": {
-													"type": 0,
-													"size": 1073741824,
-													"indices": [
-														287408178,
-														419613213,
-														464140333,
-														556319843,
-														584064458,
-														780495775,
-														824677867,
-														851899283,
-														921728202,
-														933181289,
-														1055634727
-													],
-													"values": [
-														20.2,
-														89.5,
-														18.1,
-														1.5184,
-														666,
-														24,
-														31.99,
-														5,
-														396.9,
-														22.5971,
-														0.7
-													]
-												}
-											},
-											{
-												"0": 7.5,
-												"1": {
-													"type": 0,
-													"size": 1073741824,
-													"indices": [
-														287408178,
-														419613213,
-														464140333,
-														556319843,
-														584064458,
-														780495775,
-														824677867,
-														851899283,
-														921728202,
-														933181289,
-														1055634727
-													],
-													"values": [
-														20.2,
-														90.8,
-														18.1,
-														1.8195,
-														666,
-														24,
-														25.79,
-														6.782,
-														21.57,
-														10.8342,
-														0.679
-													]
-												}
-											},
-											{
-												"0": 8.1,
-												"1": {
-													"type": 0,
-													"size": 1073741824,
-													"indices": [
-														287408178,
-														419613213,
-														464140333,
-														556319843,
-														584064458,
-														780495775,
-														824677867,
-														851899283,
-														921728202,
-														933181289,
-														1055634727
-													],
-													"values": [
-														20.1,
-														98,
-														27.74,
-														1.8226,
-														711,
-														4,
-														29.68,
-														5.093,
-														318.43,
-														0.20746,
-														0.609
-													]
-												}
-											},
-											{
-												"0": 8.3,
-												"1": {
-													"type": 0,
-													"size": 1073741824,
-													"indices": [
-														287408178,
-														419613213,
-														464140333,
-														556319843,
-														584064458,
-														780495775,
-														824677867,
-														851899283,
-														921728202,
-														933181289,
-														1055634727
-													],
-													"values": [
-														20.2,
-														95.4,
-														18.1,
-														1.9096,
-														666,
-														24,
-														24.39,
-														5.896,
-														7.68,
-														15.8603,
-														0.679
-													]
-												}
-											}
-										],
-										"schema": [
-											{
-												"key": "0",
-												"name": "target",
-												"type": "double"
-											},
-											{
-												"key": "1",
-												"name": "features",
-												"type": "org.apache.spark.ml.linalg.VectorUDT@3bfc3ba7"
-											}
-										]
-									},
-									"isSummary": false,
-									"language": "scala"
-								},
-								"persist_state": {
-									"view": {
-										"type": "details",
-										"chartOptions": {
-											"chartType": "bar",
-											"aggregationType": "sum",
-											"categoryFieldKeys": [],
-											"seriesFieldKeys": [
-												"0"
-											],
-											"isStacked": false
-										}
-									}
-								}
-							},
-							"eed8eb90-268c-4803-ad6c-b173411a6203": {
-								"type": "Synapse.DataFrame",
-								"sync_state": {
-									"table": {
-										"rows": [
-											{
-												"0": 5,
-												"1": {
-													"type": 0,
-													"size": 1073741824,
-													"indices": [
-														287408178,
-														419613213,
-														464140333,
-														556319843,
-														584064458,
-														780495775,
-														824677867,
-														851899283,
-														921728202,
-														933181289,
-														1055634727
-													],
-													"values": [
-														20.2,
-														100,
-														18.1,
-														1.4254,
-														666,
-														24,
-														22.98,
-														5.683,
-														384.97,
-														67.9208,
-														0.693
-													]
-												},
-												"2": 20.90886688232422,
-												"3": 20.90886688232422
-											},
-											{
-												"0": 5.6,
-												"1": {
-													"type": 0,
-													"size": 1073741824,
-													"indices": [
-														287408178,
-														419613213,
-														464140333,
-														556319843,
-														584064458,
-														780495775,
-														824677867,
-														851899283,
-														921728202,
-														933181289,
-														1055634727
-													],
-													"values": [
-														20.2,
-														100,
-														18.1,
-														1.5888,
-														666,
-														24,
-														26.77,
-														5.987,
-														396.9,
-														25.0461,
-														0.693
-													]
-												},
-												"2": 32.110198974609375,
-												"3": 32.110198974609375
-											},
-											{
-												"0": 6.3,
-												"1": {
-													"type": 0,
-													"size": 1073741824,
-													"indices": [
-														287408178,
-														419613213,
-														464140333,
-														556319843,
-														584064458,
-														780495775,
-														824677867,
-														851899283,
-														921728202,
-														933181289,
-														1055634727
-													],
-													"values": [
-														20.2,
-														77.8,
-														18.1,
-														1.5004,
-														666,
-														24,
-														29.97,
-														5.852,
-														338.16,
-														9.91655,
-														0.693
-													]
-												},
-												"2": 34.4964599609375,
-												"3": 34.4964599609375
-											},
-											{
-												"0": 8.3,
-												"1": {
-													"type": 0,
-													"size": 1073741824,
-													"indices": [
-														287408178,
-														419613213,
-														464140333,
-														556319843,
-														584064458,
-														780495775,
-														824677867,
-														851899283,
-														921728202,
-														933181289,
-														1055634727
-													],
-													"values": [
-														20.2,
-														96,
-														18.1,
-														1.7028,
-														666,
-														24,
-														19.77,
-														5.349,
-														396.9,
-														24.8017,
-														0.693
-													]
-												},
-												"2": 33.560638427734375,
-												"3": 33.560638427734375
-											},
-											{
-												"0": 8.5,
-												"1": {
-													"type": 0,
-													"size": 1073741824,
-													"indices": [
-														287408178,
-														419613213,
-														464140333,
-														556319843,
-														584064458,
-														780495775,
-														824677867,
-														851899283,
-														921728202,
-														933181289,
-														1055634727
-													],
-													"values": [
-														20.2,
-														98.9,
-														18.1,
-														1.6334,
-														666,
-														24,
-														19.92,
-														5.747,
-														393.1,
-														7.67202,
-														0.693
-													]
-												},
-												"2": 40.183040618896484,
-												"3": 40.183040618896484
-											},
-											{
-												"0": 10.2,
-												"1": {
-													"type": 0,
-													"size": 1073741824,
-													"indices": [
-														287408178,
-														419613213,
-														464140333,
-														556319843,
-														584064458,
-														780495775,
-														824677867,
-														851899283,
-														921728202,
-														933181289,
-														1055634727
-													],
-													"values": [
-														20.2,
-														100,
-														18.1,
-														1.3861,
-														666,
-														24,
-														21.78,
-														6.223,
-														393.74,
-														17.8667,
-														0.671
-													]
-												},
-												"2": 37.640419006347656,
-												"3": 37.640419006347656
-											},
-											{
-												"0": 10.4,
-												"1": {
-													"type": 0,
-													"size": 1073741824,
-													"indices": [
-														287408178,
-														419613213,
-														464140333,
-														556319843,
-														584064458,
-														780495775,
-														824677867,
-														851899283,
-														921728202,
-														933181289,
-														1055634727
-													],
-													"values": [
-														20.2,
-														91.9,
-														18.1,
-														1.4165,
-														666,
-														24,
-														17.21,
-														6.968,
-														396.9,
-														88.9762,
-														0.671
-													]
-												},
-												"2": 23.387290954589844,
-												"3": 23.387290954589844
-											},
-											{
-												"0": 11,
-												"1": {
-													"type": 0,
-													"size": 1073741824,
-													"indices": [
-														287408178,
-														419613213,
-														464140333,
-														556319843,
-														584064458,
-														780495775,
-														824677867,
-														851899283,
-														921728202,
-														933181289,
-														1055634727
-													],
-													"values": [
-														20.2,
-														78.1,
-														18.1,
-														1.9356,
-														666,
-														24,
-														21.52,
-														6.193,
-														96.73,
-														7.36711,
-														0.679
-													]
-												},
-												"2": 33.56855010986328,
-												"3": 33.56855010986328
-											},
-											{
-												"0": 11.3,
-												"1": {
-													"type": 0,
-													"size": 1073741824,
-													"indices": [
-														287408178,
-														419613213,
-														464140333,
-														556319843,
-														584064458,
-														780495775,
-														824677867,
-														851899283,
-														921728202,
-														933181289,
-														1055634727
-													],
-													"values": [
-														20.2,
-														100,
-														18.1,
-														1.5804,
-														666,
-														24,
-														23.6,
-														5.536,
-														396.9,
-														9.18702,
-														0.7
-													]
-												},
-												"2": 37.96609115600586,
-												"3": 37.96609115600586
-											},
-											{
-												"0": 12.7,
-												"1": {
-													"type": 0,
-													"size": 1073741824,
-													"indices": [
-														287408178,
-														419613213,
-														464140333,
-														556319843,
-														584064458,
-														780495775,
-														824677867,
-														851899283,
-														921728202,
-														933181289,
-														1055634727
-													],
-													"values": [
-														20.2,
-														94.7,
-														18.1,
-														1.7821,
-														666,
-														24,
-														16.35,
-														5.887,
-														396.9,
-														13.3598,
-														0.693
-													]
-												},
-												"2": 39.88002014160156,
-												"3": 39.88002014160156
-											}
-										],
-										"schema": [
-											{
-												"key": "0",
-												"name": "target",
-												"type": "double"
-											},
-											{
-												"key": "1",
-												"name": "features",
-												"type": "org.apache.spark.ml.linalg.VectorUDT@3bfc3ba7"
-											},
-											{
-												"key": "2",
-												"name": "rawPrediction",
-												"type": "double"
-											},
-											{
-												"key": "3",
-												"name": "prediction",
-												"type": "double"
-											}
-										]
-									},
-									"isSummary": false,
-									"language": "scala"
-								},
-								"persist_state": {
-									"view": {
-										"type": "details",
-										"chartOptions": {
-											"chartType": "bar",
-											"aggregationType": "sum",
-											"categoryFieldKeys": [
-												"2"
-											],
-											"seriesFieldKeys": [
-												"0"
-											],
-											"isStacked": false
-										}
-									}
-								}
-							},
-							"9c80f938-a9c2-447f-896e-a3b5447ed2f9": {
-								"type": "Synapse.DataFrame",
-								"sync_state": {
-									"table": {
-										"rows": [
-											{
-												"0": "Spark MLlib - Linear Regression",
-												"1": 27.976319703714584,
-												"2": 5.289264571158696,
-												"3": 0.7112910017173594,
-												"4": 3.7154226196060236
-											},
-											{
-												"0": "Vowpal Wabbit",
-												"1": 261.6089180538872,
-												"2": 16.174328983110463,
-												"3": -1.6997421202301588,
-												"4": 14.759180039398432
-											}
-										],
-										"schema": [
-											{
-												"key": "0",
-												"name": "model",
-												"type": "string"
-											},
-											{
-												"key": "1",
-												"name": "mean_squared_error",
-												"type": "double"
-											},
-											{
-												"key": "2",
-												"name": "root_mean_squared_error",
-												"type": "double"
-											},
-											{
-												"key": "3",
-												"name": "R^2",
-												"type": "double"
-											},
-											{
-												"key": "4",
-												"name": "mean_absolute_error",
-												"type": "double"
-											}
-										]
-									},
-									"isSummary": false,
-									"language": "scala"
-								},
-								"persist_state": {
-									"view": {
-										"type": "details",
-										"chartOptions": {
-											"chartType": "bar",
-											"aggregationType": "sum",
-											"categoryFieldKeys": [
-												"0"
-											],
-											"seriesFieldKeys": [
-												"1"
-											],
-											"isStacked": false
-										}
-									}
-								}
-							},
-							"66ca8e41-a8e6-4f96-8859-301c2c46b3ff": {
-								"type": "Synapse.DataFrame",
-								"sync_state": {
-									"table": {
-										"rows": [
-											{
-												"0": 5,
-												"1": {
-													"type": 1,
-													"values": [
-														67.9208,
-														0,
-														18.1,
-														0,
-														0.693,
-														5.683,
-														100,
-														1.4254,
-														24,
-														666,
-														20.2,
-														384.97,
-														22.98
-													]
-												},
-												"2": 10.125545304878454
-											},
-											{
-												"0": 5.6,
-												"1": {
-													"type": 1,
-													"values": [
-														25.0461,
-														0,
-														18.1,
-														0,
-														0.693,
-														5.987,
-														100,
-														1.5888,
-														24,
-														666,
-														20.2,
-														396.9,
-														26.77
-													]
-												},
-												"2": 7.8555181506504566
-											},
-											{
-												"0": 6.3,
-												"1": {
-													"type": 1,
-													"values": [
-														9.91655,
-														0,
-														18.1,
-														0,
-														0.693,
-														5.852,
-														77.8,
-														1.5004,
-														24,
-														666,
-														20.2,
-														338.16,
-														29.97
-													]
-												},
-												"2": 12.350327830954347
-											},
-											{
-												"0": 8.3,
-												"1": {
-													"type": 1,
-													"values": [
-														24.8017,
-														0,
-														18.1,
-														0,
-														0.693,
-														5.349,
-														96,
-														1.7028,
-														24,
-														666,
-														20.2,
-														396.9,
-														19.77
-													]
-												},
-												"2": 9.408284298711045
-											},
-											{
-												"0": 8.5,
-												"1": {
-													"type": 1,
-													"values": [
-														7.67202,
-														0,
-														18.1,
-														0,
-														0.693,
-														5.747,
-														98.9,
-														1.6334,
-														24,
-														666,
-														20.2,
-														393.1,
-														19.92
-													]
-												},
-												"2": 11.705711758454298
-											},
-											{
-												"0": 10.2,
-												"1": {
-													"type": 1,
-													"values": [
-														17.8667,
-														0,
-														18.1,
-														0,
-														0.671,
-														6.223,
-														100,
-														1.3861,
-														24,
-														666,
-														20.2,
-														393.74,
-														21.78
-													]
-												},
-												"2": 11.378612631892928
-											},
-											{
-												"0": 10.4,
-												"1": {
-													"type": 1,
-													"values": [
-														88.9762,
-														0,
-														18.1,
-														0,
-														0.671,
-														6.968,
-														91.9,
-														1.4165,
-														24,
-														666,
-														20.2,
-														396.9,
-														17.21
-													]
-												},
-												"2": 12.758518021271096
-											},
-											{
-												"0": 11,
-												"1": {
-													"type": 1,
-													"values": [
-														7.36711,
-														0,
-														18.1,
-														0,
-														0.679,
-														6.193,
-														78.1,
-														1.9356,
-														24,
-														666,
-														20.2,
-														96.73,
-														21.52
-													]
-												},
-												"2": 11.009850748168407
-											},
-											{
-												"0": 11.3,
-												"1": {
-													"type": 1,
-													"values": [
-														9.18702,
-														0,
-														18.1,
-														0,
-														0.7,
-														5.536,
-														100,
-														1.5804,
-														24,
-														666,
-														20.2,
-														396.9,
-														23.6
-													]
-												},
-												"2": 11.789698630551646
-											},
-											{
-												"0": 12.7,
-												"1": {
-													"type": 1,
-													"values": [
-														13.3598,
-														0,
-														18.1,
-														0,
-														0.693,
-														5.887,
-														94.7,
-														1.7821,
-														24,
-														666,
-														20.2,
-														396.9,
-														16.35
-													]
-												},
-												"2": 12.862038681023014
-											}
-										],
-										"schema": [
-											{
-												"key": "0",
-												"name": "target",
-												"type": "double"
-											},
-											{
-												"key": "1",
-												"name": "features",
-												"type": "org.apache.spark.ml.linalg.VectorUDT@3bfc3ba7"
-											},
-											{
-												"key": "2",
-												"name": "prediction",
-												"type": "double"
-											}
-										]
-									},
-									"isSummary": false,
-									"language": "scala"
-								},
-								"persist_state": {
-									"view": {
-										"type": "details",
-										"chartOptions": {
-											"chartType": "bar",
-											"aggregationType": "sum",
-											"categoryFieldKeys": [
-												"2"
-											],
-											"seriesFieldKeys": [
-												"0"
-											],
-											"isStacked": false
-										}
-									}
-								}
-							},
-							"64d87527-ac0f-48e1-a7d2-8e897a0d942a": {
-								"type": "Synapse.DataFrame",
-								"sync_state": {
-									"table": {
-										"rows": [
-											{
-												"0": "Spark MLlib - Linear Regression",
-												"1": 27.976319703714584,
-												"2": 5.289264571158696,
-												"3": 0.7112910017173594,
-												"4": 3.7154226196060236
-											},
-											{
-												"0": "Vowpal Wabbit",
-												"1": 261.6089180538872,
-												"2": 16.174328983110463,
-												"3": -1.6997421202301588,
-												"4": 14.759180039398432
-											},
-											{
-												"0": "LightGBM",
-												"1": 17.11581348425377,
-												"2": 4.137126234991358,
-												"3": 0.823368855583413,
-												"4": 2.671315643076597
-											}
-										],
-										"schema": [
-											{
-												"key": "0",
-												"name": "model",
-												"type": "string"
-											},
-											{
-												"key": "1",
-												"name": "mean_squared_error",
-												"type": "double"
-											},
-											{
-												"key": "2",
-												"name": "root_mean_squared_error",
-												"type": "double"
-											},
-											{
-												"key": "3",
-												"name": "R^2",
-												"type": "double"
-											},
-											{
-												"key": "4",
-												"name": "mean_absolute_error",
-												"type": "double"
-											}
-										]
-									},
-									"isSummary": false,
-									"language": "scala"
-								},
-								"persist_state": {
-									"view": {
-										"type": "details",
-										"chartOptions": {
-											"chartType": "bar",
-											"aggregationType": "sum",
-											"categoryFieldKeys": [
-												"0"
-											],
-											"seriesFieldKeys": [
-												"1"
-											],
-											"isStacked": false
-										}
-									}
-								}
-							}
-						}
-					},
 					"enableDebugMode": false,
 					"kernelspec": {
 						"name": "synapse_pyspark",
@@ -3688,6 +1364,20 @@
 					},
 					"language_info": {
 						"name": "python"
+					},
+					"a365ComputeOptions": {
+						"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/testsparkpool01",
+						"name": "testsparkpool01",
+						"type": "Spark",
+						"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/testsparkpool01",
+						"auth": {
+							"type": "AAD",
+							"authResource": "https://dev.azuresynapse.net"
+						},
+						"sparkVersion": "3.1",
+						"nodeCount": 10,
+						"cores": 8,
+						"memory": 56
 					}
 				},
 				"cells": [
@@ -3701,8 +1391,7 @@
 							"[LightGBM](https://github.com/microsoft/LightGBM) with MMLSpark.\n",
 							" We also compare the results with \n",
 							" [Spark MLlib Linear Regression](https://spark.apache.org/docs/latest/ml-classification-regression.html#linear-regression)."
-						],
-						"attachments": null
+						]
 					},
 					{
 						"cell_type": "code",
@@ -3720,7 +1409,6 @@
 							"from pyspark.ml.regression import LinearRegression\n",
 							"from sklearn.datasets import load_boston"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 1
 					},
@@ -3732,8 +1420,7 @@
 							". \n",
 							"The data was collected in 1978 from Boston area and consists of 506 entries with 14 features including the value of homes. \n",
 							"We use `sklearn.datasets` module to download it easily, then split the set into training and testing by 75/25."
-						],
-						"attachments": null
+						]
 					},
 					{
 						"cell_type": "code",
@@ -3751,7 +1438,6 @@
 							"print(\"Dataframe has {} rows\".format(df.count()))\n",
 							"display(df.limit(10).toPandas())"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 2
 					},
@@ -3762,7 +1448,6 @@
 							"train_data.cache()\n",
 							"test_data.cache()"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 3
 					},
@@ -3770,8 +1455,7 @@
 						"cell_type": "markdown",
 						"source": [
 							"Following is the summary of the training set."
-						],
-						"attachments": null
+						]
 					},
 					{
 						"cell_type": "code",
@@ -3781,7 +1465,6 @@
 						"source": [
 							"display(train_data.summary().toPandas())"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 4
 					},
@@ -3789,8 +1472,7 @@
 						"cell_type": "markdown",
 						"source": [
 							"Plot feature distributions over different target values (house prices in our case)."
-						],
-						"attachments": null
+						]
 					},
 					{
 						"cell_type": "code",
@@ -3818,7 +1500,6 @@
 							"        except IndexError:\n",
 							"            f.delaxes(axes[irow][icol])"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 5
 					},
@@ -3828,8 +1509,7 @@
 							"## Baseline - Spark MLlib Linear Regressor\n",
 							"\n",
 							"First, we set a baseline performance by using Linear Regressor in Spark MLlib."
-						],
-						"attachments": null
+						]
 					},
 					{
 						"cell_type": "code",
@@ -3845,7 +1525,6 @@
 							"lr_test_data = featurizer.transform(test_data)['target', 'features']\n",
 							"display(lr_train_data.limit(10).toPandas())"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 6
 					},
@@ -3865,7 +1544,6 @@
 							"\n",
 							"display(lr_predictions.limit(10).toPandas())"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 7
 					},
@@ -3877,8 +1555,7 @@
 							"* [RMSE (Root Mean Squared Error)](https://en.wikipedia.org/wiki/Root-mean-square_deviation) = sqrt(MSE)\n",
 							"* [R quared](https://en.wikipedia.org/wiki/Coefficient_of_determination)\n",
 							"* [MAE (Mean Absolute Error)](https://en.wikipedia.org/wiki/Mean_absolute_error)"
-						],
-						"attachments": null
+						]
 					},
 					{
 						"cell_type": "code",
@@ -3896,7 +1573,6 @@
 							"results.insert(0, 'model', ['Spark MLlib - Linear Regression'])\n",
 							"display(results)"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 8
 					},
@@ -3904,15 +1580,13 @@
 						"cell_type": "markdown",
 						"source": [
 							"## Vowpal Wabbit"
-						],
-						"attachments": null
+						]
 					},
 					{
 						"cell_type": "markdown",
 						"source": [
 							"Perform VW-style feature hashing. Many types (numbers, string, bool, map of string to (number, string)) are supported."
-						],
-						"attachments": null
+						]
 					},
 					{
 						"cell_type": "code",
@@ -3928,7 +1602,6 @@
 							"vw_test_data = vw_featurizer.transform(test_data)['target', 'features']\n",
 							"display(vw_train_data.limit(10).toPandas())"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 9
 					},
@@ -3936,8 +1609,7 @@
 						"cell_type": "markdown",
 						"source": [
 							"See [VW wiki](https://github.com/vowpalWabbit/vowpal_wabbit/wiki/Command-Line-Arguments) for command line arguments."
-						],
-						"attachments": null
+						]
 					},
 					{
 						"cell_type": "code",
@@ -3961,7 +1633,6 @@
 							"\n",
 							"display(vw_predictions.limit(10).toPandas())"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 10
 					},
@@ -3985,7 +1656,6 @@
 							")\n",
 							"display(results)"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 11
 					},
@@ -3993,8 +1663,7 @@
 						"cell_type": "markdown",
 						"source": [
 							"## LightGBM"
-						],
-						"attachments": null
+						]
 					},
 					{
 						"cell_type": "code",
@@ -4019,7 +1688,6 @@
 							"\n",
 							"display(lg_predictions.limit(10).toPandas())"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 12
 					},
@@ -4043,7 +1711,6 @@
 							")\n",
 							"display(results)"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 13
 					},
@@ -4053,8 +1720,7 @@
 							"Following figure shows the actual-vs.-prediction graphs of the results:\n",
 							"\n",
 							"<img width=\"1102\" alt=\"lr-vw-lg\" src=\"https://user-images.githubusercontent.com/42475935/64071975-4c3e9600-cc54-11e9-8b1f-9a1ee300f445.png\">"
-						],
-						"attachments": null
+						]
 					},
 					{
 						"cell_type": "code",
@@ -4068,7 +1734,6 @@
 							"    (\"LightGBM\", lg_predictions)\n",
 							"]"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 14
 					},
@@ -4104,7 +1769,6 @@
 							"    axes[i].set_title(model_name)\r\n",
 							"plt.show()"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 15
 					},
@@ -4122,8 +1786,7 @@
 							"To ensure the Spark instance is shut down, end any connected sessions(notebooks). The pool shuts down when the **idle time** specified in the Apache Spark pool is reached. You can also select **stop session** from the status bar at the upper right of the notebook.\r\n",
 							"\r\n",
 							"![stopsession](https://adsnotebookrelease.blob.core.windows.net/adsnotebookrelease/adsnotebook/image/stopsession.png)"
-						],
-						"attachments": null
+						]
 					},
 					{
 						"cell_type": "markdown",
@@ -4139,8 +1802,7 @@
 							"\r\n",
 							"* [Check out Synapse sample notebooks](https://github.com/Azure-Samples/Synapse/tree/main/MachineLearning) \r\n",
 							"* [MMLSpark GitHub Repo](https://github.com/Azure/mmlspark)"
-						],
-						"attachments": null
+						]
 					}
 				]
 			},
@@ -4154,20 +1816,20 @@
 				"nbformat": 4,
 				"nbformat_minor": 2,
 				"bigDataPool": {
-					"referenceName": "zhao1",
+					"referenceName": "testsparkpool01",
 					"type": "BigDataPoolReference"
 				},
 				"sessionProperties": {
-					"driverMemory": "28g",
-					"driverCores": 4,
-					"executorMemory": "28g",
-					"executorCores": 4,
+					"driverMemory": "56g",
+					"driverCores": 8,
+					"executorMemory": "56g",
+					"executorCores": 8,
 					"numExecutors": 2,
 					"conf": {
 						"spark.dynamicAllocation.enabled": "false",
 						"spark.dynamicAllocation.minExecutors": "2",
 						"spark.dynamicAllocation.maxExecutors": "2",
-						"spark.autotune.trackingId": "0833a835-c432-4d47-8d1e-540aac0644f5"
+						"spark.autotune.trackingId": "9cf5e0e8-7c8c-4a63-88b1-562a2c2005b7"
 					}
 				},
 				"metadata": {
@@ -4181,19 +1843,18 @@
 						"name": "python"
 					},
 					"a365ComputeOptions": {
-						"id": "/subscriptions/ee9a0083-b9db-4f2d-9cb9-05a291e9c158/resourceGroups/bdbjqa/providers/Microsoft.Synapse/workspaces/bdbj20211129ws/bigDataPools/zhao1",
-						"name": "zhao1",
+						"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/testsparkpool01",
+						"name": "testsparkpool01",
 						"type": "Spark",
-						"endpoint": "https://bdbj20211129ws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/zhao1",
+						"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/testsparkpool01",
 						"auth": {
 							"type": "AAD",
 							"authResource": "https://dev.azuresynapse.net"
 						},
 						"sparkVersion": "3.1",
 						"nodeCount": 10,
-						"cores": 4,
-						"memory": 28,
-						"extraHeader": null
+						"cores": 8,
+						"memory": 56
 					}
 				},
 				"cells": [
@@ -4218,7 +1879,6 @@
 							"pipeline_name = 'pipeline_name'\r\n",
 							"tag = 'tag'"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": null
 					},
@@ -4227,7 +1887,6 @@
 						"source": [
 							"source_df = spark.sql(\"SELECT * FROM default.NYC_Taxi\")"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": null
 					},
@@ -4249,7 +1908,6 @@
 							"import time\r\n",
 							"a = time.strftime(\"%Y%m%d_%H%M%S\", time.localtime())"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": null
 					},
@@ -4270,7 +1928,6 @@
 						"source": [
 							"source_df.write.mode(\"overwrite\").saveAsTable(\"default.NYC_Taxi_\" + pipeline_name + \"_\" + tag + \"_\" + a)"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": null
 					}
@@ -4439,7 +2096,7 @@
 				"nbformat": 4,
 				"nbformat_minor": 2,
 				"bigDataPool": {
-					"referenceName": "SampleSpark",
+					"referenceName": "testsparkpool01",
 					"type": "BigDataPoolReference"
 				},
 				"sessionProperties": {
@@ -4452,587 +2109,11 @@
 						"spark.dynamicAllocation.enabled": "false",
 						"spark.dynamicAllocation.minExecutors": "2",
 						"spark.dynamicAllocation.maxExecutors": "2",
-						"spark.autotune.trackingId": "73ed3dbf-8db8-4020-ae65-9765cbf355b5"
+						"spark.autotune.trackingId": "49b5c733-5c7f-4a84-941b-5118a3300259"
 					}
 				},
 				"metadata": {
 					"saveOutput": true,
-					"synapse_widget": {
-						"version": "0.1",
-						"state": {
-							"b2b64cf9-3a8b-470c-97e3-3d32cb4cbd69": {
-								"type": "Synapse.DataFrame",
-								"sync_state": {
-									"table": {
-										"rows": [
-											{
-												"0": "test",
-												"1": "1"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232test"
-											},
-											{
-												"0": "map",
-												"1": "2"
-											},
-											{
-												"0": "cool",
-												"1": "10"
-											},
-											{
-												"0": "coolest",
-												"1": "232"
-											}
-										],
-										"schema": [
-											{
-												"key": "0",
-												"name": "_c0",
-												"type": "string"
-											},
-											{
-												"key": "1",
-												"name": "_c1",
-												"type": "string"
-											}
-										]
-									},
-									"isSummary": false,
-									"language": "scala"
-								},
-								"persist_state": {
-									"view": {
-										"type": "details",
-										"chartOptions": {
-											"chartType": "bar",
-											"aggregationType": "count",
-											"categoryFieldKeys": [
-												"0"
-											],
-											"seriesFieldKeys": [
-												"0"
-											],
-											"isStacked": false
-										}
-									}
-								}
-							}
-						}
-					},
 					"enableDebugMode": false,
 					"kernelspec": {
 						"name": "synapse_pyspark",
@@ -5042,19 +2123,18 @@
 						"name": "python"
 					},
 					"a365ComputeOptions": {
-						"id": "/subscriptions/ee9a0083-b9db-4f2d-9cb9-05a291e9c158/resourceGroups/bdbjqa/providers/Microsoft.Synapse/workspaces/bdbj20211129ws/bigDataPools/SampleSpark",
-						"name": "SampleSpark",
+						"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/testsparkpool01",
+						"name": "testsparkpool01",
 						"type": "Spark",
-						"endpoint": "https://bdbj20211129ws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/SampleSpark",
+						"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/testsparkpool01",
 						"auth": {
 							"type": "AAD",
 							"authResource": "https://dev.azuresynapse.net"
 						},
 						"sparkVersion": "3.1",
-						"nodeCount": 3,
+						"nodeCount": 10,
 						"cores": 8,
-						"memory": 56,
-						"extraHeader": null
+						"memory": 56
 					}
 				},
 				"cells": [
@@ -5063,7 +2143,6 @@
 						"source": [
 							"%lsmagic"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 1
 					},
@@ -5077,7 +2156,6 @@
 							"test()\n",
 							"a"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 2
 					},
@@ -5088,7 +2166,6 @@
 							"import time\n",
 							"time.sleep(.3)"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 3
 					},
@@ -5104,7 +2181,6 @@
 							"print('std\\\\out')\n",
 							"eprint('std\\nerr')"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 4
 					},
@@ -5113,7 +2189,6 @@
 						"source": [
 							"out.stdout"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 5
 					},
@@ -5126,7 +2201,6 @@
 							"cool,10\n",
 							"coolest,232"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 6
 					},
@@ -5136,7 +2210,6 @@
 							"df = spark.read.csv('abc/test1.txt')\n",
 							"df.show()"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 7
 					},
@@ -5145,7 +2218,6 @@
 						"source": [
 							"df.show()"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 8
 					},
@@ -5157,7 +2229,6 @@
 						"source": [
 							"display(df)"
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 9
 					},
@@ -5166,7 +2237,6 @@
 						"source": [
 							""
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": null
 					}
@@ -5366,24 +2436,25 @@
 			"properties": {
 				"nbformat": 4,
 				"nbformat_minor": 2,
+				"bigDataPool": {
+					"referenceName": "testsparkpool01",
+					"type": "BigDataPoolReference"
+				},
 				"sessionProperties": {
-					"driverMemory": "28g",
-					"driverCores": 4,
-					"executorMemory": "28g",
-					"executorCores": 4,
+					"driverMemory": "56g",
+					"driverCores": 8,
+					"executorMemory": "56g",
+					"executorCores": 8,
 					"numExecutors": 2,
 					"conf": {
 						"spark.dynamicAllocation.enabled": "false",
 						"spark.dynamicAllocation.minExecutors": "2",
 						"spark.dynamicAllocation.maxExecutors": "2",
-						"spark.autotune.trackingId": "934cac50-38f0-4037-a46c-c414d60aaf86"
+						"spark.autotune.trackingId": "58092944-34ec-4ab0-8256-53645bf40aba"
 					}
 				},
 				"metadata": {
 					"saveOutput": true,
-					"synapse_widget": {
-						"version": "0.1"
-					},
 					"enableDebugMode": false,
 					"kernelspec": {
 						"name": "synapse_sparksql",
@@ -5391,6 +2462,20 @@
 					},
 					"language_info": {
 						"name": "sql"
+					},
+					"a365ComputeOptions": {
+						"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/testsparkpool01",
+						"name": "testsparkpool01",
+						"type": "Spark",
+						"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/testsparkpool01",
+						"auth": {
+							"type": "AAD",
+							"authResource": "https://dev.azuresynapse.net"
+						},
+						"sparkVersion": "3.1",
+						"nodeCount": 10,
+						"cores": 8,
+						"memory": 56
 					}
 				},
 				"cells": [
@@ -5399,7 +2484,6 @@
 						"source": [
 							""
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": null
 					},
@@ -5428,8 +2512,7 @@
 							"- \r\n",
 							"1. \r\n",
 							"![image-alt-text](image-URL)"
-						],
-						"attachments": null
+						]
 					},
 					{
 						"cell_type": "markdown",
@@ -5442,8 +2525,7 @@
 						},
 						"source": [
 							""
-						],
-						"attachments": null
+						]
 					},
 					{
 						"cell_type": "markdown",
@@ -5456,8 +2538,7 @@
 						},
 						"source": [
 							""
-						],
-						"attachments": null
+						]
 					},
 					{
 						"cell_type": "markdown",
@@ -5470,8 +2551,7 @@
 						},
 						"source": [
 							""
-						],
-						"attachments": null
+						]
 					}
 				]
 			},
@@ -6000,27 +3080,24 @@
 				"nbformat": 4,
 				"nbformat_minor": 2,
 				"bigDataPool": {
-					"referenceName": "zhao",
+					"referenceName": "testsparkpool01",
 					"type": "BigDataPoolReference"
 				},
 				"sessionProperties": {
-					"driverMemory": "28g",
-					"driverCores": 4,
-					"executorMemory": "28g",
-					"executorCores": 4,
+					"driverMemory": "56g",
+					"driverCores": 8,
+					"executorMemory": "56g",
+					"executorCores": 8,
 					"numExecutors": 2,
 					"conf": {
 						"spark.dynamicAllocation.enabled": "false",
 						"spark.dynamicAllocation.minExecutors": "2",
 						"spark.dynamicAllocation.maxExecutors": "2",
-						"spark.autotune.trackingId": "82b4e2fa-db29-46ec-866e-0ba4bc656955"
+						"spark.autotune.trackingId": "8a613224-de54-4f8a-be71-ab4f5f6f81b8"
 					}
 				},
 				"metadata": {
 					"saveOutput": true,
-					"synapse_widget": {
-						"version": "0.1"
-					},
 					"enableDebugMode": false,
 					"kernelspec": {
 						"name": "synapse_pyspark",
@@ -6030,19 +3107,18 @@
 						"name": "python"
 					},
 					"a365ComputeOptions": {
-						"id": "/subscriptions/ee9a0083-b9db-4f2d-9cb9-05a291e9c158/resourceGroups/bdbjqa/providers/Microsoft.Synapse/workspaces/bdbj20211129ws/bigDataPools/zhao",
-						"name": "zhao",
+						"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/testsparkpool01",
+						"name": "testsparkpool01",
 						"type": "Spark",
-						"endpoint": "https://bdbj20211129ws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/zhao",
+						"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/testsparkpool01",
 						"auth": {
 							"type": "AAD",
 							"authResource": "https://dev.azuresynapse.net"
 						},
 						"sparkVersion": "3.1",
 						"nodeCount": 10,
-						"cores": 4,
-						"memory": 28,
-						"extraHeader": null
+						"cores": 8,
+						"memory": 56
 					}
 				},
 				"cells": [
@@ -6064,7 +3140,6 @@
 							"    .save()\n",
 							""
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 1
 					}
@@ -6080,27 +3155,24 @@
 				"nbformat": 4,
 				"nbformat_minor": 2,
 				"bigDataPool": {
-					"referenceName": "zhao",
+					"referenceName": "testsparkpool01",
 					"type": "BigDataPoolReference"
 				},
 				"sessionProperties": {
-					"driverMemory": "28g",
-					"driverCores": 4,
-					"executorMemory": "28g",
-					"executorCores": 4,
+					"driverMemory": "56g",
+					"driverCores": 8,
+					"executorMemory": "56g",
+					"executorCores": 8,
 					"numExecutors": 2,
 					"conf": {
 						"spark.dynamicAllocation.enabled": "false",
 						"spark.dynamicAllocation.minExecutors": "2",
 						"spark.dynamicAllocation.maxExecutors": "2",
-						"spark.autotune.trackingId": "f89803c3-4808-42f4-9eb0-7c3dfe674a11"
+						"spark.autotune.trackingId": "f3738c97-d002-4e00-99a3-59145d7e569b"
 					}
 				},
 				"metadata": {
 					"saveOutput": true,
-					"synapse_widget": {
-						"version": "0.1"
-					},
 					"enableDebugMode": false,
 					"kernelspec": {
 						"name": "synapse_pyspark",
@@ -6110,19 +3182,18 @@
 						"name": "python"
 					},
 					"a365ComputeOptions": {
-						"id": "/subscriptions/ee9a0083-b9db-4f2d-9cb9-05a291e9c158/resourceGroups/bdbjqa/providers/Microsoft.Synapse/workspaces/bdbj20211129ws/bigDataPools/zhao",
-						"name": "zhao",
+						"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/testsparkpool01",
+						"name": "testsparkpool01",
 						"type": "Spark",
-						"endpoint": "https://bdbj20211129ws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/zhao",
+						"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/testsparkpool01",
 						"auth": {
 							"type": "AAD",
 							"authResource": "https://dev.azuresynapse.net"
 						},
 						"sparkVersion": "3.1",
 						"nodeCount": 10,
-						"cores": 4,
-						"memory": 28,
-						"extraHeader": null
+						"cores": 8,
+						"memory": 56
 					}
 				},
 				"cells": [
@@ -6154,7 +3225,6 @@
 							"kustoQ.start().awaitTermination(60*8)\n",
 							""
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 1
 					}
@@ -6170,372 +3240,24 @@
 				"nbformat": 4,
 				"nbformat_minor": 2,
 				"bigDataPool": {
-					"referenceName": "zhao",
+					"referenceName": "testsparkpool01",
 					"type": "BigDataPoolReference"
 				},
 				"sessionProperties": {
-					"driverMemory": "28g",
-					"driverCores": 4,
-					"executorMemory": "28g",
-					"executorCores": 4,
+					"driverMemory": "56g",
+					"driverCores": 8,
+					"executorMemory": "56g",
+					"executorCores": 8,
 					"numExecutors": 2,
 					"conf": {
 						"spark.dynamicAllocation.enabled": "false",
 						"spark.dynamicAllocation.minExecutors": "2",
 						"spark.dynamicAllocation.maxExecutors": "2",
-						"spark.autotune.trackingId": "0831b449-6e9e-4956-81ec-16b80f4c1004"
+						"spark.autotune.trackingId": "e959e4fa-fae0-4306-9b49-4d980889eed3"
 					}
 				},
 				"metadata": {
 					"saveOutput": true,
-					"synapse_widget": {
-						"version": "0.1",
-						"state": {
-							"12f9279f-0cbb-44a5-b03e-f9a9358d1280": {
-								"type": "Synapse.DataFrame",
-								"sync_state": {
-									"table": {
-										"rows": [
-											{
-												"0": "2007-01-01 00:00:00",
-												"1": "2007-01-01 00:00:00",
-												"2": "2592",
-												"3": "13208",
-												"4": "NORTH CAROLINA",
-												"5": "Thunderstorm Wind",
-												"6": "0",
-												"7": "0",
-												"8": "0",
-												"9": "0",
-												"10": "0",
-												"11": "0",
-												"12": "Public",
-												"13": "CASAR",
-												"14": "CASAR",
-												"15": "35.52",
-												"16": "-81.63",
-												"17": "35.52",
-												"18": "-81.63",
-												"19": "A small cluster of thunderstorms moved rapidly across the foothills and piedmont of western North Carolina, producing scattered wind damage.",
-												"20": "Several trees down.",
-												"21": "{\"TotalDamages\":0,\"StartTime\":\"2007-01-01T00:00:00.0000000Z\",\"EndTime\":\"2007-01-01T00:00:00.0000000Z\",\"Details\":{\"Description\":\"Several trees down.\",\"Location\":\"NORTH CAROLINA\"}}"
-											},
-											{
-												"0": "2007-01-01 00:00:00",
-												"1": "2007-01-01 05:00:00",
-												"2": "4171",
-												"3": "23358",
-												"4": "WISCONSIN",
-												"5": "Winter Storm",
-												"6": "0",
-												"7": "0",
-												"8": "0",
-												"9": "0",
-												"10": "0",
-												"11": "0",
-												"12": "COOP Observer",
-												"13": "",
-												"14": "",
-												"19": "A powerful storm system moved from the southern plains through eastern Wisconsin, bringing copious amounts of precipitation to northwest Wisconsin from December 30th through the morning of January 1st. Deep tropical moisture out ahead of the storm brought heavy rains to the area on December 30th and 31st. Many areas saw over 1 inch of rain. Cold air wrapped around the system and changed the rain over to snow New Year's Eve. The snow finally ended during the early morning hours of New Year's Day, with the heaviest amounts of 6 to 12 inches reported across Ashland and Iron counties.",
-												"20": "",
-												"21": "{\"TotalDamages\":0,\"StartTime\":\"2007-01-01T00:00:00.0000000Z\",\"EndTime\":\"2007-01-01T05:00:00.0000000Z\",\"Details\":{\"Description\":\"\",\"Location\":\"WISCONSIN\"}}"
-											},
-											{
-												"0": "2007-01-01 00:00:00",
-												"1": "2007-01-01 05:00:00",
-												"2": "4171",
-												"3": "23357",
-												"4": "WISCONSIN",
-												"5": "Winter Storm",
-												"6": "0",
-												"7": "0",
-												"8": "0",
-												"9": "0",
-												"10": "0",
-												"11": "0",
-												"12": "COOP Observer",
-												"13": "",
-												"14": "",
-												"19": "A powerful storm system moved from the southern plains through eastern Wisconsin, bringing copious amounts of precipitation to northwest Wisconsin from December 30th through the morning of January 1st. Deep tropical moisture out ahead of the storm brought heavy rains to the area on December 30th and 31st. Many areas saw over 1 inch of rain. Cold air wrapped around the system and changed the rain over to snow New Year's Eve. The snow finally ended during the early morning hours of New Year's Day, with the heaviest amounts of 6 to 12 inches reported across Ashland and Iron counties.",
-												"20": "",
-												"21": "{\"TotalDamages\":0,\"StartTime\":\"2007-01-01T00:00:00.0000000Z\",\"EndTime\":\"2007-01-01T05:00:00.0000000Z\",\"Details\":{\"Description\":\"\",\"Location\":\"WISCONSIN\"}}"
-											},
-											{
-												"0": "2007-01-01 00:00:00",
-												"1": "2007-01-01 06:00:00",
-												"2": "1930",
-												"3": "9494",
-												"4": "NEW YORK",
-												"5": "Winter Weather",
-												"6": "0",
-												"7": "0",
-												"8": "0",
-												"9": "0",
-												"10": "2000",
-												"11": "0",
-												"12": "Department of Highways",
-												"13": "",
-												"14": "",
-												"19": "A weak area of low pressure moved across Ontario and Quebec provinces in Canada during the morning and afternoon of the 1st. Mild, moist air traveled over a seasonably cool airmass across New York and this resulted in a period of freezing rain from around Midnight to just before dawn. Freezing rain accumulated up to 1/4 of an inch across northern New York resulting in slick roads and several vehicle accidents.",
-												"20": "",
-												"21": "{\"TotalDamages\":2000,\"StartTime\":\"2007-01-01T00:00:00.0000000Z\",\"EndTime\":\"2007-01-01T06:00:00.0000000Z\",\"Details\":{\"Description\":\"\",\"Location\":\"NEW YORK\"}}"
-											},
-											{
-												"0": "2007-01-01 00:00:00",
-												"1": "2007-01-01 06:00:00",
-												"2": "1930",
-												"3": "9488",
-												"4": "NEW YORK",
-												"5": "Winter Weather",
-												"6": "0",
-												"7": "0",
-												"8": "0",
-												"9": "0",
-												"10": "2000",
-												"11": "0",
-												"12": "Department of Highways",
-												"13": "",
-												"14": "",
-												"19": "A weak area of low pressure moved across Ontario and Quebec provinces in Canada during the morning and afternoon of the 1st. Mild, moist air traveled over a seasonably cool airmass across New York and this resulted in a period of freezing rain from around Midnight to just before dawn. Freezing rain accumulated up to 1/4 of an inch across northern New York resulting in slick roads and several vehicle accidents.",
-												"20": "",
-												"21": "{\"TotalDamages\":2000,\"StartTime\":\"2007-01-01T00:00:00.0000000Z\",\"EndTime\":\"2007-01-01T06:00:00.0000000Z\",\"Details\":{\"Description\":\"\",\"Location\":\"NEW YORK\"}}"
-											},
-											{
-												"0": "2007-01-01 00:00:00",
-												"1": "2007-01-01 06:00:00",
-												"2": "1930",
-												"3": "9487",
-												"4": "NEW YORK",
-												"5": "Winter Weather",
-												"6": "0",
-												"7": "0",
-												"8": "0",
-												"9": "0",
-												"10": "2000",
-												"11": "0",
-												"12": "Department of Highways",
-												"13": "",
-												"14": "",
-												"19": "A weak area of low pressure moved across Ontario and Quebec provinces in Canada during the morning and afternoon of the 1st. Mild, moist air traveled over a seasonably cool airmass across New York and this resulted in a period of freezing rain from around Midnight to just before dawn. Freezing rain accumulated up to 1/4 of an inch across northern New York resulting in slick roads and several vehicle accidents.",
-												"20": "",
-												"21": "{\"TotalDamages\":2000,\"StartTime\":\"2007-01-01T00:00:00.0000000Z\",\"EndTime\":\"2007-01-01T06:00:00.0000000Z\",\"Details\":{\"Description\":\"\",\"Location\":\"NEW YORK\"}}"
-											},
-											{
-												"0": "2007-01-01 00:00:00",
-												"1": "2007-01-01 06:00:00",
-												"2": "1930",
-												"3": "9485",
-												"4": "NEW YORK",
-												"5": "Winter Weather",
-												"6": "0",
-												"7": "0",
-												"8": "0",
-												"9": "0",
-												"10": "3000",
-												"11": "0",
-												"12": "Department of Highways",
-												"13": "",
-												"14": "",
-												"19": "A weak area of low pressure moved across Ontario and Quebec provinces in Canada during the morning and afternoon of the 1st. Mild, moist air traveled over a seasonably cool airmass across New York and this resulted in a period of freezing rain from around Midnight to just before dawn. Freezing rain accumulated up to 1/4 of an inch across northern New York resulting in slick roads and several vehicle accidents.",
-												"20": "",
-												"21": "{\"TotalDamages\":3000,\"StartTime\":\"2007-01-01T00:00:00.0000000Z\",\"EndTime\":\"2007-01-01T06:00:00.0000000Z\",\"Details\":{\"Description\":\"\",\"Location\":\"NEW YORK\"}}"
-											},
-											{
-												"0": "2007-01-01 00:00:00",
-												"1": "2007-01-01 06:00:00",
-												"2": "1930",
-												"3": "9486",
-												"4": "NEW YORK",
-												"5": "Winter Weather",
-												"6": "0",
-												"7": "0",
-												"8": "0",
-												"9": "0",
-												"10": "3000",
-												"11": "0",
-												"12": "Department of Highways",
-												"13": "",
-												"14": "",
-												"19": "A weak area of low pressure moved across Ontario and Quebec provinces in Canada during the morning and afternoon of the 1st. Mild, moist air traveled over a seasonably cool airmass across New York and this resulted in a period of freezing rain from around Midnight to just before dawn. Freezing rain accumulated up to 1/4 of an inch across northern New York resulting in slick roads and several vehicle accidents.",
-												"20": "",
-												"21": "{\"TotalDamages\":3000,\"StartTime\":\"2007-01-01T00:00:00.0000000Z\",\"EndTime\":\"2007-01-01T06:00:00.0000000Z\",\"Details\":{\"Description\":\"\",\"Location\":\"NEW YORK\"}}"
-											},
-											{
-												"0": "2007-01-01 00:00:00",
-												"1": "2007-01-01 06:00:00",
-												"2": "1930",
-												"3": "9493",
-												"4": "NEW YORK",
-												"5": "Winter Weather",
-												"6": "0",
-												"7": "0",
-												"8": "0",
-												"9": "0",
-												"10": "2000",
-												"11": "0",
-												"12": "Department of Highways",
-												"13": "",
-												"14": "",
-												"19": "A weak area of low pressure moved across Ontario and Quebec provinces in Canada during the morning and afternoon of the 1st. Mild, moist air traveled over a seasonably cool airmass across New York and this resulted in a period of freezing rain from around Midnight to just before dawn. Freezing rain accumulated up to 1/4 of an inch across northern New York resulting in slick roads and several vehicle accidents.",
-												"20": "",
-												"21": "{\"TotalDamages\":2000,\"StartTime\":\"2007-01-01T00:00:00.0000000Z\",\"EndTime\":\"2007-01-01T06:00:00.0000000Z\",\"Details\":{\"Description\":\"\",\"Location\":\"NEW YORK\"}}"
-											},
-											{
-												"0": "2007-01-01 00:00:00",
-												"1": "2007-01-01 06:00:00",
-												"2": "1930",
-												"3": "9489",
-												"4": "NEW YORK",
-												"5": "Winter Weather",
-												"6": "0",
-												"7": "0",
-												"8": "0",
-												"9": "0",
-												"10": "2000",
-												"11": "0",
-												"12": "Department of Highways",
-												"13": "",
-												"14": "",
-												"19": "A weak area of low pressure moved across Ontario and Quebec provinces in Canada during the morning and afternoon of the 1st. Mild, moist air traveled over a seasonably cool airmass across New York and this resulted in a period of freezing rain from around Midnight to just before dawn. Freezing rain accumulated up to 1/4 of an inch across northern New York resulting in slick roads and several vehicle accidents.",
-												"20": "",
-												"21": "{\"TotalDamages\":2000,\"StartTime\":\"2007-01-01T00:00:00.0000000Z\",\"EndTime\":\"2007-01-01T06:00:00.0000000Z\",\"Details\":{\"Description\":\"\",\"Location\":\"NEW YORK\"}}"
-											}
-										],
-										"schema": [
-											{
-												"key": "0",
-												"name": "StartTime",
-												"type": "timestamp"
-											},
-											{
-												"key": "1",
-												"name": "EndTime",
-												"type": "timestamp"
-											},
-											{
-												"key": "2",
-												"name": "EpisodeId",
-												"type": "int"
-											},
-											{
-												"key": "3",
-												"name": "EventId",
-												"type": "int"
-											},
-											{
-												"key": "4",
-												"name": "State",
-												"type": "string"
-											},
-											{
-												"key": "5",
-												"name": "EventType",
-												"type": "string"
-											},
-											{
-												"key": "6",
-												"name": "InjuriesDirect",
-												"type": "int"
-											},
-											{
-												"key": "7",
-												"name": "InjuriesIndirect",
-												"type": "int"
-											},
-											{
-												"key": "8",
-												"name": "DeathsDirect",
-												"type": "int"
-											},
-											{
-												"key": "9",
-												"name": "DeathsIndirect",
-												"type": "int"
-											},
-											{
-												"key": "10",
-												"name": "DamageProperty",
-												"type": "int"
-											},
-											{
-												"key": "11",
-												"name": "DamageCrops",
-												"type": "int"
-											},
-											{
-												"key": "12",
-												"name": "Source",
-												"type": "string"
-											},
-											{
-												"key": "13",
-												"name": "BeginLocation",
-												"type": "string"
-											},
-											{
-												"key": "14",
-												"name": "EndLocation",
-												"type": "string"
-											},
-											{
-												"key": "15",
-												"name": "BeginLat",
-												"type": "double"
-											},
-											{
-												"key": "16",
-												"name": "BeginLon",
-												"type": "double"
-											},
-											{
-												"key": "17",
-												"name": "EndLat",
-												"type": "double"
-											},
-											{
-												"key": "18",
-												"name": "EndLon",
-												"type": "double"
-											},
-											{
-												"key": "19",
-												"name": "EpisodeNarrative",
-												"type": "string"
-											},
-											{
-												"key": "20",
-												"name": "EventNarrative",
-												"type": "string"
-											},
-											{
-												"key": "21",
-												"name": "StormSummary",
-												"type": "string"
-											}
-										]
-									},
-									"isSummary": false,
-									"language": "scala"
-								},
-								"persist_state": {
-									"view": {
-										"type": "details",
-										"chartOptions": {
-											"chartType": "bar",
-											"aggregationType": "sum",
-											"categoryFieldKeys": [
-												"0"
-											],
-											"seriesFieldKeys": [
-												"2"
-											],
-											"isStacked": false
-										}
-									}
-								}
-							}
-						}
-					},
 					"enableDebugMode": false,
 					"kernelspec": {
 						"name": "synapse_pyspark",
@@ -6545,19 +3267,18 @@
 						"name": "python"
 					},
 					"a365ComputeOptions": {
-						"id": "/subscriptions/ee9a0083-b9db-4f2d-9cb9-05a291e9c158/resourceGroups/bdbjqa/providers/Microsoft.Synapse/workspaces/bdbj20211129ws/bigDataPools/zhao",
-						"name": "zhao",
+						"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/testsparkpool01",
+						"name": "testsparkpool01",
 						"type": "Spark",
-						"endpoint": "https://bdbj20211129ws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/zhao",
+						"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/testsparkpool01",
 						"auth": {
 							"type": "AAD",
 							"authResource": "https://dev.azuresynapse.net"
 						},
 						"sparkVersion": "3.1",
 						"nodeCount": 10,
-						"cores": 4,
-						"memory": 28,
-						"extraHeader": null
+						"cores": 8,
+						"memory": 56
 					}
 				},
 				"cells": [
@@ -6582,7 +3303,6 @@
 							"display(kustoDf)\n",
 							""
 						],
-						"attachments": null,
 						"outputs": [],
 						"execution_count": 1
 					}
@@ -6596,7 +3316,7 @@
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
 				"targetBigDataPool": {
-					"referenceName": "zhao",
+					"referenceName": "testsparkpool01",
 					"type": "BigDataPoolReference"
 				},
 				"requiredSparkVersion": "3.1",
@@ -6608,15 +3328,15 @@
 						"spark.dynamicAllocation.enabled": "false",
 						"spark.dynamicAllocation.minExecutors": "1",
 						"spark.dynamicAllocation.maxExecutors": "2",
-						"spark.autotune.trackingId": "61bc249d-f8fa-4f91-a50c-6e8a3c6a7d19"
+						"spark.autotune.trackingId": "6dac5fb2-f968-4bc5-990e-152160a9e6e9"
 					},
 					"args": [],
 					"jars": [],
 					"files": [],
-					"driverMemory": "28g",
-					"driverCores": 4,
-					"executorMemory": "28g",
-					"executorCores": 4,
+					"driverMemory": "56g",
+					"driverCores": 8,
+					"executorMemory": "56g",
+					"executorCores": 8,
 					"numExecutors": 2
 				}
 			},
