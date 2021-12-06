@@ -4,20 +4,20 @@
 		"nbformat": 4,
 		"nbformat_minor": 2,
 		"bigDataPool": {
-			"referenceName": "zhao1",
+			"referenceName": "testsparkpool01",
 			"type": "BigDataPoolReference"
 		},
 		"sessionProperties": {
-			"driverMemory": "28g",
-			"driverCores": 4,
-			"executorMemory": "28g",
-			"executorCores": 4,
+			"driverMemory": "56g",
+			"driverCores": 8,
+			"executorMemory": "56g",
+			"executorCores": 8,
 			"numExecutors": 2,
 			"conf": {
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "0833a835-c432-4d47-8d1e-540aac0644f5"
+				"spark.autotune.trackingId": "9cf5e0e8-7c8c-4a63-88b1-562a2c2005b7"
 			}
 		},
 		"metadata": {
@@ -31,20 +31,21 @@
 				"name": "python"
 			},
 			"a365ComputeOptions": {
-				"id": "/subscriptions/ee9a0083-b9db-4f2d-9cb9-05a291e9c158/resourceGroups/bdbjqa/providers/Microsoft.Synapse/workspaces/bdbj20211129ws/bigDataPools/zhao1",
-				"name": "zhao1",
+				"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/testsparkpool01",
+				"name": "testsparkpool01",
 				"type": "Spark",
-				"endpoint": "https://bdbj20211129ws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/zhao1",
+				"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/testsparkpool01",
 				"auth": {
 					"type": "AAD",
 					"authResource": "https://dev.azuresynapse.net"
 				},
 				"sparkVersion": "3.1",
 				"nodeCount": 10,
-				"cores": 4,
-				"memory": 28,
-				"extraHeader": null
-			}
+				"cores": 8,
+				"memory": 56,
+				"automaticScaleJobs": false
+			},
+			"sessionKeepAliveTimeout": 30
 		},
 		"cells": [
 			{
@@ -68,7 +69,6 @@
 					"pipeline_name = 'pipeline_name'\r\n",
 					"tag = 'tag'"
 				],
-				"attachments": null,
 				"execution_count": null
 			},
 			{
@@ -76,7 +76,6 @@
 				"source": [
 					"source_df = spark.sql(\"SELECT * FROM default.NYC_Taxi\")"
 				],
-				"attachments": null,
 				"execution_count": null
 			},
 			{
@@ -97,7 +96,6 @@
 					"import time\r\n",
 					"a = time.strftime(\"%Y%m%d_%H%M%S\", time.localtime())"
 				],
-				"attachments": null,
 				"execution_count": null
 			},
 			{
@@ -117,7 +115,6 @@
 				"source": [
 					"source_df.write.mode(\"overwrite\").saveAsTable(\"default.NYC_Taxi_\" + pipeline_name + \"_\" + tag + \"_\" + a)"
 				],
-				"attachments": null,
 				"execution_count": null
 			}
 		]

@@ -3,24 +3,25 @@
 	"properties": {
 		"nbformat": 4,
 		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "testsparkpool01",
+			"type": "BigDataPoolReference"
+		},
 		"sessionProperties": {
-			"driverMemory": "28g",
-			"driverCores": 4,
-			"executorMemory": "28g",
-			"executorCores": 4,
+			"driverMemory": "56g",
+			"driverCores": 8,
+			"executorMemory": "56g",
+			"executorCores": 8,
 			"numExecutors": 2,
 			"conf": {
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "934cac50-38f0-4037-a46c-c414d60aaf86"
+				"spark.autotune.trackingId": "58092944-34ec-4ab0-8256-53645bf40aba"
 			}
 		},
 		"metadata": {
 			"saveOutput": true,
-			"synapse_widget": {
-				"version": "0.1"
-			},
 			"enableDebugMode": false,
 			"kernelspec": {
 				"name": "synapse_sparksql",
@@ -28,7 +29,23 @@
 			},
 			"language_info": {
 				"name": "sql"
-			}
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/testsparkpool01",
+				"name": "testsparkpool01",
+				"type": "Spark",
+				"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/testsparkpool01",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "3.1",
+				"nodeCount": 10,
+				"cores": 8,
+				"memory": 56,
+				"automaticScaleJobs": false
+			},
+			"sessionKeepAliveTimeout": 30
 		},
 		"cells": [
 			{
@@ -36,7 +53,6 @@
 				"source": [
 					""
 				],
-				"attachments": null,
 				"execution_count": null
 			},
 			{
@@ -64,8 +80,7 @@
 					"- \r\n",
 					"1. \r\n",
 					"![image-alt-text](image-URL)"
-				],
-				"attachments": null
+				]
 			},
 			{
 				"cell_type": "markdown",
@@ -78,8 +93,7 @@
 				},
 				"source": [
 					""
-				],
-				"attachments": null
+				]
 			},
 			{
 				"cell_type": "markdown",
@@ -92,8 +106,7 @@
 				},
 				"source": [
 					""
-				],
-				"attachments": null
+				]
 			},
 			{
 				"cell_type": "markdown",
@@ -106,8 +119,7 @@
 				},
 				"source": [
 					""
-				],
-				"attachments": null
+				]
 			}
 		]
 	}

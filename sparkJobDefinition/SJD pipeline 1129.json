@@ -2,10 +2,8 @@
 	"name": "SJD pipeline 1129",
 	"properties": {
 		"targetBigDataPool": {
-			"referenceName": "zhao",
 			"type": "BigDataPoolReference"
 		},
-		"requiredSparkVersion": "3.1",
 		"language": "python",
 		"jobProperties": {
 			"name": "SJD pipeline 1129",
@@ -14,15 +12,11 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "1",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "61bc249d-f8fa-4f91-a50c-6e8a3c6a7d19"
+				"spark.autotune.trackingId": "d864fc71-cf03-4799-bea3-af71ccfdbaa9"
 			},
 			"args": [],
 			"jars": [],
 			"files": [],
-			"driverMemory": "28g",
-			"driverCores": 4,
-			"executorMemory": "28g",
-			"executorCores": 4,
 			"numExecutors": 2
 		}
 	}

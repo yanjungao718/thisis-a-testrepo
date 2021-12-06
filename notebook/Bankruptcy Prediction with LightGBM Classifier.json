@@ -4,24 +4,25 @@
 		"description": "544545",
 		"nbformat": 4,
 		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "testsparkpool01",
+			"type": "BigDataPoolReference"
+		},
 		"sessionProperties": {
-			"driverMemory": "28g",
-			"driverCores": 4,
-			"executorMemory": "28g",
-			"executorCores": 4,
+			"driverMemory": "56g",
+			"driverCores": 8,
+			"executorMemory": "56g",
+			"executorCores": 8,
 			"numExecutors": 2,
 			"conf": {
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "04650cf6-000a-44e2-8bc0-f8cbe199df9c"
+				"spark.autotune.trackingId": "164de100-edcc-4e16-be74-1f7416a38196"
 			}
 		},
 		"metadata": {
 			"saveOutput": true,
-			"synapse_widget": {
-				"version": "0.1"
-			},
 			"enableDebugMode": false,
 			"kernelspec": {
 				"name": "synapse_pyspark",
@@ -29,7 +30,23 @@
 			},
 			"language_info": {
 				"name": "python"
-			}
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/testsparkpool01",
+				"name": "testsparkpool01",
+				"type": "Spark",
+				"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/testsparkpool01",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "3.1",
+				"nodeCount": 10,
+				"cores": 8,
+				"memory": 56,
+				"automaticScaleJobs": false
+			},
+			"sessionKeepAliveTimeout": 30
 		},
 		"cells": [
 			{
@@ -37,8 +54,7 @@
 				"source": [
 					"# Bankruptcy Prediction with LightGBM Classifier\r\n",
 					""
-				],
-				"attachments": null
+				]
 			},
 			{
 				"cell_type": "markdown",
@@ -59,8 +75,7 @@
 					"    Spark also supports new types of problems such as quantile regression.\n",
 					"-   Cross platform：LightGBM on Spark is available on Spark (Scala) and PySpark (Python).\n",
 					""
-				],
-				"attachments": null
+				]
 			},
 			{
 				"cell_type": "markdown",
@@ -69,8 +84,7 @@
 					"<img src=\"https://mmlspark.blob.core.windows.net/graphics/Documentation/bankruptcy image.png\" width=\"800\" style=\"float: center;\"/>\n",
 					"\n",
 					"In this example, we use LightGBM to build a classification model in order to predict bankruptcy."
-				],
-				"attachments": null
+				]
 			},
 			{
 				"cell_type": "markdown",
@@ -78,8 +92,7 @@
 					"## Read dataset\r\n",
 					"\r\n",
 					"Get a sample data of financial statements for 6819 companies, 220 represents bankrupted companies while 6599 firms are not bankrupted. "
-				],
-				"attachments": null
+				]
 			},
 			{
 				"cell_type": "code",
@@ -88,7 +101,6 @@
 					"  .option(\"header\", True)\\\n",
 					"  .load(\"wasbs://publicwasb@mmlspark.blob.core.windows.net/company_bankruptcy_prediction_data.csv\")"
 				],
-				"attachments": null,
 				"execution_count": null
 			},
 			{
@@ -104,8 +116,7 @@
 					"## Exploratory data\r\n",
 					"\r\n",
 					"Look at the data and evaluate its suitability for use in a model."
-				],
-				"attachments": null
+				]
 			},
 			{
 				"cell_type": "code",
@@ -124,7 +135,6 @@
 				"source": [
 					"display(dataset.head(5))"
 				],
-				"attachments": null,
 				"execution_count": null
 			},
 			{
@@ -145,7 +155,6 @@
 					"# print dataset size\r\n",
 					"print(\"Total number of records: \" + str(dataset.count()))"
 				],
-				"attachments": null,
 				"execution_count": null
 			},
 			{
@@ -159,7 +168,6 @@
 					"print(\"Schema: \")\n",
 					"dataset.printSchema()"
 				],
-				"attachments": null,
 				"execution_count": null
 			},
 			{
@@ -176,8 +184,7 @@
 					"\r\n",
 					"Simple split, 85% for training and 15% for testing the model. Playing with this ratio may result in different models.\r\n",
 					""
-				],
-				"attachments": null
+				]
 			},
 			{
 				"cell_type": "code",
@@ -197,7 +204,6 @@
 					"train_data = featurizer.transform(train)['Bankrupt?', 'features']\n",
 					"test_data = featurizer.transform(test)['Bankrupt?', 'features']"
 				],
-				"attachments": null,
 				"execution_count": null
 			},
 			{
@@ -206,7 +212,6 @@
 					"# check if the data is unbalanced\r\n",
 					"train_data.groupBy(\"Bankrupt?\").count().show()"
 				],
-				"attachments": null,
 				"execution_count": null
 			},
 			{
@@ -214,8 +219,7 @@
 				"source": [
 					"## Train the model\r\n",
 					"Train the Classifier model."
-				],
-				"attachments": null
+				]
 			},
 			{
 				"cell_type": "code",
@@ -225,7 +229,6 @@
 					"model = LightGBMClassifier(objective=\"binary\", featuresCol=\"features\", labelCol=\"Bankrupt?\", isUnbalance=True)\n",
 					"model = model.fit(train_data)"
 				],
-				"attachments": null,
 				"execution_count": null
 			},
 			{
@@ -235,7 +238,6 @@
 					"model.saveNativeModel(\"/lgbmcmodel\")\n",
 					"model = LightGBMClassificationModel.loadNativeModelFromFile(\"/lgbmcmodel\")"
 				],
-				"attachments": null,
 				"execution_count": null
 			},
 			{
@@ -243,7 +245,6 @@
 				"source": [
 					"print(model.getFeatureImportances())"
 				],
-				"attachments": null,
 				"execution_count": null
 			},
 			{
@@ -252,8 +253,7 @@
 					"## Model Performance Evaluation\r\n",
 					"\r\n",
 					"After training the model, we evaluate the performance of the model using the test set."
-				],
-				"attachments": null
+				]
 			},
 			{
 				"cell_type": "code",
@@ -261,7 +261,6 @@
 					"predictions = model.transform(test_data)\n",
 					"#predictions.limit(10).toPandas()"
 				],
-				"attachments": null,
 				"execution_count": null
 			},
 			{
@@ -287,7 +286,6 @@
 					"                                 scoredLabelsCol=\"Bankrupt?\").transform(predictions)\r\n",
 					"metrics.toPandas()"
 				],
-				"attachments": null,
 				"execution_count": null
 			},
 			{
@@ -304,8 +302,7 @@
 					"To ensure the Spark instance is shut down, end any connected sessions(notebooks). The pool shuts down when the **idle time** specified in the Apache Spark pool is reached. You can also select **stop session** from the status bar at the upper right of the notebook.\r\n",
 					"\r\n",
 					"![stopsession](https://adsnotebookrelease.blob.core.windows.net/adsnotebookrelease/adsnotebook/image/stopsession.png)"
-				],
-				"attachments": null
+				]
 			},
 			{
 				"cell_type": "markdown",
@@ -321,8 +318,7 @@
 					"\r\n",
 					"* [Check out Synapse sample notebooks](https://github.com/Azure-Samples/Synapse/tree/main/MachineLearning) \r\n",
 					"* [MMLSpark GitHub Repo](https://github.com/Azure/mmlspark)"
-				],
-				"attachments": null
+				]
 			}
 		]
 	}
