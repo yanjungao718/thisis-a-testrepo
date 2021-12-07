@@ -1,0 +1,4387 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"type": "string",
+			"metadata": "Workspace name",
+			"defaultValue": "yanjuntest1207"
+		},
+		"AzureBlobStorage_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage'"
+		},
+		"AzureBlobStorage1129_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1129'"
+		},
+		"AzureDataExplorer_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureDataExplorer'"
+		},
+		"AzureDataExplorer1129_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureDataExplorer1129'"
+		},
+		"AzureDataLakeStorage_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage'"
+		},
+		"AzureDataLakeStorage1129_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1129'"
+		},
+		"CosmosDb_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'CosmosDb'"
+		},
+		"CosmosDb1129_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'CosmosDb1129'"
+		},
+		"CosmosDbMongoDbApi_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'CosmosDbMongoDbApi'"
+		},
+		"CosmosDbMongoDbApi1129_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'CosmosDbMongoDbApi1129'"
+		},
+		"bdbj20211129ws-WorkspaceDefaultSqlServer_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'bdbj20211129ws-WorkspaceDefaultSqlServer'"
+		},
+		"yanjuntest1207-WorkspaceDefaultSqlServer_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'yanjuntest1207-WorkspaceDefaultSqlServer'"
+		},
+		"yanjuntestws-WorkspaceDefaultSqlServer_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'yanjuntestws-WorkspaceDefaultSqlServer'"
+		},
+		"AzureDataExplorer_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "72bfe100-a448-4f25-af39-5b36c7bb62ef"
+		},
+		"AzureDataExplorer_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "8f6caa4c-31d9-4562-8084-bcbf13bb0068"
+		},
+		"AzureDataExplorer_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "bdbjkustodatabaseqingtest"
+		},
+		"AzureDataExplorer1129_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "72bfe100-a448-4f25-af39-5b36c7bb62ef"
+		},
+		"AzureDataExplorer1129_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "8f6caa4c-31d9-4562-8084-bcbf13bb0068"
+		},
+		"AzureDataExplorer1129_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "bdbjkustodatabaseqingtest"
+		},
+		"AzureDataLakeStorage_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://bdbjgen2qingtest.dfs.core.windows.net"
+		},
+		"AzureDataLakeStorage1129_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://bdbjgen2qingtest.dfs.core.windows.net"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://hditoolingkeyvault.vault.azure.net/"
+		},
+		"CosmosDbMongoDbApi_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "Test0510"
+		},
+		"CosmosDbMongoDbApi1129_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "mongodbapidatabaseqingtest"
+		},
+		"bdbj20211129ws-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://honghaigen2.dfs.core.windows.net"
+		},
+		"bing-covid-19-data_sasUri": {
+			"type": "secureString",
+			"metadata": "Secure string for 'sasUri' of 'bing-covid-19-data'"
+		},
+		"yanjuntest1207-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://hozhao1111gen2.dfs.core.windows.net"
+		},
+		"yanjuntestws-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://hozhao1111gen2.dfs.core.windows.net"
+		}
+	},
+	"variables": {
+		"workspaceId": "[concat('Microsoft.Synapse/workspaces/', parameters('workspaceName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('workspaceName'), '/Pipeline 1')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "Notebook1",
+						"type": "SynapseNotebook",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebook": {
+								"referenceName": "Notebook 11",
+								"type": "NotebookReference"
+							},
+							"snapshot": true
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/notebooks/Notebook 11')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/synapse_notebook_pipeline1129')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "Wait1",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 30
+						}
+					},
+					{
+						"name": "Notebook1",
+						"type": "SynapseNotebook",
+						"dependsOn": [
+							{
+								"activity": "Wait1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebook": {
+								"referenceName": "CopyDataBetweenSparkTables1129",
+								"type": "NotebookReference"
+							},
+							"parameters": {
+								"pipeline_name": {
+									"value": {
+										"value": "@pipeline().Pipeline",
+										"type": "Expression"
+									},
+									"type": "string"
+								},
+								"tag": {
+									"value": "hello_world",
+									"type": "string"
+								}
+							},
+							"snapshot": true
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-11-29T05:56:22Z"
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/notebooks/CopyDataBetweenSparkTables1129')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Dataset1129')]",
+			"type": "Microsoft.Synapse/workspaces/datasets",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage1129",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Avro",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "episodes.avro",
+						"fileSystem": "container02"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/AzureDataLakeStorage1129')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Dataset1129_01')]",
+			"type": "Microsoft.Synapse/workspaces/datasets",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1129",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "New folder 1129/New folder 112901/",
+						"container": "container02"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/AzureBlobStorage1129')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/AzureBlobStorage')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [
+					"1129"
+				],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/AzureBlobStorage1129')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [
+					"29"
+				],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage1129_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/AzureDataExplorer')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [
+					"1129test"
+				],
+				"type": "AzureDataExplorer",
+				"typeProperties": {
+					"endpoint": "https://bdbjkustoqingtest.eastus.kusto.windows.net",
+					"tenant": "[parameters('AzureDataExplorer_properties_typeProperties_tenant')]",
+					"servicePrincipalId": "[parameters('AzureDataExplorer_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDataExplorer_servicePrincipalKey')]"
+					},
+					"database": "[parameters('AzureDataExplorer_properties_typeProperties_database')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/AzureDataExplorer1129')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [
+					"11-29"
+				],
+				"type": "AzureDataExplorer",
+				"typeProperties": {
+					"endpoint": "https://bdbjkustoqingtest.eastus.kusto.windows.net",
+					"tenant": "[parameters('AzureDataExplorer1129_properties_typeProperties_tenant')]",
+					"servicePrincipalId": "[parameters('AzureDataExplorer1129_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDataExplorer1129_servicePrincipalKey')]"
+					},
+					"database": "[parameters('AzureDataExplorer1129_properties_typeProperties_database')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/AzureDataLakeStorage')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [
+					"Gen2"
+				],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('AzureDataLakeStorage_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDataLakeStorage_accountKey')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/AzureDataLakeStorage1129')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [
+					"20211129"
+				],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('AzureDataLakeStorage1129_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDataLakeStorage1129_accountKey')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/AzureKeyVault1')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/CosmosDb')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [
+					"Test"
+				],
+				"type": "CosmosDb",
+				"typeProperties": {
+					"connectionString": "[parameters('CosmosDb_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/CosmosDb1129')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [
+					"11"
+				],
+				"type": "CosmosDb",
+				"typeProperties": {
+					"connectionString": "[parameters('CosmosDb1129_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/CosmosDbMongoDbApi')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [
+					"test"
+				],
+				"type": "CosmosDbMongoDbApi",
+				"typeProperties": {
+					"connectionString": "[parameters('CosmosDbMongoDbApi_connectionString')]",
+					"database": "[parameters('CosmosDbMongoDbApi_properties_typeProperties_database')]",
+					"isServerVersionAbove32": true
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/CosmosDbMongoDbApi1129')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [
+					"test1129"
+				],
+				"type": "CosmosDbMongoDbApi",
+				"typeProperties": {
+					"connectionString": "[parameters('CosmosDbMongoDbApi1129_connectionString')]",
+					"database": "[parameters('CosmosDbMongoDbApi1129_properties_typeProperties_database')]",
+					"isServerVersionAbove32": false
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/PowerBIWorkspace1')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"type": "PowerBIWorkspace",
+				"typeProperties": {
+					"workspaceID": "28a0e6b5-f83b-47c9-aa9f-eaab6b8a2bf9",
+					"tenantID": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/bdbj20211129ws-WorkspaceDefaultSqlServer')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"parameters": {
+					"DBName": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"type": "AzureSqlDW",
+				"typeProperties": {
+					"connectionString": "[parameters('bdbj20211129ws-WorkspaceDefaultSqlServer_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/bdbj20211129ws-WorkspaceDefaultStorage')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('bdbj20211129ws-WorkspaceDefaultStorage_properties_typeProperties_url')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/bing-covid-19-data')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"sasUri": "[parameters('bing-covid-19-data_sasUri')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/yanjuntest1207-WorkspaceDefaultSqlServer')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"parameters": {
+					"DBName": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"type": "AzureSqlDW",
+				"typeProperties": {
+					"connectionString": "[parameters('yanjuntest1207-WorkspaceDefaultSqlServer_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/yanjuntest1207-WorkspaceDefaultStorage')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('yanjuntest1207-WorkspaceDefaultStorage_properties_typeProperties_url')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/yanjuntestws-WorkspaceDefaultSqlServer')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"parameters": {
+					"DBName": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"type": "AzureSqlDW",
+				"typeProperties": {
+					"connectionString": "[parameters('yanjuntestws-WorkspaceDefaultSqlServer_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/yanjuntestws-WorkspaceDefaultStorage')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('yanjuntestws-WorkspaceDefaultStorage_properties_typeProperties_url')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Trigger 1129')]",
+			"type": "Microsoft.Synapse/workspaces/triggers",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "Pipeline 1",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Minute",
+						"interval": 20,
+						"startTime": "2021-11-29T05:56:00",
+						"endTime": "2021-12-11T19:00:00",
+						"timeZone": "China Standard Time"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/pipelines/Pipeline 1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/AutoResolveIntegrationRuntime')]",
+			"type": "Microsoft.Synapse/workspaces/integrationRuntimes",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"type": "Managed",
+				"typeProperties": {
+					"computeProperties": {
+						"location": "AutoResolve",
+						"dataFlowProperties": {
+							"computeType": "General",
+							"coreCount": 8,
+							"timeToLive": 0
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/IntegrationRuntime1')]",
+			"type": "Microsoft.Synapse/workspaces/integrationRuntimes",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"type": "Managed",
+				"typeProperties": {
+					"computeProperties": {
+						"location": "AutoResolve",
+						"dataFlowProperties": {
+							"computeType": "General",
+							"coreCount": 8,
+							"timeToLive": 0,
+							"cleanup": false
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/WorkspaceSystemIdentity')]",
+			"type": "Microsoft.Synapse/workspaces/credentials",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"type": "ManagedIdentity",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Analyze Azure Open Datasets using serverless SQL pool')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "/*\nFull tutorial available on: https://docs.microsoft.com/en-us/azure/synapse-analytics/sql/tutorial-data-analyst\nIn this tutorial, you learn how to perform exploratory data analysis by combining different Azure Open Datasets using serverless SQL pool and then visualizing the results in Azure Synapse Studio.\n\nIn particular, you analyze the New York City (NYC) Taxi dataset that includes:\n\n - Pickup and drop-off dates and times.\n - Pick up and drop-off locations.\n - Trip distances.\n - Itemized fares.\n - Rate types.\n - Payment types.\n - Driver-reported passenger counts.*/\n\n\n/*\n * * * * * * * * * * * * * * * *\n * Automatic schema inference  *\n * * * * * * * * * * * * * * * *\n\nSince data is stored in the Parquet file format, automatic schema inference is available. You can easily query the data without listing the data types of all columns in the files. You also can use the virtual column mechanism and the filepath function to filter out a certain subset of files.\n\nLet's first get familiar with the NYC Taxi data by running the following query. */\n\nSELECT TOP 100 * FROM\n    OPENROWSET(\n        BULK 'https://azureopendatastorage.blob.core.windows.net/nyctlc/yellow/puYear=*/puMonth=*/*.parquet',\n        FORMAT='PARQUET'\n    ) AS [nyc];\n\n\n/* Similarly, you can query the Public Holidays dataset by using the following query. */\n\nSELECT TOP 100 * FROM\n    OPENROWSET(\n        BULK 'https://azureopendatastorage.blob.core.windows.net/holidaydatacontainer/Processed/*.parquet',\n        FORMAT='PARQUET'\n    ) AS [holidays];\n\n/* Lastly, you can also query the Weather Data dataset by using the following query. */\n\nSELECT\n    TOP 100 *\nFROM\n    OPENROWSET(\n        BULK 'https://azureopendatastorage.blob.core.windows.net/isdweatherdatacontainer/ISDWeather/year=*/month=*/*.parquet',\n        FORMAT='PARQUET'\n    ) AS [weather];\n\n/* You can learn more about the meaning of the individual columns in the descriptions\nof the NYC Taxi, Public Holidays, and Weather Data datasets on the Azure Opendatasets page. */\n\n\n/*\n * * * * * * * * * * * * * * * * * * * * * * * * * *\n * Time series, seasonality, and outlier analysis  *\n * * * * * * * * * * * * * * * * * * * * * * * * * *\nYou can easily summarize the yearly number of taxi rides by using the following query. */\n\nSELECT\n    YEAR(tpepPickupDateTime) AS current_year,\n    COUNT(*) AS rides_per_year\nFROM\n    OPENROWSET(\n        BULK 'https://azureopendatastorage.blob.core.windows.net/nyctlc/yellow/puYear=*/puMonth=*/*.parquet',\n        FORMAT='PARQUET'\n    ) AS [nyc]\nWHERE nyc.filepath(1) >= '2009' AND nyc.filepath(1) <= '2019'\nGROUP BY YEAR(tpepPickupDateTime)\nORDER BY 1 ASC;\n\n/* The data can be visualized in Synapse Studio by switching from the Table to the Chart view.\nYou can choose among different chart types, such as Area, Bar, Column, Line, Pie, and Scatter.\nIn this case, plot the Column chart with the Category column set to current_year.\n\nFrom this visualization, a trend of a decreasing number of rides over years can be clearly seen.\nPresumably, this decrease is due to the recent increased popularity of ride-sharing companies.\n*/\n\n/* Next, let's focus the analysis on a single year, for example, 2016.\nThe following query returns the daily number of rides during that year. */\n\nSELECT\n    CAST([tpepPickupDateTime] AS DATE) AS [current_day],\n    COUNT(*) as rides_per_day\nFROM\n    OPENROWSET(\n        BULK 'https://azureopendatastorage.blob.core.windows.net/nyctlc/yellow/puYear=*/puMonth=*/*.parquet',\n        FORMAT='PARQUET'\n    ) AS [nyc]\nWHERE nyc.filepath(1) = '2016'\nGROUP BY CAST([tpepPickupDateTime] AS DATE)\nORDER BY 1 ASC;\n\n/* Again, you can easily visualize data by plotting the Column chart with\nthe Category column set to current_day and the Legend (series) column set to rides_per_day. */\n\n/* From the plot chart, you can see that there's a weekly pattern, with Saturdays as the peak day.\nDuring summer months, there are fewer taxi rides because of vacations.\nThere are also some significant drops in the number of taxi rides without a clear pattern of when and why they occur. */\n\n/* Next, let's see if the drops correlate with public holidays by joining the NYC Taxi rides dataset with the Public Holidays dataset. */\n\nWITH taxi_rides AS\n(\n    SELECT\n        CAST([tpepPickupDateTime] AS DATE) AS [current_day],\n        COUNT(*) as rides_per_day\n    FROM\n        OPENROWSET(\n            BULK 'https://azureopendatastorage.blob.core.windows.net/nyctlc/yellow/puYear=*/puMonth=*/*.parquet',\n            FORMAT='PARQUET'\n        ) AS [nyc]\n    WHERE nyc.filepath(1) = '2016'\n    GROUP BY CAST([tpepPickupDateTime] AS DATE)\n),\npublic_holidays AS\n(\n    SELECT\n        holidayname as holiday,\n        date\n    FROM\n        OPENROWSET(\n            BULK 'https://azureopendatastorage.blob.core.windows.net/holidaydatacontainer/Processed/*.parquet',\n            FORMAT='PARQUET'\n        ) AS [holidays]\n    WHERE countryorregion = 'United States' AND YEAR(date) = 2016\n)\nSELECT\n*\nFROM taxi_rides t\nLEFT OUTER JOIN public_holidays p on t.current_day = p.date\nORDER BY current_day ASC;\n\n/* This time, we want to highlight the number of taxi rides during public holidays.\nFor that purpose, we choose none for the Category column and rides_per_day and holiday as the Legend (series) columns. */\n\n/* From the plot chart, you can see that during public holidays the number of taxi rides is lower.\nThere's still one unexplained large drop on January 23. Let's check the weather in NYC on that day by querying the Weather Data dataset. */\n\nSELECT\n    AVG(windspeed) AS avg_windspeed,\n    MIN(windspeed) AS min_windspeed,\n    MAX(windspeed) AS max_windspeed,\n    AVG(temperature) AS avg_temperature,\n    MIN(temperature) AS min_temperature,\n    MAX(temperature) AS max_temperature,\n    AVG(sealvlpressure) AS avg_sealvlpressure,\n    MIN(sealvlpressure) AS min_sealvlpressure,\n    MAX(sealvlpressure) AS max_sealvlpressure,\n    AVG(precipdepth) AS avg_precipdepth,\n    MIN(precipdepth) AS min_precipdepth,\n    MAX(precipdepth) AS max_precipdepth,\n    AVG(snowdepth) AS avg_snowdepth,\n    MIN(snowdepth) AS min_snowdepth,\n    MAX(snowdepth) AS max_snowdepth\nFROM\n    OPENROWSET(\n        BULK 'https://azureopendatastorage.blob.core.windows.net/isdweatherdatacontainer/ISDWeather/year=*/month=*/*.parquet',\n        FORMAT='PARQUET'\n    ) AS [weather]\nWHERE countryorregion = 'US' AND CAST([datetime] AS DATE) = '2016-01-23' AND stationname = 'JOHN F KENNEDY INTERNATIONAL AIRPORT';\n\n/* The results of the query indicate that the drop in the number of taxi rides occurred because:\n\n1. There was a blizzard on that day in NYC with heavy snow (~30 cm).\n2. It was cold (temperature was below zero degrees Celsius).\n3. It was windy (~10 m/s). */\n\n\n/* This tutorial has shown how a data analyst can quickly perform exploratory data analysis, easily combine different\ndatasets by using serverless SQL pool, and visualize the results by using Azure Synapse Studio. */\n",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "master",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Blob - Explorer - select folder - right click - new SQL script - select top 100 rows')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "-- This is auto-generated code\nSELECT\n    TOP 100 *\nFROM\n    OPENROWSET(\n        BULK 'https://bdbjblobstorageqingtest.blob.core.windows.net/container02/New folder 1129/New folder 112902/**',\n        FORMAT = 'PARQUET'\n    ) AS [result]\n",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "master",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Cosmos DB - analytical store enabled - metadata - new sql script - select top 100 rows')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "IF (EXISTS(SELECT * FROM sys.credentials WHERE name = 'bdbjsqlapiqingtest'))\nDROP CREDENTIAL [bdbjsqlapiqingtest]\nGO\n\nCREATE CREDENTIAL [bdbjsqlapiqingtest]\nWITH IDENTITY = 'SHARED ACCESS SIGNATURE', \nSECRET = 'pzQibicjdf49Aoacwj8vDRytwFQTXfKnShLfavYVqfUyaiWy9P9uvi6Zo1TR7M396HOgUCNn4QS8MPJDnzztUA=='\nGO\n\nSELECT TOP 100 *\nFROM OPENROWSET(​PROVIDER = 'CosmosDB',\n                CONNECTION = 'Account=bdbjsqlapiqingtest;Database=sqlapidatabaseqingtest',\n                OBJECT = 'container02',\n                SERVER_CREDENTIAL = 'bdbjsqlapiqingtest'\n) AS [container02]\n",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "master",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 2')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "select 1",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "testsqlpool",
+						"poolName": "testsqlpool"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 3')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "testsqlpool",
+						"poolName": "testsqlpool"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 4')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "testsqlpool",
+						"poolName": "testsqlpool"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 5')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "testsqlpool",
+						"poolName": "testsqlpool"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/KQL script 1')]",
+			"type": "Microsoft.Synapse/workspaces/kqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "",
+					"metadata": {
+						"language": "kql"
+					}
+				},
+				"type": "KqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Bankruptcy Prediction with LightGBM Classifier')]",
+			"type": "Microsoft.Synapse/workspaces/notebooks",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"description": "544545",
+				"nbformat": 4,
+				"nbformat_minor": 2,
+				"bigDataPool": {
+					"referenceName": "testsparkpool01",
+					"type": "BigDataPoolReference"
+				},
+				"sessionProperties": {
+					"driverMemory": "56g",
+					"driverCores": 8,
+					"executorMemory": "56g",
+					"executorCores": 8,
+					"numExecutors": 2,
+					"conf": {
+						"spark.dynamicAllocation.enabled": "false",
+						"spark.dynamicAllocation.minExecutors": "2",
+						"spark.dynamicAllocation.maxExecutors": "2",
+						"spark.autotune.trackingId": "164de100-edcc-4e16-be74-1f7416a38196"
+					}
+				},
+				"metadata": {
+					"saveOutput": true,
+					"enableDebugMode": false,
+					"kernelspec": {
+						"name": "synapse_pyspark",
+						"display_name": "Synapse PySpark"
+					},
+					"language_info": {
+						"name": "python"
+					},
+					"a365ComputeOptions": {
+						"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/testsparkpool01",
+						"name": "testsparkpool01",
+						"type": "Spark",
+						"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/testsparkpool01",
+						"auth": {
+							"type": "AAD",
+							"authResource": "https://dev.azuresynapse.net"
+						},
+						"sparkVersion": "3.1",
+						"nodeCount": 10,
+						"cores": 8,
+						"memory": 56
+					}
+				},
+				"cells": [
+					{
+						"cell_type": "markdown",
+						"source": [
+							"# Bankruptcy Prediction with LightGBM Classifier\r\n",
+							""
+						]
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"## Introduction of LightGBM\n",
+							"[LightGBM](https://github.com/Microsoft/LightGBM) is an open-source, distributed, high-performance gradient boosting framework with following advantages: \n",
+							"-   Composability: LightGBM models can be incorporated into existing\n",
+							"    SparkML Pipelines, and used for batch, streaming, and serving\n",
+							"    workloads.\n",
+							"-   Performance: LightGBM on Spark is 10-30% faster than SparkML on\n",
+							"    the Higgs dataset, and achieves a 15% increase in AUC.  [Parallel\n",
+							"    experiments](https://github.com/Microsoft/LightGBM/blob/master/docs/Experiments.rst#parallel-experiment)\n",
+							"    have verified that LightGBM can achieve a linear speed-up by using\n",
+							"    multiple machines for training in specific settings.\n",
+							"-   Functionality: LightGBM offers a wide array of [tunable\n",
+							"    parameters](https://github.com/Microsoft/LightGBM/blob/master/docs/Parameters.rst),\n",
+							"    that one can use to customize their decision tree system. LightGBM on\n",
+							"    Spark also supports new types of problems such as quantile regression.\n",
+							"-   Cross platform：LightGBM on Spark is available on Spark (Scala) and PySpark (Python).\n",
+							""
+						]
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"\n",
+							"<img src=\"https://mmlspark.blob.core.windows.net/graphics/Documentation/bankruptcy image.png\" width=\"800\" style=\"float: center;\"/>\n",
+							"\n",
+							"In this example, we use LightGBM to build a classification model in order to predict bankruptcy."
+						]
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"## Read dataset\r\n",
+							"\r\n",
+							"Get a sample data of financial statements for 6819 companies, 220 represents bankrupted companies while 6599 firms are not bankrupted. "
+						]
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"dataset = spark.read.format(\"csv\")\\\n",
+							"  .option(\"header\", True)\\\n",
+							"  .load(\"wasbs://publicwasb@mmlspark.blob.core.windows.net/company_bankruptcy_prediction_data.csv\")"
+						],
+						"outputs": [],
+						"execution_count": null
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							}
+						},
+						"source": [
+							"## Exploratory data\r\n",
+							"\r\n",
+							"Look at the data and evaluate its suitability for use in a model."
+						]
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"jupyter": {
+								"source_hidden": false,
+								"outputs_hidden": false
+							},
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							},
+							"collapsed": false
+						},
+						"source": [
+							"display(dataset.head(5))"
+						],
+						"outputs": [],
+						"execution_count": null
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"jupyter": {
+								"source_hidden": false,
+								"outputs_hidden": false
+							},
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							},
+							"collapsed": true
+						},
+						"source": [
+							"# print dataset size\r\n",
+							"print(\"Total number of records: \" + str(dataset.count()))"
+						],
+						"outputs": [],
+						"execution_count": null
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"# convert features to double type\n",
+							"from pyspark.sql.functions import col\n",
+							"from pyspark.sql.types import DoubleType\n",
+							"for colName in dataset.columns:\n",
+							"  dataset = dataset.withColumn(colName, col(colName).cast(DoubleType()))\n",
+							"print(\"Schema: \")\n",
+							"dataset.printSchema()"
+						],
+						"outputs": [],
+						"execution_count": null
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							}
+						},
+						"source": [
+							"## Generation of testing and training data sets\r\n",
+							"\r\n",
+							"Simple split, 85% for training and 15% for testing the model. Playing with this ratio may result in different models.\r\n",
+							""
+						]
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"# Split the dataset into train and test\n",
+							"\n",
+							"train, test = dataset.randomSplit([0.70, 0.30], seed=1)\n",
+							"\n",
+							"# Add featurizer to convert features to vector\n",
+							"\n",
+							"from pyspark.ml.feature import VectorAssembler\n",
+							"feature_cols = dataset.columns[1:]\n",
+							"featurizer = VectorAssembler(\n",
+							"    inputCols=feature_cols,\n",
+							"    outputCol='features'\n",
+							")\n",
+							"train_data = featurizer.transform(train)['Bankrupt?', 'features']\n",
+							"test_data = featurizer.transform(test)['Bankrupt?', 'features']"
+						],
+						"outputs": [],
+						"execution_count": null
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"# check if the data is unbalanced\r\n",
+							"train_data.groupBy(\"Bankrupt?\").count().show()"
+						],
+						"outputs": [],
+						"execution_count": null
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"## Train the model\r\n",
+							"Train the Classifier model."
+						]
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"from mmlspark.lightgbm import LightGBMClassifier\n",
+							"\n",
+							"model = LightGBMClassifier(objective=\"binary\", featuresCol=\"features\", labelCol=\"Bankrupt?\", isUnbalance=True)\n",
+							"model = model.fit(train_data)"
+						],
+						"outputs": [],
+						"execution_count": null
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"from mmlspark.lightgbm import LightGBMClassificationModel\n",
+							"model.saveNativeModel(\"/lgbmcmodel\")\n",
+							"model = LightGBMClassificationModel.loadNativeModelFromFile(\"/lgbmcmodel\")"
+						],
+						"outputs": [],
+						"execution_count": null
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"print(model.getFeatureImportances())"
+						],
+						"outputs": [],
+						"execution_count": null
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"## Model Performance Evaluation\r\n",
+							"\r\n",
+							"After training the model, we evaluate the performance of the model using the test set."
+						]
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"predictions = model.transform(test_data)\n",
+							"#predictions.limit(10).toPandas()"
+						],
+						"outputs": [],
+						"execution_count": null
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"jupyter": {
+								"source_hidden": false,
+								"outputs_hidden": false
+							},
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							},
+							"collapsed": true
+						},
+						"source": [
+							"from mmlspark.train import ComputeModelStatistics\r\n",
+							"\r\n",
+							"# Compute model performance metrics\r\n",
+							"metrics = ComputeModelStatistics(evaluationMetric=\"classification\", \r\n",
+							"                                 labelCol=\"prediction\", \r\n",
+							"                                 scoredLabelsCol=\"Bankrupt?\").transform(predictions)\r\n",
+							"metrics.toPandas()"
+						],
+						"outputs": [],
+						"execution_count": null
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							}
+						},
+						"source": [
+							"## Clean up resources\r\n",
+							"To ensure the Spark instance is shut down, end any connected sessions(notebooks). The pool shuts down when the **idle time** specified in the Apache Spark pool is reached. You can also select **stop session** from the status bar at the upper right of the notebook.\r\n",
+							"\r\n",
+							"![stopsession](https://adsnotebookrelease.blob.core.windows.net/adsnotebookrelease/adsnotebook/image/stopsession.png)"
+						]
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							}
+						},
+						"source": [
+							"## Next steps\r\n",
+							"\r\n",
+							"* [Check out Synapse sample notebooks](https://github.com/Azure-Samples/Synapse/tree/main/MachineLearning) \r\n",
+							"* [MMLSpark GitHub Repo](https://github.com/Azure/mmlspark)"
+						]
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Blob - Explorer - select a afile - top menu - new notebook - load to dataframe')]",
+			"type": "Microsoft.Synapse/workspaces/notebooks",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"nbformat": 4,
+				"nbformat_minor": 2,
+				"bigDataPool": {
+					"referenceName": "testsparkpool01",
+					"type": "BigDataPoolReference"
+				},
+				"sessionProperties": {
+					"driverMemory": "56g",
+					"driverCores": 8,
+					"executorMemory": "56g",
+					"executorCores": 8,
+					"numExecutors": 2,
+					"conf": {
+						"spark.dynamicAllocation.enabled": "false",
+						"spark.dynamicAllocation.minExecutors": "2",
+						"spark.dynamicAllocation.maxExecutors": "2",
+						"spark.autotune.trackingId": "2bc5453d-e875-4725-b578-7f2d6821176e"
+					}
+				},
+				"metadata": {
+					"saveOutput": true,
+					"enableDebugMode": false,
+					"kernelspec": {
+						"name": "synapse_pyspark",
+						"display_name": "Synapse PySpark"
+					},
+					"language_info": {
+						"name": "python"
+					},
+					"a365ComputeOptions": {
+						"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/testsparkpool01",
+						"name": "testsparkpool01",
+						"type": "Spark",
+						"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/testsparkpool01",
+						"auth": {
+							"type": "AAD",
+							"authResource": "https://dev.azuresynapse.net"
+						},
+						"sparkVersion": "3.1",
+						"nodeCount": 10,
+						"cores": 8,
+						"memory": 56
+					}
+				},
+				"cells": [
+					{
+						"cell_type": "code",
+						"metadata": {
+							"collapsed": false
+						},
+						"source": [
+							"%%pyspark\n",
+							"blob_account_name = \"bdbjblobstorageqingtest\"\n",
+							"blob_container_name = \"container02\"\n",
+							"from pyspark.sql import SparkSession\n",
+							"\n",
+							"sc = SparkSession.builder.getOrCreate()\n",
+							"token_library = sc._jvm.com.microsoft.azure.synapse.tokenlibrary.TokenLibrary\n",
+							"blob_sas_token = token_library.getConnectionString(\"AzureBlobStorage1129\")\n",
+							"\n",
+							"spark.conf.set(\n",
+							"    'fs.azure.sas.%s.%s.blob.core.windows.net' % (blob_container_name, blob_account_name),\n",
+							"    blob_sas_token)\n",
+							"df = spark.read.load('wasbs://container02@bdbjblobstorageqingtest.blob.core.windows.net/New folder 1129/SCOPE input file.csv', format='csv'\n",
+							"## If header exists uncomment line below\n",
+							"##, header=True\n",
+							")\n",
+							"display(df.limit(10))"
+						],
+						"outputs": [],
+						"execution_count": 1
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Blob - Explorer - select a afile - top menu - new notebook - new spark table')]",
+			"type": "Microsoft.Synapse/workspaces/notebooks",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"nbformat": 4,
+				"nbformat_minor": 2,
+				"bigDataPool": {
+					"referenceName": "testsparkpool01",
+					"type": "BigDataPoolReference"
+				},
+				"sessionProperties": {
+					"driverMemory": "56g",
+					"driverCores": 8,
+					"executorMemory": "56g",
+					"executorCores": 8,
+					"numExecutors": 2,
+					"conf": {
+						"spark.dynamicAllocation.enabled": "false",
+						"spark.dynamicAllocation.minExecutors": "2",
+						"spark.dynamicAllocation.maxExecutors": "2",
+						"spark.autotune.trackingId": "ea3794b2-9cd6-4cab-9043-e5011f180496"
+					}
+				},
+				"metadata": {
+					"saveOutput": true,
+					"enableDebugMode": false,
+					"kernelspec": {
+						"name": "synapse_pyspark",
+						"display_name": "Synapse PySpark"
+					},
+					"language_info": {
+						"name": "python"
+					},
+					"a365ComputeOptions": {
+						"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/testsparkpool01",
+						"name": "testsparkpool01",
+						"type": "Spark",
+						"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/testsparkpool01",
+						"auth": {
+							"type": "AAD",
+							"authResource": "https://dev.azuresynapse.net"
+						},
+						"sparkVersion": "3.1",
+						"nodeCount": 10,
+						"cores": 8,
+						"memory": 56
+					}
+				},
+				"cells": [
+					{
+						"cell_type": "code",
+						"source": [
+							"%%pyspark\n",
+							"blob_account_name = \"bdbjblobstorageqingtest\"\n",
+							"blob_container_name = \"container02\"\n",
+							"from pyspark.sql import SparkSession\n",
+							"\n",
+							"sc = SparkSession.builder.getOrCreate()\n",
+							"token_library = sc._jvm.com.microsoft.azure.synapse.tokenlibrary.TokenLibrary\n",
+							"blob_sas_token = token_library.getConnectionString(\"AzureBlobStorage1129\")\n",
+							"\n",
+							"spark.conf.set(\n",
+							"    'fs.azure.sas.%s.%s.blob.core.windows.net' % (blob_container_name, blob_account_name),\n",
+							"    blob_sas_token)\n",
+							"df = spark.read.load('wasbs://container02@bdbjblobstorageqingtest.blob.core.windows.net/New folder 1129/sqlscripts_8zc (1).tsv', format='csv', delimiter ='\\t'\n",
+							"## If header exists uncomment line below\n",
+							"##, header=True\n",
+							")\n",
+							"df.write.mode(\"overwrite\").saveAsTable(\"default.YourTableName\")"
+						],
+						"outputs": [],
+						"execution_count": 1
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Boston house price prediction')]",
+			"type": "Microsoft.Synapse/workspaces/notebooks",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"nbformat": 4,
+				"nbformat_minor": 2,
+				"bigDataPool": {
+					"referenceName": "testsparkpool01",
+					"type": "BigDataPoolReference"
+				},
+				"sessionProperties": {
+					"driverMemory": "56g",
+					"driverCores": 8,
+					"executorMemory": "56g",
+					"executorCores": 8,
+					"numExecutors": 2,
+					"conf": {
+						"spark.dynamicAllocation.enabled": "false",
+						"spark.dynamicAllocation.minExecutors": "2",
+						"spark.dynamicAllocation.maxExecutors": "2",
+						"spark.autotune.trackingId": "63c7b476-fdf2-4501-bfc9-e81c895cede3"
+					}
+				},
+				"metadata": {
+					"saveOutput": true,
+					"enableDebugMode": false,
+					"kernelspec": {
+						"name": "synapse_pyspark",
+						"display_name": "Synapse PySpark"
+					},
+					"language_info": {
+						"name": "python"
+					},
+					"a365ComputeOptions": {
+						"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/testsparkpool01",
+						"name": "testsparkpool01",
+						"type": "Spark",
+						"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/testsparkpool01",
+						"auth": {
+							"type": "AAD",
+							"authResource": "https://dev.azuresynapse.net"
+						},
+						"sparkVersion": "3.1",
+						"nodeCount": 10,
+						"cores": 8,
+						"memory": 56
+					}
+				},
+				"cells": [
+					{
+						"cell_type": "markdown",
+						"source": [
+							"# Boston house price prediction with Vowpal Wabbit, LightGBM and Spark MLlib\n",
+							"\n",
+							"This notebook shows how to build simple regression models by using \n",
+							"[Vowpal Wabbit (VW)](https://github.com/VowpalWabbit/vowpal_wabbit) and \n",
+							"[LightGBM](https://github.com/microsoft/LightGBM) with MMLSpark.\n",
+							" We also compare the results with \n",
+							" [Spark MLlib Linear Regression](https://spark.apache.org/docs/latest/ml-classification-regression.html#linear-regression)."
+						]
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"import math\n",
+							"from matplotlib.colors import ListedColormap, Normalize\n",
+							"from matplotlib.cm import get_cmap\n",
+							"import matplotlib.pyplot as plt\n",
+							"from mmlspark.train import ComputeModelStatistics\n",
+							"from mmlspark.vw import VowpalWabbitRegressor, VowpalWabbitFeaturizer\n",
+							"from mmlspark.lightgbm import LightGBMRegressor\n",
+							"import numpy as np\n",
+							"import pandas as pd\n",
+							"from pyspark.ml.feature import VectorAssembler\n",
+							"from pyspark.ml.regression import LinearRegression\n",
+							"from sklearn.datasets import load_boston"
+						],
+						"outputs": [],
+						"execution_count": 1
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"## Prepare Dataset\n",
+							"We use [*Boston house price* dataset](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_boston.html) \n",
+							". \n",
+							"The data was collected in 1978 from Boston area and consists of 506 entries with 14 features including the value of homes. \n",
+							"We use `sklearn.datasets` module to download it easily, then split the set into training and testing by 75/25."
+						]
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"collapsed": false
+						},
+						"source": [
+							"boston = load_boston()\n",
+							"\n",
+							"feature_cols = ['f' + str(i) for i in range(boston.data.shape[1])]\n",
+							"header = ['target'] + feature_cols\n",
+							"df = spark.createDataFrame(\n",
+							"    pd.DataFrame(data=np.column_stack((boston.target, boston.data)), columns=header)\n",
+							").repartition(1)\n",
+							"print(\"Dataframe has {} rows\".format(df.count()))\n",
+							"display(df.limit(10).toPandas())"
+						],
+						"outputs": [],
+						"execution_count": 2
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"train_data, test_data = df.randomSplit([0.75, 0.25], seed=42)\n",
+							"train_data.cache()\n",
+							"test_data.cache()"
+						],
+						"outputs": [],
+						"execution_count": 3
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"Following is the summary of the training set."
+						]
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"collapsed": false
+						},
+						"source": [
+							"display(train_data.summary().toPandas())"
+						],
+						"outputs": [],
+						"execution_count": 4
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"Plot feature distributions over different target values (house prices in our case)."
+						]
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"features = train_data.columns[1:]\n",
+							"values = train_data.drop('target').toPandas()\n",
+							"ncols = 5\n",
+							"nrows = math.ceil(len(features) / ncols)\n",
+							"\n",
+							"yy = [r['target'] for r in train_data.select('target').collect()]\n",
+							"\n",
+							"f, axes = plt.subplots(nrows, ncols, sharey=True, figsize=(30,10))\n",
+							"f.tight_layout()\n",
+							"\n",
+							"for irow in range(nrows):\n",
+							"    axes[irow][0].set_ylabel('target')\n",
+							"    for icol in range(ncols):\n",
+							"        try:\n",
+							"            feat = features[irow*ncols + icol]\n",
+							"            xx = values[feat]\n",
+							"\n",
+							"            axes[irow][icol].scatter(xx, yy, s=10, alpha=0.25)\n",
+							"            axes[irow][icol].set_xlabel(feat)\n",
+							"            axes[irow][icol].get_yaxis().set_ticks([])\n",
+							"        except IndexError:\n",
+							"            f.delaxes(axes[irow][icol])"
+						],
+						"outputs": [],
+						"execution_count": 5
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"## Baseline - Spark MLlib Linear Regressor\n",
+							"\n",
+							"First, we set a baseline performance by using Linear Regressor in Spark MLlib."
+						]
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"collapsed": false
+						},
+						"source": [
+							"featurizer = VectorAssembler(\n",
+							"    inputCols=feature_cols,\n",
+							"    outputCol='features'\n",
+							")\n",
+							"lr_train_data = featurizer.transform(train_data)['target', 'features']\n",
+							"lr_test_data = featurizer.transform(test_data)['target', 'features']\n",
+							"display(lr_train_data.limit(10).toPandas())"
+						],
+						"outputs": [],
+						"execution_count": 6
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"collapsed": false
+						},
+						"source": [
+							"# By default, `maxIter` is 100. Other params you may want to change include: `regParam`, `elasticNetParam`, etc.\n",
+							"lr = LinearRegression(\n",
+							"    labelCol='target',\n",
+							")\n",
+							"\n",
+							"lr_model = lr.fit(lr_train_data)\n",
+							"lr_predictions = lr_model.transform(lr_test_data)\n",
+							"\n",
+							"display(lr_predictions.limit(10).toPandas())"
+						],
+						"outputs": [],
+						"execution_count": 7
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"We evaluate the prediction result by using `mmlspark.train.ComputeModelStatistics` which returns four metrics:\n",
+							"* [MSE (Mean Squared Error)](https://en.wikipedia.org/wiki/Mean_squared_error)\n",
+							"* [RMSE (Root Mean Squared Error)](https://en.wikipedia.org/wiki/Root-mean-square_deviation) = sqrt(MSE)\n",
+							"* [R quared](https://en.wikipedia.org/wiki/Coefficient_of_determination)\n",
+							"* [MAE (Mean Absolute Error)](https://en.wikipedia.org/wiki/Mean_absolute_error)"
+						]
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"collapsed": false
+						},
+						"source": [
+							"metrics = ComputeModelStatistics(\n",
+							"    evaluationMetric='regression',\n",
+							"    labelCol='target',\n",
+							"    scoresCol='prediction'\n",
+							").transform(lr_predictions)\n",
+							"\n",
+							"results = metrics.toPandas()\n",
+							"results.insert(0, 'model', ['Spark MLlib - Linear Regression'])\n",
+							"display(results)"
+						],
+						"outputs": [],
+						"execution_count": 8
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"## Vowpal Wabbit"
+						]
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"Perform VW-style feature hashing. Many types (numbers, string, bool, map of string to (number, string)) are supported."
+						]
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"collapsed": false
+						},
+						"source": [
+							"vw_featurizer = VowpalWabbitFeaturizer(\n",
+							"    inputCols=feature_cols,\n",
+							"    outputCol='features',\n",
+							")\n",
+							"vw_train_data = vw_featurizer.transform(train_data)['target', 'features']\n",
+							"vw_test_data = vw_featurizer.transform(test_data)['target', 'features']\n",
+							"display(vw_train_data.limit(10).toPandas())"
+						],
+						"outputs": [],
+						"execution_count": 9
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"See [VW wiki](https://github.com/vowpalWabbit/vowpal_wabbit/wiki/Command-Line-Arguments) for command line arguments."
+						]
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"collapsed": false
+						},
+						"source": [
+							"# Use the same number of iterations as Spark MLlib's Linear Regression (=100)\n",
+							"args = \"--holdout_off --loss_function quantile -l 7 -q :: --power_t 0.3\"\n",
+							"vwr = VowpalWabbitRegressor(\n",
+							"    labelCol='target',\n",
+							"    args=args,\n",
+							"    numPasses=100,\n",
+							")\n",
+							"\n",
+							"# To reduce number of partitions (which will effect performance), use `vw_train_data.repartition(1)`\n",
+							"vw_train_data_2 = vw_train_data.repartition(1).cache()\n",
+							"print(vw_train_data_2.count())\n",
+							"vw_model = vwr.fit(vw_train_data_2.repartition(1))\n",
+							"vw_predictions = vw_model.transform(vw_test_data)\n",
+							"\n",
+							"display(vw_predictions.limit(10).toPandas())"
+						],
+						"outputs": [],
+						"execution_count": 10
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"collapsed": false
+						},
+						"source": [
+							"metrics = ComputeModelStatistics(\n",
+							"    evaluationMetric='regression',\n",
+							"    labelCol='target',\n",
+							"    scoresCol='prediction'\n",
+							").transform(vw_predictions)\n",
+							"\n",
+							"vw_result = metrics.toPandas()\n",
+							"vw_result.insert(0, 'model', ['Vowpal Wabbit'])\n",
+							"results = results.append(\n",
+							"    vw_result,\n",
+							"    ignore_index=True\n",
+							")\n",
+							"display(results)"
+						],
+						"outputs": [],
+						"execution_count": 11
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"## LightGBM"
+						]
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"collapsed": false
+						},
+						"source": [
+							"lgr = LightGBMRegressor(\n",
+							"    objective='quantile',\n",
+							"    alpha=0.2,\n",
+							"    learningRate=0.3,\n",
+							"    numLeaves=31,\n",
+							"    labelCol='target',\n",
+							"    numIterations=100,\n",
+							")\n",
+							"\n",
+							"# Using one partition since the training dataset is very small\n",
+							"repartitioned_data = lr_train_data.repartition(1).cache()\n",
+							"print(repartitioned_data.count())\n",
+							"lg_model = lgr.fit(repartitioned_data)\n",
+							"lg_predictions = lg_model.transform(lr_test_data)\n",
+							"\n",
+							"display(lg_predictions.limit(10).toPandas())"
+						],
+						"outputs": [],
+						"execution_count": 12
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"collapsed": false
+						},
+						"source": [
+							"metrics = ComputeModelStatistics(\n",
+							"    evaluationMetric='regression',\n",
+							"    labelCol='target',\n",
+							"    scoresCol='prediction'\n",
+							").transform(lg_predictions)\n",
+							"\n",
+							"lg_result = metrics.toPandas()\n",
+							"lg_result.insert(0, 'model', ['LightGBM'])\n",
+							"results = results.append(\n",
+							"    lg_result,\n",
+							"    ignore_index=True\n",
+							")\n",
+							"display(results)"
+						],
+						"outputs": [],
+						"execution_count": 13
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"Following figure shows the actual-vs.-prediction graphs of the results:\n",
+							"\n",
+							"<img width=\"1102\" alt=\"lr-vw-lg\" src=\"https://user-images.githubusercontent.com/42475935/64071975-4c3e9600-cc54-11e9-8b1f-9a1ee300f445.png\">"
+						]
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"cmap = get_cmap('YlOrRd')\n",
+							"\n",
+							"target = np.array(test_data.select('target').collect()).flatten()\n",
+							"model_preds = [\n",
+							"    (\"Spark MLlib Linear Regression\", lr_predictions),\n",
+							"    (\"Vowpal Wabbit\", vw_predictions),\n",
+							"    (\"LightGBM\", lg_predictions)\n",
+							"]"
+						],
+						"outputs": [],
+						"execution_count": 14
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"jupyter": {
+								"source_hidden": false,
+								"outputs_hidden": false
+							},
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							},
+							"collapsed": true
+						},
+						"source": [
+							"f, axes = plt.subplots(1, len(model_preds), sharey=True, figsize=(18, 6))\r\n",
+							"f.tight_layout()\r\n",
+							"\r\n",
+							"for i, (model_name, preds) in enumerate(model_preds):\r\n",
+							"    preds = np.array(preds.select('prediction').collect()).flatten()\r\n",
+							"    err = np.absolute(preds - target)\r\n",
+							"\r\n",
+							"    norm = Normalize()\r\n",
+							"    clrs = cmap(np.asarray(norm(err)))[:, :-1]\r\n",
+							"    axes[i].scatter(preds, target, s=60, c=clrs, edgecolors='#888888', alpha=0.75)\r\n",
+							"    axes[i].plot((0, 60), (0, 60), linestyle='--', color='#888888')\r\n",
+							"    axes[i].set_xlabel('Predicted values')\r\n",
+							"    if i ==0:\r\n",
+							"        axes[i].set_ylabel('Actual values')\r\n",
+							"    axes[i].set_title(model_name)\r\n",
+							"plt.show()"
+						],
+						"outputs": [],
+						"execution_count": 15
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							}
+						},
+						"source": [
+							"## Clean up resources\r\n",
+							"To ensure the Spark instance is shut down, end any connected sessions(notebooks). The pool shuts down when the **idle time** specified in the Apache Spark pool is reached. You can also select **stop session** from the status bar at the upper right of the notebook.\r\n",
+							"\r\n",
+							"![stopsession](https://adsnotebookrelease.blob.core.windows.net/adsnotebookrelease/adsnotebook/image/stopsession.png)"
+						]
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							}
+						},
+						"source": [
+							"## Next steps\r\n",
+							"\r\n",
+							"* [Check out Synapse sample notebooks](https://github.com/Azure-Samples/Synapse/tree/main/MachineLearning) \r\n",
+							"* [MMLSpark GitHub Repo](https://github.com/Azure/mmlspark)"
+						]
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/CopyDataBetweenSparkTables1129')]",
+			"type": "Microsoft.Synapse/workspaces/notebooks",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"nbformat": 4,
+				"nbformat_minor": 2,
+				"bigDataPool": {
+					"referenceName": "testsparkpool01",
+					"type": "BigDataPoolReference"
+				},
+				"sessionProperties": {
+					"driverMemory": "56g",
+					"driverCores": 8,
+					"executorMemory": "56g",
+					"executorCores": 8,
+					"numExecutors": 2,
+					"conf": {
+						"spark.dynamicAllocation.enabled": "false",
+						"spark.dynamicAllocation.minExecutors": "2",
+						"spark.dynamicAllocation.maxExecutors": "2",
+						"spark.autotune.trackingId": "9cf5e0e8-7c8c-4a63-88b1-562a2c2005b7"
+					}
+				},
+				"metadata": {
+					"saveOutput": false,
+					"enableDebugMode": false,
+					"kernelspec": {
+						"name": "synapse_pyspark",
+						"display_name": "python"
+					},
+					"language_info": {
+						"name": "python"
+					},
+					"a365ComputeOptions": {
+						"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/testsparkpool01",
+						"name": "testsparkpool01",
+						"type": "Spark",
+						"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/testsparkpool01",
+						"auth": {
+							"type": "AAD",
+							"authResource": "https://dev.azuresynapse.net"
+						},
+						"sparkVersion": "3.1",
+						"nodeCount": 10,
+						"cores": 8,
+						"memory": 56
+					}
+				},
+				"cells": [
+					{
+						"cell_type": "code",
+						"metadata": {
+							"jupyter": {
+								"source_hidden": false,
+								"outputs_hidden": false
+							},
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							},
+							"collapsed": true,
+							"tags": [
+								"parameters"
+							]
+						},
+						"source": [
+							"pipeline_name = 'pipeline_name'\r\n",
+							"tag = 'tag'"
+						],
+						"outputs": [],
+						"execution_count": null
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"source_df = spark.sql(\"SELECT * FROM default.NYC_Taxi\")"
+						],
+						"outputs": [],
+						"execution_count": null
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"jupyter": {
+								"source_hidden": false,
+								"outputs_hidden": false
+							},
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							},
+							"collapsed": true
+						},
+						"source": [
+							"import time\r\n",
+							"a = time.strftime(\"%Y%m%d_%H%M%S\", time.localtime())"
+						],
+						"outputs": [],
+						"execution_count": null
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"jupyter": {
+								"source_hidden": false,
+								"outputs_hidden": false
+							},
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							},
+							"collapsed": true
+						},
+						"source": [
+							"source_df.write.mode(\"overwrite\").saveAsTable(\"default.NYC_Taxi_\" + pipeline_name + \"_\" + tag + \"_\" + a)"
+						],
+						"outputs": [],
+						"execution_count": null
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Kusto Sample')]",
+			"type": "Microsoft.Synapse/workspaces/notebooks",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"nbformat": 4,
+				"nbformat_minor": 2,
+				"bigDataPool": {
+					"referenceName": "testsparkpool01",
+					"type": "BigDataPoolReference"
+				},
+				"sessionProperties": {
+					"driverMemory": "56g",
+					"driverCores": 8,
+					"executorMemory": "56g",
+					"executorCores": 8,
+					"numExecutors": 2,
+					"conf": {
+						"spark.dynamicAllocation.enabled": "false",
+						"spark.dynamicAllocation.minExecutors": "2",
+						"spark.dynamicAllocation.maxExecutors": "2",
+						"spark.autotune.trackingId": "30269aa3-942a-49b0-9781-39ef8d0e1ad4"
+					}
+				},
+				"metadata": {
+					"saveOutput": true,
+					"enableDebugMode": false,
+					"kernelspec": {
+						"name": "synapse_pyspark",
+						"display_name": "Synapse PySpark"
+					},
+					"language_info": {
+						"name": "python"
+					},
+					"a365ComputeOptions": {
+						"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/testsparkpool01",
+						"name": "testsparkpool01",
+						"type": "Spark",
+						"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/testsparkpool01",
+						"auth": {
+							"type": "AAD",
+							"authResource": "https://dev.azuresynapse.net"
+						},
+						"sparkVersion": "3.1",
+						"nodeCount": 10,
+						"cores": 8,
+						"memory": 56
+					}
+				},
+				"cells": [
+					{
+						"cell_type": "code",
+						"metadata": {
+							"microsoft": {
+								"language": "python"
+							},
+							"collapsed": false
+						},
+						"source": [
+							"%%pyspark\n",
+							"\n",
+							"# Read data from Azure Data Explorer table(s)\n",
+							"# Full Sample Code available at: https://github.com/Azure/azure-kusto-spark/blob/master/samples/src/main/python/SynapseSample.py\n",
+							"\n",
+							"kustoDf  = spark.read \\\n",
+							"    .format(\"com.microsoft.kusto.spark.synapse.datasource\") \\\n",
+							"    .option(\"spark.synapse.linkedService\", \"AzureDataExplorer\") \\\n",
+							"    .option(\"kustoDatabase\", \"bdbjkustodatabaseqingtest\") \\\n",
+							"    .option(\"kustoQuery\", \"Qingtest | take 10\") \\\n",
+							"    .load()\n",
+							"\n",
+							"display(kustoDf)\n",
+							""
+						],
+						"outputs": [],
+						"execution_count": 1
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"jupyter": {
+								"source_hidden": false,
+								"outputs_hidden": false
+							},
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							},
+							"collapsed": true
+						},
+						"source": [
+							"kustoDf.write \\\r\n",
+							"    .format(\"com.microsoft.kusto.spark.synapse.datasource\") \\\r\n",
+							"    .option(\"spark.synapse.linkedService\", \"AzureDataExplorer\") \\\r\n",
+							"    .option(\"kustoDatabase\", \"bdbjkustodatabaseqingtest\") \\\r\n",
+							"    .option(\"kustoTable\", \"Qingtest1129\") \\\r\n",
+							"    .option(\"tableCreateOptions\",\"CreateIfNotExist\") \\\r\n",
+							"    .mode(\"Append\") \\\r\n",
+							"    .save()"
+						],
+						"outputs": [],
+						"execution_count": null
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"jupyter": {
+								"source_hidden": false,
+								"outputs_hidden": false
+							},
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							},
+							"collapsed": true
+						},
+						"source": [
+							"from pyspark.sql.types import *\r\n",
+							"customSchema = StructType([StructField('Id_P', IntegerType(), True),  \\\r\n",
+							"                           StructField('LastName', StringType(), True), \\\r\n",
+							"                           StructField('FirstName', StringType(), True), \\\r\n",
+							"                           StructField('Address', StringType(), True), \\\r\n",
+							"                           StructField('City', StringType(), True)] )\r\n",
+							"                 \r\n",
+							"\r\n",
+							"dfStream = spark \\\r\n",
+							"  .readStream \\\r\n",
+							"  .schema(customSchema) \\\r\n",
+							"  .csv(\"abfss://default@honghaigen2.dfs.core.windows.net/csv/\") \\\r\n",
+							"\r\n",
+							"spark.conf.set(\"spark.sql.streaming.checkpointLocation\", \"/localWriteCheckpointFolder\")\r\n",
+							"spark.conf.set(\"spark.sql.codegen.wholeStage\", \"false\")\r\n",
+							"\r\n",
+							"kustoQ = dfStream \\\r\n",
+							"    .writeStream \\\r\n",
+							"    .format(\"com.microsoft.kusto.spark.synapse.datasink.KustoSynapseSinkProvider\") \\\r\n",
+							"    .option(\"spark.synapse.linkedService\", \"AzureDataExplorer\") \\\r\n",
+							"    .option(\"kustoDatabase\", \"bdbjkustodatabaseqingtest\") \\\r\n",
+							"    .option(\"kustoTable\", \"Qingtest1129\") \\\r\n",
+							"    .option(\"tableCreateOptions\",\"CreateIfNotExist\") \\\r\n",
+							"    .trigger(once = True)\r\n",
+							"\r\n",
+							"kustoQ.start().awaitTermination(60*8)"
+						],
+						"outputs": [],
+						"execution_count": null
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Magictest1')]",
+			"type": "Microsoft.Synapse/workspaces/notebooks",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"nbformat": 4,
+				"nbformat_minor": 2,
+				"bigDataPool": {
+					"referenceName": "testsparkpool01",
+					"type": "BigDataPoolReference"
+				},
+				"sessionProperties": {
+					"driverMemory": "56g",
+					"driverCores": 8,
+					"executorMemory": "56g",
+					"executorCores": 8,
+					"numExecutors": 2,
+					"conf": {
+						"spark.dynamicAllocation.enabled": "false",
+						"spark.dynamicAllocation.minExecutors": "2",
+						"spark.dynamicAllocation.maxExecutors": "2",
+						"spark.autotune.trackingId": "49b5c733-5c7f-4a84-941b-5118a3300259"
+					}
+				},
+				"metadata": {
+					"saveOutput": true,
+					"enableDebugMode": false,
+					"kernelspec": {
+						"name": "synapse_pyspark",
+						"display_name": "Synapse PySpark"
+					},
+					"language_info": {
+						"name": "python"
+					},
+					"a365ComputeOptions": {
+						"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/testsparkpool01",
+						"name": "testsparkpool01",
+						"type": "Spark",
+						"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/testsparkpool01",
+						"auth": {
+							"type": "AAD",
+							"authResource": "https://dev.azuresynapse.net"
+						},
+						"sparkVersion": "3.1",
+						"nodeCount": 10,
+						"cores": 8,
+						"memory": 56
+					}
+				},
+				"cells": [
+					{
+						"cell_type": "code",
+						"source": [
+							"%lsmagic"
+						],
+						"outputs": [],
+						"execution_count": 1
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"a = 1\n",
+							"def test():\n",
+							"    b = %time 2\n",
+							"    print(a, b)\n",
+							"test()\n",
+							"a"
+						],
+						"outputs": [],
+						"execution_count": 2
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"%%time\n",
+							"import time\n",
+							"time.sleep(.3)"
+						],
+						"outputs": [],
+						"execution_count": 3
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"%%capture --no-stderr out\n",
+							"import sys\n",
+							"\n",
+							"def eprint(*args, **kwargs):\n",
+							"    print(*args, file=sys.stderr, **kwargs)\n",
+							"\n",
+							"print('std\\\\out')\n",
+							"eprint('std\\nerr')"
+						],
+						"outputs": [],
+						"execution_count": 4
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"out.stdout"
+						],
+						"outputs": [],
+						"execution_count": 5
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"%%writefile -a abc/test1.txt\n",
+							"test,1\n",
+							"map,2\n",
+							"cool,10\n",
+							"coolest,232"
+						],
+						"outputs": [],
+						"execution_count": 6
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"df = spark.read.csv('abc/test1.txt')\n",
+							"df.show()"
+						],
+						"outputs": [],
+						"execution_count": 7
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"df.show()"
+						],
+						"outputs": [],
+						"execution_count": 8
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"collapsed": false
+						},
+						"source": [
+							"display(df)"
+						],
+						"outputs": [],
+						"execution_count": 9
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							""
+						],
+						"outputs": [],
+						"execution_count": null
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Notebook 11')]",
+			"type": "Microsoft.Synapse/workspaces/notebooks",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"nbformat": 4,
+				"nbformat_minor": 2,
+				"bigDataPool": {
+					"referenceName": "testsparkpool01",
+					"type": "BigDataPoolReference"
+				},
+				"sessionProperties": {
+					"driverMemory": "56g",
+					"driverCores": 8,
+					"executorMemory": "56g",
+					"executorCores": 8,
+					"numExecutors": 2,
+					"conf": {
+						"spark.dynamicAllocation.enabled": "false",
+						"spark.dynamicAllocation.minExecutors": "2",
+						"spark.dynamicAllocation.maxExecutors": "2",
+						"spark.autotune.trackingId": "75780fee-2eb0-44b8-9ee2-54e19a7f5106"
+					}
+				},
+				"metadata": {
+					"saveOutput": true,
+					"enableDebugMode": false,
+					"kernelspec": {
+						"name": "synapse_sparksql",
+						"display_name": "sql"
+					},
+					"language_info": {
+						"name": "sql"
+					},
+					"a365ComputeOptions": {
+						"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/testsparkpool01",
+						"name": "testsparkpool01",
+						"type": "Spark",
+						"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/testsparkpool01",
+						"auth": {
+							"type": "AAD",
+							"authResource": "https://dev.azuresynapse.net"
+						},
+						"sparkVersion": "3.1",
+						"nodeCount": 10,
+						"cores": 8,
+						"memory": 56
+					}
+				},
+				"cells": [
+					{
+						"cell_type": "code",
+						"metadata": {
+							"jupyter": {
+								"source_hidden": false,
+								"outputs_hidden": false
+							},
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							}
+						},
+						"source": [
+							""
+						],
+						"outputs": [],
+						"execution_count": null
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"123"
+						],
+						"outputs": [],
+						"execution_count": null
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"jupyter": {
+								"source_hidden": false,
+								"outputs_hidden": false
+							},
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							}
+						},
+						"source": [
+							""
+						],
+						"outputs": [],
+						"execution_count": null
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"jupyter": {
+								"source_hidden": false,
+								"outputs_hidden": false
+							},
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							}
+						},
+						"source": [
+							""
+						],
+						"outputs": [],
+						"execution_count": null
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							}
+						},
+						"source": [
+							"****\r\n",
+							"__\r\n",
+							"```\r\n",
+							" \r\n",
+							"```\r\n",
+							"[link-alt-text](link-URL)\r\n",
+							"# \r\n",
+							"## \r\n",
+							"### \r\n",
+							"#### \r\n",
+							"##### \r\n",
+							"###### \r\n",
+							"- \r\n",
+							"1. \r\n",
+							"![image-alt-text](image-URL)"
+						]
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							}
+						},
+						"source": [
+							""
+						]
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							}
+						},
+						"source": [
+							""
+						]
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							}
+						},
+						"source": [
+							""
+						]
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Notebook 11_Copy1')]",
+			"type": "Microsoft.Synapse/workspaces/notebooks",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"nbformat": 4,
+				"nbformat_minor": 2,
+				"bigDataPool": {
+					"referenceName": "testsparkpool01",
+					"type": "BigDataPoolReference"
+				},
+				"sessionProperties": {
+					"driverMemory": "56g",
+					"driverCores": 8,
+					"executorMemory": "56g",
+					"executorCores": 8,
+					"numExecutors": 2,
+					"conf": {
+						"spark.dynamicAllocation.enabled": "false",
+						"spark.dynamicAllocation.minExecutors": "2",
+						"spark.dynamicAllocation.maxExecutors": "2",
+						"spark.autotune.trackingId": "58092944-34ec-4ab0-8256-53645bf40aba"
+					}
+				},
+				"metadata": {
+					"saveOutput": true,
+					"enableDebugMode": false,
+					"kernelspec": {
+						"name": "synapse_sparksql",
+						"display_name": "sql"
+					},
+					"language_info": {
+						"name": "sql"
+					},
+					"a365ComputeOptions": {
+						"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/testsparkpool01",
+						"name": "testsparkpool01",
+						"type": "Spark",
+						"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/testsparkpool01",
+						"auth": {
+							"type": "AAD",
+							"authResource": "https://dev.azuresynapse.net"
+						},
+						"sparkVersion": "3.1",
+						"nodeCount": 10,
+						"cores": 8,
+						"memory": 56
+					}
+				},
+				"cells": [
+					{
+						"cell_type": "code",
+						"source": [
+							""
+						],
+						"outputs": [],
+						"execution_count": null
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							}
+						},
+						"source": [
+							"****\r\n",
+							"__\r\n",
+							"```\r\n",
+							" \r\n",
+							"```\r\n",
+							"[link-alt-text](link-URL)\r\n",
+							"# \r\n",
+							"## \r\n",
+							"### \r\n",
+							"#### \r\n",
+							"##### \r\n",
+							"###### \r\n",
+							"- \r\n",
+							"1. \r\n",
+							"![image-alt-text](image-URL)"
+						]
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							}
+						},
+						"source": [
+							""
+						]
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							}
+						},
+						"source": [
+							""
+						]
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							}
+						},
+						"source": [
+							""
+						]
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Widget Basics')]",
+			"type": "Microsoft.Synapse/workspaces/notebooks",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"nbformat": 4,
+				"nbformat_minor": 2,
+				"sessionProperties": {
+					"driverMemory": "28g",
+					"driverCores": 4,
+					"executorMemory": "28g",
+					"executorCores": 4,
+					"numExecutors": 2,
+					"conf": {
+						"spark.dynamicAllocation.enabled": "false",
+						"spark.dynamicAllocation.minExecutors": "2",
+						"spark.dynamicAllocation.maxExecutors": "2",
+						"spark.autotune.trackingId": "42348071-15fb-47fc-a1ff-ca4310e2cb2c"
+					}
+				},
+				"metadata": {
+					"saveOutput": true,
+					"synapse_widget": {
+						"version": "0.1"
+					},
+					"enableDebugMode": false,
+					"kernelspec": {
+						"name": "synapse_pyspark",
+						"display_name": "Synapse PySpark"
+					},
+					"language_info": {
+						"name": "python"
+					}
+				},
+				"cells": [
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"nbsphinx": "hidden"
+						},
+						"source": [
+							"**This notebook sample is based on the official [Jupyter Widgets sample notebook `Widget Basics.ipynb`](https://github.com/jupyter-widgets/ipywidgets/blob/7.x/docs/source/examples/Widget%20Basics.ipynb)\r\n",
+							".** Edit this cell to see the full license content.\r\n",
+							"\r\n",
+							"<!--\r\n",
+							"Copyright (c) 2015 Project Jupyter Contributors\r\n",
+							"All rights reserved.\r\n",
+							"\r\n",
+							"Redistribution and use in source and binary forms, with or without\r\n",
+							"modification, are permitted provided that the following conditions are met:\r\n",
+							"\r\n",
+							"1. Redistributions of source code must retain the above copyright notice, this\r\n",
+							"   list of conditions and the following disclaimer.\r\n",
+							"\r\n",
+							"2. Redistributions in binary form must reproduce the above copyright notice,\r\n",
+							"   this list of conditions and the following disclaimer in the documentation\r\n",
+							"   and/or other materials provided with the distribution.\r\n",
+							"\r\n",
+							"3. Neither the name of the copyright holder nor the names of its\r\n",
+							"   contributors may be used to endorse or promote products derived from\r\n",
+							"   this software without specific prior written permission.\r\n",
+							"\r\n",
+							"THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\r\n",
+							"AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\r\n",
+							"IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\r\n",
+							"DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\r\n",
+							"FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\r\n",
+							"DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\r\n",
+							"SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\r\n",
+							"CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\r\n",
+							"OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\r\n",
+							"OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\r\n",
+							"-->"
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							}
+						},
+						"source": [
+							"**Synapse Studio users**: Now you can consume Jupyter Widgets in Synapse Studio (with \"Preview Features\" turned on). Since it's a Python library, you will need to consume it in PySpark environment.\r\n",
+							"To go through this sample, please create a new notebook from the sample, then execute the code cells one by one with \"Run\" button or `Shift+Enter` shortcut keys.\r\n",
+							"\r\n",
+							"See https://go.microsoft.com/fwlink/?linkid=2170793 for general introduction as well as known limitations on the Jupyter Widgets support in Synapse Studio."
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"# Simple Widget Introduction"
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"## What are widgets?"
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"slideshow": {
+								"slide_type": "slide"
+							}
+						},
+						"source": [
+							"Widgets are eventful python objects that have a representation in the browser, often as a control like a slider, textbox, etc."
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"## What can they be used for?"
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"slideshow": {
+								"slide_type": "slide"
+							}
+						},
+						"source": [
+							"You can use widgets to build **interactive GUIs** for your notebooks.  \n",
+							"You can also use widgets to **synchronize stateful and stateless information** between Python and JavaScript."
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"## Using widgets  "
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"slideshow": {
+								"slide_type": "slide"
+							}
+						},
+						"source": [
+							"To use the widget framework, you need to import `ipywidgets`."
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"import ipywidgets as widgets\r\n",
+							"widgets.__version__"
+						],
+						"attachments": null,
+						"outputs": [],
+						"execution_count": 1
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"slideshow": {
+								"slide_type": "slide"
+							}
+						},
+						"source": [
+							"### repr"
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"Widgets have their own display `repr` which allows them to be displayed using IPython's display framework.  Constructing and returning an `IntSlider` automatically displays the widget (as seen below).  Widgets are displayed inside the output area below the code cell. Clearing cell output will also remove the widget."
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"widgets.IntSlider()"
+						],
+						"attachments": null,
+						"outputs": [],
+						"execution_count": 2
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"slideshow": {
+								"slide_type": "slide"
+							}
+						},
+						"source": [
+							"### display()"
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"You can also explicitly display the widget using `display(...)`.\r\n",
+							"\r\n",
+							"**Synapse Studio users**:\r\n",
+							"* Usually you do not need to import `display` function manually from `IPython.display` package. The pre-imported global `display(d)` function now also accepts `Widget` instance as first parameter (`d`). Just note that it does not support more than 1 arguments. If you want to display 2 Widgets respectively, call `display` twice.\r\n",
+							"* In case you have already imported `display` function from IPython, you can always use the following statement to restore the global `display` function provided by Synapse Studio, if necessary (e.g. when you want to display Spark `DataFrame`).\r\n",
+							"```python\r\n",
+							"from notebookutils import display\r\n",
+							"```"
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"# pre-imported `display` already supports Widget. No need to import from IPyton.\n",
+							"# from IPython.display import display\n",
+							"w = widgets.IntSlider()\n",
+							"display(w)"
+						],
+						"attachments": null,
+						"outputs": [],
+						"execution_count": 3
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"slideshow": {
+								"slide_type": "slide"
+							}
+						},
+						"source": [
+							"### Multiple display() calls"
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"If you display the same widget twice, the displayed instances in the front-end will remain in sync with each other.  Try dragging the slider below and watch the slider above."
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"display(w)"
+						],
+						"attachments": null,
+						"outputs": [],
+						"execution_count": 4
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"## Why does displaying the same widget twice work?"
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"slideshow": {
+								"slide_type": "slide"
+							}
+						},
+						"source": [
+							"Widgets are represented in the back-end by a single object.  Each time a widget is displayed, a new representation of that same object is created in the front-end.  These representations are called views.\n",
+							"\n",
+							"![Kernel & front-end diagram](https://ipywidgets.readthedocs.io/en/7.x/_images/WidgetModelView.png)"
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"slideshow": {
+								"slide_type": "slide"
+							}
+						},
+						"source": [
+							"### Closing widgets"
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"You can close a widget by calling its `close()` method."
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"display(w)"
+						],
+						"attachments": null,
+						"outputs": [],
+						"execution_count": 5
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"w.close()"
+						],
+						"attachments": null,
+						"outputs": [],
+						"execution_count": 6
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"## Widget properties"
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"slideshow": {
+								"slide_type": "slide"
+							}
+						},
+						"source": [
+							"All of the IPython widgets share a similar naming scheme.  To read the value of a widget, you can query its `value` property."
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"w = widgets.IntSlider()\n",
+							"display(w)"
+						],
+						"attachments": null,
+						"outputs": [],
+						"execution_count": 7
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"w.value"
+						],
+						"attachments": null,
+						"outputs": [],
+						"execution_count": 8
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"Similarly, to set a widget's value, you can set its `value` property."
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"w.value = 100"
+						],
+						"attachments": null,
+						"outputs": [],
+						"execution_count": 9
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"slideshow": {
+								"slide_type": "slide"
+							}
+						},
+						"source": [
+							"### Keys"
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"In addition to `value`, most widgets share `keys`, `description`, and `disabled`.  To see the entire list of synchronized, stateful properties of any specific widget, you can query the `keys` property."
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"w.keys"
+						],
+						"attachments": null,
+						"outputs": [],
+						"execution_count": 10
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"### Shorthand for setting the initial values of widget properties"
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"slideshow": {
+								"slide_type": "slide"
+							}
+						},
+						"source": [
+							"While creating a widget, you can set some or all of the initial values of that widget by defining them as keyword arguments in the widget's constructor (as seen below)."
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"widgets.Text(value='Hello World!', disabled=True)"
+						],
+						"attachments": null,
+						"outputs": [],
+						"execution_count": 11
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"## Linking two similar widgets"
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"slideshow": {
+								"slide_type": "slide"
+							}
+						},
+						"source": [
+							"If you need to display the same value two different ways, you'll have to use two different widgets. Instead of attempting to manually synchronize the values of the two widgets, you can use the `link`  or `jslink` function to link two properties together (the difference between these is discussed in [Widget Events](https://ipywidgets.readthedocs.io/en/7.x/examples/Widget%20Events.html)).  Below, the values of two widgets are linked together.\r\n",
+							"\r\n",
+							"**Synapse Studio users**: `jslink` is not supported yet. As a workaround, use `link`."
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"a = widgets.FloatText()\n",
+							"b = widgets.FloatSlider()\n",
+							"display(a)\n",
+							"display(b)\n",
+							"\n",
+							"# `jslink` is not supported in Synapse Studio yet. Ue `link` instead.\n",
+							"# mylink = widgets.jslink((a, 'value'), (b, 'value'))\n",
+							"mylink = widgets.link((a, 'value'), (b, 'value'))"
+						],
+						"attachments": null,
+						"outputs": [],
+						"execution_count": 12
+					},
+					{
+						"cell_type": "markdown",
+						"source": [
+							"### Unlinking widgets"
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"slideshow": {
+								"slide_type": "slide"
+							}
+						},
+						"source": [
+							"Unlinking the widgets is simple.  All you have to do is call `.unlink` on the link object.  Try changing one of the widgets above after unlinking to see that they can be independently changed."
+						],
+						"attachments": null
+					},
+					{
+						"cell_type": "code",
+						"source": [
+							"mylink.unlink()"
+						],
+						"attachments": null,
+						"outputs": [],
+						"execution_count": 13
+					},
+					{
+						"cell_type": "markdown",
+						"metadata": {
+							"nbsphinx": "hidden"
+						},
+						"source": [
+							"## Next steps\r\n",
+							"\r\n",
+							"You can find more examples from the official [Jupyter Widgets documentation](https://ipywidgets.readthedocs.io/en/7.x/index.html), including\r\n",
+							"* [Widget List](https://ipywidgets.readthedocs.io/en/latest/examples/Widget%20List.html)\r\n",
+							"* [Widget Events](https://ipywidgets.readthedocs.io/en/latest/examples/Widget%20Events.html)\r\n",
+							"* [Widget Styling](https://ipywidgets.readthedocs.io/en/latest/examples/Widget%20Styling.html)\r\n",
+							"* and more!"
+						],
+						"attachments": null
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/kusto - A table - New notebook - Write DataFrame to table')]",
+			"type": "Microsoft.Synapse/workspaces/notebooks",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"nbformat": 4,
+				"nbformat_minor": 2,
+				"bigDataPool": {
+					"referenceName": "testsparkpool01",
+					"type": "BigDataPoolReference"
+				},
+				"sessionProperties": {
+					"driverMemory": "56g",
+					"driverCores": 8,
+					"executorMemory": "56g",
+					"executorCores": 8,
+					"numExecutors": 2,
+					"conf": {
+						"spark.dynamicAllocation.enabled": "false",
+						"spark.dynamicAllocation.minExecutors": "2",
+						"spark.dynamicAllocation.maxExecutors": "2",
+						"spark.autotune.trackingId": "8a613224-de54-4f8a-be71-ab4f5f6f81b8"
+					}
+				},
+				"metadata": {
+					"saveOutput": true,
+					"enableDebugMode": false,
+					"kernelspec": {
+						"name": "synapse_pyspark",
+						"display_name": "Synapse PySpark"
+					},
+					"language_info": {
+						"name": "python"
+					},
+					"a365ComputeOptions": {
+						"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/testsparkpool01",
+						"name": "testsparkpool01",
+						"type": "Spark",
+						"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/testsparkpool01",
+						"auth": {
+							"type": "AAD",
+							"authResource": "https://dev.azuresynapse.net"
+						},
+						"sparkVersion": "3.1",
+						"nodeCount": 10,
+						"cores": 8,
+						"memory": 56
+					}
+				},
+				"cells": [
+					{
+						"cell_type": "code",
+						"source": [
+							"%%pyspark\n",
+							"\n",
+							"# Write data to a Azure Data Explorer table\n",
+							"# Full Sample Code available at: https://github.com/Azure/azure-kusto-spark/blob/master/samples/src/main/python/SynapseSample.py\n",
+							"\n",
+							"df.write \\\n",
+							"    .format(\"com.microsoft.kusto.spark.synapse.datasource\") \\\n",
+							"    .option(\"spark.synapse.linkedService\", \"AzureDataExplorer\") \\\n",
+							"    .option(\"kustoDatabase\", \"bdbjkustodatabaseqingtest\") \\\n",
+							"    .option(\"kustoTable\", \"Qingtest\") \\\n",
+							"    .option(\"tableCreateOptions\",\"CreateIfNotExist\") \\\n",
+							"    .mode(\"Append\") \\\n",
+							"    .save()\n",
+							""
+						],
+						"outputs": [],
+						"execution_count": 1
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/kusto - A table - New notebook - Write streaming DataFrame to table')]",
+			"type": "Microsoft.Synapse/workspaces/notebooks",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"nbformat": 4,
+				"nbformat_minor": 2,
+				"bigDataPool": {
+					"referenceName": "testsparkpool01",
+					"type": "BigDataPoolReference"
+				},
+				"sessionProperties": {
+					"driverMemory": "56g",
+					"driverCores": 8,
+					"executorMemory": "56g",
+					"executorCores": 8,
+					"numExecutors": 2,
+					"conf": {
+						"spark.dynamicAllocation.enabled": "false",
+						"spark.dynamicAllocation.minExecutors": "2",
+						"spark.dynamicAllocation.maxExecutors": "2",
+						"spark.autotune.trackingId": "f3738c97-d002-4e00-99a3-59145d7e569b"
+					}
+				},
+				"metadata": {
+					"saveOutput": true,
+					"enableDebugMode": false,
+					"kernelspec": {
+						"name": "synapse_pyspark",
+						"display_name": "Synapse PySpark"
+					},
+					"language_info": {
+						"name": "python"
+					},
+					"a365ComputeOptions": {
+						"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/testsparkpool01",
+						"name": "testsparkpool01",
+						"type": "Spark",
+						"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/testsparkpool01",
+						"auth": {
+							"type": "AAD",
+							"authResource": "https://dev.azuresynapse.net"
+						},
+						"sparkVersion": "3.1",
+						"nodeCount": 10,
+						"cores": 8,
+						"memory": 56
+					}
+				},
+				"cells": [
+					{
+						"cell_type": "code",
+						"source": [
+							"%%pyspark\n",
+							"\n",
+							"# Write a streaming Spark DataFrame to a Azure Data Explorer table\n",
+							"# Full Sample Code available at: https://github.com/Azure/azure-kusto-spark/blob/master/samples/src/main/python/SynapseSample.py\n",
+							"\n",
+							"dfStream = spark \\\n",
+							"  .readStream \\\n",
+							"  .schema([customSchema]) \\\n",
+							"  .csv([filename]) \\\n",
+							"\n",
+							"spark.conf.set(\"spark.sql.streaming.checkpointLocation\", \"/localWriteCheckpointFolder\")\n",
+							"spark.conf.set(\"spark.sql.codegen.wholeStage\", \"false\")\n",
+							"\n",
+							"kustoQ = dfStream \\\n",
+							"    .writeStream \\\n",
+							"    .format(\"com.microsoft.kusto.spark.synapse.datasink.KustoSynapseSinkProvider\") \\\n",
+							"    .option(\"spark.synapse.linkedService\", \"AzureDataExplorer\") \\\n",
+							"    .option(\"kustoDatabase\", \"bdbjkustodatabaseqingtest\") \\\n",
+							"    .option(\"kustoTable\", \"Qingtest\") \\\n",
+							"    .option(\"tableCreateOptions\",\"CreateIfNotExist\") \\\n",
+							"    .trigger(once = True)\n",
+							"\n",
+							"kustoQ.start().awaitTermination(60*8)\n",
+							""
+						],
+						"outputs": [],
+						"execution_count": 1
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/kusto - Atable - New notebook - Write DataFrame to table')]",
+			"type": "Microsoft.Synapse/workspaces/notebooks",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"nbformat": 4,
+				"nbformat_minor": 2,
+				"bigDataPool": {
+					"referenceName": "testsparkpool01",
+					"type": "BigDataPoolReference"
+				},
+				"sessionProperties": {
+					"driverMemory": "56g",
+					"driverCores": 8,
+					"executorMemory": "56g",
+					"executorCores": 8,
+					"numExecutors": 2,
+					"conf": {
+						"spark.dynamicAllocation.enabled": "false",
+						"spark.dynamicAllocation.minExecutors": "2",
+						"spark.dynamicAllocation.maxExecutors": "2",
+						"spark.autotune.trackingId": "e959e4fa-fae0-4306-9b49-4d980889eed3"
+					}
+				},
+				"metadata": {
+					"saveOutput": true,
+					"enableDebugMode": false,
+					"kernelspec": {
+						"name": "synapse_pyspark",
+						"display_name": "Synapse PySpark"
+					},
+					"language_info": {
+						"name": "python"
+					},
+					"a365ComputeOptions": {
+						"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/testsparkpool01",
+						"name": "testsparkpool01",
+						"type": "Spark",
+						"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/testsparkpool01",
+						"auth": {
+							"type": "AAD",
+							"authResource": "https://dev.azuresynapse.net"
+						},
+						"sparkVersion": "3.1",
+						"nodeCount": 10,
+						"cores": 8,
+						"memory": 56
+					}
+				},
+				"cells": [
+					{
+						"cell_type": "code",
+						"metadata": {
+							"collapsed": false
+						},
+						"source": [
+							"%%pyspark\n",
+							"\n",
+							"# Read data from Azure Data Explorer table(s)\n",
+							"# Full Sample Code available at: https://github.com/Azure/azure-kusto-spark/blob/master/samples/src/main/python/SynapseSample.py\n",
+							"\n",
+							"kustoDf  = spark.read \\\n",
+							"    .format(\"com.microsoft.kusto.spark.synapse.datasource\") \\\n",
+							"    .option(\"spark.synapse.linkedService\", \"AzureDataExplorer\") \\\n",
+							"    .option(\"kustoDatabase\", \"bdbjkustodatabaseqingtest\") \\\n",
+							"    .option(\"kustoQuery\", \"Qingtest | take 10\") \\\n",
+							"    .load()\n",
+							"\n",
+							"display(kustoDf)\n",
+							""
+						],
+						"outputs": [],
+						"execution_count": 1
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SJD pipeline 1129')]",
+			"type": "Microsoft.Synapse/workspaces/sparkJobDefinitions",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"targetBigDataPool": {
+					"referenceName": "testsparkpool01",
+					"type": "BigDataPoolReference"
+				},
+				"requiredSparkVersion": "3.1",
+				"language": "python",
+				"jobProperties": {
+					"name": "SJD pipeline 1129",
+					"file": "abfss://default@honghaigen2.dfs.core.windows.net/synapse/workspaces/bdbj20211129ws/batchjobs/Spark%20job%20definition%201/copy_opendataset_to_spark_table.py",
+					"conf": {
+						"spark.dynamicAllocation.enabled": "false",
+						"spark.dynamicAllocation.minExecutors": "1",
+						"spark.dynamicAllocation.maxExecutors": "2",
+						"spark.autotune.trackingId": "6dac5fb2-f968-4bc5-990e-152160a9e6e9"
+					},
+					"args": [],
+					"jars": [],
+					"files": [],
+					"driverMemory": "56g",
+					"driverCores": 8,
+					"executorMemory": "56g",
+					"executorCores": 8,
+					"numExecutors": 2
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Database 1')]",
+			"type": "Microsoft.Synapse/workspaces/databases",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"Ddls": [
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"Properties": {
+								"IsSyMSCDMDatabase": true
+							},
+							"Name": "Database 1",
+							"EntityType": "DATABASE",
+							"Source": {
+								"Provider": "ADLS",
+								"Location": "abfss://default@hozhao1111gen2.dfs.core.windows.net/Database 1",
+								"Properties": {
+									"FormatType": "csv",
+									"LinkedServiceName": "yanjuntestws-WorkspaceDefaultStorage"
+								}
+							}
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Namespace": {
+								"DatabaseName": "Database 1"
+							},
+							"Name": "Table_1",
+							"Description": "",
+							"EntityType": "TABLE",
+							"TableType": "EXTERNAL",
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"StorageDescriptor": {
+								"Columns": [
+									{
+										"Name": "Column_1",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Length": 256,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										}
+									}
+								],
+								"Format": {
+									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+									"FormatType": "csv",
+									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+									"Properties": {
+										"path": "abfss://default@hozhao1111gen2.dfs.core.windows.net/Database 1/Table_1",
+										"delimiter": ",",
+										"firstRowAsHeader": "false",
+										"multiLine": "false",
+										"serialization.format": "1",
+										"escape": "\\",
+										"quote": "\"",
+										"FormatTypeSetToDatabaseDefault": true,
+										"header": "false"
+									}
+								},
+								"Source": {
+									"Provider": "ADLS",
+									"Location": "abfss://default@hozhao1111gen2.dfs.core.windows.net/Database 1/Table_1",
+									"Properties": {
+										"LinkedServiceName": "yanjuntestws-WorkspaceDefaultStorage",
+										"LocationSetToDatabaseDefault": true
+									}
+								},
+								"Properties": {
+									"textinputformat.record.delimiter": ",",
+									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+									"derivedModelAttributeInfo": "{\"attributeReferences\":{}}"
+								},
+								"Compressed": false,
+								"IsStoredAsSubdirectories": false
+							},
+							"Properties": {
+								"Description": "",
+								"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
+								"PrimaryKeys": "",
+								"spark.sql.sources.provider": "csv"
+							},
+							"Retention": 0,
+							"Temporary": false,
+							"IsRewriteEnabled": false
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Database 2')]",
+			"type": "Microsoft.Synapse/workspaces/databases",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"Ddls": [
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"Properties": {
+								"IsSyMSCDMDatabase": true,
+								"DerivedModelDBInfo": "{\"ModelDirectives\":{\"BaseModel\":{\"Name\":\"ConsumerGoods\",\"Version\":\"0.1.0\"}}}"
+							},
+							"Name": "Database 2",
+							"EntityType": "DATABASE",
+							"Source": {
+								"Provider": "ADLS",
+								"Location": "abfss://default@hozhao1111gen2.dfs.core.windows.net/Database 2",
+								"Properties": {
+									"FormatType": "csv",
+									"LinkedServiceName": "yanjuntest1207-WorkspaceDefaultStorage"
+								}
+							}
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Namespace": {
+								"DatabaseName": "Database 2"
+							},
+							"Name": "AccountingBasis",
+							"Description": "The accounting basis in which transactions that change a company's financial statements are recorded in the periods in which the events occur, rather than in the periods in which the company receives or pays cash.\n\nEx:\nCASH BASIS ACCOUNTING\nRevenue is recorded only when cash is received and an expense is recorded only when cash is paid. \n\nMost businesses use the accrual basis, which individuals and professional people sue the cash basis.   The cash basis is not normally suitable when there are significant amounts of inventories, receivables and payables.\n\nACCRUAL BASIS ACCOUNTING\nAccounting basis in which transactions that change a company's financial statements are recorded in the periods in which the events occur, rather than in the periods in which the company receives or pays cash.\n\nMost businesses use the accrual basis, which individuals and professional people use the cash basis.   The cash basis is not normally suitable when there are significant amounts of inventories, receivables and payables.",
+							"EntityType": "TABLE",
+							"TableType": "EXTERNAL",
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"StorageDescriptor": {
+								"Columns": [
+									{
+										"Name": "AccountingBasisId",
+										"Description": "The unique identifier of an Accounting Basis.",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "AccountingBasis.cdm.json/AccountingBasis",
+											"Name": "AccountingBasisId"
+										}
+									},
+									{
+										"Name": "AccountingBasisName",
+										"Description": "The name of an Accounting Basis.",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Length": 128,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "AccountingBasis.cdm.json/AccountingBasis",
+											"Name": "AccountingBasisName"
+										}
+									},
+									{
+										"Name": "AccountingBasisDescription",
+										"Description": "The description of an Accounting Basis.",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Length": 512,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "AccountingBasis.cdm.json/AccountingBasis",
+											"Name": "AccountingBasisDescription"
+										}
+									}
+								],
+								"Format": {
+									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+									"FormatType": "csv",
+									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+									"Properties": {
+										"path": "abfss://default@hozhao1111gen2.dfs.core.windows.net/Database 2/AccountingBasis",
+										"delimiter": ",",
+										"multiLine": "false",
+										"firstRowAsHeader": "false",
+										"serialization.format": "1",
+										"escape": "\\",
+										"quote": "\"",
+										"FormatTypeSetToDatabaseDefault": true,
+										"header": "false"
+									}
+								},
+								"Source": {
+									"Provider": "ADLS",
+									"Location": "abfss://default@hozhao1111gen2.dfs.core.windows.net/Database 2/AccountingBasis",
+									"Properties": {
+										"LinkedServiceName": "yanjuntest1207-WorkspaceDefaultStorage",
+										"LocationSetToDatabaseDefault": true
+									}
+								},
+								"Properties": {
+									"textinputformat.record.delimiter": ",",
+									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+									"derivedModelAttributeInfo": "{\"attributeReferences\":{\"AccountingBasisId\":{\"entity\":\"AccountingBasis.cdm.json/AccountingBasis\",\"name\":\"AccountingBasisId\"},\"AccountingBasisName\":{\"entity\":\"AccountingBasis.cdm.json/AccountingBasis\",\"name\":\"AccountingBasisName\"},\"AccountingBasisDescription\":{\"entity\":\"AccountingBasis.cdm.json/AccountingBasis\",\"name\":\"AccountingBasisDescription\"}}}"
+								},
+								"Compressed": false,
+								"IsStoredAsSubdirectories": false
+							},
+							"Properties": {
+								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"AccountingBasis\",\"path\":\"AccountingBasis.cdm.json/AccountingBasis\"},\"description\":\"The accounting basis in which transactions that change a company's financial statements are recorded in the periods in which the events occur, rather than in the periods in which the company receives or pays cash.\\n\\nEx:\\nCASH BASIS ACCOUNTING\\nRevenue is recorded only when cash is received and an expense is recorded only when cash is paid. \\n\\nMost businesses use the accrual basis, which individuals and professional people sue the cash basis.   The cash basis is not normally suitable when there are significant amounts of inventories, receivables and payables.\\n\\nACCRUAL BASIS ACCOUNTING\\nAccounting basis in which transactions that change a company's financial statements are recorded in the periods in which the events occur, rather than in the periods in which the company receives or pays cash.\\n\\nMost businesses use the accrual basis, which individuals and professional people use the cash basis.   The cash basis is not normally suitable when there are significant amounts of inventories, receivables and payables.\",\"primaryKey\":[\"AccountingBasisId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"AccountingBasisId\",\"attributeReference\":{\"entity\":\"AccountingBasis.cdm.json/AccountingBasis\",\"name\":\"AccountingBasisId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"AccountingBasisName\",\"attributeReference\":{\"entity\":\"AccountingBasis.cdm.json/AccountingBasis\",\"name\":\"AccountingBasisName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"AccountingBasisDescription\",\"attributeReference\":{\"entity\":\"AccountingBasis.cdm.json/AccountingBasis\",\"name\":\"AccountingBasisDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512}]}}}",
+								"Description": "The accounting basis in which transactions that change a company's financial statements are recorded in the periods in which the events occur, rather than in the periods in which the company receives or pays cash.\n\nEx:\nCASH BASIS ACCOUNTING\nRevenue is recorded only when cash is received and an expense is recorded only when cash is paid. \n\nMost businesses use the accrual basis, which individuals and professional people sue the cash basis.   The cash basis is not normally suitable when there are significant amounts of inventories, receivables and payables.\n\nACCRUAL BASIS ACCOUNTING\nAccounting basis in which transactions that change a company's financial statements are recorded in the periods in which the events occur, rather than in the periods in which the company receives or pays cash.\n\nMost businesses use the accrual basis, which individuals and professional people use the cash basis.   The cash basis is not normally suitable when there are significant amounts of inventories, receivables and payables.",
+								"DisplayFolderInfo": "{\"name\":\"Accounting & Financial Reporting\",\"colorCode\":\"#0078D4\"}",
+								"PrimaryKeys": "AccountingBasisId",
+								"spark.sql.sources.provider": "csv"
+							},
+							"Retention": 0,
+							"Temporary": false,
+							"IsRewriteEnabled": false
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Namespace": {
+								"DatabaseName": "Database 2"
+							},
+							"Name": "AccountingFramework",
+							"Description": "There are many different frameworks of accounting standards in use internationally. Each of these frameworks consists of a set of standards / rules / interpretations. Each accounting framework is controlled by their own governing body.\n\nEx:\nGAAP\nUS GAAP\nIFRS\nFERC",
+							"EntityType": "TABLE",
+							"TableType": "EXTERNAL",
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"StorageDescriptor": {
+								"Columns": [
+									{
+										"Name": "AccountingFrameworkId",
+										"Description": "The unique identifier of an Accounting Framework.",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "AccountingFramework.cdm.json/AccountingFramework",
+											"Name": "AccountingFrameworkId"
+										}
+									},
+									{
+										"Name": "AccountingFrameworkName",
+										"Description": "The name of an Accounting Framework.",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Length": 128,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "AccountingFramework.cdm.json/AccountingFramework",
+											"Name": "AccountingFrameworkName"
+										}
+									},
+									{
+										"Name": "AccountingFrameworkDescription",
+										"Description": "The description of an Accounting Framework.",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Length": 512,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "AccountingFramework.cdm.json/AccountingFramework",
+											"Name": "AccountingFrameworkDescription"
+										}
+									},
+									{
+										"Name": "GoverningPartyId",
+										"Description": "The unique identifier of a Party.",
+										"OriginDataTypeName": {
+											"TypeName": "long",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Properties": {
+												"HIVE_TYPE_STRING": "long"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "AccountingFramework.cdm.json/AccountingFramework",
+											"Name": "GoverningPartyId"
+										}
+									}
+								],
+								"Format": {
+									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+									"FormatType": "csv",
+									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+									"Properties": {
+										"path": "abfss://default@hozhao1111gen2.dfs.core.windows.net/Database 2/AccountingFramework",
+										"delimiter": ",",
+										"multiLine": "false",
+										"firstRowAsHeader": "false",
+										"serialization.format": "1",
+										"escape": "\\",
+										"quote": "\"",
+										"FormatTypeSetToDatabaseDefault": true,
+										"header": "false"
+									}
+								},
+								"Source": {
+									"Provider": "ADLS",
+									"Location": "abfss://default@hozhao1111gen2.dfs.core.windows.net/Database 2/AccountingFramework",
+									"Properties": {
+										"LinkedServiceName": "yanjuntest1207-WorkspaceDefaultStorage",
+										"LocationSetToDatabaseDefault": true
+									}
+								},
+								"Properties": {
+									"textinputformat.record.delimiter": ",",
+									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+									"derivedModelAttributeInfo": "{\"attributeReferences\":{\"AccountingFrameworkId\":{\"entity\":\"AccountingFramework.cdm.json/AccountingFramework\",\"name\":\"AccountingFrameworkId\"},\"AccountingFrameworkName\":{\"entity\":\"AccountingFramework.cdm.json/AccountingFramework\",\"name\":\"AccountingFrameworkName\"},\"AccountingFrameworkDescription\":{\"entity\":\"AccountingFramework.cdm.json/AccountingFramework\",\"name\":\"AccountingFrameworkDescription\"},\"GoverningPartyId\":{\"entity\":\"AccountingFramework.cdm.json/AccountingFramework\",\"name\":\"GoverningPartyId\"}}}"
+								},
+								"Compressed": false,
+								"IsStoredAsSubdirectories": false
+							},
+							"Properties": {
+								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"AccountingFramework\",\"path\":\"AccountingFramework.cdm.json/AccountingFramework\"},\"description\":\"There are many different frameworks of accounting standards in use internationally. Each of these frameworks consists of a set of standards / rules / interpretations. Each accounting framework is controlled by their own governing body.\\n\\nEx:\\nGAAP\\nUS GAAP\\nIFRS\\nFERC\",\"primaryKey\":[\"AccountingFrameworkId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"AccountingFrameworkId\",\"attributeReference\":{\"entity\":\"AccountingFramework.cdm.json/AccountingFramework\",\"name\":\"AccountingFrameworkId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"AccountingFrameworkName\",\"attributeReference\":{\"entity\":\"AccountingFramework.cdm.json/AccountingFramework\",\"name\":\"AccountingFrameworkName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"AccountingFrameworkDescription\",\"attributeReference\":{\"entity\":\"AccountingFramework.cdm.json/AccountingFramework\",\"name\":\"AccountingFrameworkDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512},{\"type\":\"Existing\",\"name\":\"GoverningPartyId\",\"attributeReference\":{\"entity\":\"AccountingFramework.cdm.json/AccountingFramework\",\"name\":\"GoverningPartyId\"},\"dataType\":\"long\"}]}}}",
+								"Description": "There are many different frameworks of accounting standards in use internationally. Each of these frameworks consists of a set of standards / rules / interpretations. Each accounting framework is controlled by their own governing body.\n\nEx:\nGAAP\nUS GAAP\nIFRS\nFERC",
+								"DisplayFolderInfo": "{\"name\":\"Accounting & Financial Reporting\",\"colorCode\":\"#0078D4\"}",
+								"PrimaryKeys": "AccountingFrameworkId",
+								"spark.sql.sources.provider": "csv"
+							},
+							"Retention": 0,
+							"Temporary": false,
+							"IsRewriteEnabled": false
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Namespace": {
+								"DatabaseName": "Database 2"
+							},
+							"Name": "AggregateProductAllocations",
+							"Description": "The total Product allocations (summary) expressed in terms of unit quantity allocated and allocation valuation based on selling price for the associated date.\n\nAllocations are the planned inventories to meet an anticipated demand.   In this case allocations are summarized for a product across all customers.\n\nNote:\nDrill-down is provided at the Order level.",
+							"EntityType": "TABLE",
+							"TableType": "EXTERNAL",
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"StorageDescriptor": {
+								"Columns": [
+									{
+										"Name": "ProductId",
+										"Description": "The unique identifier of a Product.",
+										"OriginDataTypeName": {
+											"TypeName": "long",
+											"IsComplexType": false,
+											"IsNullable": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "long"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "AggregateProductAllocations.cdm.json/AggregateProductAllocations",
+											"Name": "ProductId"
+										}
+									},
+									{
+										"Name": "Timestamp",
+										"Description": "The timestamp that the associated information is reported, recorded or effective as-of.",
+										"OriginDataTypeName": {
+											"TypeName": "timestamp",
+											"IsComplexType": false,
+											"IsNullable": false,
+											"Properties": {
+												"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
+												"HIVE_TYPE_STRING": "timestamp"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "AggregateProductAllocations.cdm.json/AggregateProductAllocations",
+											"Name": "Timestamp"
+										}
+									},
+									{
+										"Name": "TotalAllocationsUnitsQuantity",
+										"Description": "The total number of units allocated for the associated date.",
+										"OriginDataTypeName": {
+											"TypeName": "decimal",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Precision": 18,
+											"Scale": 2,
+											"Properties": {
+												"HIVE_TYPE_STRING": "decimal"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "AggregateProductAllocations.cdm.json/AggregateProductAllocations",
+											"Name": "TotalAllocationsUnitsQuantity"
+										}
+									},
+									{
+										"Name": "TotalAllocationsProductUnitsValuationAmount",
+										"Description": "The total value of units allocated for the associated date.",
+										"OriginDataTypeName": {
+											"TypeName": "decimal",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Precision": 18,
+											"Scale": 2,
+											"Properties": {
+												"HIVE_TYPE_STRING": "decimal"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "AggregateProductAllocations.cdm.json/AggregateProductAllocations",
+											"Name": "TotalAllocationsProductUnitsValuationAmount"
+										}
+									},
+									{
+										"Name": "IsoCurrencyCode",
+										"Description": "The ISO 4217 currency code.",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Length": 3,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "AggregateProductAllocations.cdm.json/AggregateProductAllocations",
+											"Name": "IsoCurrencyCode"
+										}
+									}
+								],
+								"Format": {
+									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+									"FormatType": "csv",
+									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+									"Properties": {
+										"path": "abfss://default@hozhao1111gen2.dfs.core.windows.net/Database 2/AggregateProductAllocations",
+										"delimiter": ",",
+										"multiLine": "false",
+										"firstRowAsHeader": "false",
+										"serialization.format": "1",
+										"escape": "\\",
+										"quote": "\"",
+										"FormatTypeSetToDatabaseDefault": true,
+										"header": "false"
+									}
+								},
+								"Source": {
+									"Provider": "ADLS",
+									"Location": "abfss://default@hozhao1111gen2.dfs.core.windows.net/Database 2/AggregateProductAllocations",
+									"Properties": {
+										"LinkedServiceName": "yanjuntest1207-WorkspaceDefaultStorage",
+										"LocationSetToDatabaseDefault": true
+									}
+								},
+								"Properties": {
+									"textinputformat.record.delimiter": ",",
+									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+									"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ProductId\":{\"entity\":\"AggregateProductAllocations.cdm.json/AggregateProductAllocations\",\"name\":\"ProductId\"},\"Timestamp\":{\"entity\":\"AggregateProductAllocations.cdm.json/AggregateProductAllocations\",\"name\":\"Timestamp\"},\"TotalAllocationsUnitsQuantity\":{\"entity\":\"AggregateProductAllocations.cdm.json/AggregateProductAllocations\",\"name\":\"TotalAllocationsUnitsQuantity\"},\"TotalAllocationsProductUnitsValuationAmount\":{\"entity\":\"AggregateProductAllocations.cdm.json/AggregateProductAllocations\",\"name\":\"TotalAllocationsProductUnitsValuationAmount\"},\"IsoCurrencyCode\":{\"entity\":\"AggregateProductAllocations.cdm.json/AggregateProductAllocations\",\"name\":\"IsoCurrencyCode\"}}}"
+								},
+								"Compressed": false,
+								"IsStoredAsSubdirectories": false
+							},
+							"Properties": {
+								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"AggregateProductAllocations\",\"path\":\"AggregateProductAllocations.cdm.json/AggregateProductAllocations\"},\"description\":\"The total Product allocations (summary) expressed in terms of unit quantity allocated and allocation valuation based on selling price for the associated date.\\n\\nAllocations are the planned inventories to meet an anticipated demand.   In this case allocations are summarized for a product across all customers.\\n\\nNote:\\nDrill-down is provided at the Order level.\",\"primaryKey\":[\"ProductId\",\"Timestamp\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"ProductId\",\"attributeReference\":{\"entity\":\"AggregateProductAllocations.cdm.json/AggregateProductAllocations\",\"name\":\"ProductId\"},\"dataType\":\"long\"},{\"type\":\"Existing\",\"name\":\"Timestamp\",\"attributeReference\":{\"entity\":\"AggregateProductAllocations.cdm.json/AggregateProductAllocations\",\"name\":\"Timestamp\"},\"dataType\":\"timestamp\",\"timestampFormat\":\"YYYY-MM-DD HH:MM:SS.fffffffff\"},{\"type\":\"Existing\",\"name\":\"TotalAllocationsUnitsQuantity\",\"attributeReference\":{\"entity\":\"AggregateProductAllocations.cdm.json/AggregateProductAllocations\",\"name\":\"TotalAllocationsUnitsQuantity\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"scale\":2},{\"type\":\"Existing\",\"name\":\"TotalAllocationsProductUnitsValuationAmount\",\"attributeReference\":{\"entity\":\"AggregateProductAllocations.cdm.json/AggregateProductAllocations\",\"name\":\"TotalAllocationsProductUnitsValuationAmount\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"scale\":2},{\"type\":\"Existing\",\"name\":\"IsoCurrencyCode\",\"attributeReference\":{\"entity\":\"AggregateProductAllocations.cdm.json/AggregateProductAllocations\",\"name\":\"IsoCurrencyCode\"},\"dataType\":\"string\",\"dataTypeLength\":3}]}}}",
+								"Description": "The total Product allocations (summary) expressed in terms of unit quantity allocated and allocation valuation based on selling price for the associated date.\n\nAllocations are the planned inventories to meet an anticipated demand.   In this case allocations are summarized for a product across all customers.\n\nNote:\nDrill-down is provided at the Order level.",
+								"DisplayFolderInfo": "{\"name\":\"BBB\",\"colorCode\":\"#00188F\"}",
+								"PrimaryKeys": "ProductId,Timestamp",
+								"spark.sql.sources.provider": "csv"
+							},
+							"Retention": 0,
+							"Temporary": false,
+							"IsRewriteEnabled": false
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Namespace": {
+								"DatabaseName": "Database 2"
+							},
+							"Name": "AggregateProductBacklog",
+							"Description": "The total Product backlog (summary) expressed in terms of unit quantity and backlog valuation.\n\nBacklog represents products sold to customers that cannot be invoiced because the product is not available in inventory or for delivery to the customer.   In this case backlog are summarized for a product across all customers.\n\nNote:\nDrill-down is provided at the Order level.",
+							"EntityType": "TABLE",
+							"TableType": "EXTERNAL",
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"StorageDescriptor": {
+								"Columns": [
+									{
+										"Name": "ProductId",
+										"Description": "The unique identifier of a Product.",
+										"OriginDataTypeName": {
+											"TypeName": "long",
+											"IsComplexType": false,
+											"IsNullable": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "long"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "AggregateProductBacklog.cdm.json/AggregateProductBacklog",
+											"Name": "ProductId"
+										}
+									},
+									{
+										"Name": "Timestamp",
+										"Description": "The timestamp that the associated information is reported, recorded or effective as-of.",
+										"OriginDataTypeName": {
+											"TypeName": "timestamp",
+											"IsComplexType": false,
+											"IsNullable": false,
+											"Properties": {
+												"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
+												"HIVE_TYPE_STRING": "timestamp"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "AggregateProductBacklog.cdm.json/AggregateProductBacklog",
+											"Name": "Timestamp"
+										}
+									},
+									{
+										"Name": "TotalBacklogProductUnitsQuantity",
+										"Description": "The total quantity of Product on backlog for the associated date.",
+										"OriginDataTypeName": {
+											"TypeName": "decimal",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Precision": 18,
+											"Scale": 2,
+											"Properties": {
+												"HIVE_TYPE_STRING": "decimal"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "AggregateProductBacklog.cdm.json/AggregateProductBacklog",
+											"Name": "TotalBacklogProductUnitsQuantity"
+										}
+									},
+									{
+										"Name": "TotalBacklogProductUnitsValuationAmount",
+										"Description": "The total valuation of Product on backlog during the associated period and valued at actual invoiced price.",
+										"OriginDataTypeName": {
+											"TypeName": "decimal",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Precision": 18,
+											"Scale": 2,
+											"Properties": {
+												"HIVE_TYPE_STRING": "decimal"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "AggregateProductBacklog.cdm.json/AggregateProductBacklog",
+											"Name": "TotalBacklogProductUnitsValuationAmount"
+										}
+									},
+									{
+										"Name": "IsoCurrencyCode",
+										"Description": "The ISO 4217 currency code.",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Length": 3,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "AggregateProductBacklog.cdm.json/AggregateProductBacklog",
+											"Name": "IsoCurrencyCode"
+										}
+									}
+								],
+								"Format": {
+									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+									"FormatType": "csv",
+									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+									"Properties": {
+										"path": "abfss://default@hozhao1111gen2.dfs.core.windows.net/Database 2/AggregateProductBacklog",
+										"delimiter": ",",
+										"multiLine": "false",
+										"firstRowAsHeader": "false",
+										"serialization.format": "1",
+										"escape": "\\",
+										"quote": "\"",
+										"FormatTypeSetToDatabaseDefault": true,
+										"header": "false"
+									}
+								},
+								"Source": {
+									"Provider": "ADLS",
+									"Location": "abfss://default@hozhao1111gen2.dfs.core.windows.net/Database 2/AggregateProductBacklog",
+									"Properties": {
+										"LinkedServiceName": "yanjuntest1207-WorkspaceDefaultStorage",
+										"LocationSetToDatabaseDefault": true
+									}
+								},
+								"Properties": {
+									"textinputformat.record.delimiter": ",",
+									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+									"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ProductId\":{\"entity\":\"AggregateProductBacklog.cdm.json/AggregateProductBacklog\",\"name\":\"ProductId\"},\"Timestamp\":{\"entity\":\"AggregateProductBacklog.cdm.json/AggregateProductBacklog\",\"name\":\"Timestamp\"},\"TotalBacklogProductUnitsQuantity\":{\"entity\":\"AggregateProductBacklog.cdm.json/AggregateProductBacklog\",\"name\":\"TotalBacklogProductUnitsQuantity\"},\"TotalBacklogProductUnitsValuationAmount\":{\"entity\":\"AggregateProductBacklog.cdm.json/AggregateProductBacklog\",\"name\":\"TotalBacklogProductUnitsValuationAmount\"},\"IsoCurrencyCode\":{\"entity\":\"AggregateProductBacklog.cdm.json/AggregateProductBacklog\",\"name\":\"IsoCurrencyCode\"}}}"
+								},
+								"Compressed": false,
+								"IsStoredAsSubdirectories": false
+							},
+							"Properties": {
+								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"AggregateProductBacklog\",\"path\":\"AggregateProductBacklog.cdm.json/AggregateProductBacklog\"},\"description\":\"The total Product backlog (summary) expressed in terms of unit quantity and backlog valuation.\\n\\nBacklog represents products sold to customers that cannot be invoiced because the product is not available in inventory or for delivery to the customer.   In this case backlog are summarized for a product across all customers.\\n\\nNote:\\nDrill-down is provided at the Order level.\",\"primaryKey\":[\"ProductId\",\"Timestamp\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"ProductId\",\"attributeReference\":{\"entity\":\"AggregateProductBacklog.cdm.json/AggregateProductBacklog\",\"name\":\"ProductId\"},\"dataType\":\"long\"},{\"type\":\"Existing\",\"name\":\"Timestamp\",\"attributeReference\":{\"entity\":\"AggregateProductBacklog.cdm.json/AggregateProductBacklog\",\"name\":\"Timestamp\"},\"dataType\":\"timestamp\",\"timestampFormat\":\"YYYY-MM-DD HH:MM:SS.fffffffff\"},{\"type\":\"Existing\",\"name\":\"TotalBacklogProductUnitsQuantity\",\"attributeReference\":{\"entity\":\"AggregateProductBacklog.cdm.json/AggregateProductBacklog\",\"name\":\"TotalBacklogProductUnitsQuantity\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"scale\":2},{\"type\":\"Existing\",\"name\":\"TotalBacklogProductUnitsValuationAmount\",\"attributeReference\":{\"entity\":\"AggregateProductBacklog.cdm.json/AggregateProductBacklog\",\"name\":\"TotalBacklogProductUnitsValuationAmount\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"scale\":2},{\"type\":\"Existing\",\"name\":\"IsoCurrencyCode\",\"attributeReference\":{\"entity\":\"AggregateProductBacklog.cdm.json/AggregateProductBacklog\",\"name\":\"IsoCurrencyCode\"},\"dataType\":\"string\",\"dataTypeLength\":3}]}}}",
+								"Description": "The total Product backlog (summary) expressed in terms of unit quantity and backlog valuation.\n\nBacklog represents products sold to customers that cannot be invoiced because the product is not available in inventory or for delivery to the customer.   In this case backlog are summarized for a product across all customers.\n\nNote:\nDrill-down is provided at the Order level.",
+								"DisplayFolderInfo": "{\"name\":\"BBB\",\"colorCode\":\"#00188F\"}",
+								"PrimaryKeys": "ProductId,Timestamp",
+								"spark.sql.sources.provider": "csv"
+							},
+							"Retention": 0,
+							"Temporary": false,
+							"IsRewriteEnabled": false
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Namespace": {
+								"DatabaseName": "Database 2"
+							},
+							"Name": "BudgetPlanningCycleType",
+							"Description": "A categorization of budget planning cycles.\n\nEx:\n- Annual\n- 3-year\n- 5-year\n- Quarterly",
+							"EntityType": "TABLE",
+							"TableType": "EXTERNAL",
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"StorageDescriptor": {
+								"Columns": [
+									{
+										"Name": "BudgetPlanningCycleTypeId",
+										"Description": "The unique identifier of a Budget Planning Cycle Type.",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "BudgetPlanningCycleType.cdm.json/BudgetPlanningCycleType",
+											"Name": "BudgetPlanningCycleTypeId"
+										}
+									},
+									{
+										"Name": "BudgetPlanningCycleTypeName",
+										"Description": "The unique identifier of a Budget Planning Cycle Type Name.",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Length": 128,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "BudgetPlanningCycleType.cdm.json/BudgetPlanningCycleType",
+											"Name": "BudgetPlanningCycleTypeName"
+										}
+									},
+									{
+										"Name": "BudgetPlanningCycleTypeDescription",
+										"Description": "The unique identifier of a Budget Planning Cycle Type Description.",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Length": 512,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "BudgetPlanningCycleType.cdm.json/BudgetPlanningCycleType",
+											"Name": "BudgetPlanningCycleTypeDescription"
+										}
+									}
+								],
+								"Format": {
+									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+									"FormatType": "csv",
+									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+									"Properties": {
+										"path": "abfss://default@hozhao1111gen2.dfs.core.windows.net/Database 2/BudgetPlanningCycleType",
+										"delimiter": ",",
+										"multiLine": "false",
+										"firstRowAsHeader": "false",
+										"serialization.format": "1",
+										"escape": "\\",
+										"quote": "\"",
+										"FormatTypeSetToDatabaseDefault": true,
+										"header": "false"
+									}
+								},
+								"Source": {
+									"Provider": "ADLS",
+									"Location": "abfss://default@hozhao1111gen2.dfs.core.windows.net/Database 2/BudgetPlanningCycleType",
+									"Properties": {
+										"LinkedServiceName": "yanjuntest1207-WorkspaceDefaultStorage",
+										"LocationSetToDatabaseDefault": true
+									}
+								},
+								"Properties": {
+									"textinputformat.record.delimiter": ",",
+									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+									"derivedModelAttributeInfo": "{\"attributeReferences\":{\"BudgetPlanningCycleTypeId\":{\"entity\":\"BudgetPlanningCycleType.cdm.json/BudgetPlanningCycleType\",\"name\":\"BudgetPlanningCycleTypeId\"},\"BudgetPlanningCycleTypeName\":{\"entity\":\"BudgetPlanningCycleType.cdm.json/BudgetPlanningCycleType\",\"name\":\"BudgetPlanningCycleTypeName\"},\"BudgetPlanningCycleTypeDescription\":{\"entity\":\"BudgetPlanningCycleType.cdm.json/BudgetPlanningCycleType\",\"name\":\"BudgetPlanningCycleTypeDescription\"}}}"
+								},
+								"Compressed": false,
+								"IsStoredAsSubdirectories": false
+							},
+							"Properties": {
+								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"BudgetPlanningCycleType\",\"path\":\"BudgetPlanningCycleType.cdm.json/BudgetPlanningCycleType\"},\"description\":\"A categorization of budget planning cycles.\\n\\nEx:\\n- Annual\\n- 3-year\\n- 5-year\\n- Quarterly\",\"primaryKey\":[\"BudgetPlanningCycleTypeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"BudgetPlanningCycleTypeId\",\"attributeReference\":{\"entity\":\"BudgetPlanningCycleType.cdm.json/BudgetPlanningCycleType\",\"name\":\"BudgetPlanningCycleTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"BudgetPlanningCycleTypeName\",\"attributeReference\":{\"entity\":\"BudgetPlanningCycleType.cdm.json/BudgetPlanningCycleType\",\"name\":\"BudgetPlanningCycleTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"BudgetPlanningCycleTypeDescription\",\"attributeReference\":{\"entity\":\"BudgetPlanningCycleType.cdm.json/BudgetPlanningCycleType\",\"name\":\"BudgetPlanningCycleTypeDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512}]}}}",
+								"Description": "A categorization of budget planning cycles.\n\nEx:\n- Annual\n- 3-year\n- 5-year\n- Quarterly",
+								"DisplayFolderInfo": "{\"name\":\"Budget & Forecasting\",\"colorCode\":\"#00A2AD\"}",
+								"PrimaryKeys": "BudgetPlanningCycleTypeId",
+								"spark.sql.sources.provider": "csv"
+							},
+							"Retention": 0,
+							"Temporary": false,
+							"IsRewriteEnabled": false
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Namespace": {
+								"DatabaseName": "Database 2"
+							},
+							"Name": "BudgetedIncomeRevenueItem",
+							"Description": "The revenue items accounted for in the budgeted income section of the budgeted income statement.",
+							"EntityType": "TABLE",
+							"TableType": "EXTERNAL",
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"StorageDescriptor": {
+								"Columns": [
+									{
+										"Name": "BudgetedIncomeStatementId",
+										"Description": "The unique identifier of a Budgeted Income Statement.",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "BudgetedIncomeRevenueItem.cdm.json/BudgetedIncomeRevenueItem",
+											"Name": "BudgetedIncomeStatementId"
+										}
+									},
+									{
+										"Name": "BudgetedIncomeStatementVersionId",
+										"Description": "The unique identifier of a Budgeted Income Statement Version.",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "BudgetedIncomeRevenueItem.cdm.json/BudgetedIncomeRevenueItem",
+											"Name": "BudgetedIncomeStatementVersionId"
+										}
+									},
+									{
+										"Name": "RevenueItemId",
+										"Description": "The unique identifier of a revenue item.",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "BudgetedIncomeRevenueItem.cdm.json/BudgetedIncomeRevenueItem",
+											"Name": "RevenueItemId"
+										}
+									},
+									{
+										"Name": "BudgetedRevenueItemAmount",
+										"Description": "The budgeted amount of the associated revenue item applied to the budgeted income statement.",
+										"OriginDataTypeName": {
+											"TypeName": "decimal",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Precision": 18,
+											"Scale": 2,
+											"Properties": {
+												"HIVE_TYPE_STRING": "decimal"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "BudgetedIncomeRevenueItem.cdm.json/BudgetedIncomeRevenueItem",
+											"Name": "BudgetedRevenueItemAmount"
+										}
+									},
+									{
+										"Name": "ActualRevenueItemAmount",
+										"Description": "The actual amount of the associated revenue item applied to the budgeted income statement.",
+										"OriginDataTypeName": {
+											"TypeName": "decimal",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Precision": 18,
+											"Scale": 2,
+											"Properties": {
+												"HIVE_TYPE_STRING": "decimal"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "BudgetedIncomeRevenueItem.cdm.json/BudgetedIncomeRevenueItem",
+											"Name": "ActualRevenueItemAmount"
+										}
+									}
+								],
+								"Format": {
+									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+									"FormatType": "csv",
+									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+									"Properties": {
+										"path": "abfss://default@hozhao1111gen2.dfs.core.windows.net/Database 2/BudgetedIncomeRevenueItem",
+										"delimiter": ",",
+										"multiLine": "false",
+										"firstRowAsHeader": "false",
+										"serialization.format": "1",
+										"escape": "\\",
+										"quote": "\"",
+										"FormatTypeSetToDatabaseDefault": true,
+										"header": "false"
+									}
+								},
+								"Source": {
+									"Provider": "ADLS",
+									"Location": "abfss://default@hozhao1111gen2.dfs.core.windows.net/Database 2/BudgetedIncomeRevenueItem",
+									"Properties": {
+										"LinkedServiceName": "yanjuntest1207-WorkspaceDefaultStorage",
+										"LocationSetToDatabaseDefault": true
+									}
+								},
+								"Properties": {
+									"textinputformat.record.delimiter": ",",
+									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+									"derivedModelAttributeInfo": "{\"attributeReferences\":{\"BudgetedIncomeStatementId\":{\"entity\":\"BudgetedIncomeRevenueItem.cdm.json/BudgetedIncomeRevenueItem\",\"name\":\"BudgetedIncomeStatementId\"},\"BudgetedIncomeStatementVersionId\":{\"entity\":\"BudgetedIncomeRevenueItem.cdm.json/BudgetedIncomeRevenueItem\",\"name\":\"BudgetedIncomeStatementVersionId\"},\"RevenueItemId\":{\"entity\":\"BudgetedIncomeRevenueItem.cdm.json/BudgetedIncomeRevenueItem\",\"name\":\"RevenueItemId\"},\"BudgetedRevenueItemAmount\":{\"entity\":\"BudgetedIncomeRevenueItem.cdm.json/BudgetedIncomeRevenueItem\",\"name\":\"BudgetedRevenueItemAmount\"},\"ActualRevenueItemAmount\":{\"entity\":\"BudgetedIncomeRevenueItem.cdm.json/BudgetedIncomeRevenueItem\",\"name\":\"ActualRevenueItemAmount\"}}}"
+								},
+								"Compressed": false,
+								"IsStoredAsSubdirectories": false
+							},
+							"Properties": {
+								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"BudgetedIncomeRevenueItem\",\"path\":\"BudgetedIncomeRevenueItem.cdm.json/BudgetedIncomeRevenueItem\"},\"description\":\"The revenue items accounted for in the budgeted income section of the budgeted income statement.\",\"primaryKey\":[\"BudgetedIncomeStatementId\",\"BudgetedIncomeStatementVersionId\",\"RevenueItemId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"BudgetedIncomeStatementId\",\"attributeReference\":{\"entity\":\"BudgetedIncomeRevenueItem.cdm.json/BudgetedIncomeRevenueItem\",\"name\":\"BudgetedIncomeStatementId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"BudgetedIncomeStatementVersionId\",\"attributeReference\":{\"entity\":\"BudgetedIncomeRevenueItem.cdm.json/BudgetedIncomeRevenueItem\",\"name\":\"BudgetedIncomeStatementVersionId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"RevenueItemId\",\"attributeReference\":{\"entity\":\"BudgetedIncomeRevenueItem.cdm.json/BudgetedIncomeRevenueItem\",\"name\":\"RevenueItemId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"BudgetedRevenueItemAmount\",\"attributeReference\":{\"entity\":\"BudgetedIncomeRevenueItem.cdm.json/BudgetedIncomeRevenueItem\",\"name\":\"BudgetedRevenueItemAmount\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"scale\":2},{\"type\":\"Existing\",\"name\":\"ActualRevenueItemAmount\",\"attributeReference\":{\"entity\":\"BudgetedIncomeRevenueItem.cdm.json/BudgetedIncomeRevenueItem\",\"name\":\"ActualRevenueItemAmount\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"scale\":2}]}}}",
+								"Description": "The revenue items accounted for in the budgeted income section of the budgeted income statement.",
+								"DisplayFolderInfo": "{\"name\":\"Budget & Forecasting\",\"colorCode\":\"#00A2AD\"}",
+								"PrimaryKeys": "BudgetedIncomeStatementId,BudgetedIncomeStatementVersionId,RevenueItemId",
+								"spark.sql.sources.provider": "csv"
+							},
+							"Retention": 0,
+							"Temporary": false,
+							"IsRewriteEnabled": false
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					}
+				]
+			},
+			"dependsOn": []
+		}
+	]
+}

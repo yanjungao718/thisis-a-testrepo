@@ -1,0 +1,93 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "yanjuntest1207"
+		},
+		"AzureBlobStorage_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage1129_connectionString": {
+			"value": ""
+		},
+		"AzureDataExplorer_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureDataExplorer1129_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureDataLakeStorage_accountKey": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1129_accountKey": {
+			"value": ""
+		},
+		"CosmosDb_connectionString": {
+			"value": ""
+		},
+		"CosmosDb1129_connectionString": {
+			"value": ""
+		},
+		"CosmosDbMongoDbApi_connectionString": {
+			"value": ""
+		},
+		"CosmosDbMongoDbApi1129_connectionString": {
+			"value": ""
+		},
+		"bdbj20211129ws-WorkspaceDefaultSqlServer_connectionString": {
+			"value": ""
+		},
+		"yanjuntest1207-WorkspaceDefaultSqlServer_connectionString": {
+			"value": ""
+		},
+		"yanjuntestws-WorkspaceDefaultSqlServer_connectionString": {
+			"value": ""
+		},
+		"AzureDataExplorer_properties_typeProperties_tenant": {
+			"value": "72bfe100-a448-4f25-af39-5b36c7bb62ef"
+		},
+		"AzureDataExplorer_properties_typeProperties_servicePrincipalId": {
+			"value": "8f6caa4c-31d9-4562-8084-bcbf13bb0068"
+		},
+		"AzureDataExplorer_properties_typeProperties_database": {
+			"value": "bdbjkustodatabaseqingtest"
+		},
+		"AzureDataExplorer1129_properties_typeProperties_tenant": {
+			"value": "72bfe100-a448-4f25-af39-5b36c7bb62ef"
+		},
+		"AzureDataExplorer1129_properties_typeProperties_servicePrincipalId": {
+			"value": "8f6caa4c-31d9-4562-8084-bcbf13bb0068"
+		},
+		"AzureDataExplorer1129_properties_typeProperties_database": {
+			"value": "bdbjkustodatabaseqingtest"
+		},
+		"AzureDataLakeStorage_properties_typeProperties_url": {
+			"value": "https://bdbjgen2qingtest.dfs.core.windows.net"
+		},
+		"AzureDataLakeStorage1129_properties_typeProperties_url": {
+			"value": "https://bdbjgen2qingtest.dfs.core.windows.net"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://hditoolingkeyvault.vault.azure.net/"
+		},
+		"CosmosDbMongoDbApi_properties_typeProperties_database": {
+			"value": "Test0510"
+		},
+		"CosmosDbMongoDbApi1129_properties_typeProperties_database": {
+			"value": "mongodbapidatabaseqingtest"
+		},
+		"bdbj20211129ws-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://honghaigen2.dfs.core.windows.net"
+		},
+		"bing-covid-19-data_sasUri": {
+			"value": ""
+		},
+		"yanjuntest1207-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://hozhao1111gen2.dfs.core.windows.net"
+		},
+		"yanjuntestws-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://hozhao1111gen2.dfs.core.windows.net"
+		}
+	}
+}
