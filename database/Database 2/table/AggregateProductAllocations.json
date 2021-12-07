@@ -1,0 +1,148 @@
+{
+	"name": "AggregateProductAllocations",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database 2"
+		},
+		"Name": "AggregateProductAllocations",
+		"Description": "The total Product allocations (summary) expressed in terms of unit quantity allocated and allocation valuation based on selling price for the associated date.\n\nAllocations are the planned inventories to meet an anticipated demand.   In this case allocations are summarized for a product across all customers.\n\nNote:\nDrill-down is provided at the Order level.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "ProductId",
+					"Description": "The unique identifier of a Product.",
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductAllocations.cdm.json/AggregateProductAllocations",
+						"Name": "ProductId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "Timestamp",
+					"Description": "The timestamp that the associated information is reported, recorded or effective as-of.",
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductAllocations.cdm.json/AggregateProductAllocations",
+						"Name": "Timestamp"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "timestamp",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
+							"HIVE_TYPE_STRING": "timestamp"
+						}
+					}
+				},
+				{
+					"Name": "TotalAllocationsUnitsQuantity",
+					"Description": "The total number of units allocated for the associated date.",
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductAllocations.cdm.json/AggregateProductAllocations",
+						"Name": "TotalAllocationsUnitsQuantity"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "TotalAllocationsProductUnitsValuationAmount",
+					"Description": "The total value of units allocated for the associated date.",
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductAllocations.cdm.json/AggregateProductAllocations",
+						"Name": "TotalAllocationsProductUnitsValuationAmount"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "IsoCurrencyCode",
+					"Description": "The ISO 4217 currency code.",
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductAllocations.cdm.json/AggregateProductAllocations",
+						"Name": "IsoCurrencyCode"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 3,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://default@hozhao1111gen2.dfs.core.windows.net/Database 2/AggregateProductAllocations",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://default@hozhao1111gen2.dfs.core.windows.net/Database 2/AggregateProductAllocations",
+				"Properties": {
+					"LinkedServiceName": "yanjuntest1207-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ProductId\":{\"entity\":\"AggregateProductAllocations.cdm.json/AggregateProductAllocations\",\"name\":\"ProductId\"},\"Timestamp\":{\"entity\":\"AggregateProductAllocations.cdm.json/AggregateProductAllocations\",\"name\":\"Timestamp\"},\"TotalAllocationsUnitsQuantity\":{\"entity\":\"AggregateProductAllocations.cdm.json/AggregateProductAllocations\",\"name\":\"TotalAllocationsUnitsQuantity\"},\"TotalAllocationsProductUnitsValuationAmount\":{\"entity\":\"AggregateProductAllocations.cdm.json/AggregateProductAllocations\",\"name\":\"TotalAllocationsProductUnitsValuationAmount\"},\"IsoCurrencyCode\":{\"entity\":\"AggregateProductAllocations.cdm.json/AggregateProductAllocations\",\"name\":\"IsoCurrencyCode\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"AggregateProductAllocations\",\"path\":\"AggregateProductAllocations.cdm.json/AggregateProductAllocations\"},\"description\":\"The total Product allocations (summary) expressed in terms of unit quantity allocated and allocation valuation based on selling price for the associated date.\\n\\nAllocations are the planned inventories to meet an anticipated demand.   In this case allocations are summarized for a product across all customers.\\n\\nNote:\\nDrill-down is provided at the Order level.\",\"primaryKey\":[\"ProductId\",\"Timestamp\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"ProductId\",\"attributeReference\":{\"entity\":\"AggregateProductAllocations.cdm.json/AggregateProductAllocations\",\"name\":\"ProductId\"},\"dataType\":\"long\"},{\"type\":\"Existing\",\"name\":\"Timestamp\",\"attributeReference\":{\"entity\":\"AggregateProductAllocations.cdm.json/AggregateProductAllocations\",\"name\":\"Timestamp\"},\"dataType\":\"timestamp\",\"timestampFormat\":\"YYYY-MM-DD HH:MM:SS.fffffffff\"},{\"type\":\"Existing\",\"name\":\"TotalAllocationsUnitsQuantity\",\"attributeReference\":{\"entity\":\"AggregateProductAllocations.cdm.json/AggregateProductAllocations\",\"name\":\"TotalAllocationsUnitsQuantity\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"scale\":2},{\"type\":\"Existing\",\"name\":\"TotalAllocationsProductUnitsValuationAmount\",\"attributeReference\":{\"entity\":\"AggregateProductAllocations.cdm.json/AggregateProductAllocations\",\"name\":\"TotalAllocationsProductUnitsValuationAmount\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"scale\":2},{\"type\":\"Existing\",\"name\":\"IsoCurrencyCode\",\"attributeReference\":{\"entity\":\"AggregateProductAllocations.cdm.json/AggregateProductAllocations\",\"name\":\"IsoCurrencyCode\"},\"dataType\":\"string\",\"dataTypeLength\":3}]}}}",
+			"Description": "The total Product allocations (summary) expressed in terms of unit quantity allocated and allocation valuation based on selling price for the associated date.\n\nAllocations are the planned inventories to meet an anticipated demand.   In this case allocations are summarized for a product across all customers.\n\nNote:\nDrill-down is provided at the Order level.",
+			"DisplayFolderInfo": "{\"name\":\"BBB\",\"colorCode\":\"#00188F\"}",
+			"PrimaryKeys": "ProductId,Timestamp",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}
