@@ -1,0 +1,29 @@
+{
+	"name": "SourceDataset_o2a",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "yanjuncicdtestws-WorkspaceDefaultStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "copy_opendataset_to_spark_table.py",
+				"folderPath": "synapse/workspaces/bigdataqa211206ext/batchjobs/Spark job definition 1",
+				"fileSystem": "default"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "\tstart_date = parser.parse('2018-05-01 00:00:00')",
+				"type": "String"
+			}
+		]
+	}
+}
