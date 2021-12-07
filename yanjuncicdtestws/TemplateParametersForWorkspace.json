@@ -1,0 +1,15 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "yanjuncicdtestws"
+		},
+		"yanjuncicdtestws-WorkspaceDefaultSqlServer_connectionString": {
+			"value": ""
+		},
+		"yanjuncicdtestws-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://hozhao1206gen2.dfs.core.windows.net"
+		}
+	}
+}
