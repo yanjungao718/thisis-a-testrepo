@@ -1,8 +1,8 @@
 {
-	"name": "SQL script 2",
+	"name": "SQL script 5",
 	"properties": {
 		"content": {
-			"query": "select 1",
+			"query": "",
 			"metadata": {
 				"language": "sql"
 			},
