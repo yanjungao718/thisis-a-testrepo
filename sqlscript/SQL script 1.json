@@ -7,8 +7,8 @@
 				"language": "sql"
 			},
 			"currentConnection": {
-				"databaseName": "master",
-				"poolName": "Built-in"
+				"databaseName": "testsqlpool",
+				"poolName": "testsqlpool"
 			},
 			"resultLimit": 5000
 		},
