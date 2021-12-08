@@ -5,14 +5,8 @@
 		"workspaceName": {
 			"value": "yanjuntestws"
 		},
-		"yanjuncicdtestws-WorkspaceDefaultSqlServer_connectionString": {
-			"value": ""
-		},
 		"yanjuntestws-WorkspaceDefaultSqlServer_connectionString": {
 			"value": ""
-		},
-		"yanjuncicdtestws-WorkspaceDefaultStorage_properties_typeProperties_url": {
-			"value": "https://hozhao1206gen2.dfs.core.windows.net"
 		},
 		"yanjuntestws-WorkspaceDefaultStorage_properties_typeProperties_url": {
 			"value": "https://hozhao1111gen2.dfs.core.windows.net"

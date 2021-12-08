@@ -7,17 +7,9 @@
 			"metadata": "Workspace name",
 			"defaultValue": "yanjuntestws"
 		},
-		"yanjuncicdtestws-WorkspaceDefaultSqlServer_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'yanjuncicdtestws-WorkspaceDefaultSqlServer'"
-		},
 		"yanjuntestws-WorkspaceDefaultSqlServer_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'yanjuntestws-WorkspaceDefaultSqlServer'"
-		},
-		"yanjuncicdtestws-WorkspaceDefaultStorage_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://hozhao1206gen2.dfs.core.windows.net"
 		},
 		"yanjuntestws-WorkspaceDefaultStorage_properties_typeProperties_url": {
 			"type": "string",
@@ -29,203 +21,18 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('workspaceName'), '/CopyPipeline_o2a')]",
-			"type": "Microsoft.Synapse/workspaces/pipelines",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy_o2a",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [
-							{
-								"name": "Source",
-								"value": "default/synapse/workspaces/bigdataqa211206ext/batchjobs/Spark job definition 1/copy_opendataset_to_spark_table.py"
-							},
-							{
-								"name": "Destination",
-								"value": "default//test"
-							}
-						],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobFSReadSettings",
-									"recursive": true,
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings",
-									"skipLineCount": 8
-								}
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".txt"
-								}
-							},
-							"enableStaging": false,
-							"validateDataConsistency": false
-						},
-						"inputs": [
-							{
-								"referenceName": "SourceDataset_o2a",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "DestinationDataset_o2a",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('workspaceId'), '/datasets/SourceDataset_o2a')]",
-				"[concat(variables('workspaceId'), '/datasets/DestinationDataset_o2a')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('workspaceName'), '/DestinationDataset_o2a')]",
-			"type": "Microsoft.Synapse/workspaces/datasets",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "yanjuncicdtestws-WorkspaceDefaultStorage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "test",
-						"fileSystem": "default"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"quoteChar": "\""
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('workspaceId'), '/linkedServices/yanjuncicdtestws-WorkspaceDefaultStorage')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('workspaceName'), '/SourceDataset_o2a')]",
-			"type": "Microsoft.Synapse/workspaces/datasets",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "yanjuncicdtestws-WorkspaceDefaultStorage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "copy_opendataset_to_spark_table.py",
-						"folderPath": "synapse/workspaces/bigdataqa211206ext/batchjobs/Spark job definition 1",
-						"fileSystem": "default"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "\tstart_date = parser.parse('2018-05-01 00:00:00')",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('workspaceId'), '/linkedServices/yanjuncicdtestws-WorkspaceDefaultStorage')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('workspaceName'), '/PowerBIWorkspace1')]",
+			"name": "[concat(parameters('workspaceName'), '/PowerBIWorkspace_yanjuntestws')]",
 			"type": "Microsoft.Synapse/workspaces/linkedServices",
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
 				"annotations": [],
 				"type": "PowerBIWorkspace",
 				"typeProperties": {
-					"workspaceID": "28a0e6b5-f83b-47c9-aa9f-eaab6b8a2bf9",
+					"workspaceID": "83e87975-d6f2-4890-91fc-ac75d8f8eecf",
 					"tenantID": "72f988bf-86f1-41af-91ab-2d7cd011db47"
 				}
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('workspaceName'), '/yanjuncicdtestws-WorkspaceDefaultSqlServer')]",
-			"type": "Microsoft.Synapse/workspaces/linkedServices",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"parameters": {
-					"DBName": {
-						"type": "String"
-					}
-				},
-				"annotations": [],
-				"type": "AzureSqlDW",
-				"typeProperties": {
-					"connectionString": "[parameters('yanjuncicdtestws-WorkspaceDefaultSqlServer_connectionString')]"
-				},
-				"connectVia": {
-					"referenceName": "AutoResolveIntegrationRuntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('workspaceName'), '/yanjuncicdtestws-WorkspaceDefaultStorage')]",
-			"type": "Microsoft.Synapse/workspaces/linkedServices",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('yanjuncicdtestws-WorkspaceDefaultStorage_properties_typeProperties_url')]"
-				},
-				"connectVia": {
-					"referenceName": "AutoResolveIntegrationRuntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
-			]
 		},
 		{
 			"name": "[concat(parameters('workspaceName'), '/yanjuntestws-WorkspaceDefaultSqlServer')]",
@@ -320,6 +127,20 @@
 			},
 			"dependsOn": [],
 			"location": "eastus"
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/PowerBIWorkspace1')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"type": "PowerBIWorkspace",
+				"typeProperties": {
+					"workspaceID": "98fb6d6b-fda1-4e3b-bb20-63c9afce110b",
+					"tenantID": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+				}
+			},
+			"dependsOn": []
 		}
 	]
 }
