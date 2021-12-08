@@ -1,6 +1,10 @@
 {
 	"name": "SourceDataset_o2a",
 	"properties": {
+		"linkedServiceName": {
+			"referenceName": "yanjuntestws-WorkspaceDefaultStorage",
+			"type": "LinkedServiceReference"
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
