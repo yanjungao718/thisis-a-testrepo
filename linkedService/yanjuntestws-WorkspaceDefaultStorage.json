@@ -3,7 +3,7 @@
 	"type": "Microsoft.Synapse/workspaces/linkedservices",
 	"properties": {
 		"typeProperties": {
-			"url": "https://hozhao1111gen2.dfs.core.windows.net"
+			"url": "https://hozhaohdi0428gen2.dfs.core.windows.net"
 		},
 		"type": "AzureBlobFS",
 		"connectVia": {
