@@ -1,0 +1,68 @@
+{
+	"name": "Kusto_Notebook 3",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "989ebda4-e1f2-49c7-a0e8-235b35072747"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1"
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "python"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					"%%pyspark\n",
+					"\n",
+					"# Write a streaming Spark DataFrame to a Azure Data Explorer table\n",
+					"# Full Sample Code available at: https://github.com/Azure/azure-kusto-spark/blob/master/samples/src/main/python/SynapseSample.py\n",
+					"\n",
+					"dfStream = spark \\\n",
+					"  .readStream \\\n",
+					"  .schema([customSchema]) \\\n",
+					"  .csv([filename]) \\\n",
+					"\n",
+					"spark.conf.set(\"spark.sql.streaming.checkpointLocation\", \"/localWriteCheckpointFolder\")\n",
+					"spark.conf.set(\"spark.sql.codegen.wholeStage\", \"false\")\n",
+					"\n",
+					"kustoQ = dfStream \\\n",
+					"    .writeStream \\\n",
+					"    .format(\"com.microsoft.kusto.spark.synapse.datasink.KustoSynapseSinkProvider\") \\\n",
+					"    .option(\"spark.synapse.linkedService\", \"AzureDataExplorer\") \\\n",
+					"    .option(\"kustoDatabase\", \"bdbjkustodatabaseqingtest\") \\\n",
+					"    .option(\"kustoTable\", \"Qingtest\") \\\n",
+					"    .option(\"tableCreateOptions\",\"CreateIfNotExist\") \\\n",
+					"    .trigger(once = True)\n",
+					"\n",
+					"kustoQ.start().awaitTermination(60*8)\n",
+					""
+				],
+				"attachments": null,
+				"execution_count": null
+			}
+		]
+	}
+}

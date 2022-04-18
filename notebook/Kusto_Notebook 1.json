@@ -1,0 +1,58 @@
+{
+	"name": "Kusto_Notebook 1",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "e3002201-6105-4cef-bfb6-d05b74857dc0"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1"
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "python"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					"%%pyspark\n",
+					"\n",
+					"# Read data from Azure Data Explorer table(s)\n",
+					"# Full Sample Code available at: https://github.com/Azure/azure-kusto-spark/blob/master/samples/src/main/python/SynapseSample.py\n",
+					"\n",
+					"kustoDf  = spark.read \\\n",
+					"    .format(\"com.microsoft.kusto.spark.synapse.datasource\") \\\n",
+					"    .option(\"spark.synapse.linkedService\", \"AzureDataExplorer\") \\\n",
+					"    .option(\"kustoDatabase\", \"bdbjkustodatabaseqingtest\") \\\n",
+					"    .option(\"kustoQuery\", \"Qingtest | take 10\") \\\n",
+					"    .load()\n",
+					"\n",
+					"display(kustoDf)\n",
+					""
+				],
+				"attachments": null,
+				"execution_count": null
+			}
+		]
+	}
+}

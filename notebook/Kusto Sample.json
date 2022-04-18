@@ -3,25 +3,24 @@
 	"properties": {
 		"nbformat": 4,
 		"nbformat_minor": 2,
-		"bigDataPool": {
-			"referenceName": "testsparkpool01",
-			"type": "BigDataPoolReference"
-		},
 		"sessionProperties": {
-			"driverMemory": "56g",
-			"driverCores": 8,
-			"executorMemory": "56g",
-			"executorCores": 8,
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
 			"numExecutors": 2,
 			"conf": {
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "30269aa3-942a-49b0-9781-39ef8d0e1ad4"
+				"spark.autotune.trackingId": "2d3fe401-2859-4a97-999e-f18bbe8add5f"
 			}
 		},
 		"metadata": {
 			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1"
+			},
 			"enableDebugMode": false,
 			"kernelspec": {
 				"name": "synapse_pyspark",
@@ -29,21 +28,6 @@
 			},
 			"language_info": {
 				"name": "python"
-			},
-			"a365ComputeOptions": {
-				"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/testsparkpool01",
-				"name": "testsparkpool01",
-				"type": "Spark",
-				"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/testsparkpool01",
-				"auth": {
-					"type": "AAD",
-					"authResource": "https://dev.azuresynapse.net"
-				},
-				"sparkVersion": "3.1",
-				"nodeCount": 10,
-				"cores": 8,
-				"memory": 56,
-				"automaticScaleJobs": false
 			},
 			"sessionKeepAliveTimeout": 30
 		},
@@ -72,6 +56,7 @@
 					"display(kustoDf)\n",
 					""
 				],
+				"attachments": null,
 				"execution_count": 1
 			},
 			{
@@ -93,12 +78,13 @@
 					"    .format(\"com.microsoft.kusto.spark.synapse.datasource\") \\\r\n",
 					"    .option(\"spark.synapse.linkedService\", \"AzureDataExplorer\") \\\r\n",
 					"    .option(\"kustoDatabase\", \"bdbjkustodatabaseqingtest\") \\\r\n",
-					"    .option(\"kustoTable\", \"Qingtest1129\") \\\r\n",
+					"    .option(\"kustoTable\", \"Qingtest0411\") \\\r\n",
 					"    .option(\"tableCreateOptions\",\"CreateIfNotExist\") \\\r\n",
 					"    .mode(\"Append\") \\\r\n",
 					"    .save()"
 				],
-				"execution_count": null
+				"attachments": null,
+				"execution_count": 3
 			},
 			{
 				"cell_type": "code",
@@ -136,13 +122,14 @@
 					"    .format(\"com.microsoft.kusto.spark.synapse.datasink.KustoSynapseSinkProvider\") \\\r\n",
 					"    .option(\"spark.synapse.linkedService\", \"AzureDataExplorer\") \\\r\n",
 					"    .option(\"kustoDatabase\", \"bdbjkustodatabaseqingtest\") \\\r\n",
-					"    .option(\"kustoTable\", \"Qingtest1129\") \\\r\n",
+					"    .option(\"kustoTable\", \"Qingtest041101\") \\\r\n",
 					"    .option(\"tableCreateOptions\",\"CreateIfNotExist\") \\\r\n",
 					"    .trigger(once = True)\r\n",
 					"\r\n",
 					"kustoQ.start().awaitTermination(60*8)"
 				],
-				"execution_count": null
+				"attachments": null,
+				"execution_count": 6
 			}
 		]
 	}

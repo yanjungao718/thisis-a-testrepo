@@ -1,0 +1,2881 @@
+{
+	"name": "ZHAO_AZ_Csharp_Copy1",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "49eca40f-c666-4138-bd04-1c1eb8f40ef9"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1",
+				"state": {
+					"187903d9-d3b2-48a3-a66e-8b13ba3c733b": {
+						"type": "Synapse.DataFrame",
+						"sync_state": {
+							"table": {
+								"rows": [
+									{
+										"0": "Bangalore",
+										"1": "10540000"
+									},
+									{
+										"0": "Beijing",
+										"1": "21540000"
+									},
+									{
+										"0": "San Francisco",
+										"1": "881549"
+									},
+									{
+										"0": "Seattle",
+										"1": "730400"
+									}
+								],
+								"schema": [
+									{
+										"key": "0",
+										"name": "name",
+										"type": "string"
+									},
+									{
+										"key": "1",
+										"name": "population",
+										"type": "int"
+									}
+								]
+							},
+							"isSummary": false,
+							"language": "scala"
+						},
+						"persist_state": {
+							"view": {
+								"type": "details",
+								"chartOptions": {
+									"chartType": "bar",
+									"aggregationType": "sum",
+									"categoryFieldKeys": [
+										"0"
+									],
+									"seriesFieldKeys": [
+										"1"
+									],
+									"isStacked": false
+								}
+							}
+						}
+					},
+					"a5c42c88-9af0-4c1c-9424-018c846e8a4a": {
+						"type": "Synapse.DataFrame",
+						"sync_state": {
+							"table": {
+								"rows": [
+									{
+										"0": "Bangalore",
+										"1": "10540000"
+									},
+									{
+										"0": "Bangalore",
+										"1": "10540000"
+									},
+									{
+										"0": "Beijing",
+										"1": "21540000"
+									},
+									{
+										"0": "Beijing",
+										"1": "21540000"
+									},
+									{
+										"0": "San Francisco",
+										"1": "881549"
+									},
+									{
+										"0": "San Francisco",
+										"1": "881549"
+									},
+									{
+										"0": "Seattle",
+										"1": "730400"
+									},
+									{
+										"0": "Seattle",
+										"1": "730400"
+									}
+								],
+								"schema": [
+									{
+										"key": "0",
+										"name": "name",
+										"type": "string"
+									},
+									{
+										"key": "1",
+										"name": "population",
+										"type": "int"
+									}
+								]
+							},
+							"isSummary": false,
+							"language": "scala"
+						},
+						"persist_state": {
+							"view": {
+								"type": "details",
+								"chartOptions": {
+									"chartType": "bar",
+									"aggregationType": "sum",
+									"categoryFieldKeys": [
+										"0"
+									],
+									"seriesFieldKeys": [
+										"1"
+									],
+									"isStacked": false
+								}
+							}
+						}
+					}
+				}
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_sparkdotnet",
+				"display_name": "csharp"
+			},
+			"language_info": {
+				"name": "csharp"
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "markdown",
+				"source": [
+					"# 1. Creating a managed Spark table\n",
+					"This notebook describes how to create a managed table from Spark. \n",
+					"The table is created in the Synapse warehouse folder in your primary storage account. The table will be synchronized and available in Synapse SQL Pools. \n",
+					""
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"spark.Sql(\"DROP TABLE IF EXISTS cities\")"
+				],
+				"attachments": null,
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"spark.Sql(\"CREATE TABLE cities (name STRING, population INT) USING PARQUET\")"
+				],
+				"attachments": null,
+				"execution_count": 1
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"Insert a few rows into the table using a list of values.\n",
+					""
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"spark.Sql(\"INSERT INTO cities VALUES ('Seattle', 730400), ('San Francisco', 881549), ('Beijing', 21540000), ('Bangalore', 10540000)\")"
+				],
+				"attachments": null,
+				"execution_count": 2
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"* Retrieve values back. Click on 'Chart' below to review the visualization.\n",
+					""
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"diagram": {
+						"activateDiagramType": 1,
+						"chartConfig": {
+							"category": "bar",
+							"keys": [
+								"name"
+							],
+							"values": [
+								"population"
+							],
+							"yLabel": "population",
+							"xLabel": "name",
+							"aggregation": "SUM",
+							"aggByBackend": false
+						},
+						"aggData": "{\"population\":{\"Bangalore\":10540000,\"Beijing\":21540000,\"San Francisco\":881549,\"Seattle\":730400}}",
+						"isSummary": false,
+						"previewData": {
+							"filter": null
+						},
+						"isSql": false
+					},
+					"collapsed": false
+				},
+				"source": [
+					"Display(spark.Sql(\"SELECT * FROM cities ORDER BY name\"));"
+				],
+				"attachments": null,
+				"execution_count": 3
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"Drop the table. Please note the data will get deleted from the primary storage account associated with this workspace.\n",
+					""
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"spark.Sql(\"DROP TABLE cities\")"
+				],
+				"attachments": null,
+				"execution_count": 4
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"# 2. Creating an unmanaged (external) Spark table\n",
+					"This notebook describes how to create an unmanaged (also known as external) table from Spark. \n",
+					"The table is created in /datalake/cities which may exist already (so you can attach to existing data) it can be created when you insert data."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"spark.Sql(\"DROP TABLE IF EXISTS cities\")"
+				],
+				"attachments": null,
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"spark.Sql(\"CREATE TABLE cities (name STRING, population INT) USING PARQUET LOCATION '/datalake/cities' OPTIONS ('compression'='snappy')\")"
+				],
+				"attachments": null,
+				"execution_count": 5
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"Insert a few rows into the table using a list of values.\n",
+					""
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"spark.Sql(\"INSERT INTO cities VALUES ('Seattle', 730400), ('San Francisco', 881549), ('Beijing', 21540000), ('Bangalore', 10540000)\")"
+				],
+				"attachments": null,
+				"execution_count": 6
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"* Retrieve values back. Click on 'Chart' below to review the visualization.\n",
+					""
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"diagram": {
+						"activateDiagramType": 1,
+						"chartConfig": {
+							"category": "bar",
+							"keys": [
+								"name"
+							],
+							"values": [
+								"population"
+							],
+							"yLabel": "population",
+							"xLabel": "name",
+							"aggregation": "SUM",
+							"aggByBackend": false
+						},
+						"aggData": "{\"population\":{\"Bangalore\":52700000,\"Beijing\":107700000,\"San Francisco\":4407745,\"Seattle\":3652000}}",
+						"isSummary": false,
+						"previewData": {
+							"filter": null
+						},
+						"isSql": false
+					},
+					"collapsed": false
+				},
+				"source": [
+					"Display(spark.Sql(\"SELECT * FROM cities ORDER BY name\"));"
+				],
+				"attachments": null,
+				"execution_count": 7
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"Drop the table. Please note the data will remain in the data lake.\n",
+					""
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"spark.Sql(\"DROP TABLE cities\")"
+				],
+				"attachments": null,
+				"execution_count": 8
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"# 3. Experimenting with .NET for Apache Spark Using the CreateDataFrame API\n",
+					"\n",
+					"A Spark DataFrame is a distributed collection of data organized into named columns that provides operations to filter, group, or compute aggregates, and can be used with Spark SQL. It is conceptually equivalent to a table in a relational database or a data frame in R/Python, but with richer optimizations under the hood. \n",
+					"\n",
+					"DataFrames can be constructed from structured data files, existing RDDs, tables in Hive, or external databases.\n",
+					"Another way of creating Spark Dataframes is by using the `CreateDataFrame` API that takes in data in the form of List of Row objects along with the schema and returns a `DataFrame` object. Let's look at a simple example below:\n",
+					""
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"using Microsoft.Spark.Sql.Types;\n",
+					"\n",
+					"// List of GenericRow objects that contain the data for each row of the DataFrame\n",
+					"var data = new List<GenericRow>();\n",
+					"data.Add(new GenericRow(new object[] { \"Alice\", 20 }));\n",
+					"data.Add(new GenericRow(new object[] { \"Bob\", 30}));\n",
+					"\n",
+					"// Schema of the DataFrame\n",
+					"var schema = new StructType(new List<StructField>()\n",
+					"{\n",
+					"    new StructField(\"Name\", new StringType()),\n",
+					"    new StructField(\"Age\", new IntegerType())\n",
+					"});\n",
+					"\n",
+					"// Calling CreateDataFrame with the data and schema\n",
+					"DataFrame df = spark.CreateDataFrame(data, schema);\n",
+					"\n",
+					"// Displaying the returned dataframe\n",
+					"df.Show();"
+				],
+				"attachments": null,
+				"execution_count": 9
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## A more real-life example\n",
+					"\n",
+					"Now let's take a look at a more complex example closer to a real-life use case.\n",
+					""
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"using Microsoft.Spark.Sql.Types;\n",
+					"\n",
+					"// Data as list of Rows\n",
+					"var searchlogData = new List<GenericRow>();\n",
+					"searchlogData.Add(new GenericRow(new object[] {399266 , \"2019-10-15T11:53:04Z\" , \"en-us\" , \"how to make nachos\" , 73 , \"www.nachos.com;www.wikipedia.com\" , \"NULL\"})); \n",
+					"searchlogData.Add(new GenericRow(new object[] {382045 , \"2019-10-15T11:53:25Z\" , \"en-gb\" , \"best ski resorts\" , 614 , \"skiresorts.com;ski-europe.com;www.travelersdigest.com/ski_resorts.htm\" , \"ski-europe.com;www.travelersdigest.com/ski_resorts.htm\"})); \n",
+					"searchlogData.Add(new GenericRow(new object[] {382045 , \"2019-10-16T11:53:42Z\" , \"en-gb\" , \"broken leg\" , 74 , \"mayoclinic.com/health;webmd.com/a-to-z-guides;mybrokenleg.com;wikipedia.com/Bone_fracture\" , \"mayoclinic.com/health;webmd.com/a-to-z-guides;mybrokenleg.com;wikipedia.com/Bone_fracture\"}));\n",
+					"searchlogData.Add(new GenericRow(new object[] {106479 , \"2019-10-16T11:53:10Z\" , \"en-ca\" , \"south park episodes\" , 24 , \"southparkstudios.com;wikipedia.org/wiki/Sout_Park;imdb.com/title/tt0121955;simon.com/mall\" , \"southparkstudios.com\"}));\n",
+					"searchlogData.Add(new GenericRow(new object[] {906441 , \"2019-10-16T11:54:18Z\" , \"en-us\" , \"cosmos\" , 1213 , \"cosmos.com;wikipedia.org/wiki/Cosmos:_A_Personal_Voyage;hulu.com/cosmos\" , \"NULL\"}));\n",
+					"searchlogData.Add(new GenericRow(new object[] {351530 , \"2019-10-16T11:54:29Z\" , \"en-fr\" , \"microsoft\" , 241 , \"microsoft.com;wikipedia.org/wiki/Microsoft;xbox.com\" , \"NULL\"}));\n",
+					"searchlogData.Add(new GenericRow(new object[] {640806 , \"2019-10-16T11:54:32Z\" , \"en-us\" , \"wireless headphones\" , 502 , \"www.amazon.com;reviews.cnet.com/wireless-headphones;store.apple.com\" , \"www.amazon.com;store.apple.com\"}));\n",
+					"searchlogData.Add(new GenericRow(new object[] {304305 , \"2019-10-16T11:54:45Z\" , \"en-us\" , \"dominos pizza\" , 60 , \"dominos.com;wikipedia.org/wiki/Domino's_Pizza;facebook.com/dominos\" , \"dominos.com\"})); \n",
+					"searchlogData.Add(new GenericRow(new object[] {460748 , \"2019-10-16T11:54:58Z\" , \"en-us\" , \"yelp\" , 1270 , \"yelp.com;apple.com/us/app/yelp;wikipedia.org/wiki/Yelp_Inc.;facebook.com/yelp\" , \"yelp.com\"}));\n",
+					"searchlogData.Add(new GenericRow(new object[] {354841 , \"2019-10-16T11:59:00Z\" , \"en-us\" , \"how to run\" , 610 , \"running.about.com;ehow.com;go.com\" , \"running.about.com;ehow.com\"}));\n",
+					"searchlogData.Add(new GenericRow(new object[] {354068 , \"2019-10-16T12:00:07Z\" , \"en-mx\" , \"what is sql\" , 422 , \"wikipedia.org/wiki/SQL;sqlcourse.com/intro.html;wikipedia.org/wiki/Microsoft_SQL\" , \"wikipedia.org/wiki/SQL\"}));\n",
+					"searchlogData.Add(new GenericRow(new object[] {674364 , \"2019-10-16T12:00:21Z\" , \"en-us\" , \"mexican food redmond\" , 283 , \"eltoreador.com;yelp.com/c/redmond-wa/mexican;agaverest.com\" , \"NULL\"}));\n",
+					"searchlogData.Add(new GenericRow(new object[] {347413 , \"2019-10-16T12:11:34Z\" , \"en-gr\" , \"microsoft\" , 305 , \"microsoft.com;wikipedia.org/wiki/Microsoft;xbox.com\" , \"NULL\"}));\n",
+					"searchlogData.Add(new GenericRow(new object[] {848434 , \"2019-10-16T12:12:14Z\" , \"en-ch\" , \"facebook\" , 10 , \"facebook.com;facebook.com/login;wikipedia.org/wiki/Facebook\" , \"facebook.com\"}));\n",
+					"searchlogData.Add(new GenericRow(new object[] {604846 , \"2019-10-16T12:13:18Z\" , \"en-us\" , \"wikipedia\" , 612 , \"wikipedia.org;en.wikipedia.org;en.wikipedia.org/wiki/Wikipedia\" , \"wikipedia.org\"}));\n",
+					"searchlogData.Add(new GenericRow(new object[] {840614 , \"2019-10-16T12:13:41Z\" , \"en-us\" , \"xbox\" , 1220 , \"xbox.com;en.wikipedia.org/wiki/Xbox;xbox.com/xbox360\" , \"xbox.com/xbox360\"}));\n",
+					"searchlogData.Add(new GenericRow(new object[] {656666 , \"2019-10-16T12:15:19Z\" , \"en-us\" , \"hotmail\" , 691 , \"hotmail.com;login.live.com;msn.com;en.wikipedia.org/wiki/Hotmail\" , \"NULL\"}));\n",
+					"searchlogData.Add(new GenericRow(new object[] {951513 , \"2019-10-16T12:17:37Z\" , \"en-us\" , \"pokemon\" , 63 , \"pokemon.com;pokemon.com/us;serebii.net\" , \"pokemon.com\"}));\n",
+					"searchlogData.Add(new GenericRow(new object[] {350350 , \"2019-10-16T12:18:17Z\" , \"en-us\" , \"wolfram\" , 30 , \"wolframalpha.com;wolfram.com;mathworld.wolfram.com;en.wikipedia.org/wiki/Stephen_Wolfram\" , \"NULL\"}));\n",
+					"searchlogData.Add(new GenericRow(new object[] {641615 , \"2019-10-16T12:19:21Z\" , \"en-us\" , \"kahn\" , 119 , \"khanacademy.org;en.wikipedia.org/wiki/Khan_(title);answers.com/topic/genghis-khan;en.wikipedia.org/wiki/Khan_(name)\" , \"khanacademy.org\"}));\n",
+					"searchlogData.Add(new GenericRow(new object[] {321065 , \"2019-10-16T12:20:19Z\" , \"en-us\" , \"clothes\" , 732 , \"gap.com;overstock.com;forever21.com;footballfanatics.com/college_washington_state_cougars\" , \"footballfanatics.com/college_washington_state_cougars\"}));\n",
+					"searchlogData.Add(new GenericRow(new object[] {651777 , \"2019-10-16T12:20:49Z\" , \"en-us\" , \"food recipes\" , 183 , \"allrecipes.com;foodnetwork.com;simplyrecipes.com\" , \"foodnetwork.com\"}));\n",
+					"searchlogData.Add(new GenericRow(new object[] {666352 , \"2019-10-16T12:21:16Z\" , \"en-us\" , \"weight loss\" , 630 , \"en.wikipedia.org/wiki/Weight_loss;webmd.com/diet;exercise.about.com\" , \"webmd.com/diet\"}));\n",
+					"\n",
+					"// Schema for the above data\n",
+					"// For a full list of types you can use, please see the following link:\n",
+					"// https://docs.microsoft.com/en-us/dotnet/api/microsoft.spark.sql.types?view=spark-dotnet\n",
+					"var searchlogSchema = new StructType(new List<StructField>()\n",
+					"            { \n",
+					"                new StructField(\"Id\", new IntegerType()),\n",
+					"                new StructField(\"Time\", new StringType()),\n",
+					"                new StructField(\"Market\", new StringType()),\n",
+					"                new StructField(\"Searchtext\", new StringType()),\n",
+					"                new StructField(\"Latency\", new IntegerType()),\n",
+					"                new StructField(\"Links\", new StringType()),\n",
+					"                new StructField(\"Clickedlinks\", new StringType())\n",
+					"            });\n",
+					" \n",
+					" // Creating a DataFrame using the above data and schema as input to the CreateDataFrame API\n",
+					"DataFrame dfSearchlog = spark.CreateDataFrame(searchlogData, searchlogSchema);\n",
+					"\n",
+					"// Displaying the created DataFrame\n",
+					"dfSearchlog.Show()"
+				],
+				"attachments": null,
+				"execution_count": 10
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Casting String type to Timestamp type\n",
+					"\n",
+					"We will now convert the Column `Time` which is currently of `StringType()` to `TimeStamp()` type using the `Column.Cast()` method.\n",
+					""
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Function to convert the Time column from StringType to TimestampType\n",
+					"public DataFrame CastColumn(DataFrame df_, string colName, string t)\n",
+					"{\n",
+					"    df_ = df_.WithColumn(\"NewCol__\", df_[colName].Cast(t));\n",
+					"    df_ = df_.Drop(colName);\n",
+					"    df_ = df_.WithColumnRenamed(\"NewCol__\", colName);\n",
+					"    return df_;\n",
+					"}\n",
+					"\n",
+					"// Calling castColumn function to return the new DataFrame\n",
+					"DataFrame dfTimestampCast = CastColumn(dfSearchlog, \"Time\", \"timestamp\");\n",
+					"\n",
+					"// Display the new DataFrame\n",
+					"dfTimestampCast.Show();"
+				],
+				"attachments": null,
+				"execution_count": 11
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"# 4. Hitchhiker's Guide to Delta Lake (.NET for Spark C#)\n",
+					"\n",
+					"This tutorial has been adapted for more clarity from its original counterpart [here](https://docs.delta.io/latest/quick-start.html). This notebook helps you quickly explore the main features of [Delta Lake](https://github.com/delta-io/delta). It provides code snippets that show how to read from and write to Delta Lake tables from interactive, batch, and streaming queries.\n",
+					"\n",
+					"Here's what we will cover:\n",
+					"* Create a table\n",
+					"* Understanding meta-data\n",
+					"* Read data\n",
+					"* Update table data\n",
+					"* Overwrite table data\n",
+					"* Conditional update without overwrite\n",
+					"* Read older versions of data using Time Travel\n",
+					"* Write a stream of data to a table\n",
+					"* Read a stream of changes from a table"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Configuration\n",
+					"Make sure you modify this as appropriate."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"var sessionId = (new Random()).Next(10000000);\n",
+					"var deltaTablePath = $\"/delta/delta-table-{sessionId}\";\n",
+					"\n",
+					"deltaTablePath"
+				],
+				"attachments": null,
+				"execution_count": 12
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Create a table\n",
+					"To create a Delta Lake table, write a DataFrame out in the **delta** format. You can use existing Spark SQL code and change the format from parquet, csv, json, and so on, to delta.\n",
+					"\n",
+					"These operations create a new Delta Lake table using the schema that was inferred from your DataFrame. For the full set of options available when you create a new Delta Lake table, see Create a table and Write to a table (subsequent cells in this notebook)."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"var data = spark.Range(0,5);\n",
+					"data.Show();\n",
+					"data.Write().Format(\"delta\").Save(deltaTablePath);"
+				],
+				"attachments": null,
+				"execution_count": 13
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Understanding Meta-data\n",
+					"\n",
+					"In Delta Lake, meta-data is no different from data i.e., it is stored next to the data. Therefore, an interesting side-effect here is that you can peek into meta-data using regular Spark APIs. "
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"using System.Linq;\n",
+					"spark.Read().Text($\"{deltaTablePath}/_delta_log/\").Collect().ToList().ForEach(x => Console.WriteLine(x.GetAs<string>(\"value\")));"
+				],
+				"attachments": null,
+				"execution_count": 14
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Read data\n",
+					"\n",
+					"You read data in your Delta Lake table by specifying the path to the files."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"var df = spark.Read().Format(\"delta\").Load(deltaTablePath);\n",
+					"df.Show()"
+				],
+				"attachments": null,
+				"execution_count": 15
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Update table data\n",
+					"\n",
+					"Delta Lake supports several operations to modify tables using standard DataFrame APIs. This example runs a batch job to overwrite the data in the table.\n",
+					""
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"var data = spark.Range(5,10);\n",
+					"data.Write().Format(\"delta\").Mode(\"overwrite\").Save(deltaTablePath);\n",
+					"df.Show();"
+				],
+				"attachments": null,
+				"execution_count": 16
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"When you now inspect the meta-data, what you will notice is that the original data is over-written. Well, not in a true sense but appropriate entries are added to Delta's transaction log so it can provide an \"illusion\" that the original data was deleted. We can verify this by re-inspecting the meta-data. You will see several entries indicating reference removal to the original data."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"spark.Read().Text($\"{deltaTablePath}/_delta_log/\").Collect().ToList().ForEach(x => Console.WriteLine(x.GetAs<string>(\"value\")));"
+				],
+				"attachments": null,
+				"execution_count": 17
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Save as catalog tables\n",
+					"\n",
+					"Delta Lake can write to managed or external catalog tables.\n",
+					""
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Write data to a new managed catalog table.\n",
+					"data.Write().Format(\"delta\").SaveAsTable(\"ManagedDeltaTable\");"
+				],
+				"attachments": null,
+				"execution_count": 18
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Define an external catalog table that points to the existing Delta Lake data in storage.\n",
+					"spark.Sql($\"CREATE TABLE ExternalDeltaTable USING DELTA LOCATION '{deltaTablePath}'\");"
+				],
+				"attachments": null,
+				"execution_count": 19
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// List the 2 new tables.\n",
+					"spark.Sql(\"SHOW TABLES\").Show();\n",
+					"\n",
+					"// Explore their properties.\n",
+					"spark.Sql(\"DESCRIBE EXTENDED ManagedDeltaTable\").Show(truncate: 0);\n",
+					"spark.Sql(\"DESCRIBE EXTENDED ExternalDeltaTable\").Show(truncate: 0);"
+				],
+				"attachments": null,
+				"execution_count": 20
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Conditional update without overwrite\n",
+					"\n",
+					"Delta Lake provides programmatic APIs to conditional update, delete, and merge (upsert) data into tables. For more information on these operations, see [Table Deletes, Updates, and Merges](https://docs.delta.io/latest/delta-update.html)."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"using Microsoft.Spark.Extensions.Delta;\n",
+					"using Microsoft.Spark.Extensions.Delta.Tables;\n",
+					"using Microsoft.Spark.Sql;\n",
+					"using static Microsoft.Spark.Sql.Functions;\n",
+					"\n",
+					"var deltaTable = DeltaTable.ForPath(deltaTablePath);"
+				],
+				"attachments": null,
+				"execution_count": 21
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Update every even value by adding 100 to it\n",
+					"deltaTable.Update(\n",
+					"  condition: Expr(\"id % 2 == 0\"),\n",
+					"  set: new Dictionary<string, Column>(){{ \"id\", Expr(\"id + 100\") }});\n",
+					"deltaTable.ToDF().Show();"
+				],
+				"attachments": null,
+				"execution_count": 22
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Delete every even value\n",
+					"deltaTable.Delete(condition: Expr(\"id % 2 == 0\"));\n",
+					"deltaTable.ToDF().Show();"
+				],
+				"attachments": null,
+				"execution_count": 23
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Upsert (merge) new data\n",
+					"var newData = spark.Range(20).As(\"newData\");\n",
+					"\n",
+					"deltaTable\n",
+					"    .As(\"oldData\")\n",
+					"    .Merge(newData, \"oldData.id = newData.id\")\n",
+					"    .WhenMatched()\n",
+					"        .Update(new Dictionary<string, Column>() {{\"id\", Lit(\"-1\")}})\n",
+					"    .WhenNotMatched()\n",
+					"        .Insert(new Dictionary<string, Column>() {{\"id\", Col(\"newData.id\")}})\n",
+					"    .Execute();\n",
+					"\n",
+					"deltaTable.ToDF().Show(100);"
+				],
+				"attachments": null,
+				"execution_count": 24
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## History\n",
+					"Delta's most powerful feature is the ability to allow looking into history i.e., the changes that were made to the underlying Delta Table. The cell below shows how simple it is to inspect the history."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"deltaTable.History().Show(20, 1000, false);"
+				],
+				"attachments": null,
+				"execution_count": 25
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Read older versions of data using Time Travel\n",
+					"\n",
+					"You can query previous snapshots of your Delta Lake table by using a feature called Time Travel. If you want to access the data that you overwrote, you can query a snapshot of the table before you overwrote the first set of data using the versionAsOf option.\n",
+					"\n",
+					"Once you run the cell below, you should see the first set of data, from before you overwrote it. Time Travel is an extremely powerful feature that takes advantage of the power of the Delta Lake transaction log to access data that is no longer in the table. Removing the version 0 option (or specifying version 1) would let you see the newer data again. For more information, see [Query an older snapshot of a table (time travel)](https://docs.delta.io/latest/delta-batch.html#deltatimetravel)."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"var df = spark.Read().Format(\"delta\").Option(\"versionAsOf\", 0).Load(deltaTablePath);\n",
+					"df.Show();"
+				],
+				"attachments": null,
+				"execution_count": 26
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Write a stream of data to a table\n",
+					"\n",
+					"You can also write to a Delta Lake table using Spark's Structured Streaming. The Delta Lake transaction log guarantees exactly-once processing, even when there are other streams or batch queries running concurrently against the table. By default, streams run in append mode, which adds new records to the table.\n",
+					"\n",
+					"For more information about Delta Lake integration with Structured Streaming, see [Table Streaming Reads and Writes](https://docs.delta.io/latest/delta-streaming.html).\n",
+					"\n",
+					"In the cells below, here's what we are doing:\n",
+					"\n",
+					"1. *Cell 28* Setup a simple Spark Structured Streaming job to generate a sequence and make the job write into our Delta Table\n",
+					"2. *Cell 30* Show the newly appended data\n",
+					"3. *Cell 31* Inspect history\n",
+					"4. *Cell 32* Stop the structured streaming job\n",
+					"5. *Cell 33* Inspect history <-- You'll notice appends have stopped"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"var streamingDf = spark.ReadStream().Format(\"rate\").Load();\n",
+					"var stream = streamingDf.SelectExpr(\"value as id\").WriteStream().Format(\"delta\").Option(\"checkpointLocation\", $\"/tmp/checkpoint-{sessionId}\").Start(deltaTablePath);"
+				],
+				"attachments": null,
+				"execution_count": 27
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Read a stream of changes from a table\n",
+					"\n",
+					"While the stream is writing to the Delta Lake table, you can also read from that table as streaming source. For example, you can start another streaming query that prints all the changes made to the Delta Lake table."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"deltaTable.ToDF().Sort(Col(\"id\").Desc()).Show(100);"
+				],
+				"attachments": null,
+				"execution_count": 28
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"deltaTable.History().Drop(\"userId\", \"userName\", \"job\", \"notebook\", \"clusterId\", \"isolationLevel\", \"isBlindAppend\").Show(20, 1000, false);"
+				],
+				"attachments": null,
+				"execution_count": 29
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"stream.Stop();"
+				],
+				"attachments": null,
+				"execution_count": 30
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"deltaTable.History().Drop(\"userId\", \"userName\", \"job\", \"notebook\", \"clusterId\", \"isolationLevel\", \"isBlindAppend\").Show(100, 1000, false);"
+				],
+				"attachments": null,
+				"execution_count": 31
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Compaction\n",
+					"\n",
+					"If a Delta Table is growing too large, you can compact it by repartitioning into a smaller number of files.\n",
+					"\n",
+					"The option `dataChange = false` is an optimization that tells Delta Lake to do the repartition without marking the underlying data as \"modified\". This ensures that any other concurrent operations (such as streaming reads/writes) aren't negatively impacted.\n",
+					""
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"int partitionCount = 2;\n",
+					"\n",
+					"spark.Read()\n",
+					"    .Format(\"delta\")\n",
+					"    .Load(deltaTablePath)\n",
+					"    .Repartition(partitionCount)\n",
+					"    .Write()\n",
+					"    .Option(\"dataChange\", \"false\")\n",
+					"    .Format(\"delta\")\n",
+					"    .Mode(\"overwrite\")\n",
+					"    .Save(deltaTablePath);"
+				],
+				"attachments": null,
+				"execution_count": 32
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Convert Parquet to Delta\n",
+					"You can do an in-place conversion from the Parquet format to Delta."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"var parquetPath = $\"/parquet/parquet-table-{sessionId}\";\n",
+					"\n",
+					"var data = spark.Range(0,5);\n",
+					"data.Write().Parquet(parquetPath);\n",
+					"\n",
+					"// Confirm that the data isn't in the Delta format\n",
+					"DeltaTable.IsDeltaTable(parquetPath)"
+				],
+				"attachments": null,
+				"execution_count": 33
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"DeltaTable.ConvertToDelta(spark, $\"parquet.`{parquetPath}`\");\n",
+					"\n",
+					"//Confirm that the converted data is now in the Delta format\n",
+					"DeltaTable.IsDeltaTable(parquetPath)"
+				],
+				"attachments": null,
+				"execution_count": 34
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## SQL Support\n",
+					"Delta supports table utility commands through SQL.  You can use SQL to:\n",
+					"* Get a DeltaTable's history\n",
+					"* Vacuum a DeltaTable\n",
+					"* Convert a Parquet file to Delta\n",
+					""
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"spark.Sql($\"DESCRIBE HISTORY delta.`{deltaTablePath}`\").Show();"
+				],
+				"attachments": null,
+				"execution_count": 35
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"spark.Sql($\"VACUUM delta.`{deltaTablePath}`\").Show();"
+				],
+				"attachments": null,
+				"execution_count": 36
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"var parquetId =  (new Random()).Next(10000000);\n",
+					"var parquetPath = $\"/parquet/parquet-table-{sessionId}-{parquetId}\";\n",
+					"\n",
+					"var data = spark.Range(0,5);\n",
+					"data.Write().Parquet(parquetPath);\n",
+					"\n",
+					"// Confirm that the data isn't in the Delta format\n",
+					"DeltaTable.IsDeltaTable(parquetPath);\n",
+					"\n",
+					"// Use SQL to convert the parquet table to Delta\n",
+					"spark.Sql($\"CONVERT TO DELTA parquet.`{parquetPath}`\");\n",
+					"\n",
+					"DeltaTable.IsDeltaTable(parquetPath);"
+				],
+				"attachments": null,
+				"execution_count": 37
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"# 5. Hitchhiker's Guide to Hyperspace (.NET for Spark C#)\n",
+					"## An Indexing Subsystem for Apache Spark™\n",
+					"\n",
+					"<img src=\"https://raw.githubusercontent.com/rapoth/hyperspace/master/docs/assets/images/hyperspace-small-banner.png\" alt=\"Hyperspace Indexing Sub-System Logo\" width=\"1000\"/>\n",
+					"\n",
+					"[Hyperspace](https://github.com/microsoft/hyperspace) introduces the ability for Apache Spark™ users to create indexes on their datasets (e.g., CSV, JSON, Parquet etc.) and leverage them for potential query and workload acceleration.\n",
+					"\n",
+					"In this notebook, we highlight the basics of Hyperspace, emphasizing on its simplicity and show how it can be used by just anyone.\n",
+					"\n",
+					"**Disclaimer**: Hyperspace helps accelerate your workloads/queries under two circumstances:\n",
+					"\n",
+					"  1. Queries contain filters on predicates with high selectivity (e.g., you want to select 100 matching rows from a million candidate rows)\n",
+					"  2. Queries contain a join that requires heavy-shuffles (e.g., you want to join a 100 GB dataset with a 10 GB dataset)\n",
+					"\n",
+					"You may want to carefully monitor your workloads and determine whether indexing is helping you on a case-by-case basis."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Setup\n",
+					"To begin with, let's start a new Spark™ session. Since this notebook is a tutorial merely to illustrate what Hyperspace can offer, we will make a configuration change that allow us to highlight what Hyperspace is doing on small datasets. By default, Spark™ uses *broadcast join* to optimize join queries when the data size for one side of join is small (which is the case for the sample data we use in this tutorial). Therefore, we disable broadcast joins so that later when we run join queries, Spark™ uses *sort-merge* join. This is mainly to show how Hyperspace indexes would be used at scale for accelerating join queries.\n",
+					"\n",
+					"The output of running the cell below shows a reference to the successfully created Spark™ session and prints out '-1' as the value for the modified join config which indicates that broadcast join is successfully disabled."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"var sessionId = (new Random()).Next(10000000);\n",
+					"var dataPath = $\"/hyperspace/data-{sessionId}\";\n",
+					"var indexLocation = $\"/hyperspace/indexes-{sessionId}\";\n",
+					"\n",
+					"// Please note that you DO NOT need to change this configuration in production.\n",
+					"// We store all indexes in the system folder within Synapse.\n",
+					"spark.Conf().Set(\"spark.hyperspace.system.path\", indexLocation);"
+				],
+				"attachments": null,
+				"execution_count": 38
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Disable BroadcastHashJoin, so Spark™ will use standard SortMergeJoin. Currently hyperspace indexes utilize SortMergeJoin to speed up query.\n",
+					"spark.Conf().Set(\"spark.sql.autoBroadcastJoinThreshold\", -1);\n",
+					"\n",
+					"// Verify that BroadcastHashJoin is set correctly \n",
+					"Console.WriteLine(spark.Conf().Get(\"spark.sql.autoBroadcastJoinThreshold\"));\n",
+					"\n",
+					"spark.Conf().Set(\"spark.hyperspace.explain.displayMode\", \"html\")"
+				],
+				"attachments": null,
+				"execution_count": 39
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Data Preparation\n",
+					"\n",
+					"To prepare our environment, we will create sample data records and save them as parquet data files. While we use Parquet for illustration, you can use other formats such as CSV. In the subsequent cells, we will also demonstrate how you can create several Hyperspace indexes on this sample dataset and how one can make Spark™ use them when running queries. \n",
+					"\n",
+					"Our example records correspond to two datasets: *department* and *employee*. You should configure \"empLocation\" and \"deptLocation\" paths so that on the storage account they point to your desired location to save generated data files. \n",
+					"\n",
+					"The output of running below cell shows contents of our datasets as lists of triplets followed by references to dataFrames created to save the content of each dataset in our preferred location."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"using Microsoft.Spark.Sql.Types;\n",
+					"\n",
+					"// Sample department records\n",
+					"var departments = new List<GenericRow>()\n",
+					"{\n",
+					"    new GenericRow(new object[] {10, \"Accounting\", \"New York\"}),\n",
+					"    new GenericRow(new object[] {20, \"Research\", \"Dallas\"}),\n",
+					"    new GenericRow(new object[] {30, \"Sales\", \"Chicago\"}),\n",
+					"    new GenericRow(new object[] {40, \"Operations\", \"Boston\"})\n",
+					"};\n",
+					"\n",
+					"// Sample employee records\n",
+					"var employees = new List<GenericRow>() {\n",
+					"      new GenericRow(new object[] {7369, \"SMITH\", 20}),\n",
+					"      new GenericRow(new object[] {7499, \"ALLEN\", 30}),\n",
+					"      new GenericRow(new object[] {7521, \"WARD\", 30}),\n",
+					"      new GenericRow(new object[] {7566, \"JONES\", 20}),\n",
+					"      new GenericRow(new object[] {7698, \"BLAKE\", 30}),\n",
+					"      new GenericRow(new object[] {7782, \"CLARK\", 10}),\n",
+					"      new GenericRow(new object[] {7788, \"SCOTT\", 20}),\n",
+					"      new GenericRow(new object[] {7839, \"KING\", 10}),\n",
+					"      new GenericRow(new object[] {7844, \"TURNER\", 30}),\n",
+					"      new GenericRow(new object[] {7876, \"ADAMS\", 20}),\n",
+					"      new GenericRow(new object[] {7900, \"JAMES\", 30}),\n",
+					"      new GenericRow(new object[] {7934, \"MILLER\", 10}),\n",
+					"      new GenericRow(new object[] {7902, \"FORD\", 20}),\n",
+					"      new GenericRow(new object[] {7654, \"MARTIN\", 30})\n",
+					"};\n",
+					"\n",
+					"// Save sample data in the Parquet format\n",
+					"var departmentSchema = new StructType(new List<StructField>()\n",
+					"{\n",
+					"    new StructField(\"deptId\", new IntegerType()),\n",
+					"    new StructField(\"deptName\", new StringType()),\n",
+					"    new StructField(\"location\", new StringType())\n",
+					"});\n",
+					"var employeeSchema = new StructType(new List<StructField>()\n",
+					"{\n",
+					"    new StructField(\"empId\", new IntegerType()),\n",
+					"    new StructField(\"empName\", new StringType()),\n",
+					"    new StructField(\"deptId\", new IntegerType())\n",
+					"});\n",
+					"\n",
+					"DataFrame empData = spark.CreateDataFrame(employees, employeeSchema); \n",
+					"DataFrame deptData = spark.CreateDataFrame(departments, departmentSchema); \n",
+					"\n",
+					"string empLocation = $\"{dataPath}/employees.parquet\";\n",
+					"string deptLocation = $\"{dataPath}/departments.parquet\";\n",
+					"empData.Write().Mode(\"overwrite\").Parquet(empLocation);\n",
+					"deptData.Write().Mode(\"overwrite\").Parquet(deptLocation);"
+				],
+				"attachments": null,
+				"execution_count": 40
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"Let's verify the contents of parquet files we created above to make sure they contain expected records in correct format. We later use these data files to create Hyperspace indexes and run sample queries.\n",
+					"\n",
+					"Running below cell, the output displays the rows in employee and department dataframes in a tabular form. There should be 14 employees and 4 departments, each matching with one of triplets we created in the previous cell."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// empLocation and deptLocation are the user defined locations above to save parquet files\n",
+					"DataFrame empDF = spark.Read().Parquet(empLocation);\n",
+					"DataFrame deptDF = spark.Read().Parquet(deptLocation);\n",
+					"\n",
+					"// Verify the data is available and correct\n",
+					"empDF.Show();\n",
+					"deptDF.Show();"
+				],
+				"attachments": null,
+				"execution_count": 41
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Hello Hyperspace Index!\n",
+					"Hyperspace lets users create indexes on records scanned from persisted data files. Once successfully created, an entry corresponding to the index is added to the Hyperspace's metadata. This metadata is later used by Apache Spark™'s Hyperspace-enabled optimizer during query processing to find and use proper indexes. \n",
+					"\n",
+					"Once indexes are created, users can perform several actions:\n",
+					"  - **Refresh** If the underlying data changes, users can refresh an existing index to capture that. \n",
+					"  - **Delete** If the index is not needed, users can perform a soft-delete i.e., index is not physically deleted but is marked as 'deleted' so it is no longer used in your workloads.\n",
+					"  - **Vacuum** If an index is no longer required, users can vacuum it which forces a physical deletion of the index contents and associated metadata completely from Hyperspace's metadata.\n",
+					"\n",
+					"Below sections show how such index management operations can be done in Hyperspace.\n",
+					"\n",
+					"First, we need to import the required libraries and create an instance of Hyperspace. We later use this instance to invoke different Hyperspace APIs to create indexes on our sample data and modify those indexes.\n",
+					"\n",
+					"Output of running below cell shows a reference to the created instance of Hyperspace."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Create an instance of Hyperspace\n",
+					"using Microsoft.Spark.Extensions.Hyperspace;\n",
+					"\n",
+					"Hyperspace hyperspace = new Hyperspace(spark);"
+				],
+				"attachments": null,
+				"execution_count": 42
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"### Create Indexes\n",
+					"To create a Hyperspace index, the user needs to provide 2 pieces of information:\n",
+					"* An Apache Spark™ DataFrame which references the data to be indexed.\n",
+					"* An index configuration object: IndexConfig, which specifies the *index name*, *indexed* and *included* columns of the index. \n",
+					"\n",
+					"As you might have noticed, in this notebook, we illustrate indexing using the [Covering Index](https://www.red-gate.com/simple-talk/sql/learn-sql-server/using-covering-indexes-to-improve-query-performance/), which are the default index in Hyperspace. In the future, we plan on adding support for other index types. \n",
+					"\n",
+					"We start by creating three Hyperspace indexes on our sample data: two indexes on the department dataset named \"deptIndex1\" and \"deptIndex2\", and one index on the employee dataset named 'empIndex'. \n",
+					"For each index, we need a corresponding IndexConfig to capture the name along with columns lists for the indexed and included columns. Running below cell creates these indexConfigs and its output lists them.\n",
+					"\n",
+					"**Note**: An *index column* is a column that appears in your filters or join conditions. An *included column* is a column that appears in your select/project.\n",
+					"\n",
+					"For instance, in the following query:\n",
+					"```sql\n",
+					"SELECT X\n",
+					"FROM Table\n",
+					"WHERE Y = 2\n",
+					"```\n",
+					"X can be an *index column* and Y can be an *included column*."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Create index configurations\n",
+					"using Microsoft.Spark.Extensions.Hyperspace.Index;\n",
+					"\n",
+					"var empIndexConfig = new IndexConfig(\"empIndex\", new string[] {\"deptId\"}, new string[] {\"empName\"});\n",
+					"var deptIndexConfig1 = new IndexConfig(\"deptIndex1\", new string[] {\"deptId\"}, new string[] {\"deptName\"});\n",
+					"var deptIndexConfig2 = new IndexConfig(\"deptIndex2\", new string[] {\"location\"}, new string[] {\"deptName\"});"
+				],
+				"attachments": null,
+				"execution_count": 43
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"Now, we create three indexes using our index configurations. For this purpose, we invoke \"createIndex\" command on our Hyperspace instance. This command requires an index configuration and the dataFrame containing rows to be indexed.\n",
+					"Running below cell creates three indexes.\n",
+					""
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Create indexes from configurations\n",
+					"hyperspace.CreateIndex(empDF, empIndexConfig);\n",
+					"hyperspace.CreateIndex(deptDF, deptIndexConfig1);\n",
+					"hyperspace.CreateIndex(deptDF, deptIndexConfig2);"
+				],
+				"attachments": null,
+				"execution_count": 44
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"### List Indexes\n",
+					"\n",
+					"Below code shows how a user can list all available indexes in a Hyperspace instance. It uses the `indexes` API which returns information about existing indexes as a Spark™'s DataFrame so you can perform additional operations. For instance, you can invoke valid operations on this DataFrame for checking its content or analyzing it further (for example filtering specific indexes or grouping them according to some desired property). \n",
+					"\n",
+					"Below cell uses DataFrame's `show` action to fully print the rows and show details of our indexes in a tabular form. For each index, we can see all the information Hyperspace has stored about it in its metadata. \n",
+					"\n",
+					"You will immediately notice the following:\n",
+					"  - `config.indexName`, `config.indexedColumns`, `config.includedColumns` are the fields that a user normally provides during index creation.\n",
+					"  - `status.status` indicates if the index is being actively used by the Spark's optimizer.\n",
+					"  - `dfSignature` is automatically generated by Hyperspace and is unique for each index. Hyperspace uses this signature internally to maintain the index and exploit it at query time. \n",
+					"  \n",
+					"In the output below, all three indexes should have \"ACTIVE\" as status and their name, indexed columns, and included columns should match with what we defined in index configurations above."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"hyperspace.Indexes().Show();"
+				],
+				"attachments": null,
+				"execution_count": 45
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"### Delete Indexes\n",
+					"A user can drop an existing index by using the `deleteIndex` API and providing the index name. \n",
+					"\n",
+					"Index deletion is a **soft-delete** operation i.e., only the index's status in the Hyperspace metadata from is changed from \"ACTIVE\" to \"DELETED\". This will exclude the deleted index from any future query optimization and Hyperspace no longer picks that index for any query. However, index files for a deleted index still remain available (since it is a soft-delete), so if you accidentally deleted the index, you could still restore it.\n",
+					"\n",
+					"The cell below deletes index with name \"deptIndex2\" and lists Hyperspace metadata after that. The output should be similar to above cell for \"List Indexes\" except for \"deptIndex2\" which now should have its status changed into \"DELETED\"."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"hyperspace.DeleteIndex(\"deptIndex2\");\n",
+					"\n",
+					"hyperspace.Indexes().Show();"
+				],
+				"attachments": null,
+				"execution_count": 46
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"### Restore Indexes\n",
+					"A user can use the `restoreIndex` API to restore a deleted index. This will bring back the latest version of index into ACTIVE status and makes it usable again for queries. \n",
+					"\n",
+					"The cell below shows an example of `restoreIndex` API. We delete \"deptIndex1\" and restore it. The output shows \"deptIndex1\" first went into the \"DELETED\" status after invoking \"deleteIndex\" command and came back to the \"ACTIVE\" status after calling \"restoreIndex\"."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"hyperspace.DeleteIndex(\"deptIndex1\");\n",
+					"\n",
+					"hyperspace.Indexes().Show();\n",
+					"\n",
+					"hyperspace.RestoreIndex(\"deptIndex1\");\n",
+					"\n",
+					"hyperspace.Indexes().Show();"
+				],
+				"attachments": null,
+				"execution_count": 47
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"### Vacuum Indexes\n",
+					"The user can perform a **hard-delete** i.e., fully remove files and the metadata entry for a deleted index using the `vacuumIndex` API. Once done, this action is **irreversible** as it physically deletes all the index files associated with the index.\n",
+					"\n",
+					"The cell below vacuums the \"deptIndex2\" index and shows Hyperspace metadata after vaccuming. You should see metadata entries for two indexes \"deptIndex1\" and \"empIndex\" both with \"ACTIVE\" status and no entry for \"deptIndex2\"."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"hyperspace.VacuumIndex(\"deptIndex2\");\n",
+					"\n",
+					"hyperspace.Indexes().Show();"
+				],
+				"attachments": null,
+				"execution_count": 48
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Enable/Disable Hyperspace\n",
+					"\n",
+					"Hyperspace provides APIs to enable or disable index usage with Spark™.\n",
+					"\n",
+					"  - By using `enableHyperspace` API, Hyperspace optimization rules become visible to the Apache Spark™ optimizer and it will exploit existing Hyperspace indexes to optimize user queries.\n",
+					"  - By using `disableHyperspace` command, Hyperspace rules no longer apply during query optimization. You should note that disabling Hyperspace has no impact on created indexes as they remain intact.\n",
+					"\n",
+					"Below cell shows how you can use these commands to enable or disable hyperspace. The output simply shows a reference to the existing Spark™ session whose configuration is updated."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Enable Hyperspace\n",
+					"spark.EnableHyperspace();\n",
+					"\n",
+					"// Disable Hyperspace\n",
+					"spark.DisableHyperspace();"
+				],
+				"attachments": null,
+				"execution_count": 49
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Index Usage\n",
+					"In order to make Spark™ use Hyperspace indexes during query processing, the user needs to make sure that Hyperspace is enabled. \n",
+					"\n",
+					"The cell below enables Hyperspace and creates two DataFrames containing our sample data records which we use for running example queries. For each DataFrame, a few sample rows are printed."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Enable Hyperspace\n",
+					"spark.EnableHyperspace();\n",
+					"\n",
+					"DataFrame empDFrame = spark.Read().Parquet(empLocation);\n",
+					"DataFrame deptDFrame = spark.Read().Parquet(deptLocation);\n",
+					"\n",
+					"empDFrame.Show(5);\n",
+					"deptDFrame.Show(5);"
+				],
+				"attachments": null,
+				"execution_count": 50
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"# Hyperspace's Index Types\n",
+					"\n",
+					"Currently, Hyperspace can exploit indexes for two groups of queries: \n",
+					"* Selection queries with lookup or range selection filtering predicates.\n",
+					"* Join queries with an equality join predicate (i.e. Equi-joins)."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Indexes for Accelerating Filters\n",
+					"\n",
+					"Our first example query does a lookup on department records (see below cell). In SQL, this query looks as follows:\n",
+					"\n",
+					"```sql\n",
+					"SELECT deptName \n",
+					"FROM departments\n",
+					"WHERE deptId = 20\n",
+					"```\n",
+					"\n",
+					"The output of running the cell below shows: \n",
+					"- query result, which is a single department name.\n",
+					"- query plan that Spark™ used to run the query. \n",
+					"\n",
+					"In the query plan, the \"FileScan\" operator at the bottom of the plan shows the datasource where the records were read from. The location of this file indicates the path to the latest version of the \"deptIndex1\" index. This shows  that according to the query and using Hyperspace optimization rules, Spark™ decided to exploit the proper index at runtime.\n",
+					""
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Filter with equality predicate\n",
+					"DataFrame eqFilter = deptDFrame.Filter(\"deptId = 20\").Select(\"deptName\");\n",
+					"eqFilter.Show();\n",
+					"\n",
+					"hyperspace.Explain(eqFilter, true, input => DisplayHTML(input));"
+				],
+				"attachments": null,
+				"execution_count": 51
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"Our second example is a range selection query on department records. In SQL, this query looks as follows:\n",
+					"\n",
+					"```sql\n",
+					"SELECT deptName \n",
+					"FROM departments\n",
+					"WHERE deptId > 20\n",
+					"```\n",
+					"Similar to our first example, the output of the cell below shows the query results (names of two departments) and the query plan. The location of data file in the FileScan operator shows that 'deptIndex1\" was used to run the query.   \n",
+					""
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Filter with range selection predicate\n",
+					"DataFrame rangeFilter = deptDFrame.Filter(\"deptId > 20\").Select(\"deptName\");\n",
+					"rangeFilter.Show();\n",
+					"\n",
+					"hyperspace.Explain(rangeFilter, true, input => DisplayHTML(input));"
+				],
+				"attachments": null,
+				"execution_count": 52
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"Our third example is a query joining department and employee records on the department id. The equivalent SQL statement is shown below:\n",
+					"\n",
+					"```sql\n",
+					"SELECT employees.deptId, empName, departments.deptId, deptName\n",
+					"FROM   employees, departments \n",
+					"WHERE  employees.deptId = departments.deptId\n",
+					"```\n",
+					"\n",
+					"The output of running the cell below shows the query results which are the names of 14 employees and the name of department each employee works in. The query plan is also included in the output. Notice how the file locations for two FileScan operators shows that Spark™ used \"empIndex\" and \"deptIndex1\" indexes to run the query.   \n",
+					""
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Join\n",
+					"DataFrame eqJoin =\n",
+					"      empDFrame\n",
+					"      .Join(deptDFrame, empDFrame.Col(\"deptId\") == deptDFrame.Col(\"deptId\"))\n",
+					"      .Select(empDFrame.Col(\"empName\"), deptDFrame.Col(\"deptName\"));\n",
+					"\n",
+					"eqJoin.Show();\n",
+					"\n",
+					"hyperspace.Explain(eqJoin, true, input => DisplayHTML(input));"
+				],
+				"attachments": null,
+				"execution_count": 53
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Support for SQL Semantics\n",
+					"\n",
+					"The index usage is transparent to whether the user uses DataFrame API or Spark™ SQL. The following example shows the same join example as before but using Spark SQL, showing the use of indexes if applicable."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"empDFrame.CreateOrReplaceTempView(\"EMP\");\n",
+					"deptDFrame.CreateOrReplaceTempView(\"DEPT\");\n",
+					"\n",
+					"var joinQuery = spark.Sql(\"SELECT EMP.empName, DEPT.deptName FROM EMP, DEPT WHERE EMP.deptId = DEPT.deptId\");\n",
+					"\n",
+					"joinQuery.Show();\n",
+					"hyperspace.Explain(joinQuery, true, input => DisplayHTML(input));"
+				],
+				"attachments": null,
+				"execution_count": 54
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Explain API\n",
+					"\n",
+					"So far, you might have observed we have been using the explain API provided by Hyperspace. The `explain` API from Hyperspace is very similar to Spark's `df.explain` API but allows users to compare their original plan vs the updated index-dependent plan before running their query. You have an option to choose from html/plaintext/console mode to display the command output. \n",
+					"\n",
+					"The following cell shows an example with HTML. The highlighted section represents the difference between original and updated plans along with the indexes being used."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"spark.Conf().Set(\"spark.hyperspace.explain.displayMode\", \"html\");\n",
+					"spark.Conf().Set(\"spark.hyperspace.explain.displayMode.highlight.beginTag\", \"<b style=\\\"background:LightGreen\\\">\");\n",
+					"spark.Conf().Set(\"spark.hyperspace.explain.displayMode.highlight.endTag\", \"</b>\");\n",
+					"\n",
+					"hyperspace.Explain(eqJoin, true, input => DisplayHTML(input));"
+				],
+				"attachments": null,
+				"execution_count": 55
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Refresh Indexes\n",
+					"If the original data on which an index was created changes, then the index will no longer capture the latest state of data and hence will not be used by Hyperspace to provide any acceleration. The user can refresh such a stale index using the `refreshIndex` API. This causes the index to be fully rebuilt and updates it according to the latest data records.\n",
+					"    \n",
+					"    Spoiler alert: if you are worried about fully rebuilding your index every time your data changes, don't worry! We will show you how to *incrementally refresh* your index in subsequent cells below.\n",
+					"\n",
+					"The two cells below show an example for this scenario:\n",
+					"- First cell adds two more departments to the original departments data. It reads and prints list of departments to verify new departments are added correctly. The output shows 6 departments in total: four old ones and two new. Invoking \"refreshIndex\" updates \"deptIndex1\" so index captures new departments.\n",
+					"- Second cell runs our range selection query example. The results should now contain four departments: two are the ones, seen before when we ran the query above, and two are the new departments we just added."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"var extraDepartments = new List<GenericRow>()\n",
+					"{\n",
+					"    new GenericRow(new object[] {50, \"Inovation\", \"Seattle\"}),\n",
+					"    new GenericRow(new object[] {60, \"Human Resources\", \"San Francisco\"})\n",
+					"};\n",
+					"\t  \n",
+					"DataFrame extraDeptData = spark.CreateDataFrame(extraDepartments, departmentSchema);\n",
+					"extraDeptData.Write().Mode(\"Append\").Parquet(deptLocation);\n",
+					"\n",
+					"DataFrame deptDFrameUpdated = spark.Read().Parquet(deptLocation);\n",
+					"\n",
+					"deptDFrameUpdated.Show(10);\n",
+					"\n",
+					"hyperspace.RefreshIndex(\"deptIndex1\");"
+				],
+				"attachments": null,
+				"execution_count": 56
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"DataFrame newRangeFilter = deptDFrameUpdated.Filter(\"deptId > 20\").Select(\"deptName\");\n",
+					"newRangeFilter.Show();\n",
+					"\n",
+					"hyperspace.Explain(newRangeFilter, true, input => DisplayHTML(input));"
+				],
+				"attachments": null,
+				"execution_count": 57
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Hybrid Scan for Mutable Datasets\n",
+					"\n",
+					"Often times, if your underlying source data had some new files appended or existing files deleted, your index will get stale and Hyperspace decides not to use it. However, there are times where you just want to use the index without having to refresh it everytime. There could be multiple reasons for doing so:\n",
+					"\n",
+					"  1. You do not want to continuosly refresh your index but instead want to do it periodically since you understand your workloads the best.  \n",
+					"  2. You added/removed only a few files and do not want to wait for yet another refresh job to finish. \n",
+					"\n",
+					"To allow you to still use a stale index, Hyperspace introduces **Hybrid Scan**, a novel technique that allows users to utilize outdated or stale indexes (e.g., the underlying source data had some new files appended or existing files deleted), without refreshing indexes. \n",
+					"\n",
+					"To achieve this, when you set the appropriate configuration to enable Hybrid Scan, Hyperspace modifies the query plan to leverage the changes as following:\n",
+					"- Appended files can be merged to index data by using **`Union` or `BucketUnion` (for join)**. Shuffling appended data can also be applied before merging, if needed.\n",
+					"- Deleted files can be handled by injecting `Filter-NOT-IN` condition on **lineage column** of index data, so that the indexed rows from the deleted files can be excluded at query time. \n",
+					"\n",
+					"You can check the transformation of the query plan in below examples.\n",
+					"\n",
+					"    Note: Hybrid scan is only supported for non-partitioned data. Support for partitioned data is currently being worked upon."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"### Hybrid Scan for appended files - non-partitioned data\n",
+					"\n",
+					"Non-partitioned data is used in below example. In this example, we expect Join index can be used for the query and `BucketUnion` is introduced for appended files."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// GENERATE TEST DATA\n",
+					"using Microsoft.Spark.Sql.Types;\n",
+					"\n",
+					"var products = new List<GenericRow>() {\n",
+					"    new GenericRow(new object[] {\"orange\", 3, \"2020-10-01\"}),\n",
+					"    new GenericRow(new object[] {\"banana\", 1, \"2020-10-01\"}),\n",
+					"    new GenericRow(new object[] {\"carrot\", 5, \"2020-10-02\"}),\n",
+					"    new GenericRow(new object[] {\"beetroot\", 12, \"2020-10-02\"}),\n",
+					"    new GenericRow(new object[] {\"orange\", 2, \"2020-10-03\"}),\n",
+					"    new GenericRow(new object[] {\"banana\", 11, \"2020-10-03\"}),\n",
+					"    new GenericRow(new object[] {\"carrot\", 3, \"2020-10-03\"}),\n",
+					"    new GenericRow(new object[] {\"beetroot\", 2, \"2020-10-04\"}),\n",
+					"    new GenericRow(new object[] {\"cucumber\", 7, \"2020-10-05\"}),\n",
+					"    new GenericRow(new object[] {\"pepper\", 20, \"2020-10-06\"})\n",
+					"};\n",
+					"var productsSchema = new StructType(new List<StructField>()\n",
+					"{\n",
+					"    new StructField(\"name\", new StringType()),\n",
+					"    new StructField(\"qty\", new IntegerType()),\n",
+					"    new StructField(\"date\", new StringType())\n",
+					"});\n",
+					"\n",
+					"DataFrame testData = spark.CreateDataFrame(products, productsSchema); \n",
+					"string testDataLocation = $\"{dataPath}/productTable\";\n",
+					"testData.Write().Mode(\"overwrite\").Parquet(testDataLocation);"
+				],
+				"attachments": null,
+				"execution_count": 58
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// CREATE INDEX\n",
+					"DataFrame testDF = spark.Read().Parquet(testDataLocation);\n",
+					"var productIndex2Config = new IndexConfig(\"productIndex\", new string[] {\"name\"}, new string[] {\"date\", \"qty\"});\n",
+					"hyperspace.CreateIndex(testDF, productIndex2Config);"
+				],
+				"attachments": null,
+				"execution_count": 59
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"DataFrame filter1 = testDF.Filter(\"name = 'banana'\");\n",
+					"DataFrame filter2 = testDF.Filter(\"qty > 10\");\n",
+					"DataFrame query = filter1.Join(filter2, filter1.Col(\"name\") == filter2.Col(\"name\"));\n",
+					"\n",
+					"query.Show();\n",
+					"\n",
+					"hyperspace.Explain(query, true, input => DisplayHTML(input));"
+				],
+				"attachments": null,
+				"execution_count": 60
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Append new files.\n",
+					"var appendProducts = new List<GenericRow>()\n",
+					"{\n",
+					"    new GenericRow(new object[] {\"orange\", 13, \"2020-11-01\"}),\n",
+					"    new GenericRow(new object[] {\"banana\", 5, \"2020-11-01\"})\n",
+					"};\n",
+					"    \n",
+					"DataFrame appendData = spark.CreateDataFrame(appendProducts, productsSchema);\n",
+					"appendData.Write().Mode(\"Append\").Parquet(testDataLocation);"
+				],
+				"attachments": null,
+				"execution_count": 61
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"Hybrid scan is disabled by default. Therefore, you will see that since we appended new data, Hyperspace will decide NOT to use the index.\n",
+					"\n",
+					"In the output, you will see no plan differences (hence no highlighting)."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Hybrid Scan configs are false by default.\n",
+					"spark.Conf().Set(\"spark.hyperspace.index.hybridscan.enabled\", \"false\");\n",
+					"spark.Conf().Set(\"spark.hyperspace.index.hybridscan.delete.enabled\", \"false\");\n",
+					"\n",
+					"DataFrame testDFWithAppend = spark.Read().Parquet(testDataLocation);\n",
+					"DataFrame filter1 = testDFWithAppend.Filter(\"name = 'banana'\");\n",
+					"DataFrame filter2 = testDFWithAppend.Filter(\"qty > 10\");\n",
+					"DataFrame query = filter1.Join(filter2, filter1.Col(\"name\") == filter2.Col(\"name\"));\n",
+					"\n",
+					"query.Show();\n",
+					"\n",
+					"hyperspace.Explain(query, true, input => DisplayHTML(input));"
+				],
+				"attachments": null,
+				"execution_count": 62
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"### Enable Hybrid Scan\n",
+					"\n",
+					"In plan with indexes, you can see\n",
+					"`Exchange hashpartitioning` required only for appended files so that we could still utilize the \"shuffled\" index data with appended files. `BucketUnion` is used to merge \"shuffled\" appended files with the index data."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Enable Hybrid Scan config. \"delete\" config is not necessary.\n",
+					"spark.Conf().Set(\"spark.hyperspace.index.hybridscan.enabled\", \"true\");\n",
+					"// spark.Conf().Set(\"spark.hyperspace.index.hybridscan.delete.enabled\", \"true\");\n",
+					"spark.EnableHyperspace();\n",
+					"// Need to redefine query to recalculate the query plan.\n",
+					"DataFrame query = filter1.Join(filter2, filter1.Col(\"name\") == filter2.Col(\"name\"));\n",
+					"\n",
+					"query.Show();\n",
+					"\n",
+					"hyperspace.Explain(query, true, input => DisplayHTML(input));"
+				],
+				"attachments": null,
+				"execution_count": 63
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"### Cleanup\n",
+					"To make this notebook self-contained and not leave any dangling data, we have some small clean-up code below. "
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"using Microsoft.Spark.Extensions.Azure.Synapse.Analytics.Notebook.MSSparkUtils;\n",
+					"\n",
+					"FS.Rm(dataPath, true);\n",
+					"FS.Rm(indexLocation, true);"
+				],
+				"attachments": null,
+				"execution_count": 64
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"# /////////////////////////////////////////////////////////////////////////////\n",
+					"# 6. Hitchhiker's Guide to .NET for Apache Spark\n",
+					"\n",
+					"Welcome to the .NET for Apache Spark tutorial! We are glad to have you here. Before we begin, let us cover answers to a few quick questions:\n",
+					"\n",
+					" - #### What is .NET for Apache Spark?\n",
+					"  .NET for Apache Spark provides high performance APIs for using Apache Spark from C# and F#. With these .NET APIs, you can access the most popular Dataframe and SparkSQL aspects of Apache Spark, for working with structured data, and Spark Structured Streaming, for working with streaming data.\n",
+					"\n",
+					"  .NET for Apache Spark is compliant with .NET Standard - a formal specification of .NET APIs that are common across .NET implementations. This means you can use .NET for Apache Spark anywhere you write .NET code allowing you to reuse all the knowledge, skills, code, and libraries you already have as a .NET developer.\n",
+					"\n",
+					" - #### Where can I find more on .NET for Apache Spark?\n",
+					"  https://github.com/dotnet/spark\n",
+					"\n",
+					" - #### I did not know there was a REPL for C#!?\n",
+					"   Great question! :) We collaborated with the .NET team and they built one for us! https://github.com/dotnet/interactive \n",
+					"\n",
+					"Whew! Now that we have covered some basic information, let's begin! \n",
+					"\n",
+					"Since the .NET REPL is something very new, let us start by exploring what you can do with the REPL. "
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"# Basic Capabilities of the C# REPL"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Simple assignments should just work \n",
+					"var x = 1 + 25;"
+				],
+				"attachments": null,
+				"execution_count": 65
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// You can either use traditional approach to printing a variable...\n",
+					"Console.WriteLine(x);\n",
+					"\n",
+					"// ... or just type it and execute a cell\n",
+					"256"
+				],
+				"attachments": null,
+				"execution_count": 66
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// You can even play with built-in libraries/functions\n",
+					"Enumerable.Range(1, 5)"
+				],
+				"attachments": null,
+				"execution_count": 67
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// And now for some C# 8.0 features. If you haven't read it,\n",
+					"// here's the link: \n",
+					"// https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-8\n",
+					"1..4"
+				],
+				"attachments": null,
+				"execution_count": 68
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// We can even do pattern matching!\n",
+					"public static string RockPaperScissors(string first, string second)\n",
+					"    => (first, second) switch\n",
+					"    {\n",
+					"        (\"rock\", \"paper\") => \"rock is covered by paper. Paper wins.\", // <-- Next cell prints this out\n",
+					"        (\"rock\", \"scissors\") => \"rock breaks scissors. Rock wins.\",\n",
+					"        (\"paper\", \"rock\") => \"paper covers rock. Paper wins.\",\n",
+					"        (\"paper\", \"scissors\") => \"paper is cut by scissors. Scissors wins.\",\n",
+					"        (\"scissors\", \"rock\") => \"scissors is broken by rock. Rock wins.\",\n",
+					"        (\"scissors\", \"paper\") => \"scissors cuts paper. Scissors wins.\",\n",
+					"        (_, _) => \"tie\"\n",
+					"    };"
+				],
+				"attachments": null,
+				"execution_count": 69
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"RockPaperScissors(\"rock\", \"paper\")"
+				],
+				"attachments": null,
+				"execution_count": 70
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Now, for the fun part! You can render HTML\n",
+					"display(\n",
+					"    div(\n",
+					"        h1(\"Our Incredibly Declarative Example\"),\n",
+					"        p(\"Can you believe we wrote this \", b(\"in C#\"), \"?\"),\n",
+					"        img[src:\"https://media.giphy.com/media/xUPGcguWZHRC2HyBRS/giphy.gif\"],\n",
+					"        p(\"What will \", b(\"you\"), \" create next?\")\n",
+					"    )\n",
+					");"
+				],
+				"attachments": null,
+				"execution_count": 71
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"# Looking at data through Spark.NET\n",
+					""
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Let us use some sample data. In this cell, we create this data \n",
+					"// from *scratch* but you can also load it from your storage container. \n",
+					"// For instance, \n",
+					"// var df = spark.Read().Json(\"wasbs://<account>@<container>.blob.core.windows.net/people.json\");\n",
+					"\n",
+					"using Microsoft.Spark.Sql;\n",
+					"using Microsoft.Spark.Sql.Types;\n",
+					"using static Microsoft.Spark.Sql.Functions;\n",
+					"\n",
+					"var schema = new StructType(new List<StructField>()\n",
+					"    {\n",
+					"        new StructField(\"id\", new IntegerType()),\n",
+					"        new StructField(\"name\", new StringType())\n",
+					"    });\n",
+					"\n",
+					"var data = new List<GenericRow>();\n",
+					"data.Add(new GenericRow(new object[] { 0,  \"Michael\" }));\n",
+					"data.Add(new GenericRow(new object[] { 1,  \"Elva\"    }));\n",
+					"data.Add(new GenericRow(new object[] { 2,  \"Terry\"   }));\n",
+					"data.Add(new GenericRow(new object[] { 3,  \"Steve\"   }));\n",
+					"data.Add(new GenericRow(new object[] { 4,  \"Brigit\"  }));\n",
+					"data.Add(new GenericRow(new object[] { 5,  \"Niharika\"}));\n",
+					"data.Add(new GenericRow(new object[] { 6,  \"Rahul\"   }));\n",
+					"data.Add(new GenericRow(new object[] { 7,  \"Tomas\"   }));\n",
+					"data.Add(new GenericRow(new object[] { 8,  \"Euan\"   }));\n",
+					"data.Add(new GenericRow(new object[] { 9,  \"Lev\"   }));\n",
+					"data.Add(new GenericRow(new object[] { 10, \"Saveen\"   }));\n",
+					"\n",
+					"var df = spark.CreateDataFrame(data, schema);\n",
+					"df.Show();"
+				],
+				"attachments": null,
+				"execution_count": 72
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Wait, that rendering is old-school plain! Let's spice things up a bit!\n",
+					"// What we're doing here is to define a specific formatter that is tied to \n",
+					"// Microsoft.Spark.Sql.DataFrame and registering it. When we then invoke\n",
+					"// display() and pass a DataFrame, the formatter is invoked, which then\n",
+					"// generates the necessary HTML\n",
+					"\n",
+					"Microsoft.DotNet.Interactive.Formatting.Formatter<Microsoft.Spark.Sql.DataFrame>.Register((df, writer) =>\n",
+					"{\n",
+					"    var headers = new List<dynamic>();\n",
+					"    var columnNames = df.Columns();\n",
+					"    headers.Add(th(i(\"index\")));\n",
+					"    headers.AddRange(columnNames.Select(c => th(c)));\n",
+					"\n",
+					"    var rows = new List<List<dynamic>>();\n",
+					"    var currentRow = 0;\n",
+					"    var dfRows = df.Take(Math.Min(20, (int)df.Count()));\n",
+					"    foreach (Row dfRow in dfRows)\n",
+					"    {\n",
+					"        var cells = new List<dynamic>();\n",
+					"        cells.Add(td(currentRow));\n",
+					"\n",
+					"        foreach (string columnName in columnNames)\n",
+					"        {\n",
+					"            cells.Add(td(dfRow.Get(columnName)));\n",
+					"        }\n",
+					"\n",
+					"        rows.Add(cells);\n",
+					"        ++currentRow;\n",
+					"    }\n",
+					"\n",
+					"    var t = table[@border: \"0.1\"](\n",
+					"        thead[@style: \"background-color: blue; color: white\"](headers),\n",
+					"        tbody[@style: \"color: red\"](rows.Select(r => tr(r))));\n",
+					"\n",
+					"    writer.Write(t);\n",
+					"}, \"text/html\");"
+				],
+				"attachments": null,
+				"execution_count": 73
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Now, let's try rendering the Spark's DataFrame in two ways...\n",
+					"\n",
+					"// ... a regular way ...\n",
+					"df.Show();\n",
+					"\n",
+					"// Using dotnet-interactive's display method (so it invokes the formatter we just defined)\n",
+					"display(df);\n",
+					""
+				],
+				"attachments": null,
+				"execution_count": 74
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"// ... and just typing df (equivalent to \"display(df);\")\r\n",
+					"df"
+				],
+				"attachments": null,
+				"execution_count": 75
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Let us now try something more advanced like, defining C# classes on-the-fly...\n",
+					"public static class A {\n",
+					"    public static readonly string s = \"The person named \";\n",
+					"}"
+				],
+				"attachments": null,
+				"execution_count": 76
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// ... and just for illustration, let's define one more simple class\n",
+					"public static class B {\n",
+					"    private static Random _r = new Random();\n",
+					"    private static List<string> _moods = new List<string>{ \"happy\",\"funny\",\"awesome\",\"cool\"};\n",
+					"\n",
+					"    public static string GetMood() {\n",
+					"        return _moods[_r.Next(_moods.Count)];\n",
+					"    }\n",
+					"}"
+				],
+				"attachments": null,
+				"execution_count": 77
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Let us now define a Spark User-defined Function (UDF) that utilizes\n",
+					"// the classes we just defined above. If you do not recognize the syntax\n",
+					"// below, here's some relevant documentation:\n",
+					"// https://docs.microsoft.com/en-us/dotnet/api/system.func-2?view=netcore-3.1\n",
+					"// https://github.com/dotnet/spark/blob/master/examples/Microsoft.Spark.CSharp.Examples/Sql/Batch/Basic.cs\n",
+					"//\n",
+					"// Note: If you change the class definition above, and execute the cell,\n",
+					"// you should re-execute this cell (i.e., the cell that defines the UDF)\n",
+					"var udf = Udf<string, string>(str => $\"{A.s} - {str} - is {B.GetMood()}!\");"
+				],
+				"attachments": null,
+				"execution_count": 78
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Let's use the UDF on our Spark DataFrame\n",
+					"display(\n",
+					"    df\n",
+					"    .Select(\n",
+					"        udf((Microsoft.Spark.Sql.Column)df[\"name\"])));"
+				],
+				"attachments": null,
+				"execution_count": 79
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"// Tables are not that interesting, right? :) Let's do some visualizations now.\r\n",
+					"// Let us start with something simple to illustrate the idea. We highly encourage\r\n",
+					"// you to look at https://fslab.org/XPlot/ to understand how you can use XPlot's\r\n",
+					"// full capabilities. While the examples are in F#, it is fairly straightforward\r\n",
+					"// to rewrite in C#.\r\n",
+					"\r\n",
+					"using XPlot.Plotly;\r\n",
+					"\r\n",
+					"var lineChart = Chart.Line(new List<int> { 1, 2, 3, 4, 5, 6, 10, 44 });\r\n",
+					"lineChart.WithTitle(\"My awesome chart\");\r\n",
+					"lineChart.WithXTitle(\"X axis\");\r\n",
+					"lineChart.WithYTitle(\"Y axis\");\r\n",
+					"lineChart"
+				],
+				"attachments": null,
+				"execution_count": 80
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Good! Now let us try to visualize the Spark DataFrame we have.\n",
+					"// Now is a good time to refresh your concept of a Spark DataFrame\n",
+					"// https://spark.apache.org/docs/latest/sql-programming-guide.html\n",
+					"// Remember that a Spark DataFrame is a distributed representation \n",
+					"// of your dataset (yes, even if your data is a few KB). Since we\n",
+					"// are using a visualization library, we need to first 'collect'\n",
+					"// (notice how we are using df.Collect().ToArray() below)\n",
+					"// all the data that is distributed on your cluster, and shape it\n",
+					"// appropriately for XPlot.\n",
+					"//\n",
+					"// Note: Visualizations are good for smaller datasets (typically, \n",
+					"// a few 10s of thousands of data points coming to KBs), so if you are\n",
+					"// trying to visualize GBs of data, it is usually a good idea to\n",
+					"// summarize your data appropriately using Spark.NET's APIs. For\n",
+					"// a list of summarization APIs, see here:\n",
+					"// https://docs.microsoft.com/en-us/dotnet/api/microsoft.spark.sql.functions?view=spark-dotnet\n",
+					"\n",
+					"var names = new List<string>();\n",
+					"var ids = new List<int>();\n",
+					"\n",
+					"foreach (Row row in df.Collect().ToArray())\n",
+					"{\n",
+					" names.Add(row.GetAs<string>(\"name\"));\n",
+					" int? id = row.GetAs<int?>(\"id\");\n",
+					" ids.Add( id ?? 0);\n",
+					"}\n",
+					"var bar = new Graph.Bar\n",
+					"{\n",
+					" name = \"bar chart\",\n",
+					" x = names,\n",
+					" y = ids\n",
+					"};\n",
+					"\n",
+					"var chart = Chart.Plot(new[] {bar});\n",
+					"display(chart);"
+				],
+				"attachments": null,
+				"execution_count": 81
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// As a final step, let us now plot a histogram of a random dataset\n",
+					"\n",
+					"using XPlot.Plotly;\n",
+					"\n",
+					"var schema = new StructType(new List<StructField>()\n",
+					"    {\n",
+					"        new StructField(\"number\", new DoubleType())\n",
+					"    });\n",
+					"\n",
+					"Random random = new Random();\n",
+					"\n",
+					"var data = new List<GenericRow>();\n",
+					"for(int i = 0; i <=100; i++) {\n",
+					"    data.Add(new GenericRow(new object[] { random.NextDouble() }));\n",
+					"}\n",
+					"\n",
+					"var histogramDf = spark.CreateDataFrame(data, schema);\n",
+					"histogramDf.Show()"
+				],
+				"attachments": null,
+				"execution_count": 82
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Time to use LINQ (or Language Integrated Query) :)\n",
+					"// For those that are not familiar with LINQ, you can read more about it\n",
+					"// here: https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/\n",
+					"\n",
+					"using System.Linq;\n",
+					"\n",
+					"// Let us take the histogramDf we loaded through Spark and sample some data points\n",
+					"// for the histogram. We will then use LINQ to shape the data for our next \n",
+					"// steps (visualization!)\n",
+					"var sample1 = \n",
+					"        histogramDf.Sample(0.5, true).Collect().ToArray() // <---- Spark APIs\n",
+					"        .Select(x => x.GetAs<double>(\"number\")); // <---- LINQ APIs\n",
+					"        \n",
+					"// Let us create two more sample sets we can use for plotting\n",
+					"var sample2 = histogramDf.Sample(0.3, false).Collect().ToArray().Select(x => x.GetAs<double>(\"number\"));\n",
+					"var sample3 = histogramDf.Sample(0.6, true).Collect().ToArray().Select(x => x.GetAs<double>(\"number\"));"
+				],
+				"attachments": null,
+				"execution_count": 83
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Let us plot the histograms now!\n",
+					"var hist1 = new Graph.Histogram{x = sample1, opacity = 0.75};\n",
+					"var hist2 = new Graph.Histogram{x = sample2, opacity = 0.75};\n",
+					"var hist3 = new Graph.Histogram{x = sample3, opacity = 0.75};"
+				],
+				"attachments": null,
+				"execution_count": 84
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"Chart.Plot(new[] {hist1})"
+				],
+				"attachments": null,
+				"execution_count": 85
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"Chart.Plot(new[] {hist2})"
+				],
+				"attachments": null,
+				"execution_count": 86
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"Chart.Plot(new[] {hist3})"
+				],
+				"attachments": null,
+				"execution_count": 87
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// but wait, that's three different graphs and it's impossible to read them\n",
+					"// altogether! Let's try an overlay histogram, shall we?\n",
+					"var layout = new XPlot.Plotly.Layout.Layout{barmode=\"overlay\", title=\"Overlaid Histogram\"};\n",
+					"var histogram = Chart.Plot(new[] {hist1, hist2, hist3});\n",
+					"histogram.WithLayout(layout);\n",
+					"histogram"
+				],
+				"attachments": null,
+				"execution_count": 88
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// And for the final touches\n",
+					"using static XPlot.Plotly.Graph;\n",
+					"\n",
+					"layout.title = \"Overlaid Histogram with cool colors!\";\n",
+					"hist1.marker = new Marker {color = \"#D65108)\"};\n",
+					"hist2.marker = new Marker {color = \"#ffff00\"}; \n",
+					"hist3.marker = new Marker {color = \"#462255\"};\n",
+					"\n",
+					"histogram"
+				],
+				"attachments": null,
+				"execution_count": 89
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# VectorUdfs using Apache Arrow\n",
+					"Spark .NET supports constructing Arrow-backed VectorUdfs by directly using the [Apache Arrow](https://github.com/apache/arrow) library or by using the [Microsoft DataFrame](https://devblogs.microsoft.com/dotnet/an-introduction-to-dataframe/) library."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"// Let's construct a VectorUdf by directly using Arrow.\r\n",
+					"using Apache.Arrow;\r\n",
+					"using static Microsoft.Spark.Sql.ArrowFunctions;\r\n",
+					"using Column = Microsoft.Spark.Sql.Column;\r\n",
+					"\r\n",
+					"// Helper method to construct an ArrowArray from a string[].\r\n",
+					"public static IArrowArray ToStringArrowArray(string[] array)\r\n",
+					"{\r\n",
+					"    var valueOffsets = new ArrowBuffer.Builder<int>();\r\n",
+					"    var valueBuffer = new ArrowBuffer.Builder<byte>();\r\n",
+					"    int offset = 0;\r\n",
+					"\r\n",
+					"    foreach (string str in array)\r\n",
+					"    {\r\n",
+					"        byte[] bytes = Encoding.UTF8.GetBytes(str);\r\n",
+					"        valueOffsets.Append(offset);\r\n",
+					"        valueBuffer.Append(bytes);\r\n",
+					"        offset += bytes.Length;\r\n",
+					"    }\r\n",
+					"\r\n",
+					"    valueOffsets.Append(offset);\r\n",
+					"    return new StringArray(\r\n",
+					"        new ArrayData(\r\n",
+					"            Apache.Arrow.Types.StringType.Default,\r\n",
+					"            valueOffsets.Length - 1,\r\n",
+					"            0,\r\n",
+					"            0,\r\n",
+					"            new[] { ArrowBuffer.Empty, valueOffsets.Build(), valueBuffer.Build() }));\r\n",
+					"}\r\n",
+					"\r\n",
+					"Func<Int32Array, StringArray, StringArray> arrowUdf =\r\n",
+					"    (ids, names) => (StringArray)ToStringArrowArray(\r\n",
+					"        Enumerable.Range(0, names.Length)\r\n",
+					"            .Select(i => $\"id: {ids.GetValue(i)}, name: {names.GetString(i)}\")\r\n",
+					"            .ToArray());\r\n",
+					"\r\n",
+					"Func<Column, Column, Column> vectorUdf1 = VectorUdf(arrowUdf);"
+				],
+				"attachments": null,
+				"execution_count": 90
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"df.Select(vectorUdf1(df[\"id\"], df[\"name\"]))"
+				],
+				"attachments": null,
+				"execution_count": 91
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"// Now let's construct a VectorUdf by using Microsoft Dataframe\r\n",
+					"using Microsoft.Data.Analysis;\r\n",
+					"using static Microsoft.Spark.Sql.DataFrameFunctions;\r\n",
+					"\r\n",
+					"Func<Int32DataFrameColumn, ArrowStringDataFrameColumn, ArrowStringDataFrameColumn> msftDfFunc =\r\n",
+					"    (ids, names) =>\r\n",
+					"    {\r\n",
+					"        long i = 0;\r\n",
+					"        return names.Apply(cur => $\"id: {ids[i++]}, name: {cur}\");\r\n",
+					"    };\r\n",
+					"\r\n",
+					"Func<Column, Column, Column> vectorUdf2 = VectorUdf(msftDfFunc);"
+				],
+				"attachments": null,
+				"execution_count": 92
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"df.Select(vectorUdf2(df[\"id\"], df[\"name\"]))"
+				],
+				"attachments": null,
+				"execution_count": 93
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# Running custom Nugets as UDFs inside Spark\r\n",
+					"In .NET for Spark, it is very easy to install a library from Nuget and use in UDFs in Spark."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Use #r to install new packages into the current session\r\n",
+					"\r\n",
+					"// Installs latest version\r\n",
+					"#r \"nuget: MathNet.Numerics\"\r\n",
+					"\r\n",
+					"// Installs specified version\r\n",
+					"#r \"nuget: NumSharp,0.20.5\""
+				],
+				"attachments": null,
+				"execution_count": 94
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"// Let's construct some Udfs that have a dependency on the installed packages.\r\n",
+					"using MathNet.Numerics.LinearAlgebra;\r\n",
+					"using MathNet.Numerics.LinearAlgebra.Double;\r\n",
+					"using NumSharp;\r\n",
+					"\r\n",
+					"var mathNetUdf = Udf<string, string>(str => {\r\n",
+					"    Matrix<double> matrix = DenseMatrix.OfArray(new double[,] {\r\n",
+					"        {1,1,1,1},\r\n",
+					"        {1,2,3,4},\r\n",
+					"        {4,3,2,1}});\r\n",
+					"\r\n",
+					"    return $\"{matrix[0, 0]} - {str} - {matrix[1, 1]}!\";\r\n",
+					"});\r\n",
+					"\r\n",
+					"var numSharpUdf = Udf<string, string>(str => {\r\n",
+					"    var nd = np.arange(12);\r\n",
+					"\r\n",
+					"    return $\"{nd[1].ToString()} - {str} - {nd[5].ToString()}!\";\r\n",
+					"});"
+				],
+				"attachments": null,
+				"execution_count": 95
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"// UDFs are run on the Microsoft.Spark.Worker process. The package assemblies\r\n",
+					"// defined as a Udf depedency are shipped to the Worker so they are available\r\n",
+					"// at the time of execution.\r\n",
+					"df.Select(mathNetUdf(df[\"name\"])).Show();\r\n",
+					"\r\n",
+					"df.Select(numSharpUdf(df[\"name\"])).Show();\r\n",
+					"\r\n",
+					"// We can also chain udfs.\r\n",
+					"df.Select(mathNetUdf(numSharpUdf(df[\"name\"])))"
+				],
+				"attachments": null,
+				"execution_count": 96
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# Synapse Spark Utility Methods\r\n",
+					"[Microsoft.Spark.Extensions.Azure.Synapse.Analytics.Notebook.MSSparkUtils](dev.azure.com/dnceng/internal/_git/dotnet-spark-extensions?path=%2Fsrc%2FMicrosoft.Spark.Extensions.Azure.Synapse.Analytics%2FNotebook%2FMSSparkUtils)"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"// Utility for obtaining credentials (tokens and keys) for Synapse resources.\r\n",
+					"// Credentials methods https://dev.azure.com/dnceng/internal/_git/dotnet-spark-extensions?path=%2Fsrc%2FMicrosoft.Spark.Extensions.Azure.Synapse.Analytics%2FNotebook%2FMSSparkUtils%2FCredentials.cs\r\n",
+					"using Microsoft.Spark.Extensions.Azure.Synapse.Analytics.Notebook.MSSparkUtils;\r\n",
+					"\r\n",
+					"// Note that the help message is the help message returned by the Scala implementation. This needs to be updated and addressed in a future version.\r\n",
+					"Console.WriteLine($\"Help:\\n{Credentials.Help()}\");"
+				],
+				"attachments": null,
+				"execution_count": 97
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"// Utility for obtaining environment metadata for Synapse.\r\n",
+					"// Env methods https://dev.azure.com/dnceng/internal/_git/dotnet-spark-extensions?path=%2Fsrc%2FMicrosoft.Spark.Extensions.Azure.Synapse.Analytics%2FNotebook%2FMSSparkUtils%2FEnv.cs\r\n",
+					"Console.WriteLine($\"UserName: {Env.GetUserName()}\");\r\n",
+					"Console.WriteLine($\"UserId: {Env.GetUserId()}\");\r\n",
+					"Console.WriteLine($\"WorkspaceName: {Env.GetWorkspaceName()}\");\r\n",
+					"Console.WriteLine($\"PoolName: {Env.GetPoolName()}\");\r\n",
+					"Console.WriteLine($\"ClusterId: {Env.GetClusterId()}\");\r\n",
+					"\r\n",
+					"// Note that the help message is the help message returned by the Scala implementation. This needs to be updated and addressed in a future version.\r\n",
+					"Console.WriteLine($\"Help:\\n{Env.Help()}\");"
+				],
+				"attachments": null,
+				"execution_count": 98
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"// Utility for filesystem operations in Synapse notebook\r\n",
+					"// FS methods https://dev.azure.com/dnceng/internal/_git/dotnet-spark-extensions?path=%2Fsrc%2FMicrosoft.Spark.Extensions.Azure.Synapse.Analytics%2FNotebook%2FMSSparkUtils%2FFS.cs\r\n",
+					"// FileInfo methods https://dev.azure.com/dnceng/internal/_git/dotnet-spark-extensions?path=%2Fsrc%2FMicrosoft.Spark.Extensions.Azure.Synapse.Analytics%2FNotebook%2FMSSparkUtils%2FFileInfo.cs\r\n",
+					"\r\n",
+					"// Note that the help message is the help message returned by the Scala implementation. This needs to be updated and addressed in a future version.\r\n",
+					"FS.Help(\"\");"
+				],
+				"attachments": null,
+				"execution_count": 99
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"// Utility for notebook operations (e.g, chaining Synapse notebooks together)\r\n",
+					"// Notebook methods https://dev.azure.com/dnceng/internal/_git/dotnet-spark-extensions?path=%2Fsrc%2FMicrosoft.Spark.Extensions.Azure.Synapse.Analytics%2FNotebook%2FMSSparkUtils%2FNotebook.cs\r\n",
+					"\r\n",
+					"// Note that the help message is the help message returned by the Scala implementation. This needs to be updated and addressed in a future version.\r\n",
+					"Notebook.Help(\"\");"
+				],
+				"attachments": null,
+				"execution_count": 100
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# [Microsoft.Spark.Extensions.Azure.Synapse.Analytics.Notebook.Visualization](https://dev.azure.com/dnceng/internal/_git/dotnet-spark-extensions?path=%2Fsrc%2FMicrosoft.Spark.Extensions.Azure.Synapse.Analytics%2FNotebook%2FVisualization%2FFunctions.cs)"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"using Microsoft.Spark.Extensions.Azure.Synapse.Analytics.Notebook.Visualization;\r\n",
+					"// Construct an specific html fragment to synapse notebook front-end for rendering\r\n",
+					"// based on user-input html content.\r\n",
+					"DisplayHTML(\"<h1>Hello World</h1>\");"
+				],
+				"attachments": null,
+				"execution_count": 101
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# [TokenLibrary](https://dev.azure.com/dnceng/internal/_git/dotnet-spark-extensions?path=%2Fsrc%2FMicrosoft.Spark.Extensions.Azure.Synapse.Analytics%2FUtils%2FTokenLibrary.cs)\r\n",
+					"\r\n",
+					"[Synapse Analytics TokenLibrary Official Docs](https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spark-secure-credentials-with-tokenlibrary)"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"using Microsoft.Spark.Extensions.Azure.Synapse.Analytics.Utils;\r\n",
+					"\r\n",
+					"// Note that the help message is the help message returned by the Scala implementation. This needs to be updated and addressed in a future version.\r\n",
+					"// TODO: Methodname needs to be uppercase.\r\n",
+					"Console.WriteLine($\"Help:\\n{TokenLibrary.help()}\");"
+				],
+				"attachments": null,
+				"execution_count": 102
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# Miscellaneous Helpers\n",
+					"Learn about some internal functions offered by using .NET for Spark."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"// Curious about the version of Spark .NET currently installed?\r\n",
+					"// Let's use the following method to find out!\r\n",
+					"using Microsoft.Spark.Experimental.Sql;\r\n",
+					"spark.GetAssemblyInfo()"
+				],
+				"attachments": null,
+				"execution_count": 103
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"// Current version of the dotnet-interactive REPL.\r\n",
+					"#!about"
+				],
+				"attachments": null,
+				"execution_count": 104
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"// We can even run powershell core commands\r\n",
+					"#!pwsh\r\n",
+					"cat /etc/hosts"
+				],
+				"attachments": null,
+				"execution_count": 105
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"// We can also run F# code\r\n",
+					"#!fsharp\r\n",
+					"open System\r\n",
+					"printfn \"Hello World from F#!\""
+				],
+				"attachments": null,
+				"execution_count": 106
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Whatever code is deemed invalid by the C# Compiler, is invalid here too \n",
+					"var z = 12345"
+				],
+				"attachments": null,
+				"execution_count": 107
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// You could write code that throws exceptions and they bubble up to the notebook\n",
+					"throw new Exception(\"watzzz\");"
+				],
+				"attachments": null,
+				"execution_count": 108
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"# //////////////////////////////////////////////////////////////////////\n",
+					"# 7. User-Defined Functions with Complex Types in .NET for Apache Spark\n",
+					"\n",
+					"A user-defined function, or UDF, is a routine that can take in parameters, perform some sort of calculation, and then return a result. UDFs are a powerful mechanism to encapsulate your business logic and use the power of Spark to execute them at scale. This notebook explains how to construct UDFs in C# and includes example functions, such as how to use UDFs with complex Row objects.\n",
+					"\n",
+					"[Addition Reading](https://docs.microsoft.com/en-us/dotnet/spark/how-to-guides/deploy-worker-udf-binaries)\n",
+					"\n",
+					"Now let's get started with some examples!"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Create a simple DataFrame\n",
+					"\n",
+					"Create a DataFrame which will be used in the following examples."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"Microsoft.Spark.Sql.DataFrame df = spark.Range(0, 5).WithColumn(\"structId\", Struct(\"id\"));"
+				],
+				"attachments": null,
+				"execution_count": 112
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## UDF that takes in Row objects\n",
+					"\n",
+					"Now, let us define a UDF that takes in Row objects and adds 100 to the original data's first column.\n",
+					""
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"Func<Column, Column> udf1 = Udf<Row, int>(\n",
+					"    row => row.GetAs<int>(0) + 100);"
+				],
+				"attachments": null,
+				"execution_count": 113
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"We now show how to use a UDF with DataFrames"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"df.Select(udf1(df[\"structId\"]).As(\"newId\")).Show();"
+				],
+				"attachments": null,
+				"execution_count": 114
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## UDF that returns Row objects\n",
+					"\n",
+					"Often times, you might want to accept a Row as input, and construct a **new** Row based on some complex business logic. You can do this as follows:\n",
+					""
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"using Microsoft.Spark.Sql.Types;\n",
+					"\n",
+					"// First define the schema for Row objects\n",
+					"var schema = new StructType(new[]\n",
+					"{\n",
+					"    new StructField(\"col1\", new IntegerType()),\n",
+					"    new StructField(\"col2\", new StringType())\n",
+					"});\n",
+					"\n",
+					"// Then define UDF that returns Row objects          \n",
+					"Func<Column, Column> udf2 = Udf<int>(\n",
+					"    id => new GenericRow(new object[] { id, \"abc\" }), schema);"
+				],
+				"attachments": null,
+				"execution_count": 115
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Use UDF with DataFrames\n",
+					"df.Select(udf2(df[\"id\"]).As(\"newStructId\")).Show();"
+				],
+				"attachments": null,
+				"execution_count": 116
+			},
+			{
+				"cell_type": "markdown",
+				"source": [
+					"## Chained UDF with Row objects\n",
+					""
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Chained UDF using udf1 and udf2 defined above.\n",
+					"df.Select(udf1(udf2(df[\"id\"])).As(\"chainedId\")).Show();"
+				],
+				"attachments": null,
+				"execution_count": 117
+			}
+		]
+	}
+}
