@@ -1,0 +1,136 @@
+{
+	"name": "BacklogReason",
+	"properties": {
+		"Name": "BacklogReason",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Namespace": {
+			"SchemaName": null,
+			"DatabaseName": "Database 2"
+		},
+		"StorageDescriptor": {
+			"Distribution": null,
+			"Columns": [
+				{
+					"Name": "BacklogReasonId",
+					"Description": "The unique identifier of a Backlog Reason.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "BacklogReason.cdm.json/BacklogReason",
+						"Name": "BacklogReasonId"
+					}
+				},
+				{
+					"Name": "BacklogReasonName",
+					"Description": "The name of a Backlog Reason.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "BacklogReason.cdm.json/BacklogReason",
+						"Name": "BacklogReasonName"
+					}
+				},
+				{
+					"Name": "BacklogReasonDescription",
+					"Description": "The description of a Backlog Reason.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "BacklogReason.cdm.json/BacklogReason",
+						"Name": "BacklogReasonDescription"
+					}
+				}
+			],
+			"ColumnSetEntityName": "b6908df8-a98c-4845-b47d-fd4d81440191",
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://default@hozhaohdi0428gen2.dfs.core.windows.net/Database 2/BacklogReason",
+					"delimiter": ",",
+					"firstRowAsHeader": "false",
+					"multiLine": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://default@hozhaohdi0428gen2.dfs.core.windows.net/Database 2/BacklogReason",
+				"Properties": {
+					"LinkedServiceName": "yanjuntestws-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"BacklogReasonId\":{\"entity\":\"BacklogReason.cdm.json/BacklogReason\",\"name\":\"BacklogReasonId\"},\"BacklogReasonName\":{\"entity\":\"BacklogReason.cdm.json/BacklogReason\",\"name\":\"BacklogReasonName\"},\"BacklogReasonDescription\":{\"entity\":\"BacklogReason.cdm.json/BacklogReason\",\"name\":\"BacklogReasonDescription\"}}}"
+			},
+			"Compressed": false,
+			"SerDeInfo": null,
+			"IsStoredAsSubdirectories": false
+		},
+		"Owner": null,
+		"CreateTime": 0,
+		"LastAccessTime": 0,
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false,
+		"ViewOriginalText": null,
+		"ViewExpandedText": null,
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"OriginObjectId": null,
+		"IsSharedEntity": false,
+		"PublishStatus": "PUBLISHED",
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"BacklogReason\",\"path\":\"BacklogReason.cdm.json/BacklogReason\"},\"description\":\"The reason why the Order/Order Line Item is on backlog or backordered.\\n\\nEx:\\n- inventory out-of-stock\\n(see CUSTOMER ORDER PRODUCT BACKLOG\\nFROM WAREHOUSE)\\n- make-to-order item\\n- obsolete product\\n- discontinued\\n- seasonal item\\n- manufacturing delay\\n(see CUSTOMER ORDER PRODUCT BACKLOG \\nFROM Manufacturer Facility)\\n\\nBacklog is the quantity of goods still to be delivered, received, produced, issued, etc., for which the planned or agreed date has expired.\",\"primaryKey\":[\"BacklogReasonId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"BacklogReason.cdm.json/BacklogReason\",\"name\":\"BacklogReasonId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Backlog Reason.\",\"isNullable\":false,\"name\":\"BacklogReasonId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"BacklogReason.cdm.json/BacklogReason\",\"name\":\"BacklogReasonName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a Backlog Reason.\",\"isNullable\":true,\"name\":\"BacklogReasonName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"BacklogReason.cdm.json/BacklogReason\",\"name\":\"BacklogReasonDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512,\"description\":\"The description of a Backlog Reason.\",\"isNullable\":true,\"name\":\"BacklogReasonDescription\"}]}}}",
+			"Description": "The reason why the Order/Order Line Item is on backlog or backordered.\n\nEx:\n- inventory out-of-stock\n(see CUSTOMER ORDER PRODUCT BACKLOG\nFROM WAREHOUSE)\n- make-to-order item\n- obsolete product\n- discontinued\n- seasonal item\n- manufacturing delay\n(see CUSTOMER ORDER PRODUCT BACKLOG \nFROM Manufacturer Facility)\n\nBacklog is the quantity of goods still to be delivered, received, produced, issued, etc., for which the planned or agreed date has expired.",
+			"DisplayFolderInfo": "{\"name\":\"BBB\",\"colorCode\":\"#00188F\"}",
+			"PrimaryKeys": "BacklogReasonId",
+			"spark.sql.sources.provider": "csv",
+			"x-ms-usageinfo": "AzureSynapseDatabaseTemplate",
+			"spark.sql.sources.schema.numParts": "1",
+			"spark.sql.sources.schema.part.0": "{\"type\":\"struct\",\"fields\":[{\"name\":\"BacklogReasonId\",\"type\":\"integer\",\"nullable\":false,\"metadata\":{}},{\"name\":\"BacklogReasonName\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"BacklogReasonDescription\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}]}"
+		},
+		"ObjectVersion": 1,
+		"ObjectId": "05d2977a-be8a-4a9e-8b5f-7dfbcf5e3363",
+		"Description": "The reason why the Order/Order Line Item is on backlog or backordered.\n\nEx:\n- inventory out-of-stock\n(see CUSTOMER ORDER PRODUCT BACKLOG\nFROM WAREHOUSE)\n- make-to-order item\n- obsolete product\n- discontinued\n- seasonal item\n- manufacturing delay\n(see CUSTOMER ORDER PRODUCT BACKLOG \nFROM Manufacturer Facility)\n\nBacklog is the quantity of goods still to be delivered, received, produced, issued, etc., for which the planned or agreed date has expired."
+	},
+	"type": "TABLE"
+}

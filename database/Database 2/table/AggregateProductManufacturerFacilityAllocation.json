@@ -1,0 +1,213 @@
+{
+	"name": "AggregateProductManufacturerFacilityAllocation",
+	"properties": {
+		"Name": "AggregateProductManufacturerFacilityAllocation",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Namespace": {
+			"SchemaName": null,
+			"DatabaseName": "Database 2"
+		},
+		"StorageDescriptor": {
+			"Distribution": null,
+			"Columns": [
+				{
+					"Name": "ProductId",
+					"Description": "The unique identifier of a Product.",
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductManufacturerFacilityAllocation.cdm.json/AggregateProductManufacturerFacilityAllocation",
+						"Name": "ProductId"
+					}
+				},
+				{
+					"Name": "ManufacturerId",
+					"Description": "The unique identifier of a Manufacturer.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductManufacturerFacilityAllocation.cdm.json/AggregateProductManufacturerFacilityAllocation",
+						"Name": "ManufacturerId"
+					}
+				},
+				{
+					"Name": "ManufacturerFacilityId",
+					"Description": "The unique identifier of a Manufacturer Facility.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductManufacturerFacilityAllocation.cdm.json/AggregateProductManufacturerFacilityAllocation",
+						"Name": "ManufacturerFacilityId"
+					}
+				},
+				{
+					"Name": "Timestamp",
+					"Description": "The timestamp that the associated information is reported, recorded or effective as-of.",
+					"OriginDataTypeName": {
+						"TypeName": "timestamp",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
+							"HIVE_TYPE_STRING": "timestamp"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductManufacturerFacilityAllocation.cdm.json/AggregateProductManufacturerFacilityAllocation",
+						"Name": "Timestamp"
+					}
+				},
+				{
+					"Name": "TotalAllocationsUnitsQuantity",
+					"Description": "The total number of units allocated for the associated period.",
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductManufacturerFacilityAllocation.cdm.json/AggregateProductManufacturerFacilityAllocation",
+						"Name": "TotalAllocationsUnitsQuantity"
+					}
+				},
+				{
+					"Name": "TotalAllocationsProductUnitsValuationAmount",
+					"Description": "The total value of units allocated for the associated period.",
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductManufacturerFacilityAllocation.cdm.json/AggregateProductManufacturerFacilityAllocation",
+						"Name": "TotalAllocationsProductUnitsValuationAmount"
+					}
+				},
+				{
+					"Name": "CurrencyId",
+					"Description": "The unique identifier of a currency.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductManufacturerFacilityAllocation.cdm.json/AggregateProductManufacturerFacilityAllocation",
+						"Name": "CurrencyId"
+					}
+				}
+			],
+			"ColumnSetEntityName": "14124bd5-5e90-4d96-befb-72b208094248",
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://default@hozhaohdi0428gen2.dfs.core.windows.net/Database 2/AggregateProductManufacturerFacilityAllocation",
+					"delimiter": ",",
+					"firstRowAsHeader": "false",
+					"multiLine": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://default@hozhaohdi0428gen2.dfs.core.windows.net/Database 2/AggregateProductManufacturerFacilityAllocation",
+				"Properties": {
+					"LinkedServiceName": "yanjuntestws-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ProductId\":{\"entity\":\"AggregateProductManufacturerFacilityAllocation.cdm.json/AggregateProductManufacturerFacilityAllocation\",\"name\":\"ProductId\"},\"ManufacturerId\":{\"entity\":\"AggregateProductManufacturerFacilityAllocation.cdm.json/AggregateProductManufacturerFacilityAllocation\",\"name\":\"ManufacturerId\"},\"ManufacturerFacilityId\":{\"entity\":\"AggregateProductManufacturerFacilityAllocation.cdm.json/AggregateProductManufacturerFacilityAllocation\",\"name\":\"ManufacturerFacilityId\"},\"Timestamp\":{\"entity\":\"AggregateProductManufacturerFacilityAllocation.cdm.json/AggregateProductManufacturerFacilityAllocation\",\"name\":\"Timestamp\"},\"TotalAllocationsUnitsQuantity\":{\"entity\":\"AggregateProductManufacturerFacilityAllocation.cdm.json/AggregateProductManufacturerFacilityAllocation\",\"name\":\"TotalAllocationsUnitsQuantity\"},\"TotalAllocationsProductUnitsValuationAmount\":{\"entity\":\"AggregateProductManufacturerFacilityAllocation.cdm.json/AggregateProductManufacturerFacilityAllocation\",\"name\":\"TotalAllocationsProductUnitsValuationAmount\"},\"CurrencyId\":{\"entity\":\"AggregateProductManufacturerFacilityAllocation.cdm.json/AggregateProductManufacturerFacilityAllocation\",\"name\":\"CurrencyId\"}}}"
+			},
+			"Compressed": false,
+			"SerDeInfo": null,
+			"IsStoredAsSubdirectories": false
+		},
+		"Owner": null,
+		"CreateTime": 0,
+		"LastAccessTime": 0,
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false,
+		"ViewOriginalText": null,
+		"ViewExpandedText": null,
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"OriginObjectId": null,
+		"IsSharedEntity": false,
+		"PublishStatus": "PUBLISHED",
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"AggregateProductManufacturerFacilityAllocation\",\"path\":\"AggregateProductManufacturerFacilityAllocation.cdm.json/AggregateProductManufacturerFacilityAllocation\"},\"description\":\"The allocations that are from Manufacturer Facility production at a specific Manufacturer Facility.\\n\\nThese are allocations of product allocated to the Manufacturer Facility from near-term production and to be shipped direct to the customer in support of the associated order(s).\\n\\nNote:\\nDrill-down is provided at the Order level.\",\"primaryKey\":[\"ProductId\",\"ManufacturerId\",\"ManufacturerFacilityId\",\"Timestamp\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"AggregateProductManufacturerFacilityAllocation.cdm.json/AggregateProductManufacturerFacilityAllocation\",\"name\":\"ProductId\"},\"dataType\":\"long\",\"description\":\"The unique identifier of a Product.\",\"isNullable\":false,\"name\":\"ProductId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"AggregateProductManufacturerFacilityAllocation.cdm.json/AggregateProductManufacturerFacilityAllocation\",\"name\":\"ManufacturerId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Manufacturer.\",\"isNullable\":false,\"name\":\"ManufacturerId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"AggregateProductManufacturerFacilityAllocation.cdm.json/AggregateProductManufacturerFacilityAllocation\",\"name\":\"ManufacturerFacilityId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Manufacturer Facility.\",\"isNullable\":false,\"name\":\"ManufacturerFacilityId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"AggregateProductManufacturerFacilityAllocation.cdm.json/AggregateProductManufacturerFacilityAllocation\",\"name\":\"Timestamp\"},\"dataType\":\"timestamp\",\"description\":\"The timestamp that the associated information is reported, recorded or effective as-of.\",\"isNullable\":false,\"name\":\"Timestamp\",\"timestampFormat\":\"YYYY-MM-DD HH:MM:SS.fffffffff\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"AggregateProductManufacturerFacilityAllocation.cdm.json/AggregateProductManufacturerFacilityAllocation\",\"name\":\"TotalAllocationsUnitsQuantity\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The total number of units allocated for the associated period.\",\"isNullable\":true,\"scale\":2,\"name\":\"TotalAllocationsUnitsQuantity\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"AggregateProductManufacturerFacilityAllocation.cdm.json/AggregateProductManufacturerFacilityAllocation\",\"name\":\"TotalAllocationsProductUnitsValuationAmount\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The total value of units allocated for the associated period.\",\"isNullable\":true,\"scale\":2,\"name\":\"TotalAllocationsProductUnitsValuationAmount\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"AggregateProductManufacturerFacilityAllocation.cdm.json/AggregateProductManufacturerFacilityAllocation\",\"name\":\"CurrencyId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a currency.\",\"isNullable\":true,\"name\":\"CurrencyId\"}]}}}",
+			"Description": "The allocations that are from Manufacturer Facility production at a specific Manufacturer Facility.\n\nThese are allocations of product allocated to the Manufacturer Facility from near-term production and to be shipped direct to the customer in support of the associated order(s).\n\nNote:\nDrill-down is provided at the Order level.",
+			"DisplayFolderInfo": "{\"name\":\"BBB\",\"colorCode\":\"#00188F\"}",
+			"PrimaryKeys": "ProductId,ManufacturerId,ManufacturerFacilityId,Timestamp",
+			"spark.sql.sources.provider": "csv",
+			"x-ms-usageinfo": "AzureSynapseDatabaseTemplate",
+			"spark.sql.sources.schema.numParts": "1",
+			"spark.sql.sources.schema.part.0": "{\"type\":\"struct\",\"fields\":[{\"name\":\"ProductId\",\"type\":\"long\",\"nullable\":false,\"metadata\":{}},{\"name\":\"ManufacturerId\",\"type\":\"integer\",\"nullable\":false,\"metadata\":{}},{\"name\":\"ManufacturerFacilityId\",\"type\":\"integer\",\"nullable\":false,\"metadata\":{}},{\"name\":\"Timestamp\",\"type\":\"timestamp\",\"nullable\":false,\"metadata\":{}},{\"name\":\"TotalAllocationsUnitsQuantity\",\"type\":\"decimal(18,2)\",\"nullable\":true,\"metadata\":{}},{\"name\":\"TotalAllocationsProductUnitsValuationAmount\",\"type\":\"decimal(18,2)\",\"nullable\":true,\"metadata\":{}},{\"name\":\"CurrencyId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}}]}"
+		},
+		"ObjectVersion": 1,
+		"ObjectId": "26023e6d-c89b-4401-bc7c-e9a443a4f64a",
+		"Description": "The allocations that are from Manufacturer Facility production at a specific Manufacturer Facility.\n\nThese are allocations of product allocated to the Manufacturer Facility from near-term production and to be shipped direct to the customer in support of the associated order(s).\n\nNote:\nDrill-down is provided at the Order level."
+	},
+	"type": "TABLE"
+}

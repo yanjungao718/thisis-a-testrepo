@@ -1,0 +1,31 @@
+{
+	"name": "MdeClearMachineNetworkInfo_Copy1",
+	"properties": {
+		"targetBigDataPool": {
+			"referenceName": "testsparkpool",
+			"type": "BigDataPoolReference"
+		},
+		"requiredSparkVersion": "2.4",
+		"language": "scala",
+		"jobProperties": {
+			"name": "MdeClearMachineNetworkInfo_Copy1",
+			"file": "abfss://default@hozhaohdi0428gen2.dfs.core.windows.net/synapse/workspaces/yanjuntestws/batchjobs/MdeClearMachineNetworkInfo/jrt-fs.jar",
+			"className": "jrt",
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "3",
+				"spark.dynamicAllocation.maxExecutors": "3",
+				"spark.autotune.trackingId": "3177d86f-fa99-46b4-a547-ffbec75d05c5"
+			},
+			"args": [],
+			"jars": [],
+			"pyFiles": [],
+			"files": [],
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 3
+		}
+	}
+}

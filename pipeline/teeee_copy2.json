@@ -1,0 +1,40 @@
+{
+	"name": "teeee_copy2",
+	"properties": {
+		"description": "Scala Synapse Pipeline",
+		"activities": [
+			{
+				"name": "Get Secret",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": true,
+					"secureInput": true
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://ine-runtime-stg-eus.vault.azure.net/secrets/apia-wcd-ine-spark-cooking-stg-us?api-version=7.0",
+					"connectVia": {
+						"referenceName": "AutoResolveIntegrationRuntime",
+						"type": "IntegrationRuntimeReference"
+					},
+					"method": "GET",
+					"authentication": {
+						"resource": "https://vault.azure.net",
+						"credential": {
+							"referenceName": "InESynapseUserIdentity",
+							"type": "CredentialReference"
+						}
+					},
+					"type": null
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-02-28T03:06:47Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

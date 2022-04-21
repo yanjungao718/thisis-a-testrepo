@@ -1,0 +1,136 @@
+{
+	"name": "ReturnReason",
+	"properties": {
+		"Name": "ReturnReason",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Namespace": {
+			"SchemaName": null,
+			"DatabaseName": "Database 2"
+		},
+		"StorageDescriptor": {
+			"Distribution": null,
+			"Columns": [
+				{
+					"Name": "ReturnReasonId",
+					"Description": "The unique identifier of a Return Reason.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ReturnReason.cdm.json/ReturnReason",
+						"Name": "ReturnReasonId"
+					}
+				},
+				{
+					"Name": "ReturnReasonName",
+					"Description": "The name of a Return Reason.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ReturnReason.cdm.json/ReturnReason",
+						"Name": "ReturnReasonName"
+					}
+				},
+				{
+					"Name": "ReturnReasonDescription",
+					"Description": "The description of a Return Reason.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ReturnReason.cdm.json/ReturnReason",
+						"Name": "ReturnReasonDescription"
+					}
+				}
+			],
+			"ColumnSetEntityName": "590340d4-17fa-4517-999a-c8237c37bf93",
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://default@hozhaohdi0428gen2.dfs.core.windows.net/Database 2/ReturnReason",
+					"delimiter": ",",
+					"firstRowAsHeader": "false",
+					"multiLine": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://default@hozhaohdi0428gen2.dfs.core.windows.net/Database 2/ReturnReason",
+				"Properties": {
+					"LinkedServiceName": "yanjuntestws-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ReturnReasonId\":{\"entity\":\"ReturnReason.cdm.json/ReturnReason\",\"name\":\"ReturnReasonId\"},\"ReturnReasonName\":{\"entity\":\"ReturnReason.cdm.json/ReturnReason\",\"name\":\"ReturnReasonName\"},\"ReturnReasonDescription\":{\"entity\":\"ReturnReason.cdm.json/ReturnReason\",\"name\":\"ReturnReasonDescription\"}}}"
+			},
+			"Compressed": false,
+			"SerDeInfo": null,
+			"IsStoredAsSubdirectories": false
+		},
+		"Owner": null,
+		"CreateTime": 0,
+		"LastAccessTime": 0,
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false,
+		"ViewOriginalText": null,
+		"ViewExpandedText": null,
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"OriginObjectId": null,
+		"IsSharedEntity": false,
+		"PublishStatus": "PUBLISHED",
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"ReturnReason\",\"path\":\"ReturnReason.cdm.json/ReturnReason\"},\"description\":\"The reason why the Order/Order Line Item was returned.\\n\\nEx:\\n- delivery was too late\\n- defective\\n- wrong quantity\\n- missing component\\n- missing documentation\\n- out of specification\",\"primaryKey\":[\"ReturnReasonId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"ReturnReason.cdm.json/ReturnReason\",\"name\":\"ReturnReasonId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Return Reason.\",\"isNullable\":false,\"name\":\"ReturnReasonId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"ReturnReason.cdm.json/ReturnReason\",\"name\":\"ReturnReasonName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a Return Reason.\",\"isNullable\":true,\"name\":\"ReturnReasonName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"ReturnReason.cdm.json/ReturnReason\",\"name\":\"ReturnReasonDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512,\"description\":\"The description of a Return Reason.\",\"isNullable\":true,\"name\":\"ReturnReasonDescription\"}]}}}",
+			"Description": "The reason why the Order/Order Line Item was returned.\n\nEx:\n- delivery was too late\n- defective\n- wrong quantity\n- missing component\n- missing documentation\n- out of specification",
+			"DisplayFolderInfo": "{\"name\":\"BBB\",\"colorCode\":\"#00188F\"}",
+			"PrimaryKeys": "ReturnReasonId",
+			"spark.sql.sources.provider": "csv",
+			"x-ms-usageinfo": "AzureSynapseDatabaseTemplate",
+			"spark.sql.sources.schema.numParts": "1",
+			"spark.sql.sources.schema.part.0": "{\"type\":\"struct\",\"fields\":[{\"name\":\"ReturnReasonId\",\"type\":\"integer\",\"nullable\":false,\"metadata\":{}},{\"name\":\"ReturnReasonName\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ReturnReasonDescription\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}]}"
+		},
+		"ObjectVersion": 1,
+		"ObjectId": "31f56d5d-79d3-4068-ab0a-8a04f37d6fcc",
+		"Description": "The reason why the Order/Order Line Item was returned.\n\nEx:\n- delivery was too late\n- defective\n- wrong quantity\n- missing component\n- missing documentation\n- out of specification"
+	},
+	"type": "TABLE"
+}

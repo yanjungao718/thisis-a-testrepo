@@ -1,0 +1,31 @@
+{
+	"name": "asdf",
+	"properties": {
+		"targetBigDataPool": {
+			"referenceName": "testsparkpool",
+			"type": "BigDataPoolReference"
+		},
+		"requiredSparkVersion": "2.4",
+		"language": "scala",
+		"jobProperties": {
+			"name": "test",
+			"file": "abfss://default@hozhaohdi0428gen2.dfs.core.windows.net/synapse/workspaces/yanjuntestws/batchjobs/MdeClearMachineNetworkInfo/jrt.jar",
+			"className": "jrt",
+			"conf": {
+				"spark.dynamicAllocation.enabled": "true",
+				"spark.dynamicAllocation.minExecutors": "1",
+				"spark.dynamicAllocation.maxExecutors": "5",
+				"spark.autotune.trackingId": "c5cad2b7-3d5e-4bff-a987-6dfe548e9d7b"
+			},
+			"args": [],
+			"jars": [],
+			"pyFiles": [],
+			"files": [],
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 1
+		}
+	}
+}

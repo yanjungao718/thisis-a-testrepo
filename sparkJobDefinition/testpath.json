@@ -1,0 +1,51 @@
+{
+	"name": "testpath",
+	"properties": {
+		"folder": {
+			"name": "testfolder1"
+		},
+		"targetBigDataPool": {
+			"referenceName": "testsparkpool",
+			"type": "BigDataPoolReference"
+		},
+		"requiredSparkVersion": "2.4",
+		"language": "scala",
+		"jobProperties": {
+			"name": "QueryRunner",
+			"file": "abfss://autotunedevfs@autotunedevstorage.dfs.core.windows.net/users/rufan/baseline-model-training/jars/autotune-admin_2.12-0.1-SNAPSHOT.jar",
+			"className": "com.microsoft.autotune.training.baseline.QueryRunner",
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "4",
+				"spark.dynamicAllocation.maxExecutors": "4",
+				"spark.autotune.trackingId": "1c97ad3c-b03a-4a46-ae98-41380af43f0f"
+			},
+			"args": [
+				"-poolName",
+				"rufanPipeline1",
+				"-dataset",
+				"TPCDS",
+				"-queryToRun",
+				"query1",
+				"-scaleFactor",
+				"1T",
+				"-modelSuggestConfigDir",
+				"/users/rufan/baseline-model-training/model-suggest-config/rufanPipeline1/suggestedConfig.json",
+				"-queryEventDir",
+				"/users/rufan/baseline-model-training/queryEvents"
+			],
+			"jars": [
+				"abfss://autotunedevfs@autotunedevstorage.dfs.core.windows.net/users/rufan/baseline-model-training/jars/autotune-client_2.12-0.1-SNAPSHOT.jar",
+				"abfss://autotunedevfs@autotunedevstorage.dfs.core.windows.net/users/rufan/baseline-model-training/jars/autotune-common_2.12-0.1-SNAPSHOT.jar",
+				"abfss://autotunedevfs@autotunedevstorage.dfs.core.windows.net/users/rufan/baseline-model-training/jars/peregrine-spark_2.12-0.10_1-SNAPSHOT.jar",
+				"abfss://autotunedevfs@autotunedevstorage.dfs.core.windows.net/users/rufan/baseline-model-training/jars/tpch-tpcds-resources.jar"
+			],
+			"files": [],
+			"driverMemory": "56g",
+			"driverCores": 8,
+			"executorMemory": "56g",
+			"executorCores": 8,
+			"numExecutors": 4
+		}
+	}
+}

@@ -1,0 +1,92 @@
+{
+	"name": "manualGen_copy1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Get Secret",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": true,
+					"secureInput": true
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://ine-runtime-stg-eus.vault.azure.net/secrets/apia-wcd-ine-spark-cooking-stg-us?api-version=7.0",
+					"connectVia": {
+						"referenceName": "AutoResolveIntegrationRuntime",
+						"type": "IntegrationRuntimeReference"
+					},
+					"method": "GET",
+					"authentication": {
+						"type": null,
+						"resource": "https://vault.azure.net"
+					}
+				}
+			},
+			{
+				"name": "MdeClearMachineNetworkInfo",
+				"type": "SparkJob",
+				"dependsOn": [
+					{
+						"activity": "Get Secret",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": true
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"sparkJob": {
+						"referenceName": "MdeClearMachineNetworkInfo",
+						"type": "SparkJobDefinitionReference"
+					},
+					"args": [
+						"--environment",
+						"staging",
+						"--dataCenter",
+						"eus",
+						"--applicationSecret",
+						"@activity('Get Secret').output.value",
+						"--eventType",
+						"MachineNetworkInfoEvent",
+						"--runId",
+						"@pipeline().RunId"
+					],
+					"conf": {
+						"spark.dynamicAllocation.enabled": null,
+						"spark.dynamicAllocation.minExecutors": null,
+						"spark.dynamicAllocation.maxExecutors": null
+					},
+					"numExecutors": null
+				}
+			},
+			{
+				"name": "Execute Pipeline1",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "real",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-02-28T03:06:10Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

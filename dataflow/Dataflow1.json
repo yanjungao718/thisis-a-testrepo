@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "Input",
+						"referenceName": "DestinationDataset_4pu",
 						"type": "DatasetReference"
 					},
 					"name": "source1"
@@ -15,55 +15,19 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "Output",
+						"referenceName": "DestinationDataset_4pu",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
 				}
 			],
-			"transformations": [
-				{
-					"name": "sort1"
-				}
-			],
+			"transformations": [],
 			"scriptLines": [
-				"source(output(",
-				"          SaleKey as integer,",
-				"          CityKey as integer,",
-				"          CustomerKey as integer,",
-				"          BillToCustomerKey as integer,",
-				"          StockItemKey as integer,",
-				"          InvoiceDateKey as timestamp,",
-				"          DeliveryDateKey as timestamp,",
-				"          SalespersonKey as integer,",
-				"          WWIInvoicID as integer,",
-				"          Description as string,",
-				"          Package as string,",
-				"          Quantity as integer,",
-				"          UnitPrice as double,",
-				"          TaxRate as double,",
-				"          TotalExcludingTax as double,",
-				"          TaxAmount as double,",
-				"          Profit as double,",
-				"          TotalIncludingTax as double,",
-				"          TotalDryItems as integer,",
-				"          TotalChillerItems as integer,",
-				"          LineageKey as integer",
-				"     ),",
-				"     allowSchemaDrift: true,",
+				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false,",
-				"     format: 'parquet') ~> source1",
-				"source1 sort(asc(SaleKey, true),",
-				"     caseInsensitive: true) ~> sort1",
-				"sort1 sink(allowSchemaDrift: true,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     input(",
-				"          PassengerCount as integer,",
-				"          SumTripDistance as double,",
-				"          AVGTripDistance as double",
-				"     ),",
-				"     format: 'parquet',",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",

@@ -1,0 +1,33 @@
+{
+	"name": "relationship-djkihxwxcq",
+	"properties": {
+		"Name": "relationship-djkihxwxcq",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "Database 2"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "AggregateProductAllocations",
+		"ToTableName": "AggregateProductManufacturerFacilityAllocation",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "ProductId",
+				"ToColumnName": "ProductId"
+			},
+			{
+				"FromColumnName": "Timestamp",
+				"ToColumnName": "Timestamp"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"AggregateProductAllocations.cdm.json/AggregateProductAllocations\",\"toEntity\":\"AggregateProductManufacturerFacilityAllocation.cdm.json/AggregateProductManufacturerFacilityAllocation\",\"joinPairs\":[{\"fromAttribute\":\"ProductId\",\"toAttribute\":\"ProductId\"},{\"fromAttribute\":\"Timestamp\",\"toAttribute\":\"Timestamp\"}]}}"
+		},
+		"PublishStatus": "PUBLISHED",
+		"ObjectVersion": 1,
+		"ObjectId": "5ae00c64-f50d-47bd-b586-c07358c029ad"
+	},
+	"type": "RELATIONSHIP"
+}

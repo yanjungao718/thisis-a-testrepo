@@ -1,0 +1,30 @@
+{
+	"name": "akjk",
+	"properties": {
+		"targetBigDataPool": {
+			"referenceName": "testsparkpool",
+			"type": "BigDataPoolReference"
+		},
+		"requiredSparkVersion": "2.4",
+		"language": "scala",
+		"jobProperties": {
+			"name": "QueryRunner",
+			"file": "abfss://default@hozhaohdi0428gen2.dfs.core.windows.net/synapse/workspaces/yanjuntestws/batchjobs/MdeClearMachineNetworkInfo/jrt.jar",
+			"className": "com.microsoft.autotune.training.baseline.QueryRunner",
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "4",
+				"spark.dynamicAllocation.maxExecutors": "4",
+				"spark.autotune.trackingId": "1c97ad3c-b03a-4a46-ae98-41380af43f0f"
+			},
+			"args": [],
+			"jars": [],
+			"files": [],
+			"driverMemory": "56g",
+			"driverCores": 8,
+			"executorMemory": "56g",
+			"executorCores": 8,
+			"numExecutors": 4
+		}
+	}
+}

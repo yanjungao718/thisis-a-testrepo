@@ -1,0 +1,175 @@
+{
+	"name": "AggregateProductCancellations",
+	"properties": {
+		"Name": "AggregateProductCancellations",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Namespace": {
+			"SchemaName": null,
+			"DatabaseName": "Database 2"
+		},
+		"StorageDescriptor": {
+			"Distribution": null,
+			"Columns": [
+				{
+					"Name": "ProductId",
+					"Description": "The unique identifier of a Product.",
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductCancellations.cdm.json/AggregateProductCancellations",
+						"Name": "ProductId"
+					}
+				},
+				{
+					"Name": "Timestamp",
+					"Description": "The timestamp that the associated information is reported, recorded or effective as-of.",
+					"OriginDataTypeName": {
+						"TypeName": "timestamp",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
+							"HIVE_TYPE_STRING": "timestamp"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductCancellations.cdm.json/AggregateProductCancellations",
+						"Name": "Timestamp"
+					}
+				},
+				{
+					"Name": "TotalCancelledProductUnitsQuantity",
+					"Description": "The total quantity of Product cancelled for the associated date.",
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductCancellations.cdm.json/AggregateProductCancellations",
+						"Name": "TotalCancelledProductUnitsQuantity"
+					}
+				},
+				{
+					"Name": "TotalCancelledProductUnitsValuationAmount",
+					"Description": "The total valuation of Product cancelled during the associated period and valued at actual invoiced price.",
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductCancellations.cdm.json/AggregateProductCancellations",
+						"Name": "TotalCancelledProductUnitsValuationAmount"
+					}
+				},
+				{
+					"Name": "IsoCurrencyCode",
+					"Description": "The ISO 4217 currency code.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 3,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductCancellations.cdm.json/AggregateProductCancellations",
+						"Name": "IsoCurrencyCode"
+					}
+				}
+			],
+			"ColumnSetEntityName": "a5f11fd4-e987-4911-9608-86bc0e4a8988",
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://default@hozhaohdi0428gen2.dfs.core.windows.net/Database 2/AggregateProductCancellations",
+					"delimiter": ",",
+					"firstRowAsHeader": "false",
+					"multiLine": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://default@hozhaohdi0428gen2.dfs.core.windows.net/Database 2/AggregateProductCancellations",
+				"Properties": {
+					"LinkedServiceName": "yanjuntestws-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ProductId\":{\"entity\":\"AggregateProductCancellations.cdm.json/AggregateProductCancellations\",\"name\":\"ProductId\"},\"Timestamp\":{\"entity\":\"AggregateProductCancellations.cdm.json/AggregateProductCancellations\",\"name\":\"Timestamp\"},\"TotalCancelledProductUnitsQuantity\":{\"entity\":\"AggregateProductCancellations.cdm.json/AggregateProductCancellations\",\"name\":\"TotalCancelledProductUnitsQuantity\"},\"TotalCancelledProductUnitsValuationAmount\":{\"entity\":\"AggregateProductCancellations.cdm.json/AggregateProductCancellations\",\"name\":\"TotalCancelledProductUnitsValuationAmount\"},\"IsoCurrencyCode\":{\"entity\":\"AggregateProductCancellations.cdm.json/AggregateProductCancellations\",\"name\":\"IsoCurrencyCode\"}}}"
+			},
+			"Compressed": false,
+			"SerDeInfo": null,
+			"IsStoredAsSubdirectories": false
+		},
+		"Owner": null,
+		"CreateTime": 0,
+		"LastAccessTime": 0,
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false,
+		"ViewOriginalText": null,
+		"ViewExpandedText": null,
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"OriginObjectId": null,
+		"IsSharedEntity": false,
+		"PublishStatus": "PUBLISHED",
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"AggregateProductCancellations\",\"path\":\"AggregateProductCancellations.cdm.json/AggregateProductCancellations\"},\"description\":\"The total Product cancellations (summary) expressed in terms of unit quantity and cancellations valuation.\\n\\nCancellations represent the canceling of an order after it has been booked and billed.   This represents the most serious condition of all to a business in which real revenue has been lost after the hard sales work has been done.\\nIn this case cancellations are summarized for a product across all customers.\\n\\nNote:\\nDrill-down is provided at the Order level.\",\"primaryKey\":[\"ProductId\",\"Timestamp\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"AggregateProductCancellations.cdm.json/AggregateProductCancellations\",\"name\":\"ProductId\"},\"dataType\":\"long\",\"description\":\"The unique identifier of a Product.\",\"isNullable\":false,\"name\":\"ProductId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"AggregateProductCancellations.cdm.json/AggregateProductCancellations\",\"name\":\"Timestamp\"},\"dataType\":\"timestamp\",\"description\":\"The timestamp that the associated information is reported, recorded or effective as-of.\",\"isNullable\":false,\"name\":\"Timestamp\",\"timestampFormat\":\"YYYY-MM-DD HH:MM:SS.fffffffff\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"AggregateProductCancellations.cdm.json/AggregateProductCancellations\",\"name\":\"TotalCancelledProductUnitsQuantity\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The total quantity of Product cancelled for the associated date.\",\"isNullable\":true,\"scale\":2,\"name\":\"TotalCancelledProductUnitsQuantity\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"AggregateProductCancellations.cdm.json/AggregateProductCancellations\",\"name\":\"TotalCancelledProductUnitsValuationAmount\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The total valuation of Product cancelled during the associated period and valued at actual invoiced price.\",\"isNullable\":true,\"scale\":2,\"name\":\"TotalCancelledProductUnitsValuationAmount\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"AggregateProductCancellations.cdm.json/AggregateProductCancellations\",\"name\":\"IsoCurrencyCode\"},\"dataType\":\"string\",\"dataTypeLength\":3,\"description\":\"The ISO 4217 currency code.\",\"isNullable\":true,\"name\":\"IsoCurrencyCode\"}]}}}",
+			"Description": "The total Product cancellations (summary) expressed in terms of unit quantity and cancellations valuation.\n\nCancellations represent the canceling of an order after it has been booked and billed.   This represents the most serious condition of all to a business in which real revenue has been lost after the hard sales work has been done.\nIn this case cancellations are summarized for a product across all customers.\n\nNote:\nDrill-down is provided at the Order level.",
+			"DisplayFolderInfo": "{\"name\":\"BBB\",\"colorCode\":\"#00188F\"}",
+			"PrimaryKeys": "ProductId,Timestamp",
+			"spark.sql.sources.provider": "csv",
+			"x-ms-usageinfo": "AzureSynapseDatabaseTemplate",
+			"spark.sql.sources.schema.numParts": "1",
+			"spark.sql.sources.schema.part.0": "{\"type\":\"struct\",\"fields\":[{\"name\":\"ProductId\",\"type\":\"long\",\"nullable\":false,\"metadata\":{}},{\"name\":\"Timestamp\",\"type\":\"timestamp\",\"nullable\":false,\"metadata\":{}},{\"name\":\"TotalCancelledProductUnitsQuantity\",\"type\":\"decimal(18,2)\",\"nullable\":true,\"metadata\":{}},{\"name\":\"TotalCancelledProductUnitsValuationAmount\",\"type\":\"decimal(18,2)\",\"nullable\":true,\"metadata\":{}},{\"name\":\"IsoCurrencyCode\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}]}"
+		},
+		"ObjectVersion": 1,
+		"ObjectId": "ea567880-0493-4bff-bb58-364729adbadf",
+		"Description": "The total Product cancellations (summary) expressed in terms of unit quantity and cancellations valuation.\n\nCancellations represent the canceling of an order after it has been booked and billed.   This represents the most serious condition of all to a business in which real revenue has been lost after the hard sales work has been done.\nIn this case cancellations are summarized for a product across all customers.\n\nNote:\nDrill-down is provided at the Order level."
+	},
+	"type": "TABLE"
+}

@@ -1,0 +1,20 @@
+{
+	"name": "MetadataDrivenCopyTask_mj8_ControlDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "MetadataDrivenCopyTask_mj8_20220117"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "yanjuntestdb",
+			"table": "MainControlTable_mj8"
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

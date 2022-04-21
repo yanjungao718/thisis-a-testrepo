@@ -1,0 +1,136 @@
+{
+	"name": "AllocationStatus",
+	"properties": {
+		"Name": "AllocationStatus",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Namespace": {
+			"SchemaName": null,
+			"DatabaseName": "Database 2"
+		},
+		"StorageDescriptor": {
+			"Distribution": null,
+			"Columns": [
+				{
+					"Name": "AllocationStatusId",
+					"Description": "The unique identifier of an Allocation Status.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "AllocationStatus.cdm.json/AllocationStatus",
+						"Name": "AllocationStatusId"
+					}
+				},
+				{
+					"Name": "AllocationStatusName",
+					"Description": "The name of an Allocation Status.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "AllocationStatus.cdm.json/AllocationStatus",
+						"Name": "AllocationStatusName"
+					}
+				},
+				{
+					"Name": "AllocationStatusDescription",
+					"Description": "The description of an Allocation Status.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "AllocationStatus.cdm.json/AllocationStatus",
+						"Name": "AllocationStatusDescription"
+					}
+				}
+			],
+			"ColumnSetEntityName": "6953dde9-f304-4a44-9ed4-40a83ce77182",
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://default@hozhaohdi0428gen2.dfs.core.windows.net/Database 2/AllocationStatus",
+					"delimiter": ",",
+					"firstRowAsHeader": "false",
+					"multiLine": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://default@hozhaohdi0428gen2.dfs.core.windows.net/Database 2/AllocationStatus",
+				"Properties": {
+					"LinkedServiceName": "yanjuntestws-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"AllocationStatusId\":{\"entity\":\"AllocationStatus.cdm.json/AllocationStatus\",\"name\":\"AllocationStatusId\"},\"AllocationStatusName\":{\"entity\":\"AllocationStatus.cdm.json/AllocationStatus\",\"name\":\"AllocationStatusName\"},\"AllocationStatusDescription\":{\"entity\":\"AllocationStatus.cdm.json/AllocationStatus\",\"name\":\"AllocationStatusDescription\"}}}"
+			},
+			"Compressed": false,
+			"SerDeInfo": null,
+			"IsStoredAsSubdirectories": false
+		},
+		"Owner": null,
+		"CreateTime": 0,
+		"LastAccessTime": 0,
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false,
+		"ViewOriginalText": null,
+		"ViewExpandedText": null,
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"OriginObjectId": null,
+		"IsSharedEntity": false,
+		"PublishStatus": "PUBLISHED",
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"AllocationStatus\",\"path\":\"AllocationStatus.cdm.json/AllocationStatus\"},\"description\":\"The allocation status associated with an ordered Product.\\n\\nEx:\\n- Allocated from existing/confirmed warehouse stock\\n- Allocated from confirmed manufacturing capacity\\n- Allocated from near-term warehouse stock\",\"primaryKey\":[\"AllocationStatusId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"AllocationStatus.cdm.json/AllocationStatus\",\"name\":\"AllocationStatusId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of an Allocation Status.\",\"isNullable\":false,\"name\":\"AllocationStatusId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"AllocationStatus.cdm.json/AllocationStatus\",\"name\":\"AllocationStatusName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of an Allocation Status.\",\"isNullable\":true,\"name\":\"AllocationStatusName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"AllocationStatus.cdm.json/AllocationStatus\",\"name\":\"AllocationStatusDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512,\"description\":\"The description of an Allocation Status.\",\"isNullable\":true,\"name\":\"AllocationStatusDescription\"}]}}}",
+			"Description": "The allocation status associated with an ordered Product.\n\nEx:\n- Allocated from existing/confirmed warehouse stock\n- Allocated from confirmed manufacturing capacity\n- Allocated from near-term warehouse stock",
+			"DisplayFolderInfo": "{\"name\":\"BBB\",\"colorCode\":\"#00188F\"}",
+			"PrimaryKeys": "AllocationStatusId",
+			"spark.sql.sources.provider": "csv",
+			"x-ms-usageinfo": "AzureSynapseDatabaseTemplate",
+			"spark.sql.sources.schema.numParts": "1",
+			"spark.sql.sources.schema.part.0": "{\"type\":\"struct\",\"fields\":[{\"name\":\"AllocationStatusId\",\"type\":\"integer\",\"nullable\":false,\"metadata\":{}},{\"name\":\"AllocationStatusName\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"AllocationStatusDescription\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}]}"
+		},
+		"ObjectVersion": 1,
+		"ObjectId": "33e191bb-79a2-4a56-af67-3b1eee8d7802",
+		"Description": "The allocation status associated with an ordered Product.\n\nEx:\n- Allocated from existing/confirmed warehouse stock\n- Allocated from confirmed manufacturing capacity\n- Allocated from near-term warehouse stock"
+	},
+	"type": "TABLE"
+}

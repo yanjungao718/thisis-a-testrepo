@@ -1,0 +1,27 @@
+{
+	"name": "Database 2",
+	"properties": {
+		"Name": "Database 2",
+		"EntityType": "DATABASE",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"Properties": {
+			"IsSyMSCDMDatabase": true,
+			"DerivedModelDBInfo": "{\"ModelDirectives\":{\"BaseModel\":{\"Name\":\"ConsumerGoods\",\"Version\":\"0.1.0\"}}}",
+			"x-ms-usageinfo": "AzureSynapseDatabaseTemplate"
+		},
+		"Source": {
+			"Provider": "ADLS",
+			"Location": "abfss://default@hozhaohdi0428gen2.dfs.core.windows.net/Database 2",
+			"Properties": {
+				"FormatType": "csv",
+				"LinkedServiceName": "yanjuntestws-WorkspaceDefaultStorage"
+			}
+		},
+		"PublishStatus": "PUBLISHED",
+		"ObjectVersion": 1,
+		"ObjectId": "eb4e4fc7-5947-44e3-8fc3-112ea0535fa9"
+	},
+	"type": "DATABASE"
+}

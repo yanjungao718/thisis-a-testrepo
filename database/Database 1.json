@@ -1,0 +1,27 @@
+{
+	"name": "Database 1",
+	"properties": {
+		"Name": "Database 1",
+		"EntityType": "DATABASE",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"Properties": {
+			"IsSyMSCDMDatabase": true,
+			"DerivedModelDBInfo": "{\"ModelDirectives\":{\"BaseModel\":{\"Name\":\"Agriculture\",\"Version\":\"0.1.0\"}}}",
+			"x-ms-usageinfo": "AzureSynapseDatabaseTemplate"
+		},
+		"Source": {
+			"Provider": "ADLS",
+			"Location": "abfss://default@hozhaohdi0428gen2.dfs.core.windows.net/Database 1",
+			"Properties": {
+				"FormatType": "csv",
+				"LinkedServiceName": "yanjuntestws-WorkspaceDefaultStorage"
+			}
+		},
+		"PublishStatus": "PUBLISHED",
+		"ObjectVersion": 1,
+		"ObjectId": "153d47f8-9818-4865-a3f7-a074b877ed6d"
+	},
+	"type": "DATABASE"
+}

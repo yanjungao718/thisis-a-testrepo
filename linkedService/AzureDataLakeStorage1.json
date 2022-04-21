@@ -5,11 +5,8 @@
 		"annotations": [],
 		"type": "AzureBlobFS",
 		"typeProperties": {
-			"url": "https://lanjlgen2.dfs.core.windows.net",
-			"credential": {
-				"referenceName": "identity",
-				"type": "CredentialReference"
-			}
+			"url": "https://hozhao1210gen2.dfs.core.windows.net",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIlNZTkFQU0VAMDU4QzhFQjMtMjc1RS00NjU2LTlGRTQtQzNCN0ZDRDcyQzNBXzFlNWJhNjgxLWVkNmEtNDE2OS04YmFjLTgzZjg5MGQ5Y2YzMSINCn0="
 		},
 		"connectVia": {
 			"referenceName": "AutoResolveIntegrationRuntime",

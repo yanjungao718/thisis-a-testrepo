@@ -1,0 +1,97 @@
+{
+	"name": "ConfigureNB_Copy26",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "a666",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "b004b5cc-cc9e-46d5-9963-bed9b43d1140"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1"
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/a666",
+				"name": "a666",
+				"type": "Spark",
+				"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/a666",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "2.4",
+				"nodeCount": 3,
+				"cores": 4,
+				"memory": 28,
+				"extraHeader": null
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					"%%configure -f\r\n",
+					"{\r\n",
+					"    \"driverCores\": {\"activityParameterName\": \"driverMei\",\"defaultValue\": 3}, \r\n",
+					"    \"driverMemory\": {\"activityParameterName\": \"driverMemory\",\"defaultValue\": \"28g\"},\r\n",
+					"    \"executorMemory\": {\"activityParameterName\": \"executorMemory\",\"defaultValue\": \"14g\"},\r\n",
+					"    \"conf\":\r\n",
+					"    {\r\n",
+					"        \"spark.something\": \"aaa\",\r\n",
+					"        \"spark.livy.synapse.ipythonInterpreter.enabled\": {\"activityParameterName\": \"ipy\",\"defaultValue\": \"false\"}\r\n",
+					"    }\r\n",
+					"}"
+				],
+				"attachments": null,
+				"execution_count": 3
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"microsoft": {
+						"language": "scala"
+					}
+				},
+				"source": [
+					"%%spark\r\n",
+					"spark.conf.getAll.foreach { println }"
+				],
+				"attachments": null,
+				"execution_count": 2
+			}
+		]
+	}
+}

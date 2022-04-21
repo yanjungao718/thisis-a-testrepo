@@ -1,0 +1,194 @@
+{
+	"name": "AggregateProductWarehouseAllocation",
+	"properties": {
+		"Name": "AggregateProductWarehouseAllocation",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Namespace": {
+			"SchemaName": null,
+			"DatabaseName": "Database 2"
+		},
+		"StorageDescriptor": {
+			"Distribution": null,
+			"Columns": [
+				{
+					"Name": "ProductId",
+					"Description": "The unique identifier of a Product.",
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductWarehouseAllocation.cdm.json/AggregateProductWarehouseAllocation",
+						"Name": "ProductId"
+					}
+				},
+				{
+					"Name": "WarehouseId",
+					"Description": "The unique identifier of a Warehouse.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductWarehouseAllocation.cdm.json/AggregateProductWarehouseAllocation",
+						"Name": "WarehouseId"
+					}
+				},
+				{
+					"Name": "Timestamp",
+					"Description": "The timestamp that the associated information is reported, recorded or effective as-of.",
+					"OriginDataTypeName": {
+						"TypeName": "timestamp",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
+							"HIVE_TYPE_STRING": "timestamp"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductWarehouseAllocation.cdm.json/AggregateProductWarehouseAllocation",
+						"Name": "Timestamp"
+					}
+				},
+				{
+					"Name": "TotalAllocationsUnitsQuantity",
+					"Description": "The total number of units allocated for the associated period.",
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductWarehouseAllocation.cdm.json/AggregateProductWarehouseAllocation",
+						"Name": "TotalAllocationsUnitsQuantity"
+					}
+				},
+				{
+					"Name": "TotalAllocationsProductUnitsValuationAmount",
+					"Description": "The total value of units allocated for the associated period.",
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductWarehouseAllocation.cdm.json/AggregateProductWarehouseAllocation",
+						"Name": "TotalAllocationsProductUnitsValuationAmount"
+					}
+				},
+				{
+					"Name": "CurrencyId",
+					"Description": "The unique identifier of a currency.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductWarehouseAllocation.cdm.json/AggregateProductWarehouseAllocation",
+						"Name": "CurrencyId"
+					}
+				}
+			],
+			"ColumnSetEntityName": "656193d7-f2aa-43e2-80e6-3a075941dd9c",
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://default@hozhaohdi0428gen2.dfs.core.windows.net/Database 2/AggregateProductWarehouseAllocation",
+					"delimiter": ",",
+					"firstRowAsHeader": "false",
+					"multiLine": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://default@hozhaohdi0428gen2.dfs.core.windows.net/Database 2/AggregateProductWarehouseAllocation",
+				"Properties": {
+					"LinkedServiceName": "yanjuntestws-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ProductId\":{\"entity\":\"AggregateProductWarehouseAllocation.cdm.json/AggregateProductWarehouseAllocation\",\"name\":\"ProductId\"},\"WarehouseId\":{\"entity\":\"AggregateProductWarehouseAllocation.cdm.json/AggregateProductWarehouseAllocation\",\"name\":\"WarehouseId\"},\"Timestamp\":{\"entity\":\"AggregateProductWarehouseAllocation.cdm.json/AggregateProductWarehouseAllocation\",\"name\":\"Timestamp\"},\"TotalAllocationsUnitsQuantity\":{\"entity\":\"AggregateProductWarehouseAllocation.cdm.json/AggregateProductWarehouseAllocation\",\"name\":\"TotalAllocationsUnitsQuantity\"},\"TotalAllocationsProductUnitsValuationAmount\":{\"entity\":\"AggregateProductWarehouseAllocation.cdm.json/AggregateProductWarehouseAllocation\",\"name\":\"TotalAllocationsProductUnitsValuationAmount\"},\"CurrencyId\":{\"entity\":\"AggregateProductWarehouseAllocation.cdm.json/AggregateProductWarehouseAllocation\",\"name\":\"CurrencyId\"}}}"
+			},
+			"Compressed": false,
+			"SerDeInfo": null,
+			"IsStoredAsSubdirectories": false
+		},
+		"Owner": null,
+		"CreateTime": 0,
+		"LastAccessTime": 0,
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false,
+		"ViewOriginalText": null,
+		"ViewExpandedText": null,
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"OriginObjectId": null,
+		"IsSharedEntity": false,
+		"PublishStatus": "PUBLISHED",
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"AggregateProductWarehouseAllocation\",\"path\":\"AggregateProductWarehouseAllocation.cdm.json/AggregateProductWarehouseAllocation\"},\"description\":\"The allocations that are from existing inventory at a specific Warehouse.\\n\\nThese are allocations of product from inventory at the associated warehouse in support of the associated order(s).    Inventory allocations may be fulfilled from manufacturing, third party suppliers or by internal balance of warehouse inventory from other warehouses.\\n\\nNote:\\nDrill-down is provided at the Order level.\",\"primaryKey\":[\"ProductId\",\"WarehouseId\",\"Timestamp\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"AggregateProductWarehouseAllocation.cdm.json/AggregateProductWarehouseAllocation\",\"name\":\"ProductId\"},\"dataType\":\"long\",\"description\":\"The unique identifier of a Product.\",\"isNullable\":false,\"name\":\"ProductId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"AggregateProductWarehouseAllocation.cdm.json/AggregateProductWarehouseAllocation\",\"name\":\"WarehouseId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Warehouse.\",\"isNullable\":false,\"name\":\"WarehouseId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"AggregateProductWarehouseAllocation.cdm.json/AggregateProductWarehouseAllocation\",\"name\":\"Timestamp\"},\"dataType\":\"timestamp\",\"description\":\"The timestamp that the associated information is reported, recorded or effective as-of.\",\"isNullable\":false,\"name\":\"Timestamp\",\"timestampFormat\":\"YYYY-MM-DD HH:MM:SS.fffffffff\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"AggregateProductWarehouseAllocation.cdm.json/AggregateProductWarehouseAllocation\",\"name\":\"TotalAllocationsUnitsQuantity\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The total number of units allocated for the associated period.\",\"isNullable\":true,\"scale\":2,\"name\":\"TotalAllocationsUnitsQuantity\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"AggregateProductWarehouseAllocation.cdm.json/AggregateProductWarehouseAllocation\",\"name\":\"TotalAllocationsProductUnitsValuationAmount\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The total value of units allocated for the associated period.\",\"isNullable\":true,\"scale\":2,\"name\":\"TotalAllocationsProductUnitsValuationAmount\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"AggregateProductWarehouseAllocation.cdm.json/AggregateProductWarehouseAllocation\",\"name\":\"CurrencyId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a currency.\",\"isNullable\":true,\"name\":\"CurrencyId\"}]}}}",
+			"Description": "The allocations that are from existing inventory at a specific Warehouse.\n\nThese are allocations of product from inventory at the associated warehouse in support of the associated order(s).    Inventory allocations may be fulfilled from manufacturing, third party suppliers or by internal balance of warehouse inventory from other warehouses.\n\nNote:\nDrill-down is provided at the Order level.",
+			"DisplayFolderInfo": "{\"name\":\"BBB\",\"colorCode\":\"#00188F\"}",
+			"PrimaryKeys": "ProductId,WarehouseId,Timestamp",
+			"spark.sql.sources.provider": "csv",
+			"x-ms-usageinfo": "AzureSynapseDatabaseTemplate",
+			"spark.sql.sources.schema.numParts": "1",
+			"spark.sql.sources.schema.part.0": "{\"type\":\"struct\",\"fields\":[{\"name\":\"ProductId\",\"type\":\"long\",\"nullable\":false,\"metadata\":{}},{\"name\":\"WarehouseId\",\"type\":\"integer\",\"nullable\":false,\"metadata\":{}},{\"name\":\"Timestamp\",\"type\":\"timestamp\",\"nullable\":false,\"metadata\":{}},{\"name\":\"TotalAllocationsUnitsQuantity\",\"type\":\"decimal(18,2)\",\"nullable\":true,\"metadata\":{}},{\"name\":\"TotalAllocationsProductUnitsValuationAmount\",\"type\":\"decimal(18,2)\",\"nullable\":true,\"metadata\":{}},{\"name\":\"CurrencyId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}}]}"
+		},
+		"ObjectVersion": 1,
+		"ObjectId": "7c2de11f-5e97-4978-9507-3caee70276da",
+		"Description": "The allocations that are from existing inventory at a specific Warehouse.\n\nThese are allocations of product from inventory at the associated warehouse in support of the associated order(s).    Inventory allocations may be fulfilled from manufacturing, third party suppliers or by internal balance of warehouse inventory from other warehouses.\n\nNote:\nDrill-down is provided at the Order level."
+	},
+	"type": "TABLE"
+}

@@ -1,0 +1,32 @@
+{
+	"name": "SourceDataset_tm4",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "yanjuntestws-WorkspaceDefaultStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "libraries.zip",
+				"folderPath": "synapse/workspaces/yanjuntest/sparkpools/yanjunsparkpool/libraries",
+				"fileSystem": "default"
+			},
+			"columnDelimiter": "\t",
+			"escapeChar": "\\",
+			"firstRowAsHeader": false,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

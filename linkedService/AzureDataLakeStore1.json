@@ -1,0 +1,18 @@
+{
+	"name": "AzureDataLakeStore1",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDataLakeStore",
+		"typeProperties": {
+			"dataLakeStoreUri": "https://adityasatest1.azuredatalakestore.net/webhdfs/v1",
+			"tenant": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+			"subscriptionId": "cbd70ea3-bd35-40cf-84dc-c59d65bd3c18",
+			"resourceGroupName": "adityasatest"
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

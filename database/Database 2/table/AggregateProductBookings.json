@@ -1,0 +1,175 @@
+{
+	"name": "AggregateProductBookings",
+	"properties": {
+		"Name": "AggregateProductBookings",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Namespace": {
+			"SchemaName": null,
+			"DatabaseName": "Database 2"
+		},
+		"StorageDescriptor": {
+			"Distribution": null,
+			"Columns": [
+				{
+					"Name": "ProductId",
+					"Description": "The unique identifier of a Product.",
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductBookings.cdm.json/AggregateProductBookings",
+						"Name": "ProductId"
+					}
+				},
+				{
+					"Name": "Timestamp",
+					"Description": "The timestamp that the associated information is reported, recorded or effective as-of.",
+					"OriginDataTypeName": {
+						"TypeName": "timestamp",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
+							"HIVE_TYPE_STRING": "timestamp"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductBookings.cdm.json/AggregateProductBookings",
+						"Name": "Timestamp"
+					}
+				},
+				{
+					"Name": "TotalBookedProductUnitsQuantity",
+					"Description": "The total quantity of Product booked for the associated date.",
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductBookings.cdm.json/AggregateProductBookings",
+						"Name": "TotalBookedProductUnitsQuantity"
+					}
+				},
+				{
+					"Name": "TotalBookedProductUnitsInvoicedAmount",
+					"Description": "The total valuation of Product booked during the associated period and valued at actual invoiced values as of the associated date.",
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductBookings.cdm.json/AggregateProductBookings",
+						"Name": "TotalBookedProductUnitsInvoicedAmount"
+					}
+				},
+				{
+					"Name": "IsoCurrencyCode",
+					"Description": "The ISO 4217 currency code.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 3,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "AggregateProductBookings.cdm.json/AggregateProductBookings",
+						"Name": "IsoCurrencyCode"
+					}
+				}
+			],
+			"ColumnSetEntityName": "ea78bb16-92b1-4247-b838-823514e7838d",
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://default@hozhaohdi0428gen2.dfs.core.windows.net/Database 2/AggregateProductBookings",
+					"delimiter": ",",
+					"firstRowAsHeader": "false",
+					"multiLine": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://default@hozhaohdi0428gen2.dfs.core.windows.net/Database 2/AggregateProductBookings",
+				"Properties": {
+					"LinkedServiceName": "yanjuntestws-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ProductId\":{\"entity\":\"AggregateProductBookings.cdm.json/AggregateProductBookings\",\"name\":\"ProductId\"},\"Timestamp\":{\"entity\":\"AggregateProductBookings.cdm.json/AggregateProductBookings\",\"name\":\"Timestamp\"},\"TotalBookedProductUnitsQuantity\":{\"entity\":\"AggregateProductBookings.cdm.json/AggregateProductBookings\",\"name\":\"TotalBookedProductUnitsQuantity\"},\"TotalBookedProductUnitsInvoicedAmount\":{\"entity\":\"AggregateProductBookings.cdm.json/AggregateProductBookings\",\"name\":\"TotalBookedProductUnitsInvoicedAmount\"},\"IsoCurrencyCode\":{\"entity\":\"AggregateProductBookings.cdm.json/AggregateProductBookings\",\"name\":\"IsoCurrencyCode\"}}}"
+			},
+			"Compressed": false,
+			"SerDeInfo": null,
+			"IsStoredAsSubdirectories": false
+		},
+		"Owner": null,
+		"CreateTime": 0,
+		"LastAccessTime": 0,
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false,
+		"ViewOriginalText": null,
+		"ViewExpandedText": null,
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"OriginObjectId": null,
+		"IsSharedEntity": false,
+		"PublishStatus": "PUBLISHED",
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"AggregateProductBookings\",\"path\":\"AggregateProductBookings.cdm.json/AggregateProductBookings\"},\"description\":\"The total Product bookings (summary) expressed in terms of unit quantity and booked valuation.\\n\\nBookings are field sales reports of anticipated sales that must be planned for in terms of inventory and also provide management with anticipated sales revenues.    In this case bookings are summarized for a product across all customers.\\n\\nNote:\\nDrill-down is provided at the Order level.\",\"primaryKey\":[\"ProductId\",\"Timestamp\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"AggregateProductBookings.cdm.json/AggregateProductBookings\",\"name\":\"ProductId\"},\"dataType\":\"long\",\"description\":\"The unique identifier of a Product.\",\"isNullable\":false,\"name\":\"ProductId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"AggregateProductBookings.cdm.json/AggregateProductBookings\",\"name\":\"Timestamp\"},\"dataType\":\"timestamp\",\"description\":\"The timestamp that the associated information is reported, recorded or effective as-of.\",\"isNullable\":false,\"name\":\"Timestamp\",\"timestampFormat\":\"YYYY-MM-DD HH:MM:SS.fffffffff\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"AggregateProductBookings.cdm.json/AggregateProductBookings\",\"name\":\"TotalBookedProductUnitsQuantity\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The total quantity of Product booked for the associated date.\",\"isNullable\":true,\"scale\":2,\"name\":\"TotalBookedProductUnitsQuantity\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"AggregateProductBookings.cdm.json/AggregateProductBookings\",\"name\":\"TotalBookedProductUnitsInvoicedAmount\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The total valuation of Product booked during the associated period and valued at actual invoiced values as of the associated date.\",\"isNullable\":true,\"scale\":2,\"name\":\"TotalBookedProductUnitsInvoicedAmount\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"AggregateProductBookings.cdm.json/AggregateProductBookings\",\"name\":\"IsoCurrencyCode\"},\"dataType\":\"string\",\"dataTypeLength\":3,\"description\":\"The ISO 4217 currency code.\",\"isNullable\":true,\"name\":\"IsoCurrencyCode\"}]}}}",
+			"Description": "The total Product bookings (summary) expressed in terms of unit quantity and booked valuation.\n\nBookings are field sales reports of anticipated sales that must be planned for in terms of inventory and also provide management with anticipated sales revenues.    In this case bookings are summarized for a product across all customers.\n\nNote:\nDrill-down is provided at the Order level.",
+			"DisplayFolderInfo": "{\"name\":\"BBB\",\"colorCode\":\"#00188F\"}",
+			"PrimaryKeys": "ProductId,Timestamp",
+			"spark.sql.sources.provider": "csv",
+			"x-ms-usageinfo": "AzureSynapseDatabaseTemplate",
+			"spark.sql.sources.schema.numParts": "1",
+			"spark.sql.sources.schema.part.0": "{\"type\":\"struct\",\"fields\":[{\"name\":\"ProductId\",\"type\":\"long\",\"nullable\":false,\"metadata\":{}},{\"name\":\"Timestamp\",\"type\":\"timestamp\",\"nullable\":false,\"metadata\":{}},{\"name\":\"TotalBookedProductUnitsQuantity\",\"type\":\"decimal(18,2)\",\"nullable\":true,\"metadata\":{}},{\"name\":\"TotalBookedProductUnitsInvoicedAmount\",\"type\":\"decimal(18,2)\",\"nullable\":true,\"metadata\":{}},{\"name\":\"IsoCurrencyCode\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}]}"
+		},
+		"ObjectVersion": 1,
+		"ObjectId": "a6986164-96bb-4f74-827f-c1bef13d3cb1",
+		"Description": "The total Product bookings (summary) expressed in terms of unit quantity and booked valuation.\n\nBookings are field sales reports of anticipated sales that must be planned for in terms of inventory and also provide management with anticipated sales revenues.    In this case bookings are summarized for a product across all customers.\n\nNote:\nDrill-down is provided at the Order level."
+	},
+	"type": "TABLE"
+}

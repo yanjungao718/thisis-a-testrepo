@@ -1,0 +1,95 @@
+{
+	"name": "Notebook 5",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "a1b6c300-09a3-4052-848d-ee8950c7e15b"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1"
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "python"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					"#display(DataFrame) sample:\r\n",
+					"\r\n",
+					"# import pyspark class Row from module sql\r\n",
+					"from pyspark.sql import *\r\n",
+					"# Create Example Data - Departments and Employees\r\n",
+					"# Create the Departments\r\n",
+					"department1 = Row(id='123456', name='Computer Science')\r\n",
+					"department2 = Row(id='789012', name='Mechanical Engineering')\r\n",
+					"department3 = Row(id='345678', name='Theater and Drama')\r\n",
+					"department4 = Row(id='901234', name='Indoor Recreation')\r\n",
+					"# Create the Employees\r\n",
+					"Employee = Row(\"firstName\", \"lastName\", \"email\", \"salary\")\r\n",
+					"employee1 = Employee('michael', 'armbrust', 'noreply@berkeley.edore', 130000)\r\n",
+					"employee2 = Employee('xiangrui', 'meng', 'no-reply@stanford.edu', 120000)\r\n",
+					"employee3 = Employee('matei', None, 'no-reply@waterloo.edu', 140000)\r\n",
+					"employee4 = Employee(None, 'wendell', 'no-reply@berkeley.edu', 160000)\r\n",
+					"# Create the DepartmentWithEmployees instances from Departments and Employees\r\n",
+					"departmentWithEmployees1 = Row(department=department1, employees=[employee1, employee2])\r\n",
+					"departmentWithEmployees2 = Row(department=department2, employees=[employee3, employee4])\r\n",
+					"departmentWithEmployees3 = Row(department=department3, employees=[employee1, employee4])\r\n",
+					"departmentWithEmployees4 = Row(department=department4, employees=[employee2, employee3])\r\n",
+					"\r\n",
+					"departmentsWithEmployeesSeq1 = [departmentWithEmployees1, departmentWithEmployees2]\r\n",
+					"departmentsWithEmployeesSeq2 = [departmentWithEmployees2, departmentWithEmployees3]\r\n",
+					"df1 = spark.createDataFrame(departmentsWithEmployeesSeq1)\r\n",
+					"\r\n",
+					"display(df1)"
+				],
+				"attachments": null,
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# display(List) sample:\r\n",
+					"students = [ ['jack', 34, '36'] ,\r\n",
+					"['Riti', 30, 'Delhi' ] ,\r\n",
+					"['Aadi', 16, 'New York'] ]\r\n",
+					"\r\n",
+					"display(students)"
+				],
+				"attachments": null,
+				"execution_count": null
+			}
+		]
+	}
+}
