@@ -18,7 +18,9 @@
 		},
 		"metadata": {
 			"saveOutput": true,
-			"synapse_widget": "https://scq02goewttma9u3x6nv7upy.blob.core.windows.net:443/notebook/bdbj20220418ws/2566aac3-8ffa-45b3-b412-ed7a1cb28dd7/6397b222-e3d1-4a19-8826-a386962e4e87/metadata-synapse_widget/synapse_widget.json",
+			"synapse_widget": {
+				"version": "0.1"
+			},
 			"enableDebugMode": false,
 			"kernelspec": {
 				"name": "synapse_pyspark",

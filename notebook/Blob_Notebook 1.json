@@ -22,7 +22,76 @@
 		},
 		"metadata": {
 			"saveOutput": true,
-			"synapse_widget": "https://scq02goewttma9u3x6nv7upy.blob.core.windows.net:443/notebook/bdbj20220418ws/0c49fd56-b918-492e-8c2a-c777c441a04d/27889162-eed3-4def-8a7d-151128ad2b9d/metadata-synapse_widget/synapse_widget.json",
+			"synapse_widget": {
+				"version": "0.1",
+				"state": {
+					"52eeeaff-14b3-49fa-855b-ba7f8cf1b38d": {
+						"type": "Synapse.DataFrame",
+						"sync_state": {
+							"table": {
+								"rows": [
+									{
+										"0": "399266\t2/15/2012 11:53:16 AM\ten-us\thow to make nachos\t73\td-card:recipes;www.nachos.com;www.wikipedia.com;d-card:videos\tNULL"
+									},
+									{
+										"0": "382045\t2/15/2012 11:53:18 AM\ten-gb\tbest ski resorts\t614\tskiresorts.com;d-card:news;ski-europe.com;www.travelersdigest.com/ski_resorts.htm\tski-europe.com;www.travelersdigest.com/ski_resorts.htm"
+									},
+									{
+										"0": "382045\t2/16/2012 11:53:20 AM\ten-gb\tbroken leg\t74\tmayoclinic.com/health;webmd.com/a-to-z-guides;mybrokenleg.com;wikipedia.com/Bone_fracture\tmayoclinic.com/health;webmd.com/a-to-z-guides;mybrokenleg.com;wikipedia.com/Bone_fracture"
+									},
+									{
+										"0": "106479\t2/16/2012 11:53:50 AM\ten-ca\tsouth park episodes\t24\tsouthparkstudios.com;wikipedia.org/wiki/Sout_Park;imdb.com/title/tt0121955;simon.com/mall\tsouthparkstudios.com"
+									},
+									{
+										"0": "906441\t2/16/2012 11:54:01 AM\ten-us\tcosmos\t1213\tcosmos.com;wikipedia.org/wiki/Cosmos:_A_Personal_Voyage;hulu.com/cosmos;d-card:images\td-card:images"
+									},
+									{
+										"0": "351530\t2/16/2012 11:54:01 AM\ten-fr\tmicrosoft\t241\tmicrosoft.com;wikipedia.org/wiki/Microsoft;d-card:news;xbox.com\tNULL"
+									},
+									{
+										"0": "640806\t2/16/2012 11:54:02 AM\ten-us\twireless headphones\t502\twww.amazon.com;d-card:shopping;reviews.cnet.com/wireless-headphones;store.apple.com\td-card:shopping"
+									},
+									{
+										"0": "304305\t2/16/2012 11:54:03 AM\ten-us\tdominos pizza\t60\tdominos.com;d-card; wikipedia.org/wiki/Domino's_Pizza;facebook.com/dominos\tdominos.com"
+									},
+									{
+										"0": "460748\t2/16/2012 11:54:04 AM\ten-us\tyelp\t1270\tyelp.com;apple.com/us/app/yelp;wikipedia.org/wiki/Yelp,_Inc.;facebook.com/yelp\tyelp.com"
+									},
+									{
+										"0": "354841\t2/16/2012 11:59:01 AM\ten-us\thow to run\t610\trunning.about.com;d-card:video;ehow.com;go.com\td-card:video;running.about.com;ehow.com"
+									}
+								],
+								"schema": [
+									{
+										"key": "0",
+										"name": "value",
+										"type": "string"
+									}
+								],
+								"truncated": false
+							},
+							"isSummary": false,
+							"language": "scala"
+						},
+						"persist_state": {
+							"view": {
+								"type": "details",
+								"chartOptions": {
+									"chartType": "bar",
+									"aggregationType": "count",
+									"categoryFieldKeys": [
+										"0"
+									],
+									"seriesFieldKeys": [
+										"0"
+									],
+									"isStacked": false
+								}
+							}
+						}
+					}
+				}
+			},
 			"enableDebugMode": false,
 			"kernelspec": {
 				"name": "synapse_pyspark",

@@ -22,7 +22,224 @@
 		},
 		"metadata": {
 			"saveOutput": true,
-			"synapse_widget": "https://scq02goewttma9u3x6nv7upy.blob.core.windows.net:443/notebook/bdbj20220418ws/cb6c7ede-a8d8-4e0b-8688-7362833e66f2/2478643d-1988-4dd9-9b76-102c5f21f67d/metadata-synapse_widget/synapse_widget.json",
+			"synapse_widget": {
+				"version": "0.1",
+				"state": {
+					"49d3deac-ccbf-4730-baf1-522ec70e66da": {
+						"type": "Synapse.DataFrame",
+						"sync_state": {
+							"table": {
+								"rows": [
+									{
+										"0": "338995",
+										"1": "2020-01-21",
+										"2": "262",
+										"4": "0",
+										"12": "Worldwide",
+										"16": "2022-01-11 00:06:28.611"
+									},
+									{
+										"0": "338996",
+										"1": "2020-01-22",
+										"2": "313",
+										"3": "51",
+										"4": "0",
+										"5": "0",
+										"12": "Worldwide",
+										"16": "2022-01-11 00:06:28.611"
+									},
+									{
+										"0": "338997",
+										"1": "2020-01-23",
+										"2": "578",
+										"3": "265",
+										"4": "0",
+										"5": "0",
+										"12": "Worldwide",
+										"16": "2022-01-11 00:06:28.611"
+									},
+									{
+										"0": "338998",
+										"1": "2020-01-24",
+										"2": "841",
+										"3": "263",
+										"4": "0",
+										"5": "0",
+										"12": "Worldwide",
+										"16": "2022-01-11 00:06:28.611"
+									},
+									{
+										"0": "338999",
+										"1": "2020-01-25",
+										"2": "1320",
+										"3": "479",
+										"4": "0",
+										"5": "0",
+										"12": "Worldwide",
+										"16": "2022-01-11 00:06:28.611"
+									},
+									{
+										"0": "339000",
+										"1": "2020-01-26",
+										"2": "2014",
+										"3": "694",
+										"4": "0",
+										"5": "0",
+										"12": "Worldwide",
+										"16": "2022-01-11 00:06:28.611"
+									},
+									{
+										"0": "339001",
+										"1": "2020-01-27",
+										"2": "2798",
+										"3": "784",
+										"4": "0",
+										"5": "0",
+										"12": "Worldwide",
+										"16": "2022-01-11 00:06:28.611"
+									},
+									{
+										"0": "339002",
+										"1": "2020-01-28",
+										"2": "4593",
+										"3": "1795",
+										"4": "0",
+										"5": "0",
+										"12": "Worldwide",
+										"16": "2022-01-11 00:06:28.611"
+									},
+									{
+										"0": "339003",
+										"1": "2020-01-29",
+										"2": "6065",
+										"3": "1472",
+										"4": "0",
+										"5": "0",
+										"12": "Worldwide",
+										"16": "2022-01-11 00:06:28.611"
+									},
+									{
+										"0": "339004",
+										"1": "2020-01-30",
+										"2": "7818",
+										"3": "1753",
+										"4": "0",
+										"5": "0",
+										"12": "Worldwide",
+										"16": "2022-01-11 00:06:28.611"
+									}
+								],
+								"schema": [
+									{
+										"key": "0",
+										"name": "id",
+										"type": "int"
+									},
+									{
+										"key": "1",
+										"name": "updated",
+										"type": "date"
+									},
+									{
+										"key": "2",
+										"name": "confirmed",
+										"type": "int"
+									},
+									{
+										"key": "3",
+										"name": "confirmed_change",
+										"type": "int"
+									},
+									{
+										"key": "4",
+										"name": "deaths",
+										"type": "int"
+									},
+									{
+										"key": "5",
+										"name": "deaths_change",
+										"type": "smallint"
+									},
+									{
+										"key": "6",
+										"name": "recovered",
+										"type": "int"
+									},
+									{
+										"key": "7",
+										"name": "recovered_change",
+										"type": "int"
+									},
+									{
+										"key": "8",
+										"name": "latitude",
+										"type": "double"
+									},
+									{
+										"key": "9",
+										"name": "longitude",
+										"type": "double"
+									},
+									{
+										"key": "10",
+										"name": "iso2",
+										"type": "string"
+									},
+									{
+										"key": "11",
+										"name": "iso3",
+										"type": "string"
+									},
+									{
+										"key": "12",
+										"name": "country_region",
+										"type": "string"
+									},
+									{
+										"key": "13",
+										"name": "admin_region_1",
+										"type": "string"
+									},
+									{
+										"key": "14",
+										"name": "iso_subdivision",
+										"type": "string"
+									},
+									{
+										"key": "15",
+										"name": "admin_region_2",
+										"type": "string"
+									},
+									{
+										"key": "16",
+										"name": "load_time",
+										"type": "timestamp"
+									}
+								],
+								"truncated": false
+							},
+							"isSummary": false,
+							"language": "scala"
+						},
+						"persist_state": {
+							"view": {
+								"type": "details",
+								"chartOptions": {
+									"chartType": "bar",
+									"aggregationType": "sum",
+									"categoryFieldKeys": [
+										"1"
+									],
+									"seriesFieldKeys": [
+										"0"
+									],
+									"isStacked": false
+								}
+							}
+						}
+					}
+				}
+			},
 			"enableDebugMode": false,
 			"kernelspec": {
 				"name": "synapse_pyspark",
