@@ -2,7 +2,7 @@
 	"name": "0317Scala_allinone",
 	"properties": {
 		"folder": {
-			"name": "Sample Notebook"
+			"name": "Sample Notebooks"
 		},
 		"nbformat": 4,
 		"nbformat_minor": 2,
@@ -16,7 +16,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "5299ebb0-968a-42db-817c-460209f23cd0"
+				"spark.autotune.trackingId": "b9a9e5bf-4571-428e-86d9-b79882d2c685"
 			}
 		},
 		"metadata": {

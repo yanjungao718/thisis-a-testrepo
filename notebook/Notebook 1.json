@@ -4,7 +4,7 @@
 		"nbformat": 4,
 		"nbformat_minor": 2,
 		"bigDataPool": {
-			"referenceName": "SampleSpark",
+			"referenceName": "chen",
 			"type": "BigDataPoolReference"
 		},
 		"sessionProperties": {
@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "c53d8ed1-74ae-4417-8205-20b515e1d782"
+				"spark.autotune.trackingId": "6d261482-07fa-41eb-90ae-69cd5ef3de84"
 			}
 		},
 		"metadata": {
@@ -25,7 +25,7 @@
 			"synapse_widget": {
 				"version": "0.1",
 				"state": {
-					"ed1813d6-d2f6-45c1-971f-c2568f266605": {
+					"49d3deac-ccbf-4730-baf1-522ec70e66da": {
 						"type": "Synapse.DataFrame",
 						"sync_state": {
 							"table": {
@@ -249,16 +249,16 @@
 				"name": "python"
 			},
 			"a365ComputeOptions": {
-				"id": "/subscriptions/ee9a0083-b9db-4f2d-9cb9-05a291e9c158/resourceGroups/bdbjqa/providers/Microsoft.Synapse/workspaces/bdbj20220411ws/bigDataPools/SampleSpark",
-				"name": "SampleSpark",
+				"id": "/subscriptions/ee9a0083-b9db-4f2d-9cb9-05a291e9c158/resourceGroups/bdbjqa/providers/Microsoft.Synapse/workspaces/bdbj20220418ws/bigDataPools/chen",
+				"name": "chen",
 				"type": "Spark",
-				"endpoint": "https://bdbj20220411ws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/SampleSpark",
+				"endpoint": "https://bdbj20220418ws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/chen",
 				"auth": {
 					"type": "AAD",
 					"authResource": "https://dev.azuresynapse.net"
 				},
 				"sparkVersion": "3.2",
-				"nodeCount": 3,
+				"nodeCount": 10,
 				"cores": 8,
 				"memory": 56,
 				"extraHeader": null
@@ -287,10 +287,10 @@
 					"    'fs.azure.sas.%s.%s.blob.core.windows.net' % (blob_container_name, blob_account_name),\n",
 					"    blob_sas_token)\n",
 					"df = spark.read.parquet(wasbs_path)\n",
-					"display(df.limit(20))"
+					"display(df.limit(10))"
 				],
 				"attachments": null,
-				"execution_count": 1
+				"execution_count": 3
 			}
 		]
 	}

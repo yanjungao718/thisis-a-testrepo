@@ -13,7 +13,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "98d46b90-8843-41fc-b63e-26d7ab69efe2"
+				"spark.autotune.trackingId": "1937536c-5c6b-48b7-ad3a-23fcc59c017a"
 			}
 		},
 		"metadata": {
@@ -47,7 +47,7 @@
 					"spark.conf.set(\n",
 					"    'fs.azure.sas.%s.%s.blob.core.windows.net' % (blob_container_name, blob_account_name),\n",
 					"    blob_sas_token)\r\n",
-					"df = spark.read.load('wasbs://container02@bdbjblobstorageqingtest.blob.core.windows.net/New folder 0411/sqlscripts_1125.tsv', format='csv', delimiter ='\\t'\r\n",
+					"df = spark.read.load('wasbs://container02@bdbjblobstorageqingtest.blob.core.windows.net/New folder 0418/Persons24.csv', format='csv'\r\n",
 					"## If header exists uncomment line below\r\n",
 					"##, header=True\r\n",
 					")\r\n",

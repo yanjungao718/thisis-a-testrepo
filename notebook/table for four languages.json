@@ -3,10 +3,6 @@
 	"properties": {
 		"nbformat": 4,
 		"nbformat_minor": 2,
-		"bigDataPool": {
-			"referenceName": "test24",
-			"type": "BigDataPoolReference"
-		},
 		"sessionProperties": {
 			"driverMemory": "28g",
 			"driverCores": 4,
@@ -17,151 +13,13 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "9f1d438e-18c9-4b44-ae85-74c9a6151b88"
+				"spark.autotune.trackingId": "df5c9e0f-1d0e-444b-a554-a08fb51c7536"
 			}
 		},
 		"metadata": {
 			"saveOutput": true,
 			"synapse_widget": {
-				"version": "0.1",
-				"state": {
-					"72785fc4-f6fa-4410-8ab4-e46d6a443886": {
-						"type": "Synapse.DataFrame",
-						"sync_state": {
-							"table": {
-								"rows": [
-									{
-										"0": {
-											"id": "123456",
-											"name": "Computer Science"
-										},
-										"1": [
-											{
-												"firstName": "michael",
-												"lastName": "armbrust",
-												"email": "noreply@berkeley.edore",
-												"salary": 130000
-											},
-											{
-												"firstName": "xiangrui",
-												"lastName": "meng",
-												"email": "no-reply@stanford.edu",
-												"salary": 120000
-											}
-										]
-									},
-									{
-										"0": {
-											"id": "789012",
-											"name": "Mechanical Engineering"
-										},
-										"1": [
-											{
-												"firstName": "matei",
-												"email": "no-reply@waterloo.edu",
-												"salary": 140000
-											},
-											{
-												"lastName": "wendell",
-												"email": "no-reply@berkeley.edu",
-												"salary": 160000
-											}
-										]
-									}
-								],
-								"schema": [
-									{
-										"key": "0",
-										"name": "department",
-										"type": "StructType(StructField(id,StringType,true), StructField(name,StringType,true))"
-									},
-									{
-										"key": "1",
-										"name": "employees",
-										"type": "ArrayType(StructType(StructField(firstName,StringType,true), StructField(lastName,StringType,true), StructField(email,StringType,true), StructField(salary,LongType,true)),true)"
-									}
-								],
-								"truncated": false
-							},
-							"isSummary": false,
-							"language": "scala"
-						},
-						"persist_state": {
-							"view": {
-								"type": "details",
-								"chartOptions": {
-									"chartType": "bar",
-									"aggregationType": "count",
-									"categoryFieldKeys": [],
-									"seriesFieldKeys": [
-										"0"
-									],
-									"isStacked": false
-								}
-							}
-						}
-					},
-					"07730b4f-f80e-45c3-ba26-bb3e7c4ae081": {
-						"type": "Synapse.DataFrame",
-						"sync_state": {
-							"table": {
-								"rows": [
-									{
-										"0": "jack",
-										"1": "34",
-										"2": "36"
-									},
-									{
-										"0": "Riti",
-										"1": "30",
-										"2": "Delhi"
-									},
-									{
-										"0": "Aadi",
-										"1": "16",
-										"2": "New York"
-									}
-								],
-								"schema": [
-									{
-										"key": "0",
-										"name": "_1",
-										"type": "string"
-									},
-									{
-										"key": "1",
-										"name": "_2",
-										"type": "bigint"
-									},
-									{
-										"key": "2",
-										"name": "_3",
-										"type": "string"
-									}
-								],
-								"truncated": false
-							},
-							"isSummary": false,
-							"language": "scala"
-						},
-						"persist_state": {
-							"view": {
-								"type": "details",
-								"chartOptions": {
-									"chartType": "bar",
-									"aggregationType": "sum",
-									"categoryFieldKeys": [
-										"0"
-									],
-									"seriesFieldKeys": [
-										"1"
-									],
-									"isStacked": false
-								}
-							}
-						}
-					}
-				}
+				"version": "0.1"
 			},
 			"enableDebugMode": false,
 			"kernelspec": {
@@ -170,21 +28,6 @@
 			},
 			"language_info": {
 				"name": "python"
-			},
-			"a365ComputeOptions": {
-				"id": "/subscriptions/051ddeca-1ed6-4d8b-ba6f-1ff561e5f3b3/resourceGroups/bigdataqa/providers/Microsoft.Synapse/workspaces/yanjuntestws/bigDataPools/test24",
-				"name": "test24",
-				"type": "Spark",
-				"endpoint": "https://yanjuntestws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/test24",
-				"auth": {
-					"type": "AAD",
-					"authResource": "https://dev.azuresynapse.net"
-				},
-				"sparkVersion": "2.4",
-				"nodeCount": 10,
-				"cores": 4,
-				"memory": 28,
-				"extraHeader": null
 			},
 			"sessionKeepAliveTimeout": 30
 		},
@@ -251,7 +94,7 @@
 					"display(df1)"
 				],
 				"attachments": null,
-				"execution_count": 1
+				"execution_count": null
 			},
 			{
 				"cell_type": "code",
@@ -305,7 +148,7 @@
 					"display(students)"
 				],
 				"attachments": null,
-				"execution_count": 2
+				"execution_count": null
 			},
 			{
 				"cell_type": "code",

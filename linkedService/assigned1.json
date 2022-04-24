@@ -1,0 +1,19 @@
+{
+	"name": "assigned1",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://lanjlgen2.dfs.core.windows.net",
+			"credential": {
+				"referenceName": "assignedlan",
+				"type": "CredentialReference"
+			}
+		},
+		"connectVia": {
+			"referenceName": "IntegrationRuntimeh1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

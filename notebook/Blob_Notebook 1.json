@@ -3,37 +3,129 @@
 	"properties": {
 		"nbformat": 4,
 		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "lantest",
+			"type": "BigDataPoolReference"
+		},
 		"sessionProperties": {
-			"driverMemory": "28g",
-			"driverCores": 4,
-			"executorMemory": "28g",
-			"executorCores": 4,
-			"numExecutors": 2,
+			"driverMemory": "30g",
+			"driverCores": 7,
+			"executorMemory": "60g",
+			"executorCores": 9,
+			"numExecutors": 1,
 			"conf": {
-				"spark.dynamicAllocation.enabled": "false",
-				"spark.dynamicAllocation.minExecutors": "2",
-				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "170de8fc-deb8-41b3-94d6-083aa47316ee"
+				"spark.dynamicAllocation.enabled": "true",
+				"spark.dynamicAllocation.minExecutors": "1",
+				"spark.dynamicAllocation.maxExecutors": "1",
+				"spark.autotune.trackingId": "e1900888-74b6-43c6-b6f0-7b5d5f0d5e67"
 			}
 		},
 		"metadata": {
 			"saveOutput": true,
 			"synapse_widget": {
-				"version": "0.1"
+				"version": "0.1",
+				"state": {
+					"52eeeaff-14b3-49fa-855b-ba7f8cf1b38d": {
+						"type": "Synapse.DataFrame",
+						"sync_state": {
+							"table": {
+								"rows": [
+									{
+										"0": "399266\t2/15/2012 11:53:16 AM\ten-us\thow to make nachos\t73\td-card:recipes;www.nachos.com;www.wikipedia.com;d-card:videos\tNULL"
+									},
+									{
+										"0": "382045\t2/15/2012 11:53:18 AM\ten-gb\tbest ski resorts\t614\tskiresorts.com;d-card:news;ski-europe.com;www.travelersdigest.com/ski_resorts.htm\tski-europe.com;www.travelersdigest.com/ski_resorts.htm"
+									},
+									{
+										"0": "382045\t2/16/2012 11:53:20 AM\ten-gb\tbroken leg\t74\tmayoclinic.com/health;webmd.com/a-to-z-guides;mybrokenleg.com;wikipedia.com/Bone_fracture\tmayoclinic.com/health;webmd.com/a-to-z-guides;mybrokenleg.com;wikipedia.com/Bone_fracture"
+									},
+									{
+										"0": "106479\t2/16/2012 11:53:50 AM\ten-ca\tsouth park episodes\t24\tsouthparkstudios.com;wikipedia.org/wiki/Sout_Park;imdb.com/title/tt0121955;simon.com/mall\tsouthparkstudios.com"
+									},
+									{
+										"0": "906441\t2/16/2012 11:54:01 AM\ten-us\tcosmos\t1213\tcosmos.com;wikipedia.org/wiki/Cosmos:_A_Personal_Voyage;hulu.com/cosmos;d-card:images\td-card:images"
+									},
+									{
+										"0": "351530\t2/16/2012 11:54:01 AM\ten-fr\tmicrosoft\t241\tmicrosoft.com;wikipedia.org/wiki/Microsoft;d-card:news;xbox.com\tNULL"
+									},
+									{
+										"0": "640806\t2/16/2012 11:54:02 AM\ten-us\twireless headphones\t502\twww.amazon.com;d-card:shopping;reviews.cnet.com/wireless-headphones;store.apple.com\td-card:shopping"
+									},
+									{
+										"0": "304305\t2/16/2012 11:54:03 AM\ten-us\tdominos pizza\t60\tdominos.com;d-card; wikipedia.org/wiki/Domino's_Pizza;facebook.com/dominos\tdominos.com"
+									},
+									{
+										"0": "460748\t2/16/2012 11:54:04 AM\ten-us\tyelp\t1270\tyelp.com;apple.com/us/app/yelp;wikipedia.org/wiki/Yelp,_Inc.;facebook.com/yelp\tyelp.com"
+									},
+									{
+										"0": "354841\t2/16/2012 11:59:01 AM\ten-us\thow to run\t610\trunning.about.com;d-card:video;ehow.com;go.com\td-card:video;running.about.com;ehow.com"
+									}
+								],
+								"schema": [
+									{
+										"key": "0",
+										"name": "value",
+										"type": "string"
+									}
+								],
+								"truncated": false
+							},
+							"isSummary": false,
+							"language": "scala"
+						},
+						"persist_state": {
+							"view": {
+								"type": "details",
+								"chartOptions": {
+									"chartType": "bar",
+									"aggregationType": "count",
+									"categoryFieldKeys": [
+										"0"
+									],
+									"seriesFieldKeys": [
+										"0"
+									],
+									"isStacked": false
+								}
+							}
+						}
+					}
+				}
 			},
 			"enableDebugMode": false,
 			"kernelspec": {
 				"name": "synapse_pyspark",
-				"display_name": "python"
+				"display_name": "Synapse PySpark"
 			},
 			"language_info": {
 				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/ee9a0083-b9db-4f2d-9cb9-05a291e9c158/resourceGroups/bdbjqa/providers/Microsoft.Synapse/workspaces/bdbj20220418ws/bigDataPools/lantest",
+				"name": "lantest",
+				"type": "Spark",
+				"endpoint": "https://bdbj20220418ws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/lantest",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "3.2",
+				"nodeCount": 85,
+				"cores": 16,
+				"memory": 110,
+				"extraHeader": null
 			},
 			"sessionKeepAliveTimeout": 30
 		},
 		"cells": [
 			{
 				"cell_type": "code",
+				"metadata": {
+					"microsoft": {
+						"language": "python"
+					},
+					"collapsed": false
+				},
 				"source": [
 					"%%pyspark\n",
 					"blob_account_name = \"bdbjblobstorageqingtest\"\n",
@@ -46,12 +138,12 @@
 					"\n",
 					"spark.conf.set(\n",
 					"    'fs.azure.sas.%s.%s.blob.core.windows.net' % (blob_container_name, blob_account_name),\n",
-					"    blob_sas_token)\r\n",
-					"df = spark.read.load('wasbs://container02@bdbjblobstorageqingtest.blob.core.windows.net/New folder 0411/output.txt', format='text')\r\n",
+					"    blob_sas_token)\n",
+					"df = spark.read.load('wasbs://container02@bdbjblobstorageqingtest.blob.core.windows.net/New folder 0418/output.txt', format='text')\n",
 					"display(df.limit(10))"
 				],
 				"attachments": null,
-				"execution_count": null
+				"execution_count": 1
 			}
 		]
 	}

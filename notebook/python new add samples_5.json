@@ -2,7 +2,7 @@
 	"name": "python new add samples_5",
 	"properties": {
 		"folder": {
-			"name": "Sample Notebook"
+			"name": "Sample Notebooks"
 		},
 		"nbformat": 4,
 		"nbformat_minor": 2,
@@ -16,7 +16,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "7042fc91-4afa-4dfa-9c1b-03e7a74dc7d7"
+				"spark.autotune.trackingId": "78b203d6-8f9a-4c23-8b66-f9c79d4ac641"
 			}
 		},
 		"metadata": {

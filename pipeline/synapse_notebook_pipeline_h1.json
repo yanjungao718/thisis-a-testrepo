@@ -8,7 +8,7 @@
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
-					"waitTimeInSeconds": 33
+					"waitTimeInSeconds": 30
 				}
 			},
 			{
@@ -32,32 +32,32 @@
 				"userProperties": [],
 				"typeProperties": {
 					"notebook": {
-						"referenceName": "CopyDataBetweenSparkTables_0411_hou",
+						"referenceName": "CopyDataBetweenSparkTables_0418_hou",
 						"type": "NotebookReference"
 					},
 					"parameters": {
-						"pipename": {
+						"PipelineName": {
 							"value": {
 								"value": "@pipeline().Pipeline",
 								"type": "Expression"
 							},
 							"type": "string"
 						},
-						"tag": {
-							"value": "hello",
+						"Tag": {
+							"value": "HelloWorld",
 							"type": "string"
 						}
 					},
 					"snapshot": true,
 					"sparkPool": {
-						"referenceName": "SampleSpark",
+						"referenceName": "SampleSpark2",
 						"type": "BigDataPoolReference"
 					}
 				}
 			}
 		],
 		"annotations": [],
-		"lastPublishTime": "2022-04-11T06:11:51Z"
+		"lastPublishTime": "2022-04-18T06:40:43Z"
 	},
 	"type": "Microsoft.Synapse/workspaces/pipelines"
 }

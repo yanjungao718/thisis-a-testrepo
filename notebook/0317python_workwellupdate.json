@@ -2,7 +2,7 @@
 	"name": "0317python_workwellupdate",
 	"properties": {
 		"folder": {
-			"name": "Sample Notebook"
+			"name": "Sample Notebooks"
 		},
 		"nbformat": 4,
 		"nbformat_minor": 2,
@@ -16,7 +16,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "14553268-d990-4117-8d30-556341daa0dc"
+				"spark.autotune.trackingId": "e55a62a8-bff1-493a-900d-4690dc47b918"
 			}
 		},
 		"metadata": {

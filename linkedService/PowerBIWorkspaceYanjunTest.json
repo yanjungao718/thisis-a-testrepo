@@ -1,0 +1,13 @@
+{
+	"name": "PowerBIWorkspaceYanjunTest",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"description": "this is a test description by yanjun gao",
+		"annotations": [],
+		"type": "PowerBIWorkspace",
+		"typeProperties": {
+			"workspaceID": "6ea0c39d-f486-414f-bc15-65c68574755c",
+			"tenantID": "72bfe100-a448-4f25-af39-5b36c7bb62ef"
+		}
+	}
+}

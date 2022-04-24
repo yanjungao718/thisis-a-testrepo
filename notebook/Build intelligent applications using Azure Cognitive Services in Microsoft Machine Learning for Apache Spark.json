@@ -2,7 +2,7 @@
 	"name": "Build intelligent applications using Azure Cognitive Services in Microsoft Machine Learning for Apache Spark",
 	"properties": {
 		"folder": {
-			"name": "Sample Notebook"
+			"name": "Sample Notebooks"
 		},
 		"nbformat": 4,
 		"nbformat_minor": 2,
@@ -16,7 +16,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "789796ef-4d52-4b7b-b42e-462a4de26e26"
+				"spark.autotune.trackingId": "a1575b0a-fafa-4393-8f08-c88f70c96f37"
 			}
 		},
 		"metadata": {

@@ -1,0 +1,23 @@
+{
+	"name": "DestinationDataset_f2r",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "bdbj20220418ws-WorkspaceDefaultStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Test",
+				"fileSystem": "default"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

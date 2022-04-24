@@ -1,0 +1,17 @@
+{
+	"name": "bigdata test case",
+	"properties": {
+		"content": {
+			"query": "/**/\n--create table\n\nCREATE TABLE [dbo].[BigData2]\n(\n    Id INT NOT NULL,\n    created_time DATETIME NOT NULL\n)\n\n--add msg column\nALTER TABLE [dbo].[BigData2]\n    ADD msg varchar(255)\n\n\n--insert some test data\nDECLARE @i int = 1;\nDECLARE @alphabet varchar(36) = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'\nWHILE @i <= 500\nBegin\nDECLARE @stamp datetime = CURRENT_TIMESTAMP;\nDECLARE @msg varchar(36)=\nsubstring(@alphabet, convert(int, rand()*36), 1) +\nsubstring(@alphabet, convert(int, rand()*36), 1) +\nsubstring(@alphabet, convert(int, rand()*36), 1) +\nsubstring(@alphabet, convert(int, rand()*36), 1) +\nsubstring(@alphabet, convert(int, rand()*36), 1);\nINSERT INTO [dbo].[BigData2] VALUES(@i,@stamp,@msg);\nSET @i+=1;\nEND\n\n\n--select\nSELECT * FROM BigData2 ORDER BY [BigData2].[Id] \nSELECT Id,msg FROM BigData2 WHERE Id=10 OR Id=20\nSELECT * FROM BigData2 WHERE Id>=200 ORDER BY Id\nSELECT * FROM BigData2 WHERE Id>=10 AND Id<240 ORDER BY Id\n\n\n--DELETE\n--DELETE FROM BigData2",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "ws",
+				"poolName": "ws"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

@@ -4,20 +4,20 @@
 		"nbformat": 4,
 		"nbformat_minor": 2,
 		"bigDataPool": {
-			"referenceName": "SampleSpark",
+			"referenceName": "chen",
 			"type": "BigDataPoolReference"
 		},
 		"sessionProperties": {
-			"driverMemory": "56g",
-			"driverCores": 8,
-			"executorMemory": "56g",
-			"executorCores": 8,
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
 			"numExecutors": 2,
 			"conf": {
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "677540d0-cd26-49c5-a91e-02de2b112d0d"
+				"spark.autotune.trackingId": "6bfda3f3-f35b-49cd-9cd8-425e7f4718bf"
 			}
 		},
 		"metadata": {
@@ -34,16 +34,16 @@
 				"name": "python"
 			},
 			"a365ComputeOptions": {
-				"id": "/subscriptions/ee9a0083-b9db-4f2d-9cb9-05a291e9c158/resourceGroups/bdbjqa/providers/Microsoft.Synapse/workspaces/bdbj20220411ws/bigDataPools/SampleSpark",
-				"name": "SampleSpark",
+				"id": "/subscriptions/ee9a0083-b9db-4f2d-9cb9-05a291e9c158/resourceGroups/bdbjqa/providers/Microsoft.Synapse/workspaces/bdbj20220418ws/bigDataPools/chen",
+				"name": "chen",
 				"type": "Spark",
-				"endpoint": "https://bdbj20220411ws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/SampleSpark",
+				"endpoint": "https://bdbj20220418ws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/chen",
 				"auth": {
 					"type": "AAD",
 					"authResource": "https://dev.azuresynapse.net"
 				},
 				"sparkVersion": "3.2",
-				"nodeCount": 3,
+				"nodeCount": 10,
 				"cores": 8,
 				"memory": 56,
 				"extraHeader": null
@@ -74,7 +74,7 @@
 					"df.write.mode(\"overwrite\").saveAsTable(\"default.YourTableName\")"
 				],
 				"attachments": null,
-				"execution_count": 1
+				"execution_count": 2
 			}
 		]
 	}

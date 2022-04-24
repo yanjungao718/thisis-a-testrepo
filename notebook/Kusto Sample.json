@@ -13,7 +13,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "2d3fe401-2859-4a97-999e-f18bbe8add5f"
+				"spark.autotune.trackingId": "70e94fd8-4993-4ccc-b369-b65f979922c5"
 			}
 		},
 		"metadata": {
@@ -78,7 +78,7 @@
 					"    .format(\"com.microsoft.kusto.spark.synapse.datasource\") \\\r\n",
 					"    .option(\"spark.synapse.linkedService\", \"AzureDataExplorer\") \\\r\n",
 					"    .option(\"kustoDatabase\", \"bdbjkustodatabaseqingtest\") \\\r\n",
-					"    .option(\"kustoTable\", \"Qingtest0411\") \\\r\n",
+					"    .option(\"kustoTable\", \"Qingtest0418\") \\\r\n",
 					"    .option(\"tableCreateOptions\",\"CreateIfNotExist\") \\\r\n",
 					"    .mode(\"Append\") \\\r\n",
 					"    .save()"
@@ -122,7 +122,7 @@
 					"    .format(\"com.microsoft.kusto.spark.synapse.datasink.KustoSynapseSinkProvider\") \\\r\n",
 					"    .option(\"spark.synapse.linkedService\", \"AzureDataExplorer\") \\\r\n",
 					"    .option(\"kustoDatabase\", \"bdbjkustodatabaseqingtest\") \\\r\n",
-					"    .option(\"kustoTable\", \"Qingtest041101\") \\\r\n",
+					"    .option(\"kustoTable\", \"Qingtest041801\") \\\r\n",
 					"    .option(\"tableCreateOptions\",\"CreateIfNotExist\") \\\r\n",
 					"    .trigger(once = True)\r\n",
 					"\r\n",

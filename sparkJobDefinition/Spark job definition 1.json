@@ -11,10 +11,10 @@
 			"name": "Spark job definition 1",
 			"file": "abfss://default@honghaigen2.dfs.core.windows.net/synapse/workspaces/bdbj20220103ws/batchjobs/Spark%20job%20definition%201/copy_opendataset_to_spark_table.py",
 			"conf": {
-				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.enabled": "true",
 				"spark.dynamicAllocation.minExecutors": "1",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "7ded2a91-c646-4350-bad7-2a6d57790fa6"
+				"spark.autotune.trackingId": "0fa1640b-3e6e-4b43-a7e3-6a490850926c"
 			},
 			"args": [],
 			"jars": [],
@@ -24,7 +24,7 @@
 			"driverCores": 4,
 			"executorMemory": "28g",
 			"executorCores": 4,
-			"numExecutors": 2
+			"numExecutors": 1
 		}
 	}
 }
